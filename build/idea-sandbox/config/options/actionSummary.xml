@@ -6,11 +6,26 @@
     <e n="EditorChooseLookupItemReplace">
       <i c="1" l="1652581040299" />
     </e>
+    <e n="EditorCopy">
+      <i c="1" l="1654436957200" />
+    </e>
     <e n="EditorEnter">
       <i c="1" l="1652581035636" />
     </e>
+    <e n="EditorPaste">
+      <i c="3" l="1654436960218" />
+    </e>
     <e n="WelcomeScreen.OpenProject">
       <i c="1" l="1652580973032" />
+    </e>
+    <e n="com.intellij.diagnostic.IdeMessagePanel$4">
+      <i c="1" l="1654436885176" />
+    </e>
+    <e n="com.intellij.ide.ReopenProjectAction">
+      <i c="3" l="1654436942856" />
+    </e>
+    <e n="com.intellij.openapi.fileEditor.impl.tabActions.CloseTab">
+      <i c="1" l="1654436727202" />
     </e>
   </component>
 </application>

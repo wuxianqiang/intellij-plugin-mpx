@@ -31,15 +31,15 @@
   <vendor>JetBrains</vendor>
   <category>JavaScript Frameworks and Tools</category>
 
-  <content>
-    <module name="intellij.vuejs/prettier"/>
-    <module name="intellij.vuejs/copyright"/>
-  </content>
+<!--  <content>-->
+<!--    <module name="intellij.vuejs/prettier"/>-->
+<!--    <module name="intellij.vuejs/copyright"/>-->
+<!--  </content>-->
   <dependencies>
     <plugin id="JavaScript"/>
     <plugin id="com.intellij.css"/>
   </dependencies>
-  <depends optional="true" config-file="js-debugger.xml">JavaScriptDebugger</depends>
+<!--  <depends optional="true" config-file="js-debugger.xml">JavaScriptDebugger</depends>-->
 
   <extensionPoints>
     <!--suppress PluginXmlValidity -->
@@ -145,13 +145,13 @@
     <spellchecker.bundledDictionaryProvider implementation="org.jetbrains.vuejs.spellchecker.VueSpellcheckingDictionaryProvider"/>
     <spellchecker.support language="Vue" implementationClass="org.jetbrains.vuejs.spellchecker.VueSpellcheckingStrategy"/>
 
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueBaseLiveTemplateContextType"/>
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueScriptLiveTemplateContextType"/>
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueComponentDescriptorLiveTemplateContextType"/>
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTemplateLiveTemplateContextType"/>
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueInsideTagLiveTemplateContextType"/>
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTopLevelLiveTemplateContextType"/>
-    <defaultLiveTemplates file="liveTemplates/Vue"/>
+<!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueBaseLiveTemplateContextType"/>-->
+<!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueScriptLiveTemplateContextType"/>-->
+<!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueComponentDescriptorLiveTemplateContextType"/>-->
+<!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTemplateLiveTemplateContextType"/>-->
+<!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueInsideTagLiveTemplateContextType"/>-->
+<!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTopLevelLiveTemplateContextType"/>-->
+<!--    <defaultLiveTemplates file="liveTemplates/Vue"/>-->
     <renamePsiElementProcessor implementation="org.jetbrains.vuejs.refactoring.VueJSComponentRenameProcessor"/>
     <referencesSearch implementation="org.jetbrains.vuejs.findUsages.VueJSReferenceSearcher"/>
     <completion.contributor language="any"

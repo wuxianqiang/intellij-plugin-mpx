@@ -1,83 +1,70 @@
-// Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-}
-
-repositories {
-  mavenCentral()
-  maven("https://cache-redirector.jetbrains.com/intellij-dependencies")
-  maven("https://cache-redirector.jetbrains.com/www.myget.org/F/rd-snapshots/maven")
-}
-
 plugins {
-  id("org.jetbrains.intellij") version "0.5.0"
-  java
-  kotlin("jvm") version "1.4.0"
+  id("java")
+  id("org.jetbrains.kotlin.jvm") version "1.5.10"
+  id("org.jetbrains.intellij") version "1.4.0"
 }
 
 dependencies {
-  implementation(kotlin("stdlib-jdk8"))
-  testImplementation("junit", "junit", "4.12")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.10")
+}
+
+group = "com.hxz"
+version = "1.0-SNAPSHOT"
+
+repositories {
+  mavenCentral()
 }
 
 sourceSets {
   main {
     java {
-      setSrcDirs(listOf("src", "gen"))
+      srcDirs("src")
+      srcDirs("gen")
     }
     resources {
-      setSrcDirs(listOf("resources"))
-    }
-  }
-  test {
-    java {
-      setSrcDirs(listOf("vuejs-tests/src"))
+      srcDirs("resources")
     }
   }
 }
-
-java {
-  sourceCompatibility = JavaVersion.VERSION_11
-  targetCompatibility = JavaVersion.VERSION_11
-}
-
-val ideVersion = "203-SNAPSHOT"
-
+//"intellij.prettierJS:212.4746.2"
+// Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
-  version = "IU-${ideVersion}"
-  pluginName = "Vue.js"
-  downloadSources = true
-  updateSinceUntilBuild = false
-  pluginsRepo {
-    custom("https://buildserver.labs.intellij.net/guestAuth/repository/download/ijplatform_master_Idea_Installers/${buildVersion}/IU-plugins/plugins.xml")
-  }
-
-  setPlugins("JavaScriptLanguage", "JSIntentionPowerPack", "JavaScriptDebugger", "CSS", "HtmlTools",
-             "org.jetbrains.plugins.sass", "org.jetbrains.plugins.less", "org.jetbrains.plugins.stylus",
-             "org.intellij.plugins.postcss:${buildVersion}",
-             "com.jetbrains.plugins.Jade:${buildVersion}",
-             "intellij.prettierJS:${buildVersion}")
-}
-
-dependencies {
-  testImplementation("com.jetbrains.intellij.javascript:javascript-test-framework:${ideVersion}")
-  testImplementation("com.jetbrains.intellij.copyright:copyright:${ideVersion}")
+  version.set("2021.2")
+  type.set("IU") // Target IDE Platform
+  pluginName.set("Mpx")
+  downloadSources.set(true)
+  updateSinceUntilBuild.set((false))
+  plugins.set(listOf("JavaScriptLanguage", "JSIntentionPowerPack", "JavaScriptDebugger", "CSS", "HtmlTools",
+    "org.jetbrains.plugins.sass", "org.jetbrains.plugins.less", "org.jetbrains.plugins.stylus",
+    "org.intellij.plugins.postcss:212.4746.2",
+    "com.jetbrains.plugins.Jade:212.4746.2",
+    "intellij.prettierJS:212.4746.2"))
 }
 
 tasks {
-  withType(JavaCompile::class.java) {
-    options.encoding = "UTF-8"
+  // Set the JVM compatibility versions
+  withType<JavaCompile> {
+    sourceCompatibility = "11"
+    targetCompatibility = "11"
   }
-  withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
+  withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
     kotlinOptions.freeCompilerArgs = listOf("-Xjvm-default=compatibility")
   }
-  test {
-    systemProperty("idea.home.path", File("${projectDir}/../").absolutePath)
+
+  patchPluginXml {
+    sinceBuild.set("212")
+    untilBuild.set("222.*")
   }
-  wrapper {
-    gradleVersion = "6.6.1"
+
+  signPlugin {
+    certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
+    privateKey.set(System.getenv("PRIVATE_KEY"))
+    password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
+  }
+
+  publishPlugin {
+    token.set(System.getenv("PUBLISH_TOKEN"))
   }
 }
+

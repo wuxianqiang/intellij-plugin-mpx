@@ -730,6 +730,15 @@
       <entry key="*.li">
         <plugin pluginId="org.jetbrains.android" pluginName="Android" bundled="true" />
       </entry>
+      <entry key="*.pcss">
+        <plugin pluginId="org.intellij.plugins.postcss" pluginName="PostCSS" />
+      </entry>
+      <entry key="*.pug">
+        <plugin pluginId="com.jetbrains.plugins.jade" pluginName="Pug (ex-Jade)" />
+      </entry>
+      <entry key="*.jade">
+        <plugin pluginId="com.jetbrains.plugins.jade" pluginName="Pug (ex-Jade)" />
+      </entry>
     </plugins>
   </component>
   <component name="PluginFeatureCacheService">

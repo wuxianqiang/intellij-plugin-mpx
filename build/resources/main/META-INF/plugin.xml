@@ -49,7 +49,7 @@
   <extensions defaultExtensionNs="com.intellij">
     <css.embeddedCssProvider implementation="org.jetbrains.vuejs.css.VueEmbeddedCssProvider" />
     <css.inclusionContext implementation="org.jetbrains.vuejs.css.VueCssInclusionContext" />
-    <!--    <css.elementDescriptorProvider implementation="org.jetbrains.vuejs.css.VueCssElementDescriptorProvider"/>-->
+    <css.elementDescriptorProvider implementation="org.jetbrains.vuejs.css.VueCssElementDescriptorProvider" />
     <psi.referenceContributor implementation="org.jetbrains.vuejs.css.refs.VueCssReferencesContributor" />
     <html.attributeValueProvider implementation="org.jetbrains.vuejs.codeInsight.attributes.VueCustomAttributeValueProvider" />
     <fileType name="Vue.js" extensions="vue" language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.VueFileType" fieldName="INSTANCE" />
@@ -71,7 +71,7 @@
     <xml.xmlExtension implementation="org.jetbrains.vuejs.codeInsight.VueXmlExtension" order="before web-symbols-react" />
     <html.embeddedContentSupport implementation="org.jetbrains.vuejs.lang.html.lexer.VueEmbeddedContentSupport" />
     <html.embeddedContentSupport implementation="org.jetbrains.vuejs.libraries.i18n.VueI18nEmbeddedContentSupport" />
-    <!--    <gotoDeclarationHandler implementation="org.jetbrains.vuejs.editor.VueGotoDeclarationHandler"/>-->
+    <gotoDeclarationHandler implementation="org.jetbrains.vuejs.editor.VueGotoDeclarationHandler" />
     <notificationGroup displayType="BALLOON" id="Vue" icon="org.jetbrains.vuejs.VuejsIcons.Vue" isLogByDefault="true" bundle="messages.VueBundle" key="vue.documentation.vue" />
     <stubIndex implementation="org.jetbrains.vuejs.index.VueComponentsIndex" />
     <stubIndex implementation="org.jetbrains.vuejs.index.VueOptionsIndex" />
@@ -91,7 +91,8 @@
     <directoryIndexExcludePolicy implementation="org.jetbrains.vuejs.libraries.nuxt.index.NuxtIndexExcludePolicy" />
     <directoryProjectGenerator implementation="org.jetbrains.vuejs.cli.VueCliProjectGenerator" />
     <!-- works in WebStorm and other SmallIDEs -->
-    <!--    <projectTemplatesFactory implementation="org.jetbrains.vuejs.cli.VueProjectTemplateFactory"/> &lt;!&ndash; works in IntelliJ IDEA &ndash;&gt;-->
+    <projectTemplatesFactory implementation="org.jetbrains.vuejs.cli.VueProjectTemplateFactory" />
+    <!-- works in IntelliJ IDEA -->
     <localInspection language="Vue" groupKey="vue.inspection.group.name" shortName="VueDataFunction" enabledByDefault="true" level="WARNING" implementationClass="org.jetbrains.vuejs.inspections.DataFunctionInspection" key="vue.inspection.display.name.data.function" bundle="messages.VueBundle" />
     <localInspection language="Vue" groupKey="vue.inspection.group.name" shortName="VueDuplicateTag" enabledByDefault="true" level="WARNING" implementationClass="org.jetbrains.vuejs.inspections.DuplicateTagInspection" key="vue.inspection.display.name.duplicate.tag" bundle="messages.VueBundle" />
     <intentionAction>
@@ -108,13 +109,13 @@
     <createFromTemplateHandler implementation="org.jetbrains.vuejs.VueCreateFromTemplateHandler" />
     <spellchecker.bundledDictionaryProvider implementation="org.jetbrains.vuejs.spellchecker.VueSpellcheckingDictionaryProvider" />
     <spellchecker.support language="Vue" implementationClass="org.jetbrains.vuejs.spellchecker.VueSpellcheckingStrategy" />
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueBaseLiveTemplateContextType" />
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueScriptLiveTemplateContextType" />
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueComponentDescriptorLiveTemplateContextType" />
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTemplateLiveTemplateContextType" />
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueInsideTagLiveTemplateContextType" />
-    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTopLevelLiveTemplateContextType" />
-    <defaultLiveTemplates file="liveTemplates/Vue" />
+    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueBaseLiveTemplateContextType"/>-->
+    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueScriptLiveTemplateContextType"/>-->
+    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueComponentDescriptorLiveTemplateContextType"/>-->
+    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTemplateLiveTemplateContextType"/>-->
+    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueInsideTagLiveTemplateContextType"/>-->
+    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTopLevelLiveTemplateContextType"/>-->
+    <!--    <defaultLiveTemplates file="liveTemplates/Vue"/>-->
     <renamePsiElementProcessor implementation="org.jetbrains.vuejs.refactoring.VueJSComponentRenameProcessor" />
     <referencesSearch implementation="org.jetbrains.vuejs.findUsages.VueJSReferenceSearcher" />
     <completion.contributor language="any" implementationClass="org.jetbrains.vuejs.codeInsight.VueCompletionContributor" id="VueCompletionContributor" order="before JSPatternBasedCompletionContributor, before JSCompletionContributor, before xmlNonFirst, before cssClassOrIdReferenceCompletionContributor" />
