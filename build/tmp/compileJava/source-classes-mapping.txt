@@ -1,0 +1,4 @@
+org/jetbrains/vuejs/lang/html/lexer/_VueLexer.java
+ org.jetbrains.vuejs.lang.html.lexer._VueLexer
+org/jetbrains/vuejs/VuejsIcons.java
+ org.jetbrains.vuejs.VuejsIcons

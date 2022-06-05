@@ -1,0 +1,520 @@
+2022-05-15 10:14:20,536 [      0]   INFO -        #com.intellij.idea.Main - ------------------------------------------------------ IDE STARTED ------------------------------------------------------ 
+2022-05-15 10:14:20,552 [     16]   INFO - .intellij.util.EnvironmentUtil - loading shell env: /bin/zsh -l -i -c '/Users/didi/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIU/2021.2/31f9496f635cec87427837101e04cbcddfb544d7/ideaIU-2021.2/bin/printenv' '/var/folders/y7/vw6tlg6s0lx7tfbx2tv0lmjm0000gn/T/intellij-shell-env.5326603475943185491.tmp' 
+2022-05-15 10:14:20,587 [     51]   INFO -        #com.intellij.idea.Main - IDE: IntelliJ IDEA (build #IU-212.4746.92, 27 Jul 2021 15:09) 
+2022-05-15 10:14:20,588 [     52]   INFO -        #com.intellij.idea.Main - OS: Mac OS X (11.2, x86_64) 
+2022-05-15 10:14:20,597 [     61]   INFO -        #com.intellij.idea.Main - JRE: 11.0.11+9-b1504.13 (JetBrains s.r.o.) 
+2022-05-15 10:14:20,597 [     61]   WARN - llij.ide.plugins.PluginManager - id redefinition ([row,col,system-id]: [2,3,"product classpath"]) 
+2022-05-15 10:14:20,597 [     61]   INFO -        #com.intellij.idea.Main - JVM: 11.0.11+9-b1504.13 (OpenJDK 64-Bit Server VM) 
+2022-05-15 10:14:20,600 [     64]   INFO -        #com.intellij.idea.Main - JVM Args: -Dapple.awt.fileDialogForDirectories=true -Dapple.laf.useScreenMenuBar=true -Didea.auto.reload.plugins=true -Didea.classpath.index.enabled=false -Didea.config.path=/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/config -Didea.is.internal=true -Didea.plugins.path=/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/plugins -Didea.smooth.progress=false -Didea.system.path=/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/system -Xms256m -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=CN -Duser.language=zh -Duser.variant -ea 
+2022-05-15 10:14:20,600 [     64]   INFO -        #com.intellij.idea.Main - library path: /Users/didi/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:. 
+2022-05-15 10:14:20,600 [     64]   INFO -        #com.intellij.idea.Main - boot library path: /Users/didi/.gradle/caches/modules-2/files-2.1/com.jetbrains/jbre/jbr_jcef-11_0_11-osx-x64-b1504.13/extracted/jbr/Contents/Home/lib 
+2022-05-15 10:14:20,626 [     90]   INFO -        #com.intellij.idea.Main - locale=zh_CN_#Hans JNU=UTF-8 file.encoding=UTF-8
+  idea.config.path=/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/config
+  idea.system.path=/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/system
+  idea.plugins.path=/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/plugins
+  idea.log.path=/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/system/log 
+2022-05-15 10:14:20,637 [    101]   INFO -        #com.intellij.idea.Main - CPU cores: 12; ForkJoinPool.commonPool: java.util.concurrent.ForkJoinPool@16402b05[Running, parallelism = 11, size = 8, active = 6, running = 5, steals = 1, tasks = 0, submissions = 0]; factory: com.intellij.concurrency.IdeaForkJoinWorkerThreadFactory@3a08ac7d 
+2022-05-15 10:14:21,006 [    470]   INFO -        #com.intellij.idea.Main - JNA library (64-bit) loaded in 369 ms 
+2022-05-15 10:14:21,807 [   1271]   WARN - i.mac.MacOSApplicationProvider - No URL bundle (CFBundleURLTypes) is defined in the main bundle.
+To be able to open external links, specify protocols in the app layout section of the build file.
+Example: args.urlSchemes = ["your-protocol"] will handle following links: your-protocol://open?file=file&line=line 
+2022-05-15 10:14:21,838 [   1302]   INFO - .intellij.util.EnvironmentUtil - shell environment loaded (20 vars) 
+2022-05-15 10:14:23,771 [   3235]   INFO -                #LicenseManager - License required; details: N/A 
+2022-05-15 10:15:59,068 [  98532]   INFO - e.plugins.DisabledPluginsState - Plugins to enable: [com.jetbrains.codeWithMe] 
+2022-05-15 10:16:02,306 [ 101770]   INFO - llij.ide.plugins.PluginManager - Loaded bundled plugins: IDEA CORE (212.4746.92), Configuration Script (212.4746.92), Dependency Management Api for External Build Tools (212.4746.92), JetBrains maven model api classes (212.4746.92), JetBrains Repository Search (212.4746.92), WSL File System Support (212.4746.92), Perforce Helix Core (212.4746.92), Refactor-X (212.4746.92), Subversion (212.4746.92), XPathView + XSLT (212.4746.92), XSLT Debugger (212.4746.92), Smali Support (212.4746.92), IDE Settings Sync (212.4746.92), Machine Learning Code Completion (212.4746.92), Copyright (212.4746.92), Images (212.4746.92), HTML Tools (212.4746.92), CSS (212.4746.92), W3C Validators (212.4746.92), Haml (212.4746.92), Less (212.4746.92), Sass (212.4746.92), Stylus (212.4746.92), macOS Light Theme (212.4746.92), Windows 10 Light Theme (212.4746.92), Properties (212.4746.92), Gradle (212.4746.92), FTP/SFTP Connectivity (ex. Remote Hosts Access) (212.4746.92), Mercurial (212.4746.92), WebP Support (212.4746.92), EditorConfig (212.4746.92), Emoji Picker (212.4746.92), Terminal (212.4746.92), Git (212.4746.92), ChangeReminder (212.4746.92), Shell Script (212.4746.92), SSH Remote Run (212.4746.92), WSL Support Framework (212.4746.92), TextMate Bundles (212.4746.92), YAML (212.4746.92), Settings Repository (212.4746.92), IDE Features Trainer (212.4746.92), IDE Features Trainer: Git Lessons (212.4746.92), Java (212.4746.92), Ant (212.4746.92), Bytecode Viewer (212.4746.92), Docker (212.4746.92), JUnit (212.4746.92), Lombok (212.4746.92), ZKM-Unscramble (212.4746.92), AOP Pointcut Language (212.4746.92), Diagrams (212.4746.92), Endpoints (212.4746.92), Dependency Structure Matrix (212.4746.92), Java Internationalization (212.4746.92), UI Designer (212.4746.92), Java IDE Customization (212.4746.92), Microservices Application Configuration (212.4746.92), Microservices UAST (212.4746.92), Velocity (212.4746.92), Performance Testing (212.4746.92), Project Wide Analysis (212.4746.92), Project Wide Analysis for Java (212.4746.92), Performance Testing (Dynamic Plugins) (212.4746.92), Performance Testing (Workspace Model) (212.4746.92), Protocol Buffers (212.4746.92), gRPC (212.4746.92), Java Stream Debugger (212.4746.92), Eclipse Interoperability (212.4746.92), Java Bytecode Decompiler (212.4746.92), Task Management (212.4746.92), Time Tracking (212.4746.92), Code With Me (212.4746.92), Shared Indexes (212.4746.92), Shared Project Indexes (212.4746.92), Recommenders for Java and Python (212.4746.92), IntelliLang (212.4746.92), Groovy (212.4746.92), Maven (212.4746.92), Performance Testing (Maven) (212.4746.92), TestNG (212.4746.92), Code Coverage for Java (212.4746.92), Gradle-Java (212.4746.92), Gradle-Maven (212.4746.92), Plugin DevKit (212.4746.92), Performance Testing (Gradle) (212.4746.92), Gradle Extension (212.4746.92), Reactive Streams (212.4746.92), JavaFX (212.4746.92), Gherkin (212.4746.92), Cucumber for Java (212.4746.92), Cucumber for Groovy (212.4746.92), Markdown (212.4746.92), GitHub (212.4746.92), Grazie (212.4746.92), JavaScript and TypeScript (212.4746.92), JavaScript Intention Power Pack (212.4746.92), TSLint (212.4746.92), Angular and AngularJS (212.4746.92), Database Tools and SQL (212.4746.92), Java SQL Libraries (212.4746.92), Persistence Frameworks (212.4746.92), Java EE Platform (212.4746.92), Java EE: Application Servers (212.4746.92), GlassFish (212.4746.92), WildFly (212.4746.92), Jetty (212.4746.92), Tomcat and TomEE (212.4746.92), WebSphere (212.4746.92), WebLogic (212.4746.92), Java EE: Web/Servlets (212.4746.92), Java EE: Gradle Integration (212.4746.92), Maven Extension (212.4746.92), Java Server Pages (JSP) (212.4746.92), JavaScript Debugger (212.4746.92), Node.js (212.4746.92), Spy-js (212.4746.92), Java EE: Bean Validation (212.4746.92), Java EE: Contexts and Dependency Injection (CDI) (212.4746.92), Java EE: Server Faces (JSF) (212.4746.92), Java EE: Batch Applications (212.4746.92), Java EE: Persistence (JPA) (212.4746.92), Hibernate (212.4746.92), Spring (212.4746.92), Grails (212.4746.92), Spring Batch (212.4746.92), Spring Data (212.4746.92), Spring Messaging (212.4746.92), Spring WebSocket (212.4746.92), Spring Security (212.4746.92), Spring Integration Patterns (212.4746.92), Thymeleaf (212.4746.92), Java EE: Message Service (JMS) (212.4746.92), Java EE: WebSockets (212.4746.92), JBoss Frameworks Base (212.4746.92), Java EE: Web Services (JAX-WS) (212.4746.92), Spring Web Services (212.4746.92), FreeMarker (212.4746.92), HTTP Client (212.4746.92), Spring MVC (212.4746.92), Spring Boot (212.4746.92), Java EE: RESTful Web Services (JAX-RS) (212.4746.92), Quarkus (212.4746.92), Micronaut (212.4746.92), OpenAPI Specifications (212.4746.92), Java HTTP Clients (212.4746.92), Kotlin (212-1.5.10-release-IJ4746.92), Space (212.4746.92), Package Search (212.4746.92), Ktor (212.4746.92), Gradle DSL API (212.4746.92), Android (10.4.2.212.4746.92), Gradle Dependency Updater Implementation (212.4746.92) 
+2022-05-15 10:16:02,306 [ 101770]   INFO - llij.ide.plugins.PluginManager - Loaded custom plugins: Prettier (212.4746.2), Vue.js (1.0-SNAPSHOT) 
+2022-05-15 10:16:03,143 [ 102607]   INFO - til.net.ssl.CertificateManager - Default SSL context initialized 
+2022-05-15 10:16:03,185 [ 102649]   INFO - rains.ide.BuiltInServerManager - built-in server started, port 63343 
+2022-05-15 10:16:03,191 [ 102655]   WARN - j.internal.DebugAttachDetector - Unable to start DebugAttachDetector, please add `--add-exports java.base/jdk.internal.vm=ALL-UNNAMED` to VM options 
+2022-05-15 10:16:03,236 [ 102700]   INFO - rsistent.PersistentFSConnector - Marking VFS as corrupted: '/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/system/caches/names.dat' does not exist 
+2022-05-15 10:16:03,237 [ 102701]   INFO - intellij.diagnostic.JitWatcher - JIT compilation state checking enabled 
+2022-05-15 10:16:03,237 [ 102701]   INFO - intellij.util.io.FilePageCache - lower=100; upper=492; buffer=10; max=492 
+2022-05-15 10:16:03,250 [ 102714]   INFO - ication.options.PathMacrosImpl - Loaded path macros: {MAVEN_REPOSITORY=/Users/didi/.m2/repository, KOTLIN_BUNDLED=/Users/didi/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIU/2021.2/31f9496f635cec87427837101e04cbcddfb544d7/ideaIU-2021.2/plugins/Kotlin/kotlinc} 
+2022-05-15 10:16:03,279 [ 102743]   INFO - .history.utils.LocalHistoryLog - local history version mismatch (was: 0, expected: 6), rebuilding... 
+2022-05-15 10:16:03,279 [ 102743]   INFO - .history.utils.LocalHistoryLog - FS has been rebuild, rebuilding local history... 
+2022-05-15 10:16:03,382 [ 102846]   INFO - cloudConfig.CloudConfigManager - === Start.updateInitStatus === 
+2022-05-15 10:16:03,385 [ 102849]   INFO - cloudConfig.CloudConfigManager - === Start: JBA_NOT_CONNECTED (0ms) === 
+2022-05-15 10:16:03,389 [ 102853]   INFO - cloudConfig.CloudConfigManager - === calculateInitStatus === 
+2022-05-15 10:16:03,432 [ 102896]   INFO - ings.impl.UpdateCheckerService - channel: release 
+2022-05-15 10:16:03,446 [ 102910]   INFO - penapi.application.Experiments - Experimental features enabled for user: wsl.p9.support, wsl.prefer.p9.support, wsl.p9.show.roots.in.file.chooser, wsl.execute.with.wsl.exe, linux.native.menu, recent.and.edited.files.together, show.create.new.element.in.popup, search.everywhere.mixed.results, editor.reader.mode, new.large.text.file.viewer, wsl.fsd.content.loader, terminal.shell.command.handling, reuse.target.paths.for.rsync 
+2022-05-15 10:16:03,465 [ 102929]   INFO - m.intellij.ui.mac.touchbar.NST - nst library works properly, successfully created and released native touchbar object 
+2022-05-15 10:16:03,468 [ 102932]   INFO - i.mac.touchbar.TouchbarSupport - touchbar support is enabled 
+2022-05-15 10:16:03,771 [ 103235]   INFO - impl.SharedIndexInfrastructure - Shared index version updated from -1 to 7 
+2022-05-15 10:16:03,774 [ 103238]  ERROR - template.impl.TemplateSettings - Unable to find template resource: liveTemplates/Vue; classLoader: PluginClassLoader(plugin=PluginDescriptor(name=Vue.js, id=org.jetbrains.plugins.vue, descriptorPath=plugin.xml, path=~/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/plugins/mpxjs, version=1.0-SNAPSHOT, package=org.jetbrains.vuejs), packagePrefix=org.jetbrains.vuejs., instanceId=127, state=active); plugin: PluginInfo(type=JB_NOT_BUNDLED, id=org.jetbrains.plugins.vue, version=1.0-SNAPSHOT) 
+java.lang.Throwable: Unable to find template resource: liveTemplates/Vue; classLoader: PluginClassLoader(plugin=PluginDescriptor(name=Vue.js, id=org.jetbrains.plugins.vue, descriptorPath=plugin.xml, path=~/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/plugins/mpxjs, version=1.0-SNAPSHOT, package=org.jetbrains.vuejs), packagePrefix=org.jetbrains.vuejs., instanceId=127, state=active); plugin: PluginInfo(type=JB_NOT_BUNDLED, id=org.jetbrains.plugins.vue, version=1.0-SNAPSHOT)
+	at com.intellij.openapi.diagnostic.Logger.error(Logger.java:182)
+	at com.intellij.codeInsight.template.impl.TemplateSettings.readDefTemplate(TemplateSettings.java:552)
+	at com.intellij.codeInsight.template.impl.TemplateSettings.lambda$loadDefaultLiveTemplates$1(TemplateSettings.java:502)
+	at com.intellij.openapi.extensions.impl.ExtensionPointImpl.processWithPluginDescriptor(ExtensionPointImpl.java:293)
+	at com.intellij.openapi.extensions.ExtensionPointName.processWithPluginDescriptor(ExtensionPointName.java:156)
+	at com.intellij.codeInsight.template.impl.TemplateSettings.loadDefaultLiveTemplates(TemplateSettings.java:494)
+	at com.intellij.codeInsight.template.impl.TemplateSettings.doLoadTemplates(TemplateSettings.java:298)
+	at com.intellij.codeInsight.template.impl.TemplateSettings.<init>(TemplateSettings.java:278)
+	at com.intellij.codeInsight.template.impl.TemplateSettings.<init>(TemplateSettings.java:190)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at com.intellij.serviceContainer.ConstructorInjectionKt.instantiateUsingPicoContainer(constructorInjection.kt:47)
+	at com.intellij.serviceContainer.ComponentManagerImpl.instantiateClassWithConstructorInjection(ComponentManagerImpl.kt:877)
+	at com.intellij.serviceContainer.ServiceComponentAdapter.createAndInitialize(ServiceComponentAdapter.kt:48)
+	at com.intellij.serviceContainer.ServiceComponentAdapter.access$createAndInitialize(ServiceComponentAdapter.kt:12)
+	at com.intellij.serviceContainer.ServiceComponentAdapter$doCreateInstance$1.run(ServiceComponentAdapter.kt:42)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.registerIndicatorAndRun(CoreProgressManager.java:705)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.executeProcessUnderProgress(CoreProgressManager.java:647)
+	at com.intellij.openapi.progress.impl.ProgressManagerImpl.executeProcessUnderProgress(ProgressManagerImpl.java:63)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.executeNonCancelableSection(CoreProgressManager.java:223)
+	at com.intellij.serviceContainer.ServiceComponentAdapter.doCreateInstance(ServiceComponentAdapter.kt:41)
+	at com.intellij.serviceContainer.BaseComponentAdapter.getInstanceUncached(BaseComponentAdapter.kt:113)
+	at com.intellij.serviceContainer.BaseComponentAdapter.getInstance(BaseComponentAdapter.kt:67)
+	at com.intellij.serviceContainer.BaseComponentAdapter.getInstance$default(BaseComponentAdapter.kt:60)
+	at com.intellij.serviceContainer.ComponentManagerImpl.doGetService(ComponentManagerImpl.kt:590)
+	at com.intellij.serviceContainer.ComponentManagerImpl.getService(ComponentManagerImpl.kt:573)
+	at com.intellij.openapi.client.ClientAwareComponentManager.getFromSelfOrCurrentSession(ClientAwareComponentManager.kt:37)
+	at com.intellij.openapi.client.ClientAwareComponentManager.getService(ClientAwareComponentManager.kt:22)
+	at com.intellij.codeInsight.template.impl.TemplateSettings.getInstance(TemplateSettings.java:302)
+	at com.intellij.codeInsight.template.impl.LiveTemplatesOptionsTopHitProvider.getOptions(LiveTemplatesOptionsTopHitProvider.java:24)
+	at com.intellij.ide.ui.TopHitCache.lambda$getCachedOptions$0(TopHitCache.java:66)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1737)
+	at com.intellij.ide.ui.TopHitCache.getCachedOptions(TopHitCache.java:58)
+	at com.intellij.ide.ui.OptionsTopHitProvider.getCachedOptions(OptionsTopHitProvider.java:53)
+	at com.intellij.ide.ui.OptionsTopHitProvider$Activity.lambda$cacheAll$1(OptionsTopHitProvider.java:200)
+	at com.intellij.openapi.extensions.impl.ExtensionPointImpl.processWithPluginDescriptor(ExtensionPointImpl.java:293)
+	at com.intellij.openapi.extensions.ExtensionPointName.processWithPluginDescriptor(ExtensionPointName.java:156)
+	at com.intellij.ide.ui.OptionsTopHitProvider$Activity.cacheAll(OptionsTopHitProvider.java:196)
+	at com.intellij.ide.ui.OptionsTopHitProvider$Activity.preload(OptionsTopHitProvider.java:177)
+	at com.intellij.idea.ApplicationLoader$executePreloadActivity$1.run(ApplicationLoader.kt:412)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.registerIndicatorAndRun(CoreProgressManager.java:705)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.executeProcessUnderProgress(CoreProgressManager.java:647)
+	at com.intellij.openapi.progress.impl.ProgressManagerImpl.executeProcessUnderProgress(ProgressManagerImpl.java:63)
+	at com.intellij.idea.ApplicationLoader.executePreloadActivity(ApplicationLoader.kt:402)
+	at com.intellij.idea.ApplicationLoader.access$executePreloadActivity(ApplicationLoader.kt:1)
+	at com.intellij.idea.ApplicationLoader$executePreloadActivities$2.run(ApplicationLoader.kt:467)
+	at java.base/java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1426)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+2022-05-15 10:16:03,779 [ 103243]   INFO - impl.SharedIndexInfrastructure - Shared index persistent data has been cleared 
+2022-05-15 10:16:03,783 [ 103247]  ERROR - template.impl.TemplateSettings - IntelliJ IDEA 2021.2  Build #IU-212.4746.92 
+2022-05-15 10:16:03,784 [ 103248]  ERROR - template.impl.TemplateSettings - JDK: 11.0.11; VM: OpenJDK 64-Bit Server VM; Vendor: JetBrains s.r.o. 
+2022-05-15 10:16:03,784 [ 103248]   INFO - nfig.ETagCloudConfigFileClient - === Get cloud config URL: https://cloudconfig.jetbrains.com/cloudconfig/files === 
+2022-05-15 10:16:03,785 [ 103249]  ERROR - template.impl.TemplateSettings - OS: Mac OS X 
+2022-05-15 10:16:03,786 [ 103250]  ERROR - template.impl.TemplateSettings - Last Action:  
+2022-05-15 10:16:03,808 [ 103272]   INFO - impl.SharedIndexMainZipStorage - Shared Indexes Storage is opened and empty 
+2022-05-15 10:16:04,045 [ 103509]   INFO - stubs.SerializationManagerImpl - Name storage is repaired 
+2022-05-15 10:16:04,082 [ 103546]   INFO - impl.SharedIndexMainZipStorage - Shared Indexes Storage is opened and empty 
+2022-05-15 10:16:04,098 [ 103562]   INFO - impl.SharedIndexInfrastructure - Shared index persistent data has been cleared 
+2022-05-15 10:16:04,268 [ 103732]   WARN - arketplace.MarketplaceRequests - Error reading Marketplace file: com.fasterxml.jackson.databind.JsonMappingException: Unexpected end-of-input within/between Object entries
+ at [Source: (BufferedReader); line: 1, column: 1212417] (through reference chain: java.util.ArrayList[9276]) (file=/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/plugins/brokenPlugins.json URL=https://plugins.jetbrains.com/files/brokenPlugins.json) 
+2022-05-15 10:16:04,269 [ 103733]   WARN - arketplace.MarketplaceRequests - Can not get broken plugins file from Marketplace: Unexpected end-of-input within/between Object entries
+ at [Source: (BufferedReader); line: 1, column: 1212417] (through reference chain: java.util.ArrayList[9276]) 
+2022-05-15 10:16:04,332 [ 103796]   WARN - l.NotificationGroupManagerImpl - Notification group CodeWithMe is already registered (group=com.intellij.notification.NotificationGroup@359ec5e5). Plugin descriptor: PluginDescriptor(name=Code With Me, id=com.jetbrains.codeWithMe, descriptorPath=plugin.xml, path=~/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIU/2021.2/31f9496f635cec87427837101e04cbcddfb544d7/ideaIU-2021.2/plugins/cwm-plugin, version=212.4746.92, package=null) 
+2022-05-15 10:16:04,659 [ 104123]   WARN - arketplace.MarketplaceRequests - Error reading Marketplace file: com.fasterxml.jackson.databind.JsonMappingException: Unexpected end-of-input: was expecting closing quote for a string value
+ at [Source: (BufferedReader); line: 1, column: 38655] (through reference chain: java.util.HashSet[1634]) (file=/Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/plugins/pluginsXMLIds.json URL=https://plugins.jetbrains.com/files/pluginsXMLIds.json) 
+2022-05-15 10:16:04,660 [ 104124]   INFO - ateSettings.impl.UpdateChecker - failed to load plugins from default repository: Unexpected end-of-input: was expecting closing quote for a string value
+ at [Source: (BufferedReader); line: 1, column: 38655] (through reference chain: java.util.HashSet[1634]) 
+2022-05-15 10:16:04,715 [ 104179]   INFO - pl.local.NativeFileWatcherImpl - Starting file watcher: /Users/didi/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIU/2021.2/31f9496f635cec87427837101e04cbcddfb544d7/ideaIU-2021.2/bin/mac/fsnotifier 
+2022-05-15 10:16:04,719 [ 104183]   INFO - pl.local.NativeFileWatcherImpl - Native file watcher is operational. 
+2022-05-15 10:16:04,798 [ 104262]   INFO - cloudConfig.CloudConfigManager - === calculateInitStatus.value: JBA_NOT_CONNECTED === 
+2022-05-15 10:16:04,826 [ 104290]   INFO - cloudConfig.CloudConfigManager - === End.updateInitStatus === 
+2022-05-15 10:16:06,175 [ 105639]   INFO - il.indexing.FileBasedIndexImpl - Indexes to be rebuilt after corruption:FilenameIndex(v = 3),FrameworkDetectionIndex(v = 65536),TodoIndex(v = 4107),IdIndex(v = 4113),filetypes(v = 258),Stubs(v = 46),Trigram.Index(v = 4099),fileIncludes(v = 6),DomFileIndex(v = 0),RelaxSymbolIndex(v = 0),XmlTagNames(v = 1),XmlNamespaces(v = 8),html5.custom.attributes.index(v = 1),SchemaTypeInheritance(v = 2),json.file.root.values(v = 5),HashFragmentIndex(v = 19115599),XsltSymbolIndex(v = 0),HtmlTagIdIndex(v = 3),CssIndex(v = 35),css.template.selectors(v = 30),CompassFunctionsIndex(v = 33),xmlProperties(v = 2),editorconfig.index.name(v = 5),yaml.keys.name(v = 1),bytecodeAnalysis(v = 4107),java.auto.module.name(v = 5),java.source.module.name(v = 3),java.null.method.argument(v = 4097),java.fun.expression(v = 4102),java.binary.plus.expression(v = 4100),ant-imports(v = 5),docker.compose.services(v = 1),LombokConfigIndex(v = 11),com.intellij.uiDesigner.FormClassIndex(v = 0),VtlFileIndex(v = 1),protoeditor.java.outer.class.index(v = 0),groovy.trait.fields(v = 5),groovy.trait.methods(v = 32),IdeaPluginRegistrationIndex(v = 3),PluginIdModuleIndex(v = 2),PluginIdDependenciesIndex(v = 5),devkit.ExtensionPointIndex(v = 0),devkit.ExtensionPointClassIndex(v = 1),JavaFxControllerClassIndex(v = 1),javafx.id.name(v = 3),javafx.custom.component(v = 2),javafx.stylesheets.name(v = 6),java.cucumber.java8.step(v = 4097),groovy.cucumber.step(v = 6),js.test.names(v = 22),js.package.index(v = 12),js.custom.single.entry.index(v = 312),js.implicit.elements.index(v = 1028),js.string.literal.words.index(v = 4),TypeScriptExternalPathCandidates(v = 0),VueNoScriptFilesIndex(v = 7),angularjs.template.cache(v = 65),angularjs.ui.router.views.index(v = 65),angularjs.app.index(v = 65),sql.types.count.index(v = 0),sql.routine.index(v = 1),taglibUris(v = 7),SpringXmlBeansIndex(v = 622),spring.spiFileIndex(v = 3),GspIncludeIndex(v = 4),FileBasedWSIndex(v = 6),FtlFileIndex(v = 5),http.request.execution.environment(v = 3),http.request.completion.host(v = 5),http.request.headers.values.index(v = 4),spring.autoConfigureMetadataIndex(v = 2),OpenapiSpecificationContentIndexer(v = 9),org.jetbrains.kotlin.idea.versions.KotlinJvmMetadataVersionIndex(v = 5),org.jetbrains.kotlin.idea.versions.KotlinJsMetadataVersionIndex(v = 3),org.jetbrains.kotlin.idea.vfilefinder.KotlinClassFileIndex(v = 3),org.jetbrains.kotlin.idea.vfilefinder.KotlinJavaScriptMetaFileIndex(v = 4),org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFileIndex(v = 1),org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFilePackageIndex(v = 1),org.jetbrains.kotlin.idea.vfilefinder.KotlinModuleMappingIndex(v = 5),org.jetbrains.kotlin.idea.vfilefinder.KotlinPackageSourcesMemberNamesIndex(v = 2),org.jetbrains.kotlin.idea.vfilefinder.KotlinJvmModuleAnnotationsIndex(v = 1),org.jetbrains.kotlin.idea.vfilefinder.KotlinBuiltInsMetadataIndex(v = 1),org.jetbrains.kotlin.idea.vfilefinder.KotlinStdlibIndex(v = 1),org.jetbrains.kotlin.idea.vfilefinder.KlibMetaFileIndex(v = 4),com.android.tools.idea.model.AndroidManifestIndex$Companion$NAME$1.NAME(v = 10),BindingXmlIndex(v = 8),MlModelFileIndex(v = 6),NavXmlIndex(v = 8) 
+2022-05-15 10:16:06,179 [ 105643]   INFO - leBasedIndexDataInitialization - Index data initialization done: 2825 ms. Initialized indexes: [FilenameIndex, FrameworkDetectionIndex, TodoIndex, IdIndex, filetypes, Stubs, Trigram.Index, fileIncludes, DomFileIndex, RelaxSymbolIndex, XmlTagNames, XmlNamespaces, html5.custom.attributes.index, SchemaTypeInheritance, json.file.root.values, HashFragmentIndex, XsltSymbolIndex, HtmlTagIdIndex, CssIndex, css.template.selectors, CompassFunctionsIndex, xmlProperties, editorconfig.index.name, yaml.keys.name, bytecodeAnalysis, java.auto.module.name, java.source.module.name, java.null.method.argument, java.fun.expression, java.binary.plus.expression, ant-imports, docker.compose.services, LombokConfigIndex, com.intellij.uiDesigner.FormClassIndex, VtlFileIndex, protoeditor.java.outer.class.index, groovy.trait.fields, groovy.trait.methods, IdeaPluginRegistrationIndex, PluginIdModuleIndex, PluginIdDependenciesIndex, devkit.ExtensionPointIndex, devkit.ExtensionPointClassIndex, JavaFxControllerClassIndex, javafx.id.name, javafx.custom.component, javafx.stylesheets.name, java.cucumber.java8.step, groovy.cucumber.step, js.test.names, js.package.index, js.custom.single.entry.index, js.implicit.elements.index, js.string.literal.words.index, TypeScriptExternalPathCandidates, VueNoScriptFilesIndex, angularjs.template.cache, angularjs.ui.router.views.index, angularjs.app.index, sql.types.count.index, sql.routine.index, taglibUris, SpringXmlBeansIndex, spring.spiFileIndex, GspIncludeIndex, FileBasedWSIndex, FtlFileIndex, http.request.execution.environment, http.request.completion.host, http.request.headers.values.index, spring.autoConfigureMetadataIndex, OpenapiSpecificationContentIndexer, org.jetbrains.kotlin.idea.versions.KotlinJvmMetadataVersionIndex, org.jetbrains.kotlin.idea.versions.KotlinJsMetadataVersionIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinClassFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinJavaScriptMetaFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFilePackageIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinModuleMappingIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinPackageSourcesMemberNamesIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinJvmModuleAnnotationsIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinBuiltInsMetadataIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinStdlibIndex, org.jetbrains.kotlin.idea.vfilefinder.KlibMetaFileIndex, com.android.tools.idea.model.AndroidManifestIndex$Companion$NAME$1.NAME, BindingXmlIndex, MlModelFileIndex, NavXmlIndex]. 
+2022-05-15 10:16:06,507 [ 105971]   INFO - tellij.psi.stubs.StubIndexImpl - Following stub indices will be built:dom.namespaceKey(v = 1),dom.elementClass(v = 0),Css.ampersand.selector(v = 2),Css.class(v = 2),Css.id(v = 2),Css.attr(v = 2),Css.custom.property(v = 2),Css.custom.mixin(v = 2),Less.mixins(v = 2),Less.variables(v = 2),Scss.variable(v = 2),Scss.placeholder.selector(v = 2),Scss.function(v = 2),Scss.mixin(v = 2),Stylus.variables(v = 2),Stylus.mixins(v = 2),properties.index(v = 2),protobuf.byQualifiedName(v = 2),protobuf.byShortName(v = 2),gr.class.fqn(v = 1),gr.script.fqn(v = 2),gr.field.name(v = 2),gr.method.name(v = 2),gr.annot.method.name(v = 2),gr.annot.members(v = 2),gr.script.class(v = 2),gr.class.super(v = 2),gr.anonymous.class(v = 3),markdown.header(v = 2),js.qualified.shortName(v = 4),js.element.qualifiedName(v = 3),JS.global.qualified.elements(v = 3),ts.external.module.index(v = 3),JS.class.super(v = 5),JS.class.implements(v = 3),JS.custom.stub.index(v = 2),js.symbol.index2(v = 6),js.typedef.index2(v = 2),js.generics.index(v = 2),JS.base.types.index(v = 3),js.class.index2(v = 3),js.namespace.index(v = 2),js.local.namespace.members.index(v = 2),JS.subclass.stub.index(v = 2),js.symbol.qualified.names.index(v = 1),amd.baseUrl.index(v = 2),amd.requirePaths.index(v = 2),js.global.symbol.index(v = 2),js.exported.index(v = 2),es6.exported.index(v = 2),js.imported.bindings.index(v = 2),es6.assignment.index(v = 2),ts.local.classes(v = 2),ts.embedded.content.index(v = 2),js.nonglobal.symbol.index(v = 2),js.lazy.packages(v = 3),js.gcl.modules(v = 2),js.doc.modules(v = 2),js.amd.modules(v = 2),vue.components.index(v = 25),vue.options.index(v = 25),vue.mixin.binding.index(v = 25),vue.extends.binding.index(v = 25),vue.global.directives.index(v = 25),vue.url.index(v = 25),vue.id.index(v = 25),vue.global.filters.index(v = 25),vuex.store.index(v = 25),angularjs.directives.index(v = 65),angularjs.directives.doc.index(v = 65),angularjs.controller.index(v = 65),angularjs.module.index(v = 65),angularjs.filter.index(v = 65),angularjs.symbol.index(v = 65),angularjs.ui.router.states.index(v = 65),angularjs.ui.router.generic.states.index(v = 65),angularjs.templateUrl.index(v = 65),angularjs.generic.modules.index(v = 65),angularjs.delimiter.index(v = 65),angular2.templateUrl.index(v = 9),angular2.source.pipe.index(v = 9),angular2.source.directive.index(v = 9),angular2.source.module.index(v = 9),angular2.ivy.pipe.index(v = 9),angular2.ivy.directive.index(v = 9),angular2.ivy.module.index(v = 9),angular2.metadata.pipe.index(v = 9),angular2.metadata.className.index(v = 9),angular2.metadata.directive.index(v = 9),angular2.metadata.node.index(v = 9),angular2.metadata.function.index(v = 9),angular2.metadata.module.index(v = 9),sql.table.shortName(v = 3),sql.column.name(v = 3),sql.names(v = 21),org.jetbrains.kotlin.idea.stubindex.KotlinExactPackagesIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelClassByPackageIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelFunctionByPackageIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelPropertyByPackageIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelTypeAliasByPackageIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinClassShortNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinFullClassNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinPropertyShortNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinFunctionShortNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTypeAliasShortNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinSuperClassIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelFunctionFqnNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelPropertyFqnNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelTypeAliasFqNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelExtensionsByReceiverTypeIndex(v = 3),org.jetbrains.kotlin.idea.stubindex.KotlinExtensionsInObjectsByReceiverTypeIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinAnnotationsIndex(v = 3),org.jetbrains.kotlin.idea.stubindex.KotlinJvmNameAnnotationIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinProbablyNothingFunctionShortNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinProbablyNothingPropertyShortNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinProbablyContractedFunctionShortNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinFileFacadeFqNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinFilePartClassIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinFileFacadeClassByPackageIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinFileFacadeShortNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinMultifileClassPartIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinScriptFqnIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinTypeAliasByExpansionShortNameIndex(v = 2),org.jetbrains.kotlin.idea.stubindex.KotlinOverridableInternalMembersShortNameIndex(v = 2),java.annotations(v = 2),java.class.extlist(v = 3),java.field.name(v = 2),java.method.name(v = 2),jvm.static.member.name(v = 2),jvm.static.member.type(v = 2),java.anonymous.baseref(v = 2),java.method.parameter.types(v = 3),java.class.shortname(v = 4),java.class.fqn(v = 1),java.module.name(v = 4) 
+2022-05-15 10:16:06,508 [ 105972]   INFO - exImpl$StubIndexInitialization - Index data initialization done: 328 ms. Initialized stub indexes: {Css.custom.property, JS.base.types.index, angularjs.filter.index, org.jetbrains.kotlin.idea.stubindex.KotlinScriptFqnIndex, gr.annot.method.name, angular2.metadata.node.index, angular2.metadata.directive.index, gr.method.name, Css.custom.mixin, Css.attr, org.jetbrains.kotlin.idea.stubindex.KotlinTypeAliasShortNameIndex, js.doc.modules, js.lazy.packages, js.gcl.modules, js.nonglobal.symbol.index, org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelPropertyFqnNameIndex, js.namespace.index, org.jetbrains.kotlin.idea.stubindex.KotlinFunctionShortNameIndex, org.jetbrains.kotlin.idea.stubindex.KotlinOverridableInternalMembersShortNameIndex, js.typedef.index2, gr.annot.members, java.annotations, gr.field.name, gr.script.fqn, gr.script.class, org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelTypeAliasFqNameIndex, org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelFunctionFqnNameIndex, js.class.index2, js.local.namespace.members.index, js.symbol.index2, org.jetbrains.kotlin.idea.stubindex.KotlinTypeAliasByExpansionShortNameIndex, js.generics.index, org.jetbrains.kotlin.idea.stubindex.KotlinMultifileClassPartIndex, org.jetbrains.kotlin.idea.stubindex.KotlinFileFacadeShortNameIndex, org.jetbrains.kotlin.idea.stubindex.KotlinFileFacadeClassByPackageIndex, angularjs.templateUrl.index, angularjs.directives.index, gr.anonymous.class, java.class.extlist, vue.options.index, gr.class.fqn, angular2.ivy.directive.index, js.symbol.qualified.names.index, dom.elementClass, org.jetbrains.kotlin.idea.stubindex.KotlinClassShortNameIndex, java.class.fqn, Css.class, Less.variables, js.imported.bindings.index, org.jetbrains.kotlin.idea.stubindex.KotlinPropertyShortNameIndex, sql.table.shortName, protobuf.byQualifiedName, js.amd.modules, sql.names, ts.local.classes, Scss.placeholder.selector, angularjs.ui.router.states.index, angularjs.delimiter.index, angular2.source.module.index, angularjs.controller.index, angular2.metadata.function.index, vue.extends.binding.index, vue.global.filters.index, angular2.metadata.pipe.index, org.jetbrains.kotlin.idea.stubindex.KotlinProbablyNothingFunctionShortNameIndex, Stylus.variables, js.global.symbol.index, angular2.source.pipe.index, jvm.static.member.type, java.anonymous.baseref, vue.global.directives.index, vue.url.index, Stylus.mixins, amd.requirePaths.index, js.exported.index, java.method.parameter.types, org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelPropertyByPackageIndex, org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelFunctionByPackageIndex, org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelClassByPackageIndex, Scss.mixin, org.jetbrains.kotlin.idea.stubindex.KotlinExactPackagesIndex, org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelTypeAliasByPackageIndex, amd.baseUrl.index, properties.index, es6.exported.index, js.qualified.shortName, org.jetbrains.kotlin.idea.stubindex.KotlinAnnotationsIndex, java.class.shortname, jvm.static.member.name, java.method.name, org.jetbrains.kotlin.idea.stubindex.KotlinExtensionsInObjectsByReceiverTypeIndex, org.jetbrains.kotlin.idea.stubindex.KotlinProbablyNothingPropertyShortNameIndex, org.jetbrains.kotlin.idea.stubindex.KotlinFilePartClassIndex, org.jetbrains.kotlin.idea.stubindex.KotlinJvmNameAnnotationIndex, markdown.header, org.jetbrains.kotlin.idea.stubindex.KotlinFileFacadeFqNameIndex, org.jetbrains.kotlin.idea.stubindex.KotlinProbablyContractedFunctionShortNameIndex, JS.class.implements, JS.class.super, js.element.qualifiedName, ts.external.module.index, JS.global.qualified.elements, Scss.variable, org.jetbrains.kotlin.idea.stubindex.KotlinTopLevelExtensionsByReceiverTypeIndex, JS.custom.stub.index, java.module.name, protobuf.byShortName, org.jetbrains.kotlin.idea.stubindex.KotlinFullClassNameIndex, gr.class.super, java.field.name, Css.ampersand.selector, JS.subclass.stub.index, angular2.ivy.module.index, vue.components.index, angular2.metadata.module.index, sql.column.name, es6.assignment.index, Scss.function, ts.embedded.content.index, Less.mixins, Css.id, angular2.metadata.className.index, vue.mixin.binding.index, vue.id.index, angular2.ivy.pipe.index, dom.namespaceKey, vuex.store.index, angularjs.ui.router.generic.states.index, angularjs.symbol.index, angularjs.module.index, angularjs.generic.modules.index, angularjs.directives.doc.index, angular2.source.directive.index, angular2.templateUrl.index, org.jetbrains.kotlin.idea.stubindex.KotlinSuperClassIndex}. 
+2022-05-15 10:16:07,608 [ 107072]   INFO - dea.updater.SdkComponentSource - File /Users/didi/.android/repositories.cfg could not be loaded. 
+2022-05-15 10:16:07,609 [ 107073]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/addons_list-3.xml 
+2022-05-15 10:16:07,914 [ 107378]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/repository2-1.xml 
+2022-05-15 10:16:07,915 [ 107379]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/android-desktop/sys-img2-1.xml 
+2022-05-15 10:16:07,915 [ 107379]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/android/sys-img2-1.xml 
+2022-05-15 10:16:07,915 [ 107379]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/android-automotive/sys-img2-1.xml 
+2022-05-15 10:16:07,915 [ 107379]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/android-wear/sys-img2-1.xml 
+2022-05-15 10:16:07,916 [ 107380]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/android-wear-cn/sys-img2-1.xml 
+2022-05-15 10:16:07,916 [ 107380]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/android-tv/sys-img2-1.xml 
+2022-05-15 10:16:07,916 [ 107380]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/google_atd/sys-img2-1.xml 
+2022-05-15 10:16:07,916 [ 107380]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/google_apis/sys-img2-1.xml 
+2022-05-15 10:16:07,916 [ 107380]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/aosp_atd/sys-img2-1.xml 
+2022-05-15 10:16:07,918 [ 107382]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/addon2-1.xml 
+2022-05-15 10:16:07,918 [ 107382]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/glass/addon2-1.xml 
+2022-05-15 10:16:07,918 [ 107382]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/google_apis_playstore/sys-img2-1.xml 
+2022-05-15 10:16:07,918 [ 107382]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/extras/intel/addon2-1.xml 
+2022-05-15 10:16:07,918 [ 107382]   INFO - dea.updater.SdkComponentSource - Downloading https://dl.google.com/android/repository/sys-img/google-tv/sys-img2-1.xml 
+2022-05-15 10:16:35,418 [ 134882]   INFO - BridgeArtifactManagerRedefiner - Using workspace model to open project 
+2022-05-15 10:16:35,502 [ 134966]   INFO - lij.diagnostic.DebugLogManager - Set TRACE for the following categories: #com.jetbrains.rdserver.requests, #com.jetbrains.rd.ide.document, #com.jetbrains.rdserver.document, #com.jetbrains.rdserver.editors, #com.jetbrains.rdserver.actions, #com.jetbrains.rdserver.permissions 
+2022-05-15 10:16:35,511 [ 134975]   INFO - dule.ModuleBridgeLoaderService - Workspace model loaded without cache. Loading real project state into workspace model. Thread[JobScheduler FJ pool 10/11,4,main] 
+2022-05-15 10:16:35,537 [ 135001]   INFO - tests.impl.DistributedTestHost - Host address=localhost/127.0.0.1 
+2022-05-15 10:16:35,574 [ 135038]   INFO - pl.projectlevelman.NewMappings - VCS Root: [Git] - [/Users/didi/workspace/2022/vue/vue-vite] 
+2022-05-15 10:16:35,777 [ 135241]   INFO - ins.rd.platform.codeWithMe.a.c - sessionStatus: null 
+2022-05-15 10:16:35,778 [ 135242]   INFO - ins.rd.platform.codeWithMe.a.c - freeSessionRemainingTimeMs: null null 
+2022-05-15 10:16:35,921 [ 135385]   INFO - rojectCodeStyleSettingsManager - Loading Project code style 
+2022-05-15 10:16:35,928 [ 135392]   INFO - eStyle.CustomCodeStyleSettings - Loaded com.intellij.lang.javascript.formatter.JSCodeStyleSettings 
+2022-05-15 10:16:35,928 [ 135392]   INFO - eStyle.CustomCodeStyleSettings - Loaded com.intellij.psi.formatter.xml.HtmlCodeStyleSettings 
+2022-05-15 10:16:35,932 [ 135396]   INFO - eStyle.CustomCodeStyleSettings - Loaded org.jetbrains.vuejs.lang.html.psi.formatter.VueCodeStyleSettings 
+2022-05-15 10:16:35,932 [ 135396]   INFO - eStyle.CustomCodeStyleSettings - Loaded com.intellij.lang.typescript.formatter.TypeScriptCodeStyleSettings 
+2022-05-15 10:16:35,933 [ 135397]   INFO - eStyle.CommonCodeStyleSettings - Loaded HTML common code style settings 
+2022-05-15 10:16:35,933 [ 135397]   INFO - eStyle.CommonCodeStyleSettings - Loaded JavaScript common code style settings 
+2022-05-15 10:16:35,934 [ 135398]   INFO - eStyle.CommonCodeStyleSettings - Loaded TypeScript common code style settings 
+2022-05-15 10:16:35,934 [ 135398]   INFO - eStyle.CommonCodeStyleSettings - Loaded Vue template common code style settings 
+2022-05-15 10:16:35,935 [ 135399]   INFO - rojectCodeStyleSettingsManager - Project code style loaded 
+2022-05-15 10:16:36,374 [ 135838]   INFO - .TypeScriptLibraryProviderImpl - Start refreshing typescript libraries 
+2022-05-15 10:16:36,390 [ 135854]   INFO - .TypeScriptLibraryProviderImpl - End refreshing typescript libraries 
+2022-05-15 10:16:36,704 [ 136168]   INFO -              PerformancePlugin - Performance Plugin is in silent mode 
+2022-05-15 10:16:36,932 [ 136396]   INFO -  #git4idea.commands.GitHandler - [.] git version 
+2022-05-15 10:16:36,957 [ 136421]   INFO - ge.ExternalProjectsDataStorage - Load external projects data in 14 millis (read time: 1) 
+2022-05-15 10:16:36,962 [ 136426]   INFO -  #git4idea.commands.GitHandler - git version 2.24.3 (Apple Git-128) 
+2022-05-15 10:16:36,976 [ 136440]   INFO - ea.config.GitExecutableManager - Git version for /usr/bin/git: 2.24.3.0 (UNIX) 
+2022-05-15 10:16:37,000 [ 136464]   INFO - erver.followMe.FollowMeManager - Register new user 0:'didi' with ClientId=ClientId(value=Host) 
+2022-05-15 10:16:37,177 [ 136641]   INFO - ramework.util.RdCoroutineScope - RdCoroutineHost overridden 
+2022-05-15 10:16:37,347 [ 136811]   INFO - redIndexChunkConfigurationImpl - Chunk bundled-js-predefined-ffdd448c697d-d5a2cc0426b1-JavaScript-IU-212.4746.92 is registered for project 'vue-vite: matching: (fb=35, stub=84), incompatible: (fb=0, stub=0), unknown: (fb=9, stub=9),  
+2022-05-15 10:16:37,502 [ 136966]   INFO - SharedIndexPostStartupActivity - Attached 1 pre-built shared indexes: bundled-js-predefined-ffdd448c697d-d5a2cc0426b1-JavaScript-IU-212.4746.92 
+2022-05-15 10:16:38,133 [ 137597]   WARN - ea.status.GitStagingAreaHolder - Ignoring change under another root: GitFileStatus(index= , workTree=M, path=/Users/didi/workspace/2022/vue/vue-vite/src/.DS_Store, origPath=null); root: file:///Users/didi/workspace/2022/vue/vue-vite; mapped root: null 
+2022-05-15 10:16:39,029 [ 138493]   INFO - oudConfig.StatusBarInfoManager - === StatusBar.start create === 
+2022-05-15 10:16:39,177 [ 138641]   INFO - roject.DumbServiceGuiTaskQueue - Running dumb mode task: OnDiskSharedIndexChunkLocator 
+2022-05-15 10:16:39,179 [ 138643]   INFO - roject.DumbServiceGuiTaskQueue - Running dumb mode task: UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:39,186 [ 138650]   INFO - ij.psi.search.LogFileTypeIndex - Loading file type index snapshot 
+2022-05-15 10:16:39,195 [ 138659]   INFO - indexing.UnindexedFilesUpdater - Started indexing of vue-vite. Reason: On project open 
+2022-05-15 10:16:39,204 [ 138668]   INFO - indexing.UnindexedFilesUpdater - Performing delayed pushing properties tasks for vue-vite took 0ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:39,225 [ 138689]   INFO - ProjectRootPostStartUpActivity - /Users/didi/workspace/2022/vue/vue-vite/.idea case-sensitivity: expected=false actual=false 
+2022-05-15 10:16:39,254 [ 138718]   INFO - j.ide.script.IdeStartupScripts - 0 startup script(s) found 
+2022-05-15 10:16:39,268 [ 138732]   INFO - indexing.UnindexedFilesUpdater - Scanning of vue-vite uses 11 scanning threads 
+2022-05-15 10:16:39,339 [ 138803]   INFO - .diagnostic.PerformanceWatcher - Post-startup activities under progress took 2614ms; general responsiveness: ok; EDT responsiveness: 0/2 sluggish, 1/2 very slow 
+2022-05-15 10:16:39,351 [ 138815]   INFO - llij.database.util.SqlDialects - SQL dialects initialized in 0 ms 
+2022-05-15 10:16:39,739 [ 139203]   INFO - pm.PackageJsonBuildFileManager - Found package.json in /Users/didi/workspace/2022/vue/vue-vite: file:///Users/didi/workspace/2022/vue/vue-vite/package.json 
+2022-05-15 10:16:39,830 [ 139294]   INFO - tor.impl.FileEditorManagerImpl - Project opening took 4435 ms 
+2022-05-15 10:16:39,883 [ 139347]   INFO - Tools.base.JsbtStartupActivity - Found [file:///Users/didi/workspace/2022/vue/vue-vite/package.json] for com.intellij.lang.javascript.buildTools.npm.NpmScriptsService 
+2022-05-15 10:16:40,036 [ 139500]   INFO - ry.NodeModulesDirectoryManager - Associate vue-vite/node_modules with [file:///Users/didi/workspace/2022/vue/vue-vite] 
+2022-05-15 10:16:40,036 [ 139500]   INFO - cript.library.JSLibraryManager - Firing rootsChanged event due to adding 1 library: /Users/didi/workspace/2022/vue/vue-vite/node_modules 
+2022-05-15 10:16:40,069 [ 139533]   INFO - pl.ProjectRootManagerComponent - Project roots of vue-vite have changed (trace_hash = -1031181160) 
+java.lang.Throwable
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent.logRootChanges(ProjectRootManagerComponent.java:344)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent.synchronizeRoots(ProjectRootManagerComponent.java:331)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent.fireRootsChangedEvent(ProjectRootManagerComponent.java:238)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl.fireRootsChanged(ProjectRootManagerImpl.java:449)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$1.fireRootsChanged(ProjectRootManagerImpl.java:146)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$1.fireRootsChanged(ProjectRootManagerImpl.java:143)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$BatchSession.rootsChanged(ProjectRootManagerImpl.java:113)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$BatchSession.rootsChanged(ProjectRootManagerImpl.java:121)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl.makeRootsChange(ProjectRootManagerImpl.java:421)
+	at com.intellij.webcore.libraries.ScriptingLibraryManager.commitChanges(ScriptingLibraryManager.java:92)
+	at com.intellij.lang.javascript.library.JSLibraryManager.commitChanges(JSLibraryManager.java:48)
+	at com.intellij.lang.javascript.library.JSLibraryManager.commitChanges(JSLibraryManager.java:42)
+	at com.intellij.javascript.nodejs.library.NodeModulesDirectoryManager.lambda$tryAddLibrariesOnBackgroundThread$12(NodeModulesDirectoryManager.java:338)
+	at com.intellij.openapi.application.WriteAction.lambda$run$1(WriteAction.java:94)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runWriteActionWithClass(ApplicationImpl.java:924)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runWriteAction(ApplicationImpl.java:950)
+	at com.intellij.openapi.application.WriteAction.run(WriteAction.java:93)
+	at com.intellij.javascript.nodejs.library.NodeModulesDirectoryManager.lambda$tryAddLibrariesOnBackgroundThread$13(NodeModulesDirectoryManager.java:311)
+	at com.intellij.openapi.application.TransactionGuardImpl.runWithWritingAllowed(TransactionGuardImpl.java:214)
+	at com.intellij.openapi.application.TransactionGuardImpl.access$200(TransactionGuardImpl.java:21)
+	at com.intellij.openapi.application.TransactionGuardImpl$2.run(TransactionGuardImpl.java:196)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runIntendedWriteActionOnCurrentThread(ApplicationImpl.java:794)
+	at com.intellij.openapi.application.impl.ApplicationImpl.lambda$invokeLaterOnWriteThread$10(ApplicationImpl.java:783)
+	at com.intellij.openapi.application.impl.FlushQueue.doRun(FlushQueue.java:84)
+	at com.intellij.openapi.application.impl.FlushQueue.runNextEvent(FlushQueue.java:133)
+	at com.intellij.openapi.application.impl.FlushQueue.flushNow(FlushQueue.java:46)
+	at com.intellij.openapi.application.impl.FlushQueue$FlushNow.run(FlushQueue.java:189)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:313)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:776)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:727)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:746)
+	at com.intellij.ide.IdeEventQueue.defaultDispatchEvent(IdeEventQueue.java:886)
+	at com.intellij.ide.IdeEventQueue._dispatchEvent(IdeEventQueue.java:755)
+	at com.intellij.ide.IdeEventQueue.lambda$dispatchEvent$7(IdeEventQueue.java:442)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.computePrioritized(CoreProgressManager.java:825)
+	at com.intellij.ide.IdeEventQueue.lambda$dispatchEvent$8(IdeEventQueue.java:441)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runIntendedWriteActionOnCurrentThread(ApplicationImpl.java:794)
+	at com.intellij.ide.IdeEventQueue.dispatchEvent(IdeEventQueue.java:487)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2022-05-15 10:16:40,070 [ 139534]   INFO - penapi.project.DumbServiceImpl - cancel UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:40,071 [ 139535]   INFO - indexing.UnindexedFilesUpdater - Cancelled indexing of vue-vite 
+2022-05-15 10:16:40,071 [ 139535]   INFO - ij.psi.search.LogFileTypeIndex - File type index snapshot dropped 
+2022-05-15 10:16:40,072 [ 139536]   INFO - roject.DumbServiceGuiTaskQueue - Running dumb mode task: com.android.tools.idea.res.ResourceFolderRepositoryFileCacheImpl$PruneTask@332d1f72 
+2022-05-15 10:16:40,076 [ 139540]   INFO - roject.DumbServiceGuiTaskQueue - Running dumb mode task: com.android.tools.idea.res.ResourceFolderRepositoryFileCacheImpl$ManageLruProjectFilesTask@f24910 
+2022-05-15 10:16:40,078 [ 139542]   INFO - roject.DumbServiceGuiTaskQueue - Running dumb mode task: UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:40,078 [ 139542]   INFO - ij.psi.search.LogFileTypeIndex - Loading file type index snapshot 
+2022-05-15 10:16:40,081 [ 139545]   INFO - indexing.UnindexedFilesUpdater - Started indexing of vue-vite. Reason: Project roots have changed 
+2022-05-15 10:16:40,085 [ 139549]   INFO - indexing.UnindexedFilesUpdater - Performing delayed pushing properties tasks for vue-vite took 4ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:40,124 [ 139588]   INFO - indexing.UnindexedFilesUpdater - Scanning of vue-vite uses 11 scanning threads 
+2022-05-15 10:16:40,385 [ 139849]   WARN - ea.status.GitStagingAreaHolder - Ignoring change under another root: GitFileStatus(index= , workTree=M, path=/Users/didi/workspace/2022/vue/vue-vite/src/.DS_Store, origPath=null); root: file:///Users/didi/workspace/2022/vue/vue-vite; mapped root: null 
+2022-05-15 10:16:40,389 [ 139853]   INFO - .diagnostic.PerformanceWatcher - Pushing JS language level of vue-vite to 63 libraries took 137ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:40,916 [ 140380]   INFO - indexing.UnindexedFilesUpdater - Scanning completed for vue-vite. Number of scanned files: 1462; Number of files for indexing: 1452 took 831ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:40,926 [ 140390]   INFO - indexing.UnindexedFilesUpdater - Use 4 indexing threads for indexing of vue-vite 
+2022-05-15 10:16:41,321 [ 140785]   INFO - egistry.NpmRegistryServiceImpl - Found 51 packages (1 with '@web-types' prefix) in 1785ms (https://registry.npmjs.org/-/v1/search?&text=%22%40web-types%22&from=0&size=51) 
+2022-05-15 10:16:42,503 [ 141967]   INFO - egistry.NpmRegistryServiceImpl - Found 50 packages (7 with '@web-types' prefix) in 1181ms (https://registry.npmjs.org/-/v1/search?&text=%22%40web-types%22&from=51&size=50) 
+2022-05-15 10:16:43,639 [ 143103]   INFO - egistry.NpmRegistryServiceImpl - Found 43 packages (1 with '@web-types' prefix) in 1136ms (https://registry.npmjs.org/-/v1/search?&text=%22%40web-types%22&from=101&size=43) 
+2022-05-15 10:16:44,613 [ 144077]   INFO - egistry.NpmRegistryServiceImpl - Found 42 packages (1 with '@web-types' prefix) in 973ms (https://registry.npmjs.org/-/v1/search?&text=%22%40web-types%22&from=144&size=42) 
+2022-05-15 10:16:45,124 [ 144588]   WARN - .intellij.diagnostic.VMOptions - VM options file not configured 
+2022-05-15 10:16:45,124 [ 144588]   INFO - gnostic.MemorySizeConfigurator - Physical memory 16384M, minimum memory size 256M, -Xmx adjusted from 512M to 2048M 
+2022-05-15 10:16:45,194 [ 144658]   INFO - m.codeWithMe.CodeWithMeCleanup - running activity to cleanup old thin clients... Root path is '/Users/didi/Library/Caches/JetBrains' 
+2022-05-15 10:16:45,200 [ 144664]   INFO - m.codeWithMe.CodeWithMeCleanup - found 0 Code With Me client system folders to check 
+2022-05-15 10:16:45,201 [ 144665]   INFO - m.codeWithMe.CodeWithMeCleanup - found 0 Code With Me client config folders to check 
+2022-05-15 10:16:45,203 [ 144667]   INFO - m.codeWithMe.CodeWithMeCleanup - keep only [] major versions 
+2022-05-15 10:16:46,205 [ 145669]   INFO - ion.PackageVersionRangeMatcher - Matching 16 done in 264 ms 
+2022-05-15 10:16:47,288 [ 146752]   INFO - egistry.NpmRegistryServiceImpl - Found 41 packages (0 with '@web-types' prefix) in 2674ms (https://registry.npmjs.org/-/v1/search?&text=%22%40web-types%22&from=186&size=41) 
+2022-05-15 10:16:47,723 [ 147187]  DEBUG - BackendServerFileEditorManager - Opening host editor for /Users/didi/workspace/2022/vue/vue-vite/src/App.vue 
+2022-05-15 10:16:50,276 [ 149740]   INFO - egistry.NpmRegistryServiceImpl - Found 27 packages (0 with '@web-types' prefix) in 2987ms (https://registry.npmjs.org/-/v1/search?&text=%22%40web-types%22&from=227&size=41) 
+2022-05-15 10:16:51,253 [ 150717]   INFO - tellij.xml.Html5SchemaProvider - HTML5_SCHEMA_LOCATION = /Users/didi/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIU/2021.2/31f9496f635cec87427837101e04cbcddfb544d7/ideaIU-2021.2/lib/platform-impl.jar!/resources/html5-schema/html5.rnc 
+2022-05-15 10:16:51,526 [ 150990]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 44 versions for @web-types/quasar-framework in 1238ms 
+2022-05-15 10:16:51,526 [ 150990]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 3 versions for @web-types/at-nuxt-vue-app in 1236ms 
+2022-05-15 10:16:52,110 [ 151574]   INFO - indexing.UnindexedFilesUpdater - Finished for vue-vite. Unindexed files update took 11183ms; general responsiveness: ok; EDT responsiveness: 1/11 sluggish 
+2022-05-15 10:16:52,111 [ 151575]   INFO - ij.psi.search.LogFileTypeIndex - File type index snapshot dropped 
+2022-05-15 10:16:52,360 [ 151824]   INFO - CompilerWorkspaceConfiguration - Available processors: 12 
+2022-05-15 10:16:52,385 [ 151849]   INFO - penapi.project.DumbServiceImpl - updateFinished 
+2022-05-15 10:16:52,391 [ 151855]   INFO - tFileBasedIndexStartupActivity - Has changed files: false; project=Project(name=vue-vite, containerState=COMPONENT_CREATED, componentStore=/Users/didi/workspace/2022/vue/vue-vite) 
+2022-05-15 10:16:52,457 [ 151921]   INFO - ectsystem.ProjectSystemService - DefaultProjectSystem project system has been detected 
+2022-05-15 10:16:52,584 [ 152048]   WARN - tartup.impl.StartupManagerImpl - Activities registered via registerPostStartupActivity must be dumb-aware: com.android.tools.idea.nav.safeargs.project.ProjectNavigationResourceModificationTracker$1@75f989cd 
+2022-05-15 10:16:52,953 [ 152417]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 3 versions for @web-types/lit in 1424ms 
+2022-05-15 10:16:53,450 [ 152914]   WARN - g.jetbrains.kotlin.idea.script - [KOTLIN_SCRIPTING] extension gradle.kts file type [UNKNOWN] is not registered as Kotlin 
+2022-05-15 10:16:53,450 [ 152914]   WARN - g.jetbrains.kotlin.idea.script - [KOTLIN_SCRIPTING] extension space.kts file type [UNKNOWN] is not registered as Kotlin 
+2022-05-15 10:16:53,450 [ 152914]   WARN - g.jetbrains.kotlin.idea.script - [KOTLIN_SCRIPTING] extension main.kts file type [UNKNOWN] is not registered as Kotlin 
+2022-05-15 10:16:53,451 [ 152915]   WARN - g.jetbrains.kotlin.idea.script - [KOTLIN_SCRIPTING] extensions [gradle.kts, space.kts, main.kts] is about to be registered as Kotlin 
+2022-05-15 10:16:53,459 [ 152923]   INFO - .services.SpaceKtsFileDetector - SpaceKtsFileDetector 
+2022-05-15 10:16:53,520 [ 152984]   INFO - il.indexing.FileBasedIndexImpl - indexes cleared: 
+survived indexes: FilenameIndex, FrameworkDetectionIndex, TodoIndex, IdIndex, filetypes, Stubs, Trigram.Index, fileIncludes, DomFileIndex, RelaxSymbolIndex, XmlTagNames, XmlNamespaces, html5.custom.attributes.index, SchemaTypeInheritance, json.file.root.values, HashFragmentIndex, XsltSymbolIndex, HtmlTagIdIndex, CssIndex, css.template.selectors, CompassFunctionsIndex, xmlProperties, editorconfig.index.name, yaml.keys.name, bytecodeAnalysis, java.auto.module.name, java.source.module.name, java.null.method.argument, java.fun.expression, java.binary.plus.expression, ant-imports, docker.compose.services, LombokConfigIndex, com.intellij.uiDesigner.FormClassIndex, VtlFileIndex, protoeditor.java.outer.class.index, groovy.trait.fields, groovy.trait.methods, IdeaPluginRegistrationIndex, PluginIdModuleIndex, PluginIdDependenciesIndex, devkit.ExtensionPointIndex, devkit.ExtensionPointClassIndex, JavaFxControllerClassIndex, javafx.id.name, javafx.custom.component, javafx.stylesheets.name, java.cucumber.java8.step, groovy.cucumber.step, js.test.names, js.package.index, js.custom.single.entry.index, js.implicit.elements.index, js.string.literal.words.index, TypeScriptExternalPathCandidates, VueNoScriptFilesIndex, angularjs.template.cache, angularjs.ui.router.views.index, angularjs.app.index, sql.types.count.index, sql.routine.index, taglibUris, SpringXmlBeansIndex, spring.spiFileIndex, GspIncludeIndex, FileBasedWSIndex, FtlFileIndex, http.request.execution.environment, http.request.completion.host, http.request.headers.values.index, spring.autoConfigureMetadataIndex, OpenapiSpecificationContentIndexer, org.jetbrains.kotlin.idea.versions.KotlinJvmMetadataVersionIndex, org.jetbrains.kotlin.idea.versions.KotlinJsMetadataVersionIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinClassFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinJavaScriptMetaFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFilePackageIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinModuleMappingIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinPackageSourcesMemberNamesIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinJvmModuleAnnotationsIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinBuiltInsMetadataIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinStdlibIndex, org.jetbrains.kotlin.idea.vfilefinder.KlibMetaFileIndex, com.android.tools.idea.model.AndroidManifestIndex$Companion$NAME$1.NAME, BindingXmlIndex, MlModelFileIndex, NavXmlIndex 
+2022-05-15 10:16:53,530 [ 152994]   INFO - pl.ProjectRootManagerComponent - Project roots of vue-vite have changed (trace_hash = -1132276733) 
+java.lang.Throwable
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent.logRootChanges(ProjectRootManagerComponent.java:344)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent.synchronizeRoots(ProjectRootManagerComponent.java:331)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent.fireRootsChangedEvent(ProjectRootManagerComponent.java:238)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl.fireRootsChanged(ProjectRootManagerImpl.java:449)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$2.fireRootsChanged(ProjectRootManagerImpl.java:167)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$2.fireRootsChanged(ProjectRootManagerImpl.java:164)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$BatchSession.rootsChanged(ProjectRootManagerImpl.java:113)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$BatchSession.rootsChanged(ProjectRootManagerImpl.java:121)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent$2.fileTypesChanged(ProjectRootManagerComponent.java:116)
+	at com.intellij.util.messages.impl.MessageBusImpl.invokeMethod(MessageBusImpl.java:645)
+	at com.intellij.util.messages.impl.MessageBusImpl.invokeListener(MessageBusImpl.java:620)
+	at com.intellij.util.messages.impl.MessageBusImpl.deliverMessage(MessageBusImpl.java:417)
+	at com.intellij.util.messages.impl.MessageBusImpl.pumpWaitingBuses(MessageBusImpl.java:390)
+	at com.intellij.util.messages.impl.MessageBusImpl.pumpMessages(MessageBusImpl.java:372)
+	at com.intellij.util.messages.impl.MessageBusImpl.access$200(MessageBusImpl.java:33)
+	at com.intellij.util.messages.impl.MessageBusImpl$MessagePublisher.invoke(MessageBusImpl.java:179)
+	at com.sun.proxy.$Proxy220.fileTypesChanged(Unknown Source)
+	at com.intellij.openapi.fileTypes.impl.FileTypeManagerImpl.fireFileTypesChanged(FileTypeManagerImpl.java:927)
+	at com.intellij.openapi.fileTypes.impl.FileTypeManagerImpl.fireFileTypesChanged(FileTypeManagerImpl.java:921)
+	at com.intellij.openapi.fileTypes.impl.FileTypeManagerImpl.associate(FileTypeManagerImpl.java:1506)
+	at com.intellij.openapi.fileTypes.impl.FileTypeManagerImpl.associate(FileTypeManagerImpl.java:893)
+	at com.intellij.openapi.fileTypes.FileTypeManager.associateExtension(FileTypeManager.java:153)
+	at org.jetbrains.kotlin.idea.core.script.ScriptDefinitionsManager$UpdateDefinitionsResult$apply$1$$special$$inlined$runWriteAction$1.compute(actions.kt:62)
+	at com.intellij.openapi.application.impl.ApplicationImpl.lambda$runWriteAction$15(ApplicationImpl.java:945)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runWriteActionWithClass(ApplicationImpl.java:924)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runWriteAction(ApplicationImpl.java:945)
+	at org.jetbrains.kotlin.idea.core.script.ScriptDefinitionsManager$UpdateDefinitionsResult$apply$1.run(ScriptDefinitionsManager.kt:496)
+	at com.intellij.openapi.application.TransactionGuardImpl.runWithWritingAllowed(TransactionGuardImpl.java:214)
+	at com.intellij.openapi.application.TransactionGuardImpl.access$200(TransactionGuardImpl.java:21)
+	at com.intellij.openapi.application.TransactionGuardImpl$2.run(TransactionGuardImpl.java:196)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runIntendedWriteActionOnCurrentThread(ApplicationImpl.java:794)
+	at com.intellij.openapi.application.impl.ApplicationImpl.lambda$invokeLater$4(ApplicationImpl.java:350)
+	at com.intellij.openapi.application.impl.FlushQueue.doRun(FlushQueue.java:84)
+	at com.intellij.openapi.application.impl.FlushQueue.runNextEvent(FlushQueue.java:133)
+	at com.intellij.openapi.application.impl.FlushQueue.flushNow(FlushQueue.java:46)
+	at com.intellij.openapi.application.impl.FlushQueue$FlushNow.run(FlushQueue.java:189)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:313)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:776)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:727)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:746)
+	at com.intellij.ide.IdeEventQueue.defaultDispatchEvent(IdeEventQueue.java:886)
+	at com.intellij.ide.IdeEventQueue._dispatchEvent(IdeEventQueue.java:755)
+	at com.intellij.ide.IdeEventQueue.lambda$dispatchEvent$7(IdeEventQueue.java:442)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.computePrioritized(CoreProgressManager.java:825)
+	at com.intellij.ide.IdeEventQueue.lambda$dispatchEvent$8(IdeEventQueue.java:441)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runIntendedWriteActionOnCurrentThread(ApplicationImpl.java:794)
+	at com.intellij.ide.IdeEventQueue.dispatchEvent(IdeEventQueue.java:487)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2022-05-15 10:16:53,531 [ 152995]   INFO - penapi.project.DumbServiceImpl - cancel UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:53,533 [ 152997]   INFO - il.indexing.FileBasedIndexImpl - indexes cleared: 
+survived indexes: FilenameIndex, FrameworkDetectionIndex, TodoIndex, IdIndex, filetypes, Stubs, Trigram.Index, fileIncludes, DomFileIndex, RelaxSymbolIndex, XmlTagNames, XmlNamespaces, html5.custom.attributes.index, SchemaTypeInheritance, json.file.root.values, HashFragmentIndex, XsltSymbolIndex, HtmlTagIdIndex, CssIndex, css.template.selectors, CompassFunctionsIndex, xmlProperties, editorconfig.index.name, yaml.keys.name, bytecodeAnalysis, java.auto.module.name, java.source.module.name, java.null.method.argument, java.fun.expression, java.binary.plus.expression, ant-imports, docker.compose.services, LombokConfigIndex, com.intellij.uiDesigner.FormClassIndex, VtlFileIndex, protoeditor.java.outer.class.index, groovy.trait.fields, groovy.trait.methods, IdeaPluginRegistrationIndex, PluginIdModuleIndex, PluginIdDependenciesIndex, devkit.ExtensionPointIndex, devkit.ExtensionPointClassIndex, JavaFxControllerClassIndex, javafx.id.name, javafx.custom.component, javafx.stylesheets.name, java.cucumber.java8.step, groovy.cucumber.step, js.test.names, js.package.index, js.custom.single.entry.index, js.implicit.elements.index, js.string.literal.words.index, TypeScriptExternalPathCandidates, VueNoScriptFilesIndex, angularjs.template.cache, angularjs.ui.router.views.index, angularjs.app.index, sql.types.count.index, sql.routine.index, taglibUris, SpringXmlBeansIndex, spring.spiFileIndex, GspIncludeIndex, FileBasedWSIndex, FtlFileIndex, http.request.execution.environment, http.request.completion.host, http.request.headers.values.index, spring.autoConfigureMetadataIndex, OpenapiSpecificationContentIndexer, org.jetbrains.kotlin.idea.versions.KotlinJvmMetadataVersionIndex, org.jetbrains.kotlin.idea.versions.KotlinJsMetadataVersionIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinClassFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinJavaScriptMetaFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFilePackageIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinModuleMappingIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinPackageSourcesMemberNamesIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinJvmModuleAnnotationsIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinBuiltInsMetadataIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinStdlibIndex, org.jetbrains.kotlin.idea.vfilefinder.KlibMetaFileIndex, com.android.tools.idea.model.AndroidManifestIndex$Companion$NAME$1.NAME, BindingXmlIndex, MlModelFileIndex, NavXmlIndex 
+2022-05-15 10:16:53,533 [ 152997]   INFO - penapi.project.DumbServiceImpl - cancel UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:53,539 [ 153003]   INFO - pl.ProjectRootManagerComponent - Project roots of vue-vite have changed (stacktrace has been already reported with trace_hash = -1132276733) 
+2022-05-15 10:16:53,539 [ 153003]   INFO - penapi.project.DumbServiceImpl - cancel UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:53,541 [ 153005]   INFO - il.indexing.FileBasedIndexImpl - indexes cleared: 
+survived indexes: FilenameIndex, FrameworkDetectionIndex, TodoIndex, IdIndex, filetypes, Stubs, Trigram.Index, fileIncludes, DomFileIndex, RelaxSymbolIndex, XmlTagNames, XmlNamespaces, html5.custom.attributes.index, SchemaTypeInheritance, json.file.root.values, HashFragmentIndex, XsltSymbolIndex, HtmlTagIdIndex, CssIndex, css.template.selectors, CompassFunctionsIndex, xmlProperties, editorconfig.index.name, yaml.keys.name, bytecodeAnalysis, java.auto.module.name, java.source.module.name, java.null.method.argument, java.fun.expression, java.binary.plus.expression, ant-imports, docker.compose.services, LombokConfigIndex, com.intellij.uiDesigner.FormClassIndex, VtlFileIndex, protoeditor.java.outer.class.index, groovy.trait.fields, groovy.trait.methods, IdeaPluginRegistrationIndex, PluginIdModuleIndex, PluginIdDependenciesIndex, devkit.ExtensionPointIndex, devkit.ExtensionPointClassIndex, JavaFxControllerClassIndex, javafx.id.name, javafx.custom.component, javafx.stylesheets.name, java.cucumber.java8.step, groovy.cucumber.step, js.test.names, js.package.index, js.custom.single.entry.index, js.implicit.elements.index, js.string.literal.words.index, TypeScriptExternalPathCandidates, VueNoScriptFilesIndex, angularjs.template.cache, angularjs.ui.router.views.index, angularjs.app.index, sql.types.count.index, sql.routine.index, taglibUris, SpringXmlBeansIndex, spring.spiFileIndex, GspIncludeIndex, FileBasedWSIndex, FtlFileIndex, http.request.execution.environment, http.request.completion.host, http.request.headers.values.index, spring.autoConfigureMetadataIndex, OpenapiSpecificationContentIndexer, org.jetbrains.kotlin.idea.versions.KotlinJvmMetadataVersionIndex, org.jetbrains.kotlin.idea.versions.KotlinJsMetadataVersionIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinClassFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinJavaScriptMetaFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFileIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinMetadataFilePackageIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinModuleMappingIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinPackageSourcesMemberNamesIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinJvmModuleAnnotationsIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinBuiltInsMetadataIndex, org.jetbrains.kotlin.idea.vfilefinder.KotlinStdlibIndex, org.jetbrains.kotlin.idea.vfilefinder.KlibMetaFileIndex, com.android.tools.idea.model.AndroidManifestIndex$Companion$NAME$1.NAME, BindingXmlIndex, MlModelFileIndex, NavXmlIndex 
+2022-05-15 10:16:53,541 [ 153005]   INFO - penapi.project.DumbServiceImpl - cancel UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:53,546 [ 153010]   INFO - pl.ProjectRootManagerComponent - Project roots of vue-vite have changed (stacktrace has been already reported with trace_hash = -1132276733) 
+2022-05-15 10:16:53,546 [ 153010]   INFO - penapi.project.DumbServiceImpl - cancel UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:53,589 [ 153053]   INFO - roject.DumbServiceGuiTaskQueue - Running dumb mode task: com.android.tools.idea.res.ResourceFolderRegistry$PopulateCachesTask@5ec7a776 
+2022-05-15 10:16:53,590 [ 153054]   INFO - roject.DumbServiceGuiTaskQueue - Running dumb mode task: UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:53,590 [ 153054]   INFO - ij.psi.search.LogFileTypeIndex - Loading file type index snapshot 
+2022-05-15 10:16:53,591 [ 153055]   INFO - indexing.UnindexedFilesUpdater - Started indexing of vue-vite. Reason: Project roots have changed 
+2022-05-15 10:16:53,591 [ 153055]   INFO - indexing.UnindexedFilesUpdater - Performing delayed pushing properties tasks for vue-vite took 0ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:53,592 [ 153056]   INFO - indexing.UnindexedFilesUpdater - Scanning of vue-vite uses 11 scanning threads 
+2022-05-15 10:16:53,752 [ 153216]   INFO - .diagnostic.PerformanceWatcher - Pushing JS language level of vue-vite to 63 libraries took 6ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:53,802 [ 153266]   INFO - indexing.UnindexedFilesUpdater - Scanning completed for vue-vite. Number of scanned files: 1462; Number of files for indexing: 0 took 211ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:53,804 [ 153268]   INFO - indexing.UnindexedFilesUpdater - Finished for vue-vite. No files to index with loading content. 
+2022-05-15 10:16:53,804 [ 153268]   INFO - ij.psi.search.LogFileTypeIndex - File type index snapshot dropped 
+2022-05-15 10:16:53,809 [ 153273]   INFO - penapi.project.DumbServiceImpl - updateFinished 
+2022-05-15 10:16:53,809 [ 153273]   INFO - tFileBasedIndexStartupActivity - Has changed files: false; project=Project(name=vue-vite, containerState=COMPONENT_CREATED, componentStore=/Users/didi/workspace/2022/vue/vue-vite) 
+2022-05-15 10:16:53,871 [ 153335]   WARN - ea.status.GitStagingAreaHolder - Ignoring change under another root: GitFileStatus(index= , workTree=M, path=/Users/didi/workspace/2022/vue/vue-vite/src/.DS_Store, origPath=null); root: file:///Users/didi/workspace/2022/vue/vue-vite; mapped root: null 
+2022-05-15 10:16:53,991 [ 153455]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 8 versions for @web-types/quasar in 2462ms 
+2022-05-15 10:16:54,100 [ 153564]   WARN - nSystem.impl.ActionToolbarImpl - Please do not use ActionPlaces.UNKNOWN or the empty place. Any string unique enough to deduce the toolbar location will do. 
+java.lang.Throwable: toolbar creation trace
+	at com.intellij.openapi.actionSystem.impl.ActionToolbarImpl.<init>(ActionToolbarImpl.java:112)
+	at com.intellij.openapi.actionSystem.impl.ActionManagerImpl.createActionToolbar(ActionManagerImpl.java:432)
+	at com.intellij.openapi.actionSystem.impl.ActionManagerImpl.createActionToolbar(ActionManagerImpl.java:426)
+	at com.android.tools.idea.common.error.IssuePanel.createToolbar(IssuePanel.java:244)
+	at com.android.tools.idea.common.error.IssuePanel.createTitlePanel(IssuePanel.java:255)
+	at com.android.tools.idea.common.error.IssuePanel.<init>(IssuePanel.java:124)
+	at com.android.tools.idea.common.surface.DesignSurface.<init>(DesignSurface.java:328)
+	at com.android.tools.idea.uibuilder.surface.NlDesignSurface.<init>(NlDesignSurface.java:398)
+	at com.android.tools.idea.uibuilder.surface.NlDesignSurface$Builder.build(NlDesignSurface.java:327)
+	at com.android.tools.idea.uibuilder.visual.VisualizationForm.<init>(VisualizationForm.java:151)
+	at com.android.tools.idea.uibuilder.visual.VisualizationManager.createPreviewForm(VisualizationManager.java:118)
+	at com.android.tools.idea.uibuilder.visual.VisualizationManager.initToolWindow(VisualizationManager.java:125)
+	at com.android.tools.idea.uibuilder.visual.VisualizationManager$2.run(VisualizationManager.java:268)
+	at com.intellij.util.ui.update.MergingUpdateQueue.execute(MergingUpdateQueue.java:333)
+	at com.intellij.util.ui.update.MergingUpdateQueue.execute(MergingUpdateQueue.java:323)
+	at com.intellij.util.ui.update.MergingUpdateQueue.lambda$flush$1(MergingUpdateQueue.java:273)
+	at com.intellij.util.ui.EdtInvocationManager.invokeAndWaitIfNeeded(EdtInvocationManager.java:148)
+	at com.intellij.util.ui.UIUtil.invokeAndWaitIfNeeded(UIUtil.java:2199)
+	at com.intellij.util.ui.update.MergingUpdateQueue.flush(MergingUpdateQueue.java:284)
+	at com.intellij.util.ui.update.MergingUpdateQueue.run(MergingUpdateQueue.java:242)
+	at com.intellij.util.concurrency.QueueProcessor.runSafely(QueueProcessor.java:240)
+	at com.intellij.util.Alarm$Request.runSafely(Alarm.java:391)
+	at com.intellij.util.Alarm$Request.run(Alarm.java:377)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at com.intellij.util.concurrency.SchedulingWrapper$MyScheduledFutureTask.run(SchedulingWrapper.java:220)
+	at com.intellij.openapi.application.TransactionGuardImpl.runWithWritingAllowed(TransactionGuardImpl.java:214)
+	at com.intellij.openapi.application.TransactionGuardImpl.access$200(TransactionGuardImpl.java:21)
+	at com.intellij.openapi.application.TransactionGuardImpl$2.run(TransactionGuardImpl.java:196)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runIntendedWriteActionOnCurrentThread(ApplicationImpl.java:794)
+	at com.intellij.openapi.application.impl.ApplicationImpl.lambda$invokeLater$4(ApplicationImpl.java:350)
+	at com.intellij.openapi.application.impl.FlushQueue.doRun(FlushQueue.java:84)
+	at com.intellij.openapi.application.impl.FlushQueue.runNextEvent(FlushQueue.java:133)
+	at com.intellij.openapi.application.impl.FlushQueue.flushNow(FlushQueue.java:46)
+	at com.intellij.openapi.application.impl.FlushQueue$FlushNow.run(FlushQueue.java:189)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:313)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:776)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:727)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:746)
+	at com.intellij.ide.IdeEventQueue.defaultDispatchEvent(IdeEventQueue.java:886)
+	at com.intellij.ide.IdeEventQueue._dispatchEvent(IdeEventQueue.java:755)
+	at com.intellij.ide.IdeEventQueue.lambda$dispatchEvent$7(IdeEventQueue.java:442)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.computePrioritized(CoreProgressManager.java:825)
+	at com.intellij.ide.IdeEventQueue.lambda$dispatchEvent$8(IdeEventQueue.java:441)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runIntendedWriteActionOnCurrentThread(ApplicationImpl.java:794)
+	at com.intellij.ide.IdeEventQueue.dispatchEvent(IdeEventQueue.java:487)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2022-05-15 10:16:54,401 [ 153865]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 115 versions for @web-types/vuetify in 1447ms 
+2022-05-15 10:16:54,911 [ 154375]   INFO - .TypeScriptLibraryProviderImpl - Root changed for updating the ts library 
+2022-05-15 10:16:54,913 [ 154377]   INFO - pl.ProjectRootManagerComponent - Project roots of vue-vite have changed (trace_hash = -183628479) 
+java.lang.Throwable
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent.logRootChanges(ProjectRootManagerComponent.java:344)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent.synchronizeRoots(ProjectRootManagerComponent.java:331)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerComponent.fireRootsChangedEvent(ProjectRootManagerComponent.java:238)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl.fireRootsChanged(ProjectRootManagerImpl.java:449)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$1.fireRootsChanged(ProjectRootManagerImpl.java:146)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$1.fireRootsChanged(ProjectRootManagerImpl.java:143)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$BatchSession.rootsChanged(ProjectRootManagerImpl.java:113)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl$BatchSession.rootsChanged(ProjectRootManagerImpl.java:121)
+	at com.intellij.openapi.roots.impl.ProjectRootManagerImpl.makeRootsChange(ProjectRootManagerImpl.java:421)
+	at com.intellij.lang.typescript.library.TypeScriptLibraryProviderImpl.refreshRoots(TypeScriptLibraryProviderImpl.java:111)
+	at com.intellij.lang.typescript.library.TypeScriptLibraryProviderImpl.lambda$reloadLibraries$2(TypeScriptLibraryProviderImpl.java:200)
+	at com.intellij.openapi.application.WriteAction.lambda$run$1(WriteAction.java:94)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runWriteActionWithClass(ApplicationImpl.java:924)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runWriteAction(ApplicationImpl.java:950)
+	at com.intellij.openapi.application.WriteAction.run(WriteAction.java:93)
+	at com.intellij.lang.typescript.library.TypeScriptLibraryProviderImpl.reloadLibraries(TypeScriptLibraryProviderImpl.java:198)
+	at com.intellij.util.containers.LockFreeCopyOnWriteArrayList.forEach(LockFreeCopyOnWriteArrayList.java:804)
+	at com.intellij.lang.typescript.library.TypeScriptServiceDirectoryWatcher.update(TypeScriptServiceDirectoryWatcher.java:109)
+	at com.intellij.lang.typescript.library.TypeScriptServiceDirectoryWatcher.lambda$refreshAndCacheValue$0(TypeScriptServiceDirectoryWatcher.java:86)
+	at com.intellij.openapi.application.TransactionGuardImpl.runWithWritingAllowed(TransactionGuardImpl.java:214)
+	at com.intellij.openapi.application.TransactionGuardImpl.access$200(TransactionGuardImpl.java:21)
+	at com.intellij.openapi.application.TransactionGuardImpl$2.run(TransactionGuardImpl.java:196)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runIntendedWriteActionOnCurrentThread(ApplicationImpl.java:794)
+	at com.intellij.openapi.application.impl.ApplicationImpl.lambda$invokeLater$4(ApplicationImpl.java:350)
+	at com.intellij.openapi.application.impl.FlushQueue.doRun(FlushQueue.java:84)
+	at com.intellij.openapi.application.impl.FlushQueue.runNextEvent(FlushQueue.java:133)
+	at com.intellij.openapi.application.impl.FlushQueue.flushNow(FlushQueue.java:46)
+	at com.intellij.openapi.application.impl.FlushQueue$FlushNow.run(FlushQueue.java:189)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:313)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:776)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:727)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:746)
+	at com.intellij.ide.IdeEventQueue.defaultDispatchEvent(IdeEventQueue.java:886)
+	at com.intellij.ide.IdeEventQueue._dispatchEvent(IdeEventQueue.java:755)
+	at com.intellij.ide.IdeEventQueue.lambda$dispatchEvent$7(IdeEventQueue.java:442)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.computePrioritized(CoreProgressManager.java:825)
+	at com.intellij.ide.IdeEventQueue.lambda$dispatchEvent$8(IdeEventQueue.java:441)
+	at com.intellij.openapi.application.impl.ApplicationImpl.runIntendedWriteActionOnCurrentThread(ApplicationImpl.java:794)
+	at com.intellij.ide.IdeEventQueue.dispatchEvent(IdeEventQueue.java:487)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2022-05-15 10:16:54,927 [ 154391]   INFO - roject.DumbServiceGuiTaskQueue - Running dumb mode task: UnindexedFilesUpdater[vue-vite] 
+2022-05-15 10:16:54,927 [ 154391]   INFO - ij.psi.search.LogFileTypeIndex - Loading file type index snapshot 
+2022-05-15 10:16:54,927 [ 154391]   INFO - indexing.UnindexedFilesUpdater - Started indexing of vue-vite. Reason: Project roots have changed 
+2022-05-15 10:16:54,927 [ 154391]   INFO - indexing.UnindexedFilesUpdater - Performing delayed pushing properties tasks for vue-vite took 0ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:54,930 [ 154394]   INFO - indexing.UnindexedFilesUpdater - Scanning of vue-vite uses 11 scanning threads 
+2022-05-15 10:16:54,940 [ 154404]   INFO - indexing.UnindexedFilesUpdater - Scanning completed for vue-vite. Number of scanned files: 1524; Number of files for indexing: 62 took 12ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:54,943 [ 154407]   INFO - indexing.UnindexedFilesUpdater - Use 4 indexing threads for indexing of vue-vite 
+2022-05-15 10:16:55,116 [ 154580]   INFO - .diagnostic.PerformanceWatcher - Pushing JS language level of vue-vite to 63 libraries took 2ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:55,233 [ 154697]   WARN - ea.status.GitStagingAreaHolder - Ignoring change under another root: GitFileStatus(index= , workTree=M, path=/Users/didi/workspace/2022/vue/vue-vite/src/.DS_Store, origPath=null); root: file:///Users/didi/workspace/2022/vue/vue-vite; mapped root: null 
+2022-05-15 10:16:55,692 [ 155156]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 31 versions for @web-types/vue in 1290ms 
+2022-05-15 10:16:56,702 [ 156166]   INFO - indexing.UnindexedFilesUpdater - Finished for vue-vite. Unindexed files update took 1759ms; general responsiveness: ok; EDT responsiveness: ok 
+2022-05-15 10:16:56,702 [ 156166]   INFO - ij.psi.search.LogFileTypeIndex - File type index snapshot dropped 
+2022-05-15 10:16:56,706 [ 156170]   INFO - penapi.project.DumbServiceImpl - updateFinished 
+2022-05-15 10:16:56,707 [ 156171]   INFO - tFileBasedIndexStartupActivity - Has changed files: false; project=Project(name=vue-vite, containerState=COMPONENT_CREATED, componentStore=/Users/didi/workspace/2022/vue/vue-vite) 
+2022-05-15 10:16:56,864 [ 156328]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 1 versions for @web-types/vue-client-only in 1171ms 
+2022-05-15 10:16:57,226 [ 156690]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 30 versions for @web-types/bootstrap-vue in 3234ms 
+2022-05-15 10:16:57,335 [ 156799]   INFO - ta.index.VcsLogPersistentIndex - Indexing full repository in vue-vite 
+2022-05-15 10:16:57,388 [ 156852]   INFO - ta.index.VcsLogPersistentIndex - 53ms for indexing 5 commits in vue-vite 
+2022-05-15 10:16:58,418 [ 157882]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 2 versions for @web-types/vue-router in 1192ms 
+2022-05-15 10:16:58,804 [ 158268]   INFO - egistry.NpmRegistryServiceImpl - Found 1 dist-tags, 1 versions for @web-types/vue-no-ssr in 1940ms 
+2022-05-15 10:16:59,519 [ 158983]   WARN - ellchecker.SpellCheckerManager - Couldn't load dictionary 'vue.dic' with loader 'class org.jetbrains.vuejs.spellchecker.VueSpellcheckingDictionaryProvider' 
+2022-05-15 10:17:05,026 [ 164490]   INFO - System.impl.PopupMenuPreloader - Popup menu preloaded for `ProjectViewPopup` in 1663 ms 
+2022-05-15 10:17:05,028 [ 164492]   INFO - System.impl.PopupMenuPreloader - Popup menu preloaded for `ProjectViewPopup` in 1667 ms 
+2022-05-15 10:17:05,335 [ 164799]   INFO - System.impl.PopupMenuPreloader - Popup menu preloaded for `EditorPopup` in 1973 ms 
+2022-05-15 10:17:05,337 [ 164801]   INFO - System.impl.PopupMenuPreloader - Popup menu preloaded for `EditorPopup` in 1975 ms 
+2022-05-15 10:17:26,829 [ 186293]   INFO - rationStore.ComponentStoreImpl - Saving Project(name=vue-vite, containerState=COMPONENT_CREATED, componentStore=/Users/didi/workspace/2022/vue/vue-vite)RunManager took 58 ms, XDebuggerManager took 14 ms 
+2022-05-15 10:17:26,998 [ 186462]   INFO - erver.followMe.FollowMeManager - Unregister user 0:'didi' with ClientId=ClientId(value=Host) 
+2022-05-15 10:17:27,108 [ 186572]   WARN - ution.process.OSProcessHandler - Process has been already terminated: /usr/local/opt/node@14/bin/node /Users/didi/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIU/2021.2/31f9496f635cec87427837101e04cbcddfb544d7/ideaIU-2021.2/plugins/JavaScriptLanguage/jsLanguageServicesImpl/js-language-service.js -id=1652581017810 -debug-name=eslint 
+2022-05-15 10:17:27,196 [ 186660]   INFO - ication.options.PathMacrosImpl - Saved path macros: {MAVEN_REPOSITORY=/Users/didi/.m2/repository, KOTLIN_BUNDLED=/Users/didi/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIU/2021.2/31f9496f635cec87427837101e04cbcddfb544d7/ideaIU-2021.2/plugins/Kotlin/kotlinc} 
+2022-05-15 10:17:27,251 [ 186715]   INFO - rationStore.ComponentStoreImpl - Saving appDebuggerSettings took 18 ms, PluginFeatureCacheService took 13 ms, TodoConfiguration took 15 ms, XDebuggerSettings took 12 ms 
+2022-05-15 10:17:28,361 [ 187825]   INFO - erver.followMe.FollowMeManager - Register new user 0:'didi' with ClientId=ClientId(value=Host) 
+2022-05-15 10:17:29,620 [ 189084]   INFO - ramework.util.RdCoroutineScope - RdCoroutineHost has been reset 
+2022-05-15 10:17:29,623 [ 189087]   INFO - ramework.util.RdCoroutineScope - RdCoroutineHost disposed 
+2022-05-15 10:17:29,625 [ 189089]   INFO - pl.local.NativeFileWatcherImpl - Watcher terminated with exit code 0 
+2022-05-15 10:17:29,628 [ 189092]   INFO - org.jetbrains.io.BuiltInServer - web server stopped 
+2022-05-15 10:17:29,632 [ 189096]   INFO - erver.followMe.FollowMeManager - Unregister user 0:'didi' with ClientId=ClientId(value=Host) 
+2022-05-15 10:17:29,634 [ 189098]   INFO - .impl.FileTypeDetectionService - 27 auto-detected files. Detection took 100 ms 
+2022-05-15 10:17:29,636 [ 189100]   INFO - il.indexing.FileBasedIndexImpl - START INDEX SHUTDOWN 
+2022-05-15 10:17:30,035 [ 189499]   INFO - tellij.psi.stubs.StubIndexImpl - StubIndexExtension-s were unloaded 
+2022-05-15 10:17:30,547 [ 190011]   INFO - il.indexing.FileBasedIndexImpl - END INDEX SHUTDOWN 
+2022-05-15 10:17:30,547 [ 190011]   INFO - newvfs.persistent.PersistentFS - VFS dispose started 
+2022-05-15 10:17:30,555 [ 190019]   INFO - newvfs.persistent.PersistentFS - VFS dispose completed 
+2022-05-15 10:17:30,556 [ 190020]   INFO - stubs.SerializationManagerImpl - Start shutting down /Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/system/index/rep.names 
+2022-05-15 10:17:30,557 [ 190021]   INFO - stubs.SerializationManagerImpl - Finished shutting down /Users/didi/workspace/2022/intellij-plugins/vuejs/build/idea-sandbox/system/index/rep.names 
+2022-05-15 10:17:30,584 [ 190048]   INFO -        #com.intellij.idea.Main - ------------------------------------------------------ IDE SHUTDOWN ------------------------------------------------------ 
+2022-05-15 10:17:30,585 [ 190049]   INFO - org.jetbrains.io.BuiltInServer - web server stopped 
