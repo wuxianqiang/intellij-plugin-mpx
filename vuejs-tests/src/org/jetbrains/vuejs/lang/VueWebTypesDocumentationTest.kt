@@ -1,4 +1,4 @@
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.lang.javascript.JSAbstractDocumentationTest
 import one.util.streamex.StreamEx

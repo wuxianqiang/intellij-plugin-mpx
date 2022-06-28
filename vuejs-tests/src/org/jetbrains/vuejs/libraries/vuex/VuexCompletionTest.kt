@@ -1,5 +1,5 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.libraries.vuex
+package com.hxz.mpxjs.libraries.vuex
 
 import com.intellij.javascript.web.findOffsetBySignature
 import com.intellij.javascript.web.renderLookupItems
@@ -10,8 +10,8 @@ import com.intellij.psi.PsiDocumentManager
 import com.intellij.testFramework.PlatformTestUtil
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
-import org.jetbrains.vuejs.lang.createPackageJsonWithVueDependency
-import org.jetbrains.vuejs.lang.getVueTestDataPath
+import com.hxz.mpxjs.lang.createPackageJsonWithVueDependency
+import com.hxz.mpxjs.lang.getVueTestDataPath
 import java.io.File
 
 class VuexCompletionTest : BasePlatformTestCase() {

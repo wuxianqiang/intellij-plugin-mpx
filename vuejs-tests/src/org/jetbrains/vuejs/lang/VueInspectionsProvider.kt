@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.codeInsight.daemon.impl.analysis.XmlUnboundNsPrefixInspection
 import com.intellij.codeInspection.InspectionToolProvider
@@ -13,7 +13,7 @@ import com.intellij.lang.typescript.inspections.TypeScriptUnresolvedVariableInsp
 import com.intellij.lang.typescript.inspections.TypeScriptValidateTypesInspection
 import com.intellij.xml.util.CheckEmptyTagInspection
 import com.sixrr.inspectjs.validity.ThisExpressionReferencesGlobalObjectJSInspection
-import org.jetbrains.vuejs.inspections.DuplicateTagInspection
+import com.hxz.mpxjs.inspections.DuplicateTagInspection
 
 class VueInspectionsProvider : InspectionToolProvider {
   override fun getInspectionClasses(): Array<Class<out LocalInspectionTool>> =

@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.libraries.vueLoader
+package com.hxz.mpxjs.libraries.vueLoader
 
 import com.intellij.codeInsight.daemon.impl.analysis.HtmlUnknownTargetInspection
 import com.intellij.javascript.web.assertUnresolvedReference
@@ -11,7 +11,7 @@ import com.intellij.psi.PsiFileSystemItem
 import com.intellij.psi.css.inspections.invalid.CssUnknownTargetInspection
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
-import org.jetbrains.vuejs.lang.*
+import com.hxz.mpxjs.lang.*
 
 class VueLoaderTest  : BasePlatformTestCase() {
 

@@ -1,4 +1,4 @@
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.lang.css.CSSLanguage
 import com.intellij.lang.html.HTMLLanguage
@@ -20,8 +20,8 @@ import com.jetbrains.plugins.jade.JadeLanguage
 import org.jetbrains.plugins.sass.SASSLanguage
 import org.jetbrains.plugins.scss.SCSSLanguage
 import org.jetbrains.plugins.stylus.StylusLanguage
-import org.jetbrains.vuejs.lang.html.VueLanguage
-import org.jetbrains.vuejs.lang.html.psi.formatter.VueCodeStyleSettings
+import com.hxz.mpxjs.lang.html.VueLanguage
+import com.hxz.mpxjs.lang.html.psi.formatter.VueCodeStyleSettings
 import java.io.File
 import java.nio.file.Paths
 

@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.lang.javascript.JSDaemonAnalyzerLightTestCase
@@ -9,8 +9,8 @@ import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.util.Function
-import org.jetbrains.vuejs.lang.html.VueFileType
-import org.jetbrains.vuejs.lang.html.VueLanguage
+import com.hxz.mpxjs.lang.html.VueFileType
+import com.hxz.mpxjs.lang.html.VueLanguage
 
 class VueTypeScriptHighlightingTest : TypeScriptHighlightingTest() {
   private val toFix = setOf(

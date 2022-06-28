@@ -1,14 +1,14 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.libraries.nuxt
+package com.hxz.mpxjs.libraries.nuxt
 
 import com.intellij.lang.javascript.buildTools.webpack.WebPackConfig
 import com.intellij.lang.javascript.buildTools.webpack.WebPackConfigManager
 import com.intellij.lang.javascript.buildTools.webpack.WebPackConfigPath
 import com.intellij.lang.javascript.buildTools.webpack.WebPackResolve
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import org.jetbrains.vuejs.lang.VueTestModule
-import org.jetbrains.vuejs.lang.configureVueDependencies
-import org.jetbrains.vuejs.lang.getVueTestDataPath
+import com.hxz.mpxjs.lang.VueTestModule
+import com.hxz.mpxjs.lang.configureVueDependencies
+import com.hxz.mpxjs.lang.getVueTestDataPath
 
 class NuxtCompletionTest : BasePlatformTestCase() {
 

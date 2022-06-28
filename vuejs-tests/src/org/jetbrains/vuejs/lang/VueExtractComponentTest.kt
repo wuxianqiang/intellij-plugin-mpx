@@ -1,5 +1,5 @@
 // Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.lang.javascript.JSTestUtils
 import com.intellij.lang.javascript.JavascriptLanguage
@@ -7,9 +7,9 @@ import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
-import org.jetbrains.vuejs.intentions.extractComponent.VueExtractComponentIntention
-import org.jetbrains.vuejs.intentions.extractComponent.VueExtractComponentRefactoring
-import org.jetbrains.vuejs.lang.html.VueLanguage
+import com.hxz.mpxjs.intentions.extractComponent.VueExtractComponentIntention
+import com.hxz.mpxjs.intentions.extractComponent.VueExtractComponentRefactoring
+import com.hxz.mpxjs.lang.html.VueLanguage
 
 class VueExtractComponentTest : BasePlatformTestCase() {
   fun testExtractSingleTag() = doExtractTest(

@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.service
+package com.hxz.mpxjs.service
 
 import com.intellij.codeInsight.completion.CompletionType
 import com.intellij.lang.javascript.service.JSLanguageService
@@ -13,10 +13,10 @@ import com.intellij.testFramework.JUnit38AssumeSupportRunner
 import com.intellij.util.containers.ContainerUtil
 import com.intellij.util.ui.UIUtil
 import junit.framework.TestCase
-import org.jetbrains.vuejs.lang.VueTestModule
-import org.jetbrains.vuejs.lang.configureVueDependencies
-import org.jetbrains.vuejs.lang.typescript.service.VueTypeScriptService
-import org.jetbrains.vuejs.lang.vueRelativeTestDataPath
+import com.hxz.mpxjs.lang.VueTestModule
+import com.hxz.mpxjs.lang.configureVueDependencies
+import com.hxz.mpxjs.lang.typescript.service.VueTypeScriptService
+import com.hxz.mpxjs.lang.vueRelativeTestDataPath
 import org.junit.runner.RunWith
 
 @RunWith(JUnit38AssumeSupportRunner::class)

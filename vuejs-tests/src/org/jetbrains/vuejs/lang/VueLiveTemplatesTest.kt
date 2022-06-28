@@ -1,4 +1,4 @@
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.codeInsight.lookup.Lookup
 import com.intellij.codeInsight.lookup.LookupManager
@@ -7,7 +7,7 @@ import com.intellij.codeInsight.template.TemplateContextType
 import com.intellij.codeInsight.template.impl.actions.ListTemplatesAction
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
-import org.jetbrains.vuejs.liveTemplate.*
+import com.hxz.mpxjs.liveTemplate.*
 
 class VueLiveTemplatesTest : BasePlatformTestCase() {
   fun testTopLevelVueApplicable() {

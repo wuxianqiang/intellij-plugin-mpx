@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.htmltools.codeInspection.htmlInspections.HtmlFormInputWithoutLabelInspection
 import com.intellij.lang.javascript.JSTestUtils
@@ -19,7 +19,7 @@ import com.intellij.xml.util.CheckTagEmptyBodyInspection
 import junit.framework.TestCase
 import org.jetbrains.plugins.scss.inspections.SassScssResolvedByNameOnlyInspection
 import org.jetbrains.plugins.scss.inspections.SassScssUnresolvedVariableInspection
-import org.jetbrains.vuejs.lang.html.VueFileType
+import com.hxz.mpxjs.lang.html.VueFileType
 
 class VueHighlightingTest : BasePlatformTestCase() {
   override fun getTestDataPath(): String = getVueTestDataPath() + "/highlighting"

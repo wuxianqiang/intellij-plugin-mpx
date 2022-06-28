@@ -1,11 +1,11 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.lang.javascript.typescript.TypeScriptDuplicateTest
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
-import org.jetbrains.vuejs.lang.html.VueFileType
+import com.hxz.mpxjs.lang.html.VueFileType
 
 class VueTypeScriptDuplicateTest : TypeScriptDuplicateTest() {
 

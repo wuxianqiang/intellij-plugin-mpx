@@ -1,9 +1,9 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.libraries.vuex
+package com.hxz.mpxjs.libraries.vuex
 
 import com.intellij.testFramework.fixtures.CodeInsightTestFixture
-import org.jetbrains.vuejs.lang.VueTestModule
-import org.jetbrains.vuejs.lang.configureVueDependencies
+import com.hxz.mpxjs.lang.VueTestModule
+import com.hxz.mpxjs.lang.configureVueDependencies
 
 enum class VuexTestStore(val dirName: String, val isComposition: Boolean = false) {
   CounterHot("counter-hot"),

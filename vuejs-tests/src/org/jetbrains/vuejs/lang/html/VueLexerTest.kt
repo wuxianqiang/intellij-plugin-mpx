@@ -1,5 +1,5 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang.html
+package com.hxz.mpxjs.lang.html
 
 import com.intellij.lang.javascript.dialects.JSLanguageLevel
 import com.intellij.lexer.Lexer
@@ -8,8 +8,8 @@ import com.intellij.testFramework.LightProjectDescriptor
 import com.intellij.testFramework.fixtures.IdeaProjectTestFixture
 import com.intellij.testFramework.fixtures.IdeaTestFixtureFactory
 import org.jetbrains.annotations.NonNls
-import org.jetbrains.vuejs.lang.getVueTestDataPath
-import org.jetbrains.vuejs.lang.html.lexer.VueLexerImpl
+import com.hxz.mpxjs.lang.getVueTestDataPath
+import com.hxz.mpxjs.lang.html.lexer.VueLexerImpl
 import kotlin.properties.Delegates.notNull
 
 open class VueLexerTest : LexerTestCase() {

@@ -1,17 +1,17 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
-import org.jetbrains.vuejs.lang.expr.VueJSParserTest
-import org.jetbrains.vuejs.lang.html.VueHighlightingLexerTest
-import org.jetbrains.vuejs.lang.html.VueIndexerTest
-import org.jetbrains.vuejs.lang.html.VueLexerTest
-import org.jetbrains.vuejs.lang.html.VueParserTest
-import org.jetbrains.vuejs.libraries.LibrariesTestSuite
-import org.jetbrains.vuejs.linters.tslint.VueESLintHighlightingTest
-import org.jetbrains.vuejs.linters.tslint.VueTypeScriptWithTslintTest
-import org.jetbrains.vuejs.pug.PugTemplateTest
-import org.jetbrains.vuejs.pug.VuePugFoldingTest
-import org.jetbrains.vuejs.service.VueTypeScriptServiceTest
+import com.hxz.mpxjs.lang.expr.VueJSParserTest
+import com.hxz.mpxjs.lang.html.VueHighlightingLexerTest
+import com.hxz.mpxjs.lang.html.VueIndexerTest
+import com.hxz.mpxjs.lang.html.VueLexerTest
+import com.hxz.mpxjs.lang.html.VueParserTest
+import com.hxz.mpxjs.libraries.LibrariesTestSuite
+import com.hxz.mpxjs.linters.tslint.VueESLintHighlightingTest
+import com.hxz.mpxjs.linters.tslint.VueTypeScriptWithTslintTest
+import com.hxz.mpxjs.pug.PugTemplateTest
+import com.hxz.mpxjs.pug.VuePugFoldingTest
+import com.hxz.mpxjs.service.VueTypeScriptServiceTest
 import org.junit.runner.RunWith
 import org.junit.runners.Suite
 

@@ -1,5 +1,5 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.javascript.web.findOffsetBySignature
 import com.intellij.lang.injection.InjectedLanguageManager
@@ -9,8 +9,8 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
 import one.util.streamex.StreamEx
-import org.jetbrains.vuejs.lang.expr.psi.VueJSEmbeddedExpression
-import org.jetbrains.vuejs.lang.html.VueLanguage
+import com.hxz.mpxjs.lang.expr.psi.VueJSEmbeddedExpression
+import com.hxz.mpxjs.lang.html.VueLanguage
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized

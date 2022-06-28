@@ -1,5 +1,5 @@
 // Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.codeInsight.CodeInsightSettings
 import com.intellij.lang.html.HTMLLanguage
@@ -18,10 +18,10 @@ import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.util.ui.UIUtil
 import com.intellij.webcore.libraries.ScriptingLibraryModel
 import junit.framework.TestCase
-import org.jetbrains.vuejs.context.VueContextProvider
-import org.jetbrains.vuejs.context.isVueContext
-import org.jetbrains.vuejs.lang.expr.VueJSLanguage
-import org.jetbrains.vuejs.lang.html.VueLanguage
+import com.hxz.mpxjs.context.VueContextProvider
+import com.hxz.mpxjs.context.isVueContext
+import com.hxz.mpxjs.lang.expr.VueJSLanguage
+import com.hxz.mpxjs.lang.html.VueLanguage
 
 class VueInjectionTest : BasePlatformTestCase() {
   private var oldAutoComplete = false

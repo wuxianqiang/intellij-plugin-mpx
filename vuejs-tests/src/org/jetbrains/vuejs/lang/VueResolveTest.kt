@@ -1,5 +1,5 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package org.jetbrains.vuejs.lang
+package com.hxz.mpxjs.lang
 
 import com.intellij.javascript.web.assertUnresolvedReference
 import com.intellij.javascript.web.moveToOffsetBySignature
@@ -18,12 +18,12 @@ import com.intellij.psi.xml.XmlAttribute
 import com.intellij.testFramework.UsefulTestCase
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
-import org.jetbrains.vuejs.codeInsight.VueJSSpecificHandlersFactory
-import org.jetbrains.vuejs.lang.VueTestModule.VUE_2_6_10
-import org.jetbrains.vuejs.lang.expr.psi.VueJSVForExpression
-import org.jetbrains.vuejs.model.VueModelManager
-import org.jetbrains.vuejs.model.VueNamedSymbol
-import org.jetbrains.vuejs.model.VueRegularComponent
+import com.hxz.mpxjs.codeInsight.VueJSSpecificHandlersFactory
+import com.hxz.mpxjs.lang.VueTestModule.VUE_2_6_10
+import com.hxz.mpxjs.lang.expr.psi.VueJSVForExpression
+import com.hxz.mpxjs.model.VueModelManager
+import com.hxz.mpxjs.model.VueNamedSymbol
+import com.hxz.mpxjs.model.VueRegularComponent
 
 class VueResolveTest : BasePlatformTestCase() {
   override fun getTestDataPath(): String = getVueTestDataPath() + "/resolve/"
