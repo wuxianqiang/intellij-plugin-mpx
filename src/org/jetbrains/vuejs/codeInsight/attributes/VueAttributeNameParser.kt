@@ -48,12 +48,16 @@ class VueAttributeNameParser private constructor() {
         paramsPos = 0
         isShorthand = true
       }
-      else if (attributeName.startsWith(ATTR_DIRECTIVE_PREFIX) && attributeName.length > 2) {
-        var nameEnd = attributeName.indexOfFirst { it == ATTR_MODIFIER_PREFIX || it == ATTR_ARGUMENT_PREFIX }
-        if (nameEnd < 0) {
-          nameEnd = attributeName.length
-        }
-        name = attributeName.substring(2, nameEnd)
+      else if (attributeName.startsWith(ATTR_DIRECTIVE_PREFIX) && attributeName.length > 3) {
+//        var nameEnd = attributeName.indexOfFirst { it == ATTR_MODIFIER_PREFIX || it == ATTR_ARGUMENT_PREFIX }
+//        if (nameEnd < 0) {
+//          nameEnd = attributeName.length
+//        }
+//        name = attributeName.substring(2, nameEnd)
+//        kind = directiveKindMap[name] ?: VueDirectiveKind.CUSTOM
+//        paramsPos = nameEnd
+        var nameEnd = attributeName.length
+        name = attributeName.substring(3, nameEnd)
         kind = directiveKindMap[name] ?: VueDirectiveKind.CUSTOM
         paramsPos = nameEnd
       }
@@ -254,14 +258,14 @@ class VueAttributeNameParser private constructor() {
     ON,
     CLOAK(injectJS = false, requiresValue = false),
     ELSE(injectJS = false, requiresValue = false),
-    ELSE_IF,
-    FOR,
+    ELSE_IF(injectJS = false, requiresValue = false),
+    FOR(injectJS = false, requiresValue = false),
     HTML,
-    IF,
-    MODEL,
+    IF(injectJS = false, requiresValue = true),
+    MODEL(injectJS = false, requiresValue = false),
     ONCE(injectJS = false, requiresValue = false),
     PRE(injectJS = false, requiresValue = false),
-    SHOW,
+    SHOW(injectJS = false, requiresValue = false),
     SLOT(requiresValue = false),
     TEXT;
 

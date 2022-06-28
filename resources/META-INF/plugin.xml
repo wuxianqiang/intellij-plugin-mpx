@@ -190,16 +190,16 @@
     <javascript.web.context framework="mpx" implementation="org.jetbrains.vuejs.context.VueLegacyContext"
                             id="vue.legacy" order="last"/>
 
-    <javascript.webTypes source="web-types/vue@1.0.0.web-types.json"/>
-    <javascript.webTypes source="web-types/vue@2.0.0.web-types.json"/>
-    <javascript.webTypes source="web-types/vue@2.1.0.web-types.json"/>
-    <javascript.webTypes source="web-types/vue@2.1.8.web-types.json"/>
-    <javascript.webTypes source="web-types/vue@2.2.0.web-types.json"/>
-    <javascript.webTypes source="web-types/vue@2.3.0.web-types.json"/>
-    <javascript.webTypes source="web-types/vue@2.4.0.web-types.json"/>
-    <javascript.webTypes source="web-types/vue@2.5.0.web-types.json"/>
+<!--    <javascript.webTypes source="web-types/vue@1.0.0.web-types.json"/>-->
+<!--    <javascript.webTypes source="web-types/vue@2.0.0.web-types.json"/>-->
+<!--    <javascript.webTypes source="web-types/vue@2.1.0.web-types.json"/>-->
+<!--    <javascript.webTypes source="web-types/vue@2.1.8.web-types.json"/>-->
+<!--    <javascript.webTypes source="web-types/vue@2.2.0.web-types.json"/>-->
+<!--    <javascript.webTypes source="web-types/vue@2.3.0.web-types.json"/>-->
+<!--    <javascript.webTypes source="web-types/vue@2.4.0.web-types.json"/>-->
+<!--    <javascript.webTypes source="web-types/vue@2.5.0.web-types.json"/>-->
     <javascript.webTypes source="web-types/vue@3.0.0.web-types.json" enableByDefault="true"/>
-    <javascript.webTypes source="web-types/vue-i18n@0.0.0.web-types.json"/>
+<!--    <javascript.webTypes source="web-types/vue-i18n@0.0.0.web-types.json"/>-->
 
     <javascript.web.additionalContextProvider implementation="org.jetbrains.vuejs.web.VueWebSymbolsAdditionalContextProvider" id="vue"/>
     <javascript.web.additionalContextProvider implementation="org.jetbrains.vuejs.libraries.i18n.VueI18nAdditionalContextProvider" id="vue-i18n"/>
