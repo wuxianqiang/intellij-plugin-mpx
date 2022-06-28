@@ -27,7 +27,7 @@ import org.jetbrains.vuejs.index.findModule
 import org.jetbrains.vuejs.lang.html.VueFileType
 import org.jetbrains.vuejs.lang.typescript.service.protocol.VueTypeScriptServiceProtocol
 
-class VueTypeScriptService(project: Project) : TypeScriptServerServiceImpl(project, "Vue Console") {
+class VueTypeScriptService(project: Project) : TypeScriptServerServiceImpl(project, "Mpx Console") {
 
   override fun isAcceptableNonTsFile(project: Project, service: TypeScriptConfigService, virtualFile: VirtualFile): Boolean {
     if (super.isAcceptableNonTsFile(project, service, virtualFile)) return true
@@ -64,12 +64,12 @@ class VueTypeScriptService(project: Project) : TypeScriptServerServiceImpl(proje
            (error.endLine < endLine || error.endLine == endLine && error.endColumn <= endColumn)
   }
 
-  override fun getProcessName(): String = "Vue TypeScript"
+  override fun getProcessName(): String = "Mpx TypeScript"
 
   override fun isServiceEnabled(context: VirtualFile): Boolean {
     if (!super.isServiceEnabled(context)) return false
     if (context.fileType is VueFileType) return true
-    
+
     //other files
     return isVueContext(context, myProject)
   }
@@ -96,7 +96,7 @@ class VueTypeScriptService(project: Project) : TypeScriptServerServiceImpl(proje
 
     val virtualFile = file.virtualFile ?: return false
 
-    if (!isServiceEnabled(virtualFile) || !checkAnnotationProvider(file)) return false
+//    if (!isServiceEnabled(virtualFile) || !checkAnnotationProvider(file)) return false
 
     val module = findModule(file)
     if (module == null || !DialectDetector.isTypeScript(module)) return false
@@ -109,7 +109,7 @@ class VueTypeScriptService(project: Project) : TypeScriptServerServiceImpl(proje
   private fun addConfigureCommand(result: MutableMap<JSLanguageServiceSimpleCommand, Consumer<JSLanguageServiceObject>>) {
     val arguments = ConfigureRequestArguments()
     val fileExtensionInfo = FileExtensionInfo()
-    fileExtensionInfo.extension = ".vue"
+    fileExtensionInfo.extension = ".mpx"
 
     //see ts.getSupportedExtensions
     //x.scriptKind === ScriptKind.Deferred(7) || needJsExtensions && isJSLike(x.scriptKind) ? x.extension : undefined

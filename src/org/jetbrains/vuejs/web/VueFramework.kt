@@ -14,7 +14,7 @@ import javax.swing.Icon
 
 class VueFramework : WebFramework() {
 
-  override val displayName: String = "Vue"
+  override val displayName: String = "Mpx"
   override val icon: Icon = VuejsIcons.Vue
   override val standaloneFileType: WebFrameworkHtmlFileType = VueFileType.INSTANCE
   override val htmlFileType: WebFrameworkHtmlFileType = VueFileType.INSTANCE
@@ -63,6 +63,6 @@ class VueFramework : WebFramework() {
     else emptyList()
 
   companion object {
-    val instance get() = get("vue")
+    val instance get() = get("mpx")
   }
 }

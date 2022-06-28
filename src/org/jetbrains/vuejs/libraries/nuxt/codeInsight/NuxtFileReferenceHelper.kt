@@ -14,11 +14,12 @@ import org.jetbrains.vuejs.libraries.nuxt.model.NuxtModelManager
 class NuxtFileReferenceHelper : FileReferenceHelper() {
 
   override fun isMine(project: Project, file: VirtualFile): Boolean {
-    return getPsiFileSystemItem(project, file)?.let {
-      it is HtmlLikeFile
-      && isVueContext(it)
-      && NuxtModelManager.getApplication(it) != null
-    } == true
+//    return getPsiFileSystemItem(project, file)?.let {
+//      it is HtmlLikeFile
+//      && isVueContext(it)
+//      && NuxtModelManager.getApplication(it) != null
+//    } == true
+    return false
   }
 
   override fun getContexts(project: Project, file: VirtualFile): Collection<PsiFileSystemItem> = emptyList()

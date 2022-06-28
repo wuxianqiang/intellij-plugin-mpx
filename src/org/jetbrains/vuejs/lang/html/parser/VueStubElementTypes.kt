@@ -27,7 +27,7 @@ object VueStubElementTypes {
 
   const val VERSION = 5
 
-  val STUBBED_TAG = object : HtmlStubBasedTagElementType("STUBBED_TAG", VueLanguage.INSTANCE) {
+  val STUBBED_TAG = object : HtmlStubBasedTagElementType("MPX_STUBBED_TAG", VueLanguage.INSTANCE) {
     override fun shouldCreateStub(node: ASTNode?): Boolean {
       return (node?.psi as? XmlTag)
                ?.let {
@@ -42,7 +42,7 @@ object VueStubElementTypes {
     }
   }
 
-  val SCRIPT_ID_ATTRIBUTE = object : XmlStubBasedAttributeElementType("SCRIPT_ID_ATTRIBUTE", VueLanguage.INSTANCE) {
+  val SCRIPT_ID_ATTRIBUTE = object : XmlStubBasedAttributeElementType("MPX_SCRIPT_ID_ATTRIBUTE", VueLanguage.INSTANCE) {
     override fun indexStub(stub: XmlAttributeStubImpl, sink: IndexSink) {
       stub.value?.let { sink.occurrence(VueIdIndex.KEY, it) }
     }
@@ -53,7 +53,7 @@ object VueStubElementTypes {
     }
   }
 
-  val SRC_ATTRIBUTE = object : XmlStubBasedAttributeElementType("SRC_ATTRIBUTE", VueLanguage.INSTANCE) {
+  val SRC_ATTRIBUTE = object : XmlStubBasedAttributeElementType("MPX_SRC_ATTRIBUTE", VueLanguage.INSTANCE) {
     override fun indexStub(stub: XmlAttributeStubImpl, sink: IndexSink) {
       stub.value
         ?.let { PathUtil.getFileName(it) }
@@ -62,11 +62,11 @@ object VueStubElementTypes {
     }
   }
 
-  val VUE_STUBBED_ATTRIBUTE = object : XmlStubBasedAttributeElementType("VUE_STUBBED_ATTRIBUTE", VueLanguage.INSTANCE) {
+  val VUE_STUBBED_ATTRIBUTE = object : XmlStubBasedAttributeElementType("MPX_VUE_STUBBED_ATTRIBUTE", VueLanguage.INSTANCE) {
   }
 
   val REF_ATTRIBUTE: XmlStubBasedElementType<VueRefAttributeStubImpl, VueRefAttributeImpl> =
-    object : XmlStubBasedElementType<VueRefAttributeStubImpl, VueRefAttributeImpl>("REF_ATTRIBUTE", VueLanguage.INSTANCE),
+    object : XmlStubBasedElementType<VueRefAttributeStubImpl, VueRefAttributeImpl>("MPX_REF_ATTRIBUTE", VueLanguage.INSTANCE),
              ICompositeElementType, IXmlAttributeElementType {
 
       @Throws(IOException::class)

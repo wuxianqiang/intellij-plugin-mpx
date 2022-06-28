@@ -10,7 +10,7 @@ import org.jetbrains.vuejs.lang.expr.psi.impl.VueJSVForVariableImpl
 
 object VueJSStubElementTypes {
 
-  val V_FOR_VARIABLE: JSVariableElementType = object : JSVariableElementType("V_FOR_VARIABLE") {
+  val V_FOR_VARIABLE: JSVariableElementType = object : JSVariableElementType("MPX_V_FOR_VARIABLE") {
     override fun construct(node: ASTNode): PsiElement? {
       return VueJSVForVariableImpl(node)
     }
@@ -20,7 +20,7 @@ object VueJSStubElementTypes {
     }
   }
 
-  val SLOT_PROPS_PARAMETER: JSParameterElementType = object : JSParameterElementType("SLOT_PROPS_PARAMETER") {
+  val SLOT_PROPS_PARAMETER: JSParameterElementType = object : JSParameterElementType("MPX_SLOT_PROPS_PARAMETER") {
     override fun construct(node: ASTNode): PsiElement? {
       return VueJSSlotPropsParameterImpl(node)
     }

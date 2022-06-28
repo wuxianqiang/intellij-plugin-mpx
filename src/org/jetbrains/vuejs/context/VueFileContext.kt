@@ -30,11 +30,11 @@ class VueFileContext : WebFrameworkContext {
         || (vf == null && file.language == VueLanguage.INSTANCE)) {
       return true
     }
-    if (file is HtmlLikeFile) {
-      return CachedValuesManager.getCachedValue(file) {
-        CachedValueProvider.Result.create(hasVueLibraryImport(file), file)
-      }
-    }
+//    if (file is HtmlLikeFile) {
+//      return CachedValuesManager.getCachedValue(file) {
+//        CachedValueProvider.Result.create(hasVueLibraryImport(file), file)
+//      }
+//    }
     return false
   }
 }
@@ -56,14 +56,14 @@ fun hasVueLibraryImport(file: PsiFile): Boolean {
 
     private fun hasVueScriptLink(tag: XmlTag): Boolean {
       val link = tag.getAttribute(HtmlUtil.SRC_ATTRIBUTE_NAME)?.value
-      if (link == null || !link.contains("vue")) {
+      if (link == null || !link.contains("mpx")) {
         return false
       }
       if (JSCDNLibManager.getLibraryForUrl(link)?.libraryName == VUE_MODULE) {
         return true
       }
       val fileName = VfsUtil.extractFileName(link)
-      return fileName != null && fileName.startsWith("vue.") && fileName.endsWith(".js")
+      return fileName != null && fileName.startsWith("mpx.") && fileName.endsWith(".js")
     }
   })
   return result

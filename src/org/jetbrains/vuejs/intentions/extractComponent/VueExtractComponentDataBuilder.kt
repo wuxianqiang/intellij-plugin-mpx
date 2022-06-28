@@ -144,7 +144,7 @@ class VueExtractComponentDataBuilder(private val list: List<XmlTag>) {
   fun createNewComponent(newComponentName: String): VirtualFile? {
     val newText = generateNewComponentText(newComponentName)
     val folder: PsiDirectory = containingFile.parent ?: return null
-    val virtualFile = folder.virtualFile.createChildData(this, toAsset(newComponentName).capitalize() + ".vue")
+    val virtualFile = folder.virtualFile.createChildData(this, toAsset(newComponentName).capitalize() + ".mpx")
     VfsUtil.saveText(virtualFile, newText)
     return virtualFile
   }

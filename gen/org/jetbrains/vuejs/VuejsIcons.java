@@ -3,7 +3,7 @@ package org.jetbrains.vuejs;
 
 import com.intellij.ui.IconManager;
 import org.jetbrains.annotations.NotNull;
-
+import com.intellij.openapi.util.IconLoader;
 import javax.swing.*;
 
 /**
@@ -14,5 +14,6 @@ public final class VuejsIcons {
   private static @NotNull Icon load(@NotNull String path, long cacheKey, int flags) {
     return IconManager.getInstance().loadRasterizedIcon(path, VuejsIcons.class.getClassLoader(), cacheKey, flags);
   }
-  /** 16x16 */ public static final @NotNull Icon Vue = load("icons/vue.svg", 2239181392870344675L, 0);
+  public static final Icon Vue = IconLoader.getIcon("/icons/vue.svg", VuejsIcons.class);
+//  /** 16x16 */ public static final @NotNull Icon Vue = load("icons/vue.svg", 2239181392870344675L, 0);
 }

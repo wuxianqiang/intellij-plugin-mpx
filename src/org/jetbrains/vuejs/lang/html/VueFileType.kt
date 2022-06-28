@@ -7,7 +7,7 @@ import org.jetbrains.vuejs.VueBundle
 import org.jetbrains.vuejs.VuejsIcons
 import javax.swing.Icon
 
-class VueFileType private constructor(): WebFrameworkHtmlFileType(VueLanguage.INSTANCE, "Vue.js", "vue") {
+class VueFileType private constructor(): WebFrameworkHtmlFileType(VueLanguage.INSTANCE, "Mpx.js", "mpx") {
   companion object {
     @JvmField
     val INSTANCE: VueFileType = VueFileType()

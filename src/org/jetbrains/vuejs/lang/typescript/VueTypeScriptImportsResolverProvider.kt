@@ -14,7 +14,7 @@ import org.jetbrains.vuejs.context.isVueContext
 import org.jetbrains.vuejs.index.findModule
 import org.jetbrains.vuejs.lang.html.VueFileType
 
-const val vueExtension = ".vue"
+const val vueExtension = ".mpx"
 val defaultExtensionsWithDot = arrayOf(vueExtension)
 
 class VueTypeScriptImportsResolverProvider : TypeScriptImportsResolverProvider {

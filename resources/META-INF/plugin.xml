@@ -1,7 +1,7 @@
-<idea-plugin url="https://github.com/JetBrains/intellij-plugins/tree/master/vuejs" package="org.jetbrains.vuejs">
+<idea-plugin url="https://github.com/wuxianqiang/intellij-plugin-mpx" package="org.jetbrains.vuejs">
   <!--suppress PluginXmlCapitalization -->
-  <name>Vue.js</name>
-  <id>org.jetbrains.plugins.vue</id>
+  <name>Mpx.js</name>
+  <id>org.jetbrains.plugins.mpx</id>
   <description><![CDATA[
     Support for <a href="https://vuejs.org">Vue.js</a> projects.
 
@@ -28,7 +28,7 @@
     Learn more about Vue.js support in the <a href="https://www.jetbrains.com/help/webstorm/vue-js.html">IDE
       documentation</a>.
     ]]></description>
-  <vendor>JetBrains</vendor>
+  <vendor>wuxianqiang</vendor>
   <category>JavaScript Frameworks and Tools</category>
 
 <!--  <content>-->
@@ -38,6 +38,7 @@
   <dependencies>
     <plugin id="JavaScript"/>
     <plugin id="com.intellij.css"/>
+    <plugin id="com.intellij.modules.platform"/>
   </dependencies>
 <!--  <depends optional="true" config-file="js-debugger.xml">JavaScriptDebugger</depends>-->
 
@@ -61,15 +62,15 @@
     <css.elementDescriptorProvider implementation="org.jetbrains.vuejs.css.VueCssElementDescriptorProvider"/>
     <psi.referenceContributor implementation="org.jetbrains.vuejs.css.refs.VueCssReferencesContributor"/>
     <html.attributeValueProvider implementation="org.jetbrains.vuejs.codeInsight.attributes.VueCustomAttributeValueProvider"/>
-    <fileType name="Vue.js" extensions="vue" language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.VueFileType"
+    <fileType name="Mpx.js" extensions="mpx" language="Mpx" implementationClass="org.jetbrains.vuejs.lang.html.VueFileType"
               fieldName="INSTANCE"/>
-    <lang.parserDefinition language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.parser.VueParserDefinition"/>
-    <lang.parserDefinition language="VueJS" implementationClass="org.jetbrains.vuejs.lang.expr.parser.VueJSParserDefinition"/>
+    <lang.parserDefinition language="Mpx" implementationClass="org.jetbrains.vuejs.lang.html.parser.VueParserDefinition"/>
+    <lang.parserDefinition language="MpxJS" implementationClass="org.jetbrains.vuejs.lang.expr.parser.VueJSParserDefinition"/>
     <typedHandler implementation="org.jetbrains.vuejs.editor.VueJSBracesInterpolationTypedHandler"/>
-    <lang.braceMatcher language="VueJS" implementationClass="com.intellij.lang.javascript.highlighting.JSBraceMatcher"/>
-    <annotator language="VueJS" implementationClass="com.intellij.lang.javascript.validation.JSAnnotator"/>
+    <lang.braceMatcher language="MpxJS" implementationClass="com.intellij.lang.javascript.highlighting.JSBraceMatcher"/>
+    <annotator language="MpxJS" implementationClass="com.intellij.lang.javascript.validation.JSAnnotator"/>
     <psi.referenceContributor language="JavaScript" implementation="org.jetbrains.vuejs.codeInsight.refs.VueJSReferenceContributor"/>
-    <psi.referenceContributor language="Vue" implementation="org.jetbrains.vuejs.codeInsight.refs.VueReferenceContributor"/>
+    <psi.referenceContributor language="Mpx" implementation="org.jetbrains.vuejs.codeInsight.refs.VueReferenceContributor"/>
     <psi.referenceContributor language="JavaScript"
                               implementation="org.jetbrains.vuejs.libraries.vuex.codeInsight.refs.VuexReferenceContributor"/>
     <pom.declarationSearcher implementation="org.jetbrains.vuejs.codeInsight.refs.VuePomDeclarationSearcher"/>
@@ -77,16 +78,16 @@
     <pathReferenceProvider implementation="org.jetbrains.vuejs.libraries.vueLoader.VueLoaderPathReferenceProvider"/>
     <useScopeEnlarger implementation="org.jetbrains.vuejs.findUsages.VueUseScopeEnlarger"/>
     <!--suppress PluginXmlValidity -->
-    <quoteHandler className="com.intellij.codeInsight.editorActions.HtmlQuoteHandler" fileType="Vue.js"/>
+    <quoteHandler className="com.intellij.codeInsight.editorActions.HtmlQuoteHandler" fileType="Mpx.js"/>
 
-    <lang.syntaxHighlighterFactory language="Vue"
+    <lang.syntaxHighlighterFactory language="Mpx"
                                    implementationClass="org.jetbrains.vuejs.lang.html.highlighting.VueSyntaxHighlighterFactory"/>
 
     <xml.xmlExtension implementation="org.jetbrains.vuejs.codeInsight.VueXmlExtension" order="before web-symbols-react"/>
     <html.embeddedContentSupport implementation="org.jetbrains.vuejs.lang.html.lexer.VueEmbeddedContentSupport"/>
     <html.embeddedContentSupport implementation="org.jetbrains.vuejs.libraries.i18n.VueI18nEmbeddedContentSupport"/>
     <gotoDeclarationHandler implementation="org.jetbrains.vuejs.editor.VueGotoDeclarationHandler"/>
-    <notificationGroup displayType="BALLOON" id="Vue" icon="org.jetbrains.vuejs.VuejsIcons.Vue" isLogByDefault="true"
+    <notificationGroup displayType="BALLOON" id="Mpx" icon="org.jetbrains.vuejs.VuejsIcons.Vue" isLogByDefault="true"
                        bundle="messages.VueBundle" key="vue.documentation.vue"/>
 
     <stubIndex implementation="org.jetbrains.vuejs.index.VueComponentsIndex"/>
@@ -116,22 +117,22 @@
       implementation="org.jetbrains.vuejs.cli.VueCliProjectGenerator"/>  <!-- works in WebStorm and other SmallIDEs -->
     <projectTemplatesFactory implementation="org.jetbrains.vuejs.cli.VueProjectTemplateFactory"/> <!-- works in IntelliJ IDEA -->
 
-    <localInspection language="Vue" groupKey="vue.inspection.group.name" shortName="VueDataFunction"
+    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="VueDataFunction"
                      enabledByDefault="true" level="WARNING"
                      implementationClass="org.jetbrains.vuejs.inspections.DataFunctionInspection"
                      key="vue.inspection.display.name.data.function"
                      bundle="messages.VueBundle"/>
-    <localInspection language="Vue" groupKey="vue.inspection.group.name" shortName="VueDuplicateTag"
+    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="VueDuplicateTag"
                      enabledByDefault="true" level="WARNING"
                      implementationClass="org.jetbrains.vuejs.inspections.DuplicateTagInspection"
                      key="vue.inspection.display.name.duplicate.tag" bundle="messages.VueBundle"/>
     <intentionAction>
       <className>org.jetbrains.vuejs.intentions.extractComponent.VueExtractComponentIntention</className>
-      <category>VueJS</category>
+      <category>MpxJS</category>
     </intentionAction>
     <intentionAction>
       <className>org.jetbrains.vuejs.intentions.expandVModel.VueExpandVModelIntention</className>
-      <category>VueJS</category>
+      <category>MpxJS</category>
     </intentionAction>
 
     <!--suppress PluginXmlValidity -->
@@ -143,7 +144,7 @@
     <createFromTemplateHandler implementation="org.jetbrains.vuejs.VueCreateFromTemplateHandler"/>
 
     <spellchecker.bundledDictionaryProvider implementation="org.jetbrains.vuejs.spellchecker.VueSpellcheckingDictionaryProvider"/>
-    <spellchecker.support language="Vue" implementationClass="org.jetbrains.vuejs.spellchecker.VueSpellcheckingStrategy"/>
+    <spellchecker.support language="Mpx" implementationClass="org.jetbrains.vuejs.spellchecker.VueSpellcheckingStrategy"/>
 
 <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueBaseLiveTemplateContextType"/>-->
 <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueScriptLiveTemplateContextType"/>-->
@@ -166,27 +167,27 @@
 
     <highlightingPassFactory
       implementation="org.jetbrains.vuejs.lang.typescript.service.VueTypeScriptServiceHighlightingPassFactoryRegistrar"/>
-    <lang.formatter language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.psi.formatter.VueFormattingModelBuilder"/>
-    <lang.formatter language="VueJS" implementationClass="org.jetbrains.vuejs.lang.expr.psi.formatter.VueJSFormattingModelBuilder"/>
-    <lang.rearranger language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.psi.arrangement.VueRearranger"/>
+    <lang.formatter language="Mpx" implementationClass="org.jetbrains.vuejs.lang.html.psi.formatter.VueFormattingModelBuilder"/>
+    <lang.formatter language="MpxJS" implementationClass="org.jetbrains.vuejs.lang.expr.psi.formatter.VueJSFormattingModelBuilder"/>
+    <lang.rearranger language="Mpx" implementationClass="org.jetbrains.vuejs.lang.html.psi.arrangement.VueRearranger"/>
     <multiLangCommenter implementation="org.jetbrains.vuejs.editor.VueCommenterProvider"/>
 
-    <lang.syntaxHighlighterFactory language="VueJS"
+    <lang.syntaxHighlighterFactory language="MpxJS"
                                    implementationClass="org.jetbrains.vuejs.lang.expr.highlighting.VueJSHighlighterFactory"/>
-    <idIndexer filetype="Vue" implementationClass="org.jetbrains.vuejs.lang.html.index.VueIdIndexer"/>
-    <todoIndexer filetype="Vue" implementationClass="org.jetbrains.vuejs.lang.html.index.VueTodoIndexer"/>
+    <idIndexer filetype="Mpx" implementationClass="org.jetbrains.vuejs.lang.html.index.VueIdIndexer"/>
+    <todoIndexer filetype="Mpx" implementationClass="org.jetbrains.vuejs.lang.html.index.VueTodoIndexer"/>
 
-    <codeInsight.parameterInfo language="VueJS" implementationClass="com.intellij.javascript.JSParameterInfoHandler"/>
-    <codeInsight.parameterNameHints language="Vue"
+    <codeInsight.parameterInfo language="MpxJS" implementationClass="com.intellij.javascript.JSParameterInfoHandler"/>
+    <codeInsight.parameterNameHints language="Mpx"
                                     implementationClass="org.jetbrains.vuejs.editor.VueJSInlayParameterHintsProvider"/>
 
     <eslint.ruleMappersFactory implementation="org.jetbrains.vuejs.libraries.eslint.VueEslintRuleMappersFactory"/>
 
-    <javascript.web.framework id="vue" implementation="org.jetbrains.vuejs.web.VueFramework"/>
-    <javascript.web.context framework="vue"
+    <javascript.web.framework id="mpx" implementation="org.jetbrains.vuejs.web.VueFramework"/>
+    <javascript.web.context framework="mpx"
                             implementation="org.jetbrains.vuejs.context.VueFileContext"
                             id="vue.file"/>
-    <javascript.web.context framework="vue" implementation="org.jetbrains.vuejs.context.VueLegacyContext"
+    <javascript.web.context framework="mpx" implementation="org.jetbrains.vuejs.context.VueLegacyContext"
                             id="vue.legacy" order="last"/>
 
     <javascript.webTypes source="web-types/vue@1.0.0.web-types.json"/>
@@ -248,16 +249,16 @@
                                  id="css-modules"/>
 
     <lang.documentationProvider implementationClass="org.jetbrains.vuejs.codeInsight.documentation.VueDocumentationProvider"
-                                language="VueJS"/>
+                                language="MpxJS"/>
   </extensions>
-  <actions>
-    <action class="org.jetbrains.vuejs.CreateVueSingleFileComponentAction" id="CreateVueSingleFileComp">
-      <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>
-    </action>
-    <action class="org.jetbrains.vuejs.intentions.extractComponent.VueExtractComponentAction" id="VueExtractComponentAction">
-      <add-to-group group-id="IntroduceActionsGroup" anchor="last"/>
-    </action>
-  </actions>
+<!--  <actions>-->
+<!--    <action class="org.jetbrains.vuejs.CreateVueSingleFileComponentAction" id="CreateMpxSingleFileComp">-->
+<!--      <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate"/>-->
+<!--    </action>-->
+<!--    <action class="org.jetbrains.vuejs.intentions.extractComponent.VueExtractComponentAction" id="MpxExtractComponentAction">-->
+<!--      <add-to-group group-id="IntroduceActionsGroup" anchor="last"/>-->
+<!--    </action>-->
+<!--  </actions>-->
 
   <extensions defaultExtensionNs="JavaScript">
     <elementScopeProvider implementation="org.jetbrains.vuejs.VueElementResolveScopeProvider"/>
@@ -267,18 +268,18 @@
     <frameworkIndexingHandler implementation="org.jetbrains.vuejs.libraries.vuex.index.VuexFrameworkHandler" version="7"/>
     <frameworkIndexingHandler implementation="org.jetbrains.vuejs.libraries.templateLoader.TemplateLoaderFrameworkHandler" version="1"/>
 
-    <intentionAndInspectionFilter language="VueJS" implementationClass="org.jetbrains.vuejs.inspections.VueInspectionFilter"/>
-    <inheritedLanguagesConfigurableProvider language="VueJS"
+    <intentionAndInspectionFilter language="MpxJS" implementationClass="org.jetbrains.vuejs.inspections.VueInspectionFilter"/>
+    <inheritedLanguagesConfigurableProvider language="MpxJS"
                                             implementationClass="org.jetbrains.vuejs.codeInsight.VueJSLanguageConfigurableProvider"/>
-    <dialectSpecificHandlersFactory language="VueJS" implementationClass="org.jetbrains.vuejs.codeInsight.VueJSSpecificHandlersFactory"/>
+    <dialectSpecificHandlersFactory language="MpxJS" implementationClass="org.jetbrains.vuejs.codeInsight.VueJSSpecificHandlersFactory"/>
     <frameworkSpecificHandler language="JavaScript"
                               implementationClass="org.jetbrains.vuejs.libraries.nuxt.codeInsight.NuxtFrameworkSpecificHandler"/>
     <frameworkSpecificHandler language="JavaScript"
                               implementationClass="org.jetbrains.vuejs.codeInsight.VueFrameworkInsideScriptSpecificHandler"/>
     <frameworkSpecificHandler language="JavaScript"
                               implementationClass="org.jetbrains.vuejs.libraries.vuex.codeInsight.VuexFrameworkSpecificHandler"/>
-    <analysisHandlersFactory implementationClass="org.jetbrains.vuejs.inspections.VueAnalysisHandlersFactory" language="VueJS"/>
-    <tsImportResolver implementation="org.jetbrains.vuejs.lang.typescript.VueTypeScriptImportsResolverProvider" order="first"/>
+    <analysisHandlersFactory implementationClass="org.jetbrains.vuejs.inspections.VueAnalysisHandlersFactory" language="MpxJS"/>
+<!--    <tsImportResolver implementation="org.jetbrains.vuejs.lang.typescript.VueTypeScriptImportsResolverProvider" order="first"/>-->
     <!--suppress PluginXmlValidity -->
     <languageServiceProvider order="first" implementation="org.jetbrains.vuejs.lang.typescript.service.VueLanguageServiceProvider"/>
     <!--suppress PluginXmlValidity -->

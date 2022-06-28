@@ -51,13 +51,13 @@ internal class VueGlobalImpl(override val project: Project, private val packageJ
     val result = mutableListOf<VuePlugin>()
     val webSymbolsRegistryManager = WebSymbolsRegistryManager.getInstance(project)
     val dependencies = mutableListOf<Any>(VirtualFileManager.VFS_STRUCTURE_MODIFICATIONS)
-    packageJson?.let { file ->
-      dependencies.add(webSymbolsRegistryManager.getModificationTracker(file))
-      webSymbolsRegistryManager.getNodeModulesWithoutWebTypes(file)
-        .filter { isVueLibrary(it) }
-        .map { VueSourcePlugin(project, it.name, it.version?.toString(), it.packageJsonFile) }
-        .toCollection(result)
-    }
+//    packageJson?.let { file ->
+//      dependencies.add(webSymbolsRegistryManager.getModificationTracker(file))
+//      webSymbolsRegistryManager.getNodeModulesWithoutWebTypes(file)
+//        .filter { isVueLibrary(it) }
+//        .map { VueSourcePlugin(project, it.name, it.version?.toString(), it.packageJsonFile) }
+//        .toCollection(result)
+//    }
     return Result.create(result, dependencies)
   }
 

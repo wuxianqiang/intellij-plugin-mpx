@@ -332,26 +332,26 @@ fun <T : PsiElement> resolveSymbolFromNodeModule(scope: PsiElement?, moduleName:
   } as Key<CachedValue<T>>
   val file = scope?.containingFile ?: return null
   return getCachedValue(file, key) {
-    TypeScriptNodeReference(file, moduleName, 0).resolve()
-      ?.castSafelyTo<JSElement>()
-      ?.let { module ->
-        val symbols = ES6PsiUtil.resolveSymbolInModule(symbolName, file, module)
-        if (symbols.isEmpty()) {
-          TypeScriptAugmentationUtil.getModuleAugmentations(module, module)
-            .asSequence()
-            .filterIsInstance<JSElement>()
-            .flatMap { ES6PsiUtil.resolveSymbolInModule(symbolName, file, it).asSequence() }
-        }
-        else {
-          symbols.asSequence()
-        }
-      }
-      ?.filter { it.element?.isValid == true }
-      ?.mapNotNull { tryCast(it.element, symbolClass) }
-      ?.firstOrNull()
-      ?.let {
-        return@getCachedValue create(it, PsiModificationTracker.MODIFICATION_COUNT)
-      }
+//    TypeScriptNodeReference(file, moduleName, 0).resolve()
+//      ?.castSafelyTo<JSElement>()
+//      ?.let { module ->
+//        val symbols = ES6PsiUtil.resolveSymbolInModule(symbolName, file, module)
+//        if (symbols.isEmpty()) {
+//          TypeScriptAugmentationUtil.getModuleAugmentations(module, module)
+//            .asSequence()
+//            .filterIsInstance<JSElement>()
+//            .flatMap { ES6PsiUtil.resolveSymbolInModule(symbolName, file, it).asSequence() }
+//        }
+//        else {
+//          symbols.asSequence()
+//        }
+//      }
+//      ?.filter { it.element?.isValid == true }
+//      ?.mapNotNull { tryCast(it.element, symbolClass) }
+//      ?.firstOrNull()
+//      ?.let {
+//        return@getCachedValue create(it, PsiModificationTracker.MODIFICATION_COUNT)
+//      }
     create(null, PsiModificationTracker.MODIFICATION_COUNT)
   }
 }

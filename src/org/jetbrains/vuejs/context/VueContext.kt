@@ -19,13 +19,13 @@ fun isVueContext(context: PsiElement): Boolean = VueFramework.instance.isContext
 
 fun isVueContext(contextFile: VirtualFile, project: Project): Boolean = VueFramework.instance.isContext(contextFile, project)
 
-fun hasVueFiles(project: Project): Boolean =
-  CachedValuesManager.getManager(project).getCachedValue(project) {
-    CachedValueProvider.Result.create(
-      FileBasedIndexImpl.disableUpToDateCheckIn<Boolean, Exception> {
-        FileTypeIndex.containsFileOfType(VueFileType.INSTANCE, GlobalSearchScope.projectScope(project))
-      },
-      VirtualFileManager.VFS_STRUCTURE_MODIFICATIONS,
-      DumbService.getInstance(project)
-    )
-  }
+fun hasVueFiles(project: Project): Boolean =  false
+//  CachedValuesManager.getManager(project).getCachedValue(project) {
+//    CachedValueProvider.Result.create(
+//      FileBasedIndexImpl.disableUpToDateCheckIn<Boolean, Exception> {
+//        FileTypeIndex.containsFileOfType(VueFileType.INSTANCE, GlobalSearchScope.projectScope(project))
+//      },
+//      VirtualFileManager.VFS_STRUCTURE_MODIFICATIONS,
+//      DumbService.getInstance(project)
+//    )
+//  }
