@@ -52,6 +52,6 @@ interface VueContextProvider {
     @Suppress("DEPRECATION")
     @ApiStatus.ScheduledForRemoval(inVersion = "2022.1")
     @Deprecated(message = "Use WebFrameworkContext API instead.", level = DeprecationLevel.WARNING)
-    val VUE_CONTEXT_PROVIDER_EP = ExtensionPointName.create<VueContextProvider>("com.intellij.vuejs.contextProvider")
+    val VUE_CONTEXT_PROVIDER_EP = ExtensionPointName.create<VueContextProvider>("com.intellij.mpxjs.contextProvider")
   }
 }

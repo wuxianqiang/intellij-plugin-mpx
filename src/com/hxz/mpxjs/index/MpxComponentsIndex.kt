@@ -7,7 +7,7 @@ import com.intellij.psi.stubs.StubIndexKey
 class VueComponentsIndex : VueIndexBase<JSImplicitElementProvider>(KEY, JS_KEY) {
   companion object {
     val KEY: StubIndexKey<String, JSImplicitElementProvider> =
-      StubIndexKey.createIndexKey<String, JSImplicitElementProvider>("vue.components.index")
+      StubIndexKey.createIndexKey<String, JSImplicitElementProvider>("mpx.components.index")
     val JS_KEY: String = createJSKey(KEY)
   }
 }

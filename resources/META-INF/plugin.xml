@@ -44,14 +44,14 @@
 
   <extensionPoints>
     <!--suppress PluginXmlValidity -->
-    <extensionPoint qualifiedName="com.intellij.vuejs.templateScopesProvider"
+    <extensionPoint qualifiedName="com.intellij.mpxjs.templateScopesProvider"
                     interface="com.hxz.mpxjs.codeInsight.template.VueTemplateScopesProvider"
                     dynamic="true"/>
     <!--suppress DeprecatedClassUsageInspection -->
-    <extensionPoint qualifiedName="com.intellij.vuejs.contextProvider"
+    <extensionPoint qualifiedName="com.intellij.mpxjs.contextProvider"
                     interface="com.hxz.mpxjs.context.VueContextProvider"
                     dynamic="true"/>
-    <extensionPoint qualifiedName="com.intellij.vuejs.containerInfoProvider"
+    <extensionPoint qualifiedName="com.intellij.mpxjs.containerInfoProvider"
                     interface="com.hxz.mpxjs.model.source.VueContainerInfoProvider"
                     dynamic="true"/>
   </extensionPoints>
@@ -106,7 +106,7 @@
 
     <langCodeStyleSettingsProvider implementation="com.hxz.mpxjs.options.VueCodeStyleSettingsProvider"/>
     <fileIndentOptionsProvider implementation="com.hxz.mpxjs.lang.html.psi.formatter.VueFileIndentOptionsProvider"
-                               id="vue" order="before html"/>
+                               id="mpx" order="before html"/>
 
 
     <postStartupActivity implementation="com.hxz.mpxjs.lang.html.psi.arrangement.VueArrangementSettingsMigration"/>
@@ -115,14 +115,14 @@
 
 <!--    <directoryProjectGenerator-->
 <!--      implementation="com.hxz.mpxjs.cli.VueCliProjectGenerator"/>  &lt;!&ndash; works in WebStorm and other SmallIDEs &ndash;&gt;-->
-    <projectTemplatesFactory implementation="com.hxz.mpxjs.cli.VueProjectTemplateFactory"/> <!-- works in IntelliJ IDEA -->
+<!--    <projectTemplatesFactory implementation="com.hxz.mpxjs.cli.VueProjectTemplateFactory"/> &lt;!&ndash; works in IntelliJ IDEA &ndash;&gt;-->
 
-    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="VueDataFunction"
+    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="MpxDataFunction"
                      enabledByDefault="true" level="WARNING"
                      implementationClass="com.hxz.mpxjs.inspections.DataFunctionInspection"
                      key="vue.inspection.display.name.data.function"
                      bundle="messages.VueBundle"/>
-    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="VueDuplicateTag"
+    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="MpxDuplicateTag"
                      enabledByDefault="true" level="WARNING"
                      implementationClass="com.hxz.mpxjs.inspections.DuplicateTagInspection"
                      key="vue.inspection.display.name.duplicate.tag" bundle="messages.VueBundle"/>
@@ -138,9 +138,9 @@
     <!--suppress PluginXmlValidity -->
     <multiHostInjector implementation="com.hxz.mpxjs.editor.VueInjector"
                        order="before JSConfigurationInjector, before WebSymbolsHtmlText, after TemporaryPlacesInjector"
-                       id="VueInjector"/>
+                       id="MpxInjector"/>
 
-    <internalFileTemplate name="Vue Single File Component"/>
+    <internalFileTemplate name="Mpx Single File Component"/>
     <createFromTemplateHandler implementation="com.hxz.mpxjs.VueCreateFromTemplateHandler"/>
 
     <spellchecker.bundledDictionaryProvider implementation="com.hxz.mpxjs.spellchecker.VueSpellcheckingDictionaryProvider"/>
@@ -157,7 +157,7 @@
     <referencesSearch implementation="com.hxz.mpxjs.findUsages.VueJSReferenceSearcher"/>
     <completion.contributor language="any"
                             implementationClass="com.hxz.mpxjs.codeInsight.VueCompletionContributor"
-                            id="VueCompletionContributor"
+                            id="MpxCompletionContributor"
                             order="before JSPatternBasedCompletionContributor, before JSCompletionContributor, before xmlNonFirst, before cssClassOrIdReferenceCompletionContributor"/>
 <!--    <completion.contributor language="JavaScript"-->
 <!--                            implementationClass="com.hxz.mpxjs.libraries.vuex.codeInsight.VuexCompletionContributor"-->
@@ -186,9 +186,9 @@
     <javascript.web.framework id="mpx" implementation="com.hxz.mpxjs.web.VueFramework"/>
     <javascript.web.context framework="mpx"
                             implementation="com.hxz.mpxjs.context.VueFileContext"
-                            id="vue.file"/>
+                            id="mpx.file"/>
     <javascript.web.context framework="mpx" implementation="com.hxz.mpxjs.context.VueLegacyContext"
-                            id="vue.legacy" order="last"/>
+                            id="mpx.legacy" order="last"/>
 
 <!--    <javascript.webTypes source="web-types/vue@1.0.0.web-types.json"/>-->
 <!--    <javascript.webTypes source="web-types/vue@2.0.0.web-types.json"/>-->
@@ -208,27 +208,27 @@
 <!--    <javascript.web.symbolCodeCompletionItemCustomizer-->
 <!--      implementation="com.hxz.mpxjs.web.VueWebSymbolsAdditionalContextProvider$VueSymbolsCodeCompletionItemCustomizer"/>-->
 
-    <vuejs.templateScopesProvider
+    <mpxjs.templateScopesProvider
       implementation="com.hxz.mpxjs.codeInsight.template.VueStandardSymbolsScopesProvider"
       id="standardSymbols"
       order="before templateElements"/>
-    <vuejs.templateScopesProvider
+    <mpxjs.templateScopesProvider
       implementation="com.hxz.mpxjs.codeInsight.template.VueTemplateElementsScopeProvider"
       id="templateElements"/>
-    <vuejs.templateScopesProvider
+    <mpxjs.templateScopesProvider
       implementation="com.hxz.mpxjs.codeInsight.template.VueContainerScopeProvider"
       id="containerScope"
       order="after templateElements"/>
 
-    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueDefaultContainerInfoProvider"
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueDefaultContainerInfoProvider"
                                  id="default"/>
-    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueComponentTemplateInfoProvider"
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueComponentTemplateInfoProvider"
                                  id="defaultTemplate"
                                  order="after default, before decoratedComponent"/>
-    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueCompositionInfoProvider"
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueCompositionInfoProvider"
                                  id="composition"
                                  order="after default, before decoratedComponent"/>
-    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.componentDecorator.VueDecoratedComponentInfoProvider"
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.componentDecorator.VueDecoratedComponentInfoProvider"
                                  id="decoratedComponent"
                                  order="after default"/>
 <!--    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.vuex.model.component.VuexBasicComponentInfoProvider"-->
@@ -237,15 +237,15 @@
 <!--    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.vuex.model.component.VuexDecoratedComponentInfoProvider"-->
 <!--                                 id="vuexDecoratedComponent"-->
 <!--                                 order="after decoratedComponent"/>-->
-    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.templateLoader.TemplateLoaderComponentInfoProvider"
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.templateLoader.TemplateLoaderComponentInfoProvider"
                                  id="templateLoader"
                                  order="after defaultTemplate"/>
-    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.vuelidate.VuelidateContainerInfoProvider"
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.vuelidate.VuelidateContainerInfoProvider"
                                  id="vuelidate"
                                  order="after decoratedComponent"/>
 <!--    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.nuxt.model.NuxtComponentProvider"-->
 <!--                                 id="nuxt"/>-->
-    <vuejs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.cssModules.VueCssModulesInfoProvider"
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.cssModules.VueCssModulesInfoProvider"
                                  id="css-modules"/>
 
     <lang.documentationProvider implementationClass="com.hxz.mpxjs.codeInsight.documentation.VueDocumentationProvider"

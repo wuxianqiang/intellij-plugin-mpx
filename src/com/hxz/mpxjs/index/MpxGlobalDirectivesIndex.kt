@@ -7,7 +7,7 @@ import com.intellij.psi.stubs.StubIndexKey
 class VueGlobalDirectivesIndex : VueIndexBase<JSImplicitElementProvider>(KEY, JS_KEY) {
   companion object {
     val KEY: StubIndexKey<String, JSImplicitElementProvider> =
-      StubIndexKey.createIndexKey<String, JSImplicitElementProvider>("vue.global.directives.index")
+      StubIndexKey.createIndexKey<String, JSImplicitElementProvider>("mpx.global.directives.index")
     val JS_KEY: String = createJSKey(KEY)
   }
 }
