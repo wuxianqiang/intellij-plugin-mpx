@@ -78,7 +78,7 @@ const val ATTR_ARGUMENT_PREFIX = ':'
 const val ATTR_MODIFIER_PREFIX = '.'
 
 val VUE_NOTIFICATIONS: NotificationGroup
-  get() = NotificationGroupManager.getInstance().getNotificationGroup("Vue")
+  get() = NotificationGroupManager.getInstance().getNotificationGroup("Mpx")
 
 fun fromAsset(name: String, hyphenBeforeDigit: Boolean = false): String {
   val result = StringBuilder()
