@@ -47,21 +47,21 @@ class TemplateLoaderFrameworkHandler : FrameworkIndexingHandler() {
                                               context: PsiElement,
                                               outData: JSElementIndexingDataImpl?): JSElementIndexingDataImpl? {
     val out = outData ?: JSElementIndexingDataImpl()
-    JSStubBasedPsiTreeUtil.resolveLocallyWithMergedResults(name, context)
-      .asSequence()
-      .filterIsInstance<ES6ImportedBinding>()
-      .mapNotNull { (it.parent as? ES6ImportDeclaration)?.fromClause?.referenceText }
-      .map { es6Unquote(it).takeWhile { char -> char != '?' } }
-      .map { PathUtil.getFileName(it) }
-      .find { it.isNotBlank() }
-      ?.let {
-        out.addImplicitElement(
-          JSImplicitElementImpl.Builder(it, context)
-            .setUserString(VueUrlIndex.JS_KEY)
-            .forbidAstAccess()
-            .toImplicitElement()
-        )
-      }
+//    JSStubBasedPsiTreeUtil.resolveLocallyWithMergedResults(name, context)
+//      .asSequence()
+//      .filterIsInstance<ES6ImportedBinding>()
+//      .mapNotNull { (it.parent as? ES6ImportDeclaration)?.fromClause?.referenceText }
+//      .map { es6Unquote(it).takeWhile { char -> char != '?' } }
+//      .map { PathUtil.getFileName(it) }
+//      .find { it.isNotBlank() }
+//      ?.let {
+//        out.addImplicitElement(
+//          JSImplicitElementImpl.Builder(it, context)
+//            .setUserString(VueUrlIndex.JS_KEY)
+//            .forbidAstAccess()
+//            .toImplicitElement()
+//        )
+//      }
     return if (out.isEmpty) outData else out
   }
 

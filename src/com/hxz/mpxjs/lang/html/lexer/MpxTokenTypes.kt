@@ -3,15 +3,15 @@ package com.hxz.mpxjs.lang.html.lexer
 
 import com.intellij.psi.xml.XmlTokenType
 
-interface VueTokenTypes : XmlTokenType {
+interface MpxTokenTypes : XmlTokenType {
   companion object {
     @JvmField
-    val INTERPOLATION_START = VueTokenType("VUE:INTERPOLATION_START")
+    val INTERPOLATION_START = MpxTokenType("MPX:INTERPOLATION_START")
 
     @JvmField
-    val INTERPOLATION_END = VueTokenType("VUE:INTERPOLATION_END")
+    val INTERPOLATION_END = MpxTokenType("MPX:INTERPOLATION_END")
 
     @JvmField
-    val INTERPOLATION_EXPR = VueTokenType("VUE:INTERPOLATION_EXPR")
+    val INTERPOLATION_EXPR = MpxTokenType("MPX:INTERPOLATION_EXPR")
   }
 }

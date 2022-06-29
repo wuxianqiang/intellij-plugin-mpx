@@ -22,7 +22,7 @@ import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser
 import com.hxz.mpxjs.lang.expr.highlighting.VueJSSyntaxHighlighter
 import com.hxz.mpxjs.lang.expr.parser.VueJSEmbeddedExprTokenType
 import com.hxz.mpxjs.lang.html.highlighting.VueHighlightingLexer
-import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_EXPR
+import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_EXPR
 import com.hxz.mpxjs.lang.html.parser.VueElementTypes
 
 class VueEmbeddedContentSupport : HtmlEmbeddedContentSupport {

@@ -11,8 +11,8 @@ import com.hxz.mpxjs.VueBundle
 import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser
 import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser.VueAttributeKind.*
 import com.hxz.mpxjs.lang.expr.parser.VueJSEmbeddedExprTokenType
-import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_END
-import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_START
+import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_END
+import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_START
 import com.hxz.mpxjs.model.SLOT_TAG_NAME
 import java.util.*
 

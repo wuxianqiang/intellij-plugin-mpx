@@ -13,15 +13,15 @@ const val SLOT_TAG_NAME: String = "slot"
 
 const val DEPRECATED_SLOT_ATTRIBUTE = "slot"
 
-fun getAvailableSlots(attr: XmlAttribute, newApi: Boolean): List<WebSymbol> =
-  getAvailableSlots(attr.parent, null, newApi)
+fun getAvailableSlots(attr: XmlAttribute, newApi: Boolean): List<WebSymbol> = emptyList()
+//  getAvailableSlots(attr.parent, null, newApi)
 
-fun getAvailableSlots(tag: XmlTag, name: String?, newApi: Boolean): List<WebSymbol> =
-  if (!newApi || tag.name == TEMPLATE_TAG_NAME)
-    (tag.parentTag?.descriptor as? WebSymbolElementDescriptor)?.getSlots(name) ?: emptyList()
-  else
-    (tag.descriptor as? WebSymbolElementDescriptor)?.getSlots(name)
-      ?.filter { it.name == DEFAULT_SLOT_NAME } ?: emptyList()
+fun getAvailableSlots(tag: XmlTag, name: String?, newApi: Boolean): List<WebSymbol> = emptyList()
+//  if (!newApi || tag.name == TEMPLATE_TAG_NAME)
+//    (tag.parentTag?.descriptor as? WebSymbolElementDescriptor)?.getSlots(name) ?: emptyList()
+//  else
+//    (tag.descriptor as? WebSymbolElementDescriptor)?.getSlots(name)
+//      ?.filter { it.name == DEFAULT_SLOT_NAME } ?: emptyList()
 
-private fun WebSymbolElementDescriptor.getSlots(name: String?): List<WebSymbol> =
-  runNameMatchQuery(listOfNotNull(WebSymbol.KIND_HTML_SLOTS, name))
+private fun WebSymbolElementDescriptor.getSlots(name: String?): List<WebSymbol> = emptyList()
+//  runNameMatchQuery(listOfNotNull(WebSymbol.KIND_HTML_SLOTS, name))

@@ -14,6 +14,9 @@ import com.intellij.psi.stubs.StubIndex
 import com.intellij.util.Processor
 import com.hxz.mpxjs.lang.html.VueFileType
 
+const val vueExtension = ".mpx"
+val defaultExtensionsWithDot = arrayOf(vueExtension)
+
 class VueFileImportsResolver(project: Project,
                              resolveContext: TypeScriptImportResolveContext,
                              nodeProcessor: NodeModuleDirectorySearchProcessor) :

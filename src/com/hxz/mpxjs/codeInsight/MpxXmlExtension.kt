@@ -15,7 +15,7 @@ import com.hxz.mpxjs.lang.html.VueLanguage
 import com.hxz.mpxjs.model.VueComponent
 import com.hxz.mpxjs.model.VueModelDirectiveProperties
 import com.hxz.mpxjs.model.VueModelManager
-import com.hxz.mpxjs.web.getModel
+//import com.hxz.mpxjs.web.getModel
 
 class VueXmlExtension : WebSymbolsXmlExtension() {
   override fun isAvailable(file: PsiFile?): Boolean =
@@ -42,8 +42,8 @@ class VueXmlExtension : WebSymbolsXmlExtension() {
       var name: String? = null
       if (info is VueAttributeNameParser.VueDirectiveInfo) {
         if (info.directiveKind == VueAttributeNameParser.VueDirectiveKind.MODEL) {
-          name = (tag.descriptor as? WebSymbolElementDescriptor)?.getModel()?.prop
-                 ?: VueModelDirectiveProperties.DEFAULT_PROP
+//          name = (tag.descriptor as? WebSymbolElementDescriptor)?.getModel()?.prop
+//                 ?: VueModelDirectiveProperties.DEFAULT_PROP
         }
         else if (info.directiveKind === VueAttributeNameParser.VueDirectiveKind.BIND
                  && info.arguments != null) {

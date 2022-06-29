@@ -8,9 +8,9 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.TokenSet
 import com.intellij.psi.xml.XmlTokenType.*
-import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_END
-import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_EXPR
-import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_START
+import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_END
+import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_EXPR
+import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_START
 
 class VueLexerImpl(override val languageLevel: JSLanguageLevel,
                    override val project: Project,

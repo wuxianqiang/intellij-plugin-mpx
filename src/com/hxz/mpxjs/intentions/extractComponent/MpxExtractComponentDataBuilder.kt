@@ -1,7 +1,7 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 package com.hxz.mpxjs.intentions.extractComponent
 
-import com.intellij.javascript.web.codeInsight.html.refs.WebSymbolTagNameReference
+//import com.intellij.javascript.web.codeInsight.html.refs.WebSymbolTagNameReference
 import com.intellij.lang.ecmascript6.psi.ES6ImportDeclaration
 import com.intellij.lang.ecmascript6.psi.JSExportAssignment
 import com.intellij.lang.ecmascript6.psi.impl.ES6CreateImportUtil
@@ -40,6 +40,7 @@ import com.hxz.mpxjs.index.findModule
 import com.hxz.mpxjs.index.findScriptTag
 import com.hxz.mpxjs.lang.expr.VueJSLanguage
 import com.hxz.mpxjs.lang.html.VueFileType
+import com.intellij.psi.impl.source.xml.TagNameReference
 
 class VueExtractComponentDataBuilder(private val list: List<XmlTag>) {
   private val containingFile = list[0].containingFile
@@ -56,7 +57,7 @@ class VueExtractComponentDataBuilder(private val list: List<XmlTag>) {
     val refList: List<RefData> = gatherReferences()
     val map: MutableMap<XmlTag, MutableList<RefData>> = mutableMapOf()
     refList.forEach { refData ->
-      if (refData.ref is WebSymbolTagNameReference) {
+      if (refData.ref is TagNameReference) {
         processVueComponent(refData.ref)
         return@forEach
       }
@@ -76,7 +77,7 @@ class VueExtractComponentDataBuilder(private val list: List<XmlTag>) {
     return map
   }
 
-  private fun processVueComponent(ref: WebSymbolTagNameReference) {
+  private fun processVueComponent(ref: TagNameReference) {
     if (scriptTag == null) return
     val content = PsiTreeUtil.findChildOfType(scriptTag, JSEmbeddedContent::class.java) ?: return
 
@@ -206,14 +207,14 @@ export default {
   }
 
   private fun optimizeAndRemoveEmptyStyles(file: PsiFile) {
-    val currentlyUnused = getUnusedStyles(file)
-    currentlyUnused.removeAll(unusedStylesInExistingComponent)
-    currentlyUnused.forEach { suffix -> RemoveUnusedSymbolIntentionAction.removeUnused(file.project, suffix, false) }
-    val toDelete = findStyles(file).filter { styleTag ->
-      styleTag.isValid &&
-      PsiTreeUtil.processElements(styleTag) { !(CssElementTypes.CSS_RULESET_LIST == it.node.elementType && hasMeaningfulChildren(it)) }
-    }
-    toDelete.forEach { styleTag -> styleTag.delete() }
+//    val currentlyUnused = getUnusedStyles(file)
+//    currentlyUnused.removeAll(unusedStylesInExistingComponent)
+//    currentlyUnused.forEach { suffix -> RemoveUnusedSymbolIntentionAction.removeUnused(file.project, suffix, false) }
+//    val toDelete = findStyles(file).filter { styleTag ->
+//      styleTag.isValid &&
+//      PsiTreeUtil.processElements(styleTag) { !(CssElementTypes.CSS_RULESET_LIST == it.node.elementType && hasMeaningfulChildren(it)) }
+//    }
+//    toDelete.forEach { styleTag -> styleTag.delete() }
   }
 
   private fun hasMeaningfulChildren(element: PsiElement) =

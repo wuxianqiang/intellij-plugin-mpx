@@ -24,7 +24,7 @@ import com.hxz.mpxjs.model.getAvailableSlots
 class VueReferenceContributor : PsiReferenceContributor() {
 
   override fun registerReferenceProviders(registrar: PsiReferenceRegistrar) {
-    registrar.registerReferenceProvider(DEPRECATED_SLOT_NAME_ATTR_PATTERN, DEPRECATED_SLOT_REF_PROVIDER)
+//    registrar.registerReferenceProvider(DEPRECATED_SLOT_NAME_ATTR_PATTERN, DEPRECATED_SLOT_REF_PROVIDER)
     registrar.registerReferenceProvider(createSrcAttrValuePattern(STYLE_TAG_NAME), STYLE_REF_PROVIDER)
     registrar.registerReferenceProvider(createSrcAttrValuePattern(TEMPLATE_TAG_NAME), BASIC_REF_PROVIDER)
   }
@@ -33,21 +33,21 @@ class VueReferenceContributor : PsiReferenceContributor() {
 
     private val DEPRECATED_SLOT_NAME_ATTR_PATTERN = XmlPatterns.xmlAttributeValue(DEPRECATED_SLOT_ATTRIBUTE)
 
-    private val DEPRECATED_SLOT_REF_PROVIDER = object : PsiReferenceProvider() {
-      override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {
-        if (element is XmlAttributeValue && element.textLength > 2) {
-          return arrayOf(object : PsiReferenceBase<XmlAttributeValue>(element, TextRange(1, element.textLength - 1), true) {
-            override fun resolve(): PsiElement? {
-              return (element.parent as? XmlAttribute)
-                ?.let { getAvailableSlots(it, false) }
-                ?.find { it.name == this.value }
-                ?.source
-            }
-          })
-        }
-        return PsiReference.EMPTY_ARRAY
-      }
-    }
+//    private val DEPRECATED_SLOT_REF_PROVIDER = object : PsiReferenceProvider() {
+//      override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {
+//        if (element is XmlAttributeValue && element.textLength > 2) {
+//          return arrayOf(object : PsiReferenceBase<XmlAttributeValue>(element, TextRange(1, element.textLength - 1), true) {
+//            override fun resolve(): PsiElement? {
+//              return (element.parent as? XmlAttribute)
+//                ?.let { getAvailableSlots(it, false) }
+//                ?.find { it.name == this.value }
+//                ?.source
+//            }
+//          })
+//        }
+//        return PsiReference.EMPTY_ARRAY
+//      }
+//    }
 
     private val STYLE_REF_PROVIDER = object : PsiReferenceProvider() {
       override fun getReferencesByElement(element: PsiElement, context: ProcessingContext): Array<PsiReference> {

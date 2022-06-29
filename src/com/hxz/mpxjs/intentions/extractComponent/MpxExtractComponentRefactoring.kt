@@ -58,15 +58,15 @@ class VueExtractComponentRefactoring(private val project: Project,
   private class TagNameValidator(context: XmlTag) {
     private val folder = context.containingFile.parent!!
     private val forbidden: Set<String>
-    private val alreadyExisting: Set<String>
+//    private val alreadyExisting: Set<String>
 
     init {
       forbidden = DefaultXmlExtension.DEFAULT_EXTENSION.getAvailableTagNames(context.containingFile as XmlFile, context)
         .map { it.name }.toSet()
-      alreadyExisting = WebSymbolsRegistryManager.get(context)
-        .runCodeCompletionQuery(listOf(NAMESPACE_HTML, WebSymbol.KIND_HTML_VUE_COMPONENTS), 0)
-        .map { fromAsset(it.name) }
-        .toSet()
+//      alreadyExisting = WebSymbolsRegistryManager.get(context)
+//        .runCodeCompletionQuery(listOf(NAMESPACE_HTML, WebSymbol.KIND_HTML_VUE_COMPONENTS), 0)
+//        .map { fromAsset(it.name) }
+//        .toSet()
     }
 
     @Nls
@@ -77,9 +77,9 @@ class VueExtractComponentRefactoring(private val project: Project,
           normalized.contains(' ') || forbidden.contains(normalized)) {
         return VueBundle.message("vue.template.intention.extract.component.error.component.name", normalized)
       }
-      if (alreadyExisting.contains(normalized)) {
-        return VueBundle.message("vue.template.intention.extract.component.error.component.exists", normalized)
-      }
+//      if (alreadyExisting.contains(normalized)) {
+//        return VueBundle.message("vue.template.intention.extract.component.error.component.exists", normalized)
+//      }
       if (folder.findFile(fileName) != null) {
         return VueBundle.message("vue.template.intention.extract.component.error.file.exists", fileName)
       }

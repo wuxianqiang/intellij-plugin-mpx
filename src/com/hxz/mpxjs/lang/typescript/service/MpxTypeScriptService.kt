@@ -67,7 +67,7 @@ class VueTypeScriptService(project: Project) : TypeScriptServerServiceImpl(proje
   override fun getProcessName(): String = "Mpx TypeScript"
 
   override fun isServiceEnabled(context: VirtualFile): Boolean {
-    if (!super.isServiceEnabled(context)) return false
+//    if (!super.isServiceEnabled(context)) return false
     if (context.fileType is VueFileType) return true
 
     //other files
@@ -126,12 +126,12 @@ class VueTypeScriptService(project: Project) : TypeScriptServerServiceImpl(proje
     return VueTypeScriptServiceCache(myProject)
   }
 
-  override fun createFixSet(file: PsiFile,
-                            cache: JSLanguageServiceFileCommandCache,
-                            typescriptResult: TypeScriptLanguageServiceAnnotationResult): TypeScriptLanguageServiceFixSet {
-    val textRange = findModule(file)?.textRange
-    return TypeScriptLanguageServiceFixSet(file.project, cache, file.virtualFile, typescriptResult, textRange)
-  }
+//  override fun createFixSet(file: PsiFile,
+//                            cache: JSLanguageServiceFileCommandCache,
+//                            typescriptResult: TypeScriptLanguageServiceAnnotationResult): TypeScriptLanguageServiceFixSet {
+//    val textRange = findModule(file)?.textRange
+//    return TypeScriptLanguageServiceFixSet(file.project, cache, file.virtualFile, typescriptResult, textRange)
+//  }
 
   private fun isVueFile(virtualFile: VirtualFile) = virtualFile.fileType == VueFileType.INSTANCE
 

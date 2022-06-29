@@ -5,4 +5,4 @@ import com.intellij.psi.tree.IElementType
 import org.jetbrains.annotations.NonNls
 import com.hxz.mpxjs.lang.html.VueLanguage
 
-class VueTokenType(@NonNls debugName: String) : IElementType(debugName, VueLanguage.INSTANCE)
+class MpxTokenType(@NonNls debugName: String) : IElementType(debugName, VueLanguage.INSTANCE)

@@ -11,7 +11,7 @@ import com.intellij.psi.formatter.xml.XmlBlock
 import com.intellij.psi.formatter.xml.XmlFormattingPolicy
 import com.intellij.psi.formatter.xml.XmlTagBlock
 import com.hxz.mpxjs.lang.html.VueLanguage
-import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_START
+import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_START
 import java.util.*
 
 class VueHtmlTagBlock(node: ASTNode,

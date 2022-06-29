@@ -35,30 +35,30 @@ class VueJSTypeEvaluator(context: JSEvaluateContext)
 
     when (vForExpression.getVarStatement()?.declarations?.indexOf(declaration)) {
       0 -> {
-        val destructuringParents = findDestructuringParents(jsVariable)
-        val expression = myContext.processedExpression
-        val type = when (val collectionType = JSResolveUtil.getElementJSType(collectionExpr)?.substitute()) {
-          is JSStringType -> getVForVarType(collectionExpr, ::JSStringType)
-          is JSNumberType -> getVForVarType(collectionExpr, ::JSNumberType)
-          is JSType -> {
-            val type = JSTypeUtils.getIterableComponentType(collectionType)
-            when {
-              type != null -> type
-              useTypeScriptKeyofType(collectionType) -> {
-                val keyOfType = JSCompositeTypeFactory.createKeyOfType(collectionType, collectionType.source)
-                val indexedAccessType = JSCompositeTypeFactory.createIndexedAccessType(collectionType, keyOfType, collectionType.source)
-                JSWidenType.createWidening(indexedAccessType, null)
-              }
-              else -> getVForVarType(
-                collectionExpr, *getComponentTypeFromArrayExpression(expression, collectionExpr).toTypedArray())
-            }
-          }
-          else -> null
-        }
-        if (type != null) {
-          val typeToAdd = destructuringParents.applyToOuterType(type)
-          addType(typeToAdd)
-        }
+//        val destructuringParents = findDestructuringParents(jsVariable)
+//        val expression = myContext.processedExpression
+//        val type = when (val collectionType = JSResolveUtil.getElementJSType(collectionExpr)?.substitute()) {
+//          is JSStringType -> getVForVarType(collectionExpr, ::JSStringType)
+//          is JSNumberType -> getVForVarType(collectionExpr, ::JSNumberType)
+//          is JSType -> {
+//            val type = JSTypeUtils.getIterableComponentType(collectionType)
+//            when {
+//              type != null -> type
+//              useTypeScriptKeyofType(collectionType) -> {
+//                val keyOfType = JSCompositeTypeFactory.createKeyOfType(collectionType, collectionType.source)
+//                val indexedAccessType = JSCompositeTypeFactory.createIndexedAccessType(collectionType, keyOfType, collectionType.source)
+//                JSWidenType.createWidening(indexedAccessType, null)
+//              }
+//              else -> getVForVarType(
+//                collectionExpr, *getComponentTypeFromArrayExpression(expression, collectionExpr).toTypedArray())
+//            }
+//          }
+//          else -> null
+//        }
+//        if (type != null) {
+//          val typeToAdd = destructuringParents.applyToOuterType(type)
+//          addType(typeToAdd)
+//        }
       }
       1 -> {
         val collectionType = JSResolveUtil.getElementJSType(collectionExpr)?.substitute()

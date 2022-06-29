@@ -13,8 +13,8 @@ import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Pair.pair
 import com.intellij.psi.tree.IElementType
-import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_END
-import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_START
+import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_END
+import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_START
 
 internal class VueFileHighlighter(private val languageLevel: JSLanguageLevel,
                                   private val project: Project?,
