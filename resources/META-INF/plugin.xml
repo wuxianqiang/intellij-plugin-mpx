@@ -141,6 +141,7 @@
                        id="MpxInjector"/>
 
     <internalFileTemplate name="Mpx Single File Component"/>
+    <internalFileTemplate name="Mpx Single File Page"/>
     <createFromTemplateHandler implementation="com.hxz.mpxjs.VueCreateFromTemplateHandler"/>
 
     <spellchecker.bundledDictionaryProvider implementation="com.hxz.mpxjs.spellchecker.VueSpellcheckingDictionaryProvider"/>

@@ -14,7 +14,7 @@ object VueElementTypes {
 
   val VUE_EMBEDDED_CONTENT: IElementType = EmbeddedVueContentElementType()
 
-  class EmbeddedVueContentElementType : ILazyParseableElementType("VUE_EMBEDDED_CONTENT",
+  class EmbeddedVueContentElementType : ILazyParseableElementType("MPX_EMBEDDED_CONTENT",
                                                                   VueLanguage.INSTANCE), ILightLazyParseableElementType {
 
     override fun parseContents(chameleon: LighterLazyParseableNode): FlyweightCapableTreeStructure<LighterASTNode> {

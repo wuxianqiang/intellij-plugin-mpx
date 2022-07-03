@@ -42,13 +42,11 @@ fun getDefaultVueComponentInstanceType(context: PsiElement?): JSType? =
   ?: resolveSymbolFromNodeModule(context, VUE_MODULE, VUE_NAMESPACE, TypeScriptInterface::class.java)?.jsType
 
 private val VUE_INSTANCE_PROPERTIES: List<String> = listOf(
-  "\$el", "\$options", "\$parent", "\$root", "\$children", "\$refs", "\$slots",
-  "\$scopedSlots", "\$isServer", "\$data", "\$props",
-  "\$ssrContext", "\$vnode", "\$attrs", "\$listeners")
+  "\$refs")
 
 private val VUE_INSTANCE_METHODS: List<String> = listOf(
-  "\$mount", "\$forceUpdate", "\$destroy", "\$set", "\$delete", "\$watch", "\$on",
-  "\$once", "\$off", "\$emit", "\$nextTick", "\$createElement")
+  "\$set", "\$watch", "\$forceUpdate",
+  "\$nextTick", "\$t", "\$tc", "\$te", "\$d", "\$n", "\$getRenderWatcher", "\$getWatcherByName", "\$getPausableWatchers")
 
 private fun buildInstanceType(instance: VueInstanceOwner): JSType? {
   val source = instance.source ?: return null
