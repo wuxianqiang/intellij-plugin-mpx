@@ -89,7 +89,7 @@
     <gotoDeclarationHandler implementation="com.hxz.mpxjs.editor.VueGotoDeclarationHandler"/>
     <notificationGroup displayType="BALLOON" id="Mpx" icon="com.hxz.mpxjs.VuejsIcons.Vue" isLogByDefault="true"
                        bundle="messages.VueBundle" key="vue.documentation.vue"/>
-
+    <stubIndex implementation="com.hxz.mpxjs.index.VueCompositionAppIndex"/>
     <stubIndex implementation="com.hxz.mpxjs.index.VueComponentsIndex"/>
     <stubIndex implementation="com.hxz.mpxjs.index.VueOptionsIndex"/>
     <stubIndex implementation="com.hxz.mpxjs.index.VueMixinBindingIndex"/>

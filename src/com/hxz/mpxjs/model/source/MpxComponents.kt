@@ -135,7 +135,7 @@ class VueComponents {
       callExpression.methodExpression
         ?.castSafelyTo<JSReferenceExpression>()
         ?.let {
-          (it.qualifier == null && it.referenceName == DEFINE_COMPONENT_FUN)
+          (it.qualifier == null && (it.referenceName == DEFINE_COMPONENT_FUN || it.referenceName == DEFINE_PAGE_FUN))
           || it.referenceName == EXTEND_FUN
         } == true
   }

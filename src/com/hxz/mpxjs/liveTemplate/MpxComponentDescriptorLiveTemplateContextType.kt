@@ -9,7 +9,7 @@ import com.intellij.psi.PsiFile
 import com.intellij.psi.util.PsiTreeUtil
 import com.hxz.mpxjs.VueBundle
 
-private const val CONTEXT_TYPE = "VUE_COMPONENT_DESCRIPTOR"
+private const val CONTEXT_TYPE = "MPX_COMPONENT_DESCRIPTOR"
 
 class VueComponentDescriptorLiveTemplateContextType : TemplateContextType(CONTEXT_TYPE,
                                                                           VueBundle.message("vue.live.template.context.component"),

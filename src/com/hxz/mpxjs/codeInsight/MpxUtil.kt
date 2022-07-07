@@ -43,6 +43,7 @@ import com.intellij.psi.util.CachedValueProvider.Result.create
 import com.intellij.psi.util.CachedValuesManager
 import com.intellij.psi.util.CachedValuesManager.getCachedValue
 import com.intellij.psi.util.PsiModificationTracker
+import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.xml.XmlAttribute
 import com.intellij.psi.xml.XmlFile
 import com.intellij.psi.xml.XmlTag
@@ -76,6 +77,7 @@ const val ATTR_EVENT_SHORTHAND = '@'
 const val ATTR_SLOT_SHORTHAND = '#'
 const val ATTR_ARGUMENT_PREFIX = ':'
 const val ATTR_MODIFIER_PREFIX = '.'
+const val ATTR_EVENT_PREFIX = "bind"
 
 val VUE_NOTIFICATIONS: NotificationGroup
   get() = NotificationGroupManager.getInstance().getNotificationGroup("Mpx")
@@ -313,6 +315,11 @@ fun findDefaultExport(element: PsiElement?): PsiElement? =
   element?.let {
     (ES6PsiUtil.findDefaultExport(element) as? JSExportAssignment)?.stubSafeElement
     ?: findDefaultCommonJSExport(it)
+  }
+
+fun findCreatePage(element: PsiElement?): PsiElement? =
+  element?.let {
+    PsiTreeUtil.findChildOfType(element, JSCallExpression::class.java)
   }
 
 private fun findDefaultCommonJSExport(element: PsiElement): PsiElement? {

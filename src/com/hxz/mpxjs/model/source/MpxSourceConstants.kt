@@ -1,14 +1,15 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 package com.hxz.mpxjs.model.source
 
-const val VUE_NAMESPACE: String = "Vue"
+const val VUE_NAMESPACE: String = "Mpx"
 
 const val EXTEND_FUN: String = "extend"
 const val COMPONENT_FUN: String = "component"
 const val MIXIN_FUN: String = "mixin"
 const val DIRECTIVE_FUN: String = "directive"
 const val FILTER_FUN: String = "filter"
-const val DEFINE_COMPONENT_FUN: String = "defineComponent"
+const val DEFINE_COMPONENT_FUN: String = "createComponent"
+const val DEFINE_PAGE_FUN: String = "createPage"
 
 const val MIXINS_PROP: String = "mixins"
 const val EXTENDS_PROP: String = "extends"
@@ -30,3 +31,4 @@ const val PROPS_PROP = "props"
 const val PROPS_TYPE_PROP = "type"
 const val PROPS_REQUIRED_PROP = "required"
 const val EL_PROP = "el"
+const val CREATE_APP_FUN = "createPage"

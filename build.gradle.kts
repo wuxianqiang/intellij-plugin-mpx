@@ -9,7 +9,7 @@ dependencies {
 }
 
 group = "com.hxz"
-version = "1.0-1"
+version = "1.0-2"
 
 repositories {
   mavenCentral()

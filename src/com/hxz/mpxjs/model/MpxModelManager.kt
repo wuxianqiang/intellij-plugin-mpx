@@ -32,6 +32,7 @@ import com.intellij.xml.util.HtmlUtil
 import com.intellij.xml.util.HtmlUtil.SCRIPT_TAG_NAME
 import com.hxz.mpxjs.codeInsight.SETUP_ATTRIBUTE_NAME
 import com.hxz.mpxjs.codeInsight.findDefaultExport
+import com.hxz.mpxjs.codeInsight.findCreatePage
 import com.hxz.mpxjs.codeInsight.getHostFile
 import com.hxz.mpxjs.codeInsight.toAsset
 import com.hxz.mpxjs.context.isVueContext
@@ -249,12 +250,14 @@ class VueModelManager {
       if (file != null && file.fileType == VueFileType.INSTANCE) {
         val script = findScriptTag(file)
         if (script != null && !hasAttribute(script, SETUP_ATTRIBUTE_NAME)) {
-          findDefaultExport(
+          findCreatePage(
             resolveTagSrcReference(script) as? PsiFile
             ?: PsiTreeUtil.getStubChildOfType(script, JSEmbeddedContent::class.java)
           )
             ?.let { getComponentDescriptor(it) }
             ?.let { return it }
+//          val embedded = PsiTreeUtil.getStubChildOfType(script, JSEmbeddedContent::class.java)
+//          val literal = PsiTreeUtil.findChildOfType(embedded, JSCallExpression::class.java)?.let { getComponentDescriptor(it) }?.let { return it }
         }
         if (element.containingFile.originalFile.virtualFile?.fileType == VueFileType.INSTANCE)
           return VueSourceEntityDescriptor(source = element.containingFile)

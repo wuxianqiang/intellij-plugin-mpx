@@ -9,6 +9,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiFile
 import com.intellij.psi.html.HtmlTag
 import com.hxz.mpxjs.codeInsight.ATTR_ARGUMENT_PREFIX
+import com.hxz.mpxjs.codeInsight.ATTR_EVENT_PREFIX
 import com.hxz.mpxjs.codeInsight.ATTR_EVENT_SHORTHAND
 import com.hxz.mpxjs.codeInsight.ATTR_SLOT_SHORTHAND
 import com.hxz.mpxjs.lang.html.VueLanguage

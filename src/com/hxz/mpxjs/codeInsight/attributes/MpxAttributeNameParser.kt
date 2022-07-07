@@ -42,6 +42,12 @@ class VueAttributeNameParser private constructor() {
         paramsPos = 0
         isShorthand = true
       }
+      else if (attributeName.startsWith(ATTR_EVENT_PREFIX)) {
+        name = "on"
+        kind = VueDirectiveKind.ON
+        paramsPos = 0
+        isShorthand = true
+      }
       else if (attributeName.startsWith(ATTR_SLOT_SHORTHAND)) {
         name = "slot"
         kind = VueDirectiveKind.SLOT
@@ -74,7 +80,8 @@ class VueAttributeNameParser private constructor() {
           || (attributeName[paramsPos] != ATTR_EVENT_SHORTHAND
               && attributeName[paramsPos] != ATTR_ARGUMENT_PREFIX
               && attributeName[paramsPos] != ATTR_SLOT_SHORTHAND
-              && attributeName[paramsPos] != ATTR_MODIFIER_PREFIX)) {
+              && attributeName[paramsPos] != ATTR_MODIFIER_PREFIX
+              && !attributeName.startsWith(ATTR_EVENT_PREFIX))) {
         return VueDirectiveInfo(name, kind, isShorthand = isShorthand)
       }
 
