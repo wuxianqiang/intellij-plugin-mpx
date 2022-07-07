@@ -67,6 +67,7 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
+import com.hxz.mpxjs.model.source.VueComponents.Companion.isDefineComponentOrVueExtendCall
 
 const val LANG_ATTRIBUTE_NAME = "lang"
 const val SETUP_ATTRIBUTE_NAME = "setup"
@@ -319,7 +320,14 @@ fun findDefaultExport(element: PsiElement?): PsiElement? =
 
 fun findCreatePage(element: PsiElement?): PsiElement? =
   element?.let {
-    PsiTreeUtil.findChildOfType(element, JSCallExpression::class.java)
+//    PsiTreeUtil.findChildOfType(element, JSCallExpression::class.java)
+    val res = PsiTreeUtil.findChildrenOfType(element, JSCallExpression::class.java)
+    for (item in res) {
+      if (isDefineComponentOrVueExtendCall(item)) {
+        return@let item
+      }
+    }
+    return@let null
   }
 
 private fun findDefaultCommonJSExport(element: PsiElement): PsiElement? {
