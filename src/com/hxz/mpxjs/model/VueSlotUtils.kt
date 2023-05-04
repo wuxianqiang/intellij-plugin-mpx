@@ -1,0 +1,57 @@
+// Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+package com.hxz.mpxjs.model
+
+import com.intellij.html.webSymbols.attributes.WebSymbolAttributeDescriptor
+import com.intellij.html.webSymbols.elements.WebSymbolElementDescriptor
+import com.intellij.javascript.web.js.jsType
+import com.intellij.lang.javascript.psi.JSType
+import com.intellij.psi.PsiElement
+import com.intellij.psi.util.parentOfType
+import com.intellij.psi.xml.XmlAttribute
+import com.intellij.psi.xml.XmlTag
+import com.intellij.util.asSafely
+import com.intellij.webSymbols.WebSymbol
+import com.intellij.webSymbols.completion.WebSymbolCodeCompletionItem
+import com.intellij.xml.util.HtmlUtil.TEMPLATE_TAG_NAME
+import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser
+import com.hxz.mpxjs.types.asCompleteType
+
+const val DEFAULT_SLOT_NAME = "default"
+const val SLOT_NAME_ATTRIBUTE = "name"
+const val SLOT_TAG_NAME: String = "slot"
+
+const val DEPRECATED_SLOT_ATTRIBUTE = "slot"
+
+fun getAvailableSlots(tag: XmlTag, name: String?, newApi: Boolean): List<WebSymbol> =
+  if (!newApi || tag.name == TEMPLATE_TAG_NAME)
+    (tag.parentTag?.descriptor as? WebSymbolElementDescriptor)?.getSlots(name) ?: emptyList()
+  else
+    (tag.descriptor as? WebSymbolElementDescriptor)?.getSlots(name)
+      ?.filter { it.name == DEFAULT_SLOT_NAME } ?: emptyList()
+
+fun getAvailableSlotsCompletions(tag: XmlTag, name: String?, position: Int, newApi: Boolean): List<WebSymbolCodeCompletionItem> =
+  if (!newApi || tag.name == TEMPLATE_TAG_NAME)
+    (tag.parentTag?.descriptor as? WebSymbolElementDescriptor)?.getSlotsCompletions(name, position) ?: emptyList()
+  else
+    (tag.descriptor as? WebSymbolElementDescriptor)?.getSlotsCompletions(name, position)
+      ?.filter { it.name == DEFAULT_SLOT_NAME } ?: emptyList()
+
+fun getSlotTypeFromContext(context: PsiElement): JSType? =
+  context.parentOfType<XmlAttribute>()
+    ?.takeIf { attribute ->
+      VueAttributeNameParser.parse(attribute.name, attribute.parent).let {
+        it is VueAttributeNameParser.VueDirectiveInfo
+        && it.directiveKind == VueAttributeNameParser.VueDirectiveKind.SLOT
+      }
+    }
+    ?.descriptor
+    ?.asSafely<WebSymbolAttributeDescriptor>()
+    ?.symbol
+    ?.jsType
+    ?.asCompleteType()
+
+private fun WebSymbolElementDescriptor.getSlots(name: String?): List<WebSymbol> =
+  runNameMatchQuery(WebSymbol.NAMESPACE_HTML, WebSymbol.KIND_HTML_SLOTS, name ?:"")
+
+private fun WebSymbolElementDescriptor.getSlotsCompletions(name: String?, position: Int): List<WebSymbolCodeCompletionItem> =
+  runCodeCompletionQuery(WebSymbol.NAMESPACE_HTML, WebSymbol.KIND_HTML_SLOTS, name ?: "", position)

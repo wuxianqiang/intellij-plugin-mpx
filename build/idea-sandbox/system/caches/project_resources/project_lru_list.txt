@@ -1,1 +1,2 @@
-vue-vite.4f6c009c
+kf-mp-apphome.bc8d0a9e
+mpxtemplatedeme2eo.d948e235

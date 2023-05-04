@@ -1,10 +1,10 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.pug
+package org.jetbrains.vuejs.pug
 
 import com.intellij.lang.javascript.inspections.JSIncompatibleTypesComparisonInspection
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import com.hxz.mpxjs.lang.createPackageJsonWithVueDependency
-import com.hxz.mpxjs.lang.getVueTestDataPath
+import org.jetbrains.vuejs.lang.createPackageJsonWithVueDependency
+import org.jetbrains.vuejs.lang.getVueTestDataPath
 
 class PugTemplateTest : BasePlatformTestCase() {
 
@@ -48,6 +48,21 @@ class PugTemplateTest : BasePlatformTestCase() {
 
   fun testBlockCommenterBinding() {
     doCommenterTest(false)
+  }
+
+  fun testHtmlTagTyping() {
+    myFixture.configureByFile("htmlTagTyping.vue")
+    myFixture.type("te")
+    myFixture.completeBasic()
+    myFixture.type("\n")
+    myFixture.checkResultByFile("htmlTagTyping_after.vue")
+  }
+
+  fun testComponentCompletion() {
+    myFixture.configureByFiles("componentCompletion.vue", "htmlTagTyping.vue")
+    myFixture.completeBasic()
+    assertContainsElements(myFixture.lookupElementStrings!!, "HtmlTagTyping", "html-tag-typing",
+                           "template", "component", "suspense", "teleport")
   }
 
   private fun doCommenterTest(lineCommenter: Boolean) {

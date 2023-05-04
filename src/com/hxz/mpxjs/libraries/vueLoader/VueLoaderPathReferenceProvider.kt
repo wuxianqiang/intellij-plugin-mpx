@@ -1,7 +1,8 @@
-// Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+// Copyright 2000-2022 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license.
 package com.hxz.mpxjs.libraries.vueLoader
 
 import com.intellij.lang.javascript.psi.resolve.JSModuleReferenceContributor
+import com.intellij.openapi.fileTypes.FileTypeRegistry
 import com.intellij.openapi.paths.PathReference
 import com.intellij.openapi.paths.PathReferenceProviderBase
 import com.intellij.openapi.paths.PsiDynaReference
@@ -31,7 +32,7 @@ class VueLoaderPathReferenceProvider : PathReferenceProviderBase() {
     val initialOffset = if (leadingTilde) 1 else 0
 
     val moduleRefs = JSModuleReferenceContributor.getReferences(
-      text.substring(initialOffset), psiElement, offset + initialOffset, null, true)
+      text.substring(initialOffset), psiElement, offset + initialOffset, null)
 
     val pathSegments = pathSegments(text.substring(initialOffset), offset + initialOffset)
 
@@ -60,7 +61,7 @@ class VueLoaderPathReferenceProvider : PathReferenceProviderBase() {
     val target = list[list.size - 1].resolve() ?: return null
 
     return object : PathReference(path, ResolveFunction.NULL_RESOLVE_FUNCTION) {
-      override fun resolve(): PsiElement? {
+      override fun resolve(): PsiElement {
         return target
       }
     }
@@ -91,7 +92,7 @@ class VueLoaderPathReferenceProvider : PathReferenceProviderBase() {
     return psiElement.containingFile
              .let {
                it.language == VueLanguage.INSTANCE
-               && it.originalFile.virtualFile.let { vf -> vf == null || vf.fileType == VueFileType.INSTANCE }
+               && it.originalFile.virtualFile.let { vf -> vf == null || FileTypeRegistry.getInstance().isFileOfType(vf, VueFileType.INSTANCE) }
              }
            && isVueContext(psiElement)
   }

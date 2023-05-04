@@ -1,20 +1,15 @@
 <application>
   <component name="WindowManager">
-    <frame x="136" y="25" width="1400" height="935" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-    </layout>
+    <frame x="-1455" y="66" width="1400" height="1000" />
   </component>
   <component name="WindowStateApplicationService">
-    <state x="797" y="436" width="800" height="600" key="WELCOME_SCREEN" timestamp="1654436975149">
-      <screen x="59" y="25" width="1477" height="935" />
+    <state x="896" y="498" width="800" height="650" key="WELCOME_SCREEN" timestamp="1683188629636">
+      <screen x="0" y="25" width="1792" height="1095" />
     </state>
-    <state x="927" y="490" width="800" height="600" key="WELCOME_SCREEN/-128.-1055.1920.1055/62.25.1730.1095" timestamp="1652581049309" />
-    <state x="797" y="436" width="800" height="600" key="WELCOME_SCREEN/59.25.1477.935" timestamp="1654436975149" />
+    <state x="896" y="498" width="800" height="650" key="WELCOME_SCREEN/-1849.25.1849.1055/0.25.1792.1095" timestamp="1683188629636" />
+    <state x="-922" y="236" width="800" height="620" key="new project wizard" timestamp="1683188322482">
+      <screen x="-1849" y="25" width="1849" height="1055" />
+    </state>
+    <state x="-922" y="236" width="800" height="620" key="new project wizard/-1849.25.1849.1055/0.25.1792.1095" timestamp="1683188322482" />
   </component>
 </application>

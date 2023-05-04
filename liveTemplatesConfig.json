@@ -1,60 +1,60 @@
 {
-  "templateSetName": "Vue",
+  "templateSetName": "Mpx",
   "contextMapping": {
-    "vue-script-vuex": "VUE_COMPONENT_DESCRIPTOR",
-    "vue-script-router": "VUE_SCRIPT",
-    "vue-script": "VUE_SCRIPT",
-    "vue-template": "VUE_TEMPLATE",
-    "vue": "VUE_TOP_LEVEL"
+    "vue-script-vuex": "MPX_COMPONENT_DESCRIPTOR",
+    "vue-script-router": "MPX_SCRIPT",
+    "vue-script": "MPX_SCRIPT",
+    "vue-template": "MPX_TEMPLATE",
+    "vue": "MPX_TOP_LEVEL"
   },
   "templates": {
     "vanim": {
-      "description": "Vue transition component with JavaScript hooks"
+      "description": "Mpx transition component with JavaScript hooks"
     },
     "vanimhook-js": {
-      "descriptionPrefix": "Vue",
+      "descriptionPrefix": "Mpx",
       "context": [
-        "VUE_COMPONENT_DESCRIPTOR"
+        "MPX_COMPONENT_DESCRIPTOR"
       ]
     },
     "vc-direct": {
       "context": [
         "JS_STATEMENT",
-        "VUE_SCRIPT"
+        "MPX_SCRIPT"
       ]
     },
     "vcomponents": {
       "context": [
-        "VUE_COMPONENT_DESCRIPTOR"
+        "MPX_COMPONENT_DESCRIPTOR"
       ]
     },
     "vcomputed": {
       "context": [
-        "VUE_COMPONENT_DESCRIPTOR"
+        "MPX_COMPONENT_DESCRIPTOR"
       ]
     },
     "vdata": {
       "context": [
-        "VUE_COMPONENT_DESCRIPTOR"
+        "MPX_COMPONENT_DESCRIPTOR"
       ]
     },
     "vel-props": {
-      "descriptionPrefix": "Vue"
+      "descriptionPrefix": "Mpx"
     },
     "vfilter": {
       "context": [
-        "VUE_COMPONENT_DESCRIPTOR"
+        "MPX_COMPONENT_DESCRIPTOR"
       ]
     },
     "vfor": {
-      "description": "Vue v-for statement"
+      "description": "Mpx v-for statement"
     },
     "vimport-gsap": {
       "description": "Import GSAP library"
     },
     "vmethod": {
       "context": [
-        "VUE_COMPONENT_DESCRIPTOR"
+        "MPX_COMPONENT_DESCRIPTOR"
       ]
     },
     "vmixin": {
@@ -64,19 +64,19 @@
     },
     "vmixin-use": {
       "context": [
-        "VUE_COMPONENT_DESCRIPTOR"
+        "MPX_COMPONENT_DESCRIPTOR"
       ]
     },
     "vmodel": {
-      "descriptionPrefix": "Vue"
+      "descriptionPrefix": "Mpx"
     },
     "vmodel-num": {
-      "descriptionPrefix": "Vue"
+      "descriptionPrefix": "Mpx"
     },
     "von": {
-      "descriptionPrefix": "Vue",
+      "descriptionPrefix": "Mpx",
       "context": [
-        "VUE_INSIDE_TAG"
+        "MPX_INSIDE_TAG"
       ]
     },
     "vprops": {
@@ -91,25 +91,854 @@
         }
       },
       "context": [
-        "VUE_COMPONENT_DESCRIPTOR"
+        "MPX_COMPONENT_DESCRIPTOR"
       ]
     },
     "vsrc": {
-      "descriptionPrefix": "Vue"
+      "descriptionPrefix": "Mpx"
     },
     "vstore": {
       "context": [
-        "VUE_SCRIPT"
+        "MPX_SCRIPT"
       ]
     },
     "vstore-import": {
       "context": [
-        "VUE_SCRIPT"
+        "MPX_SCRIPT"
       ]
     },
     "vwatcher": {
       "context": [
-        "VUE_COMPONENT_DESCRIPTOR"
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vrouter": {
+      "description": "Base for Vue Router",
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vroute-named": {
+      "description": "Mpx Router route with per route code-splitting",
+      "variables": {
+        "pathName": {
+          "name": "pathName",
+          "defaultValue": "pathName"
+        },
+        "routeName": {
+          "name": "routeName",
+          "defaultValue": "routeName"
+        },
+        "pathToComponent": {
+          "name": "pathToComponent",
+          "defaultValue": "pathToComponent"
+        }
+      },
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vaftereach": {
+      "description": "Mpx Router global guards afterEach",
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vbeforeeach": {
+      "description": "Mpx Router global guards beforeEach",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vbeforeenter": {
+      "description": "Mpx Router per-route guard beforeEnter",
+      "variables": {},
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vbeforeresolve": {
+      "description": "Mpx Router global guards beforeResolve",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vbeforerouteenter": {
+      "description": "Mpx Router component guards beforeRouteEnter",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vbeforerouteleave": {
+      "description": "Mpx Router component guards beforeRouteLeave",
+      "variables": {},
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vbeforerouteupdate": {
+      "description": "Mpx Router component guards beforeRouteUpdate",
+      "variables": {},
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vscrollbehavior": {
+      "description": "Mpx Router scrollBehavior",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vaction": {
+      "description": "Mpx Store action",
+      "variables": {
+        "updateValue": {
+          "name": "updateValue",
+          "defaultValue": "updateValue"
+        },
+        "payload": {
+          "name": "payload",
+          "defaultValue": "payload"
+        }
+      },
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vgetter": {
+      "description": "Mpx Store getter",
+      "variables": {},
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vmodule": {
+      "description": "Mpx Store module",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vmutation": {
+      "description": "Mpx Store mutation",
+      "variables": {
+        "updateValue": {
+          "name": "updateValue",
+          "defaultValue": "updateValue"
+        },
+        "payload": {
+          "name": "payload",
+          "defaultValue": "payload"
+        },
+        "value": {
+          "name": "value",
+          "defaultValue": "value"
+        }
+      },
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vstore2": {
+      "description": "Vuex store 2",
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vplugin": {
+      "description": "Import a plugin to main.js or plugins file",
+      "variables": {
+        "VueCompositionApiPackage": {
+          "name": "VueCompositionApiPackage",
+          "defaultValue": "@vue/composition-api"
+        },
+        "VueCompositionApi": {
+          "name": "VueCompositionApi",
+          "defaultValue": "VueCompositionApi"
+        }
+      },
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vtest": {
+      "description": "Unit test component",
+      "variables": {
+        "name": {
+          "name": "name",
+          "defaultValue": "should render correct contents"
+        },
+        "equal": {
+          "name": "equal",
+          "defaultValue": "'Welcome to Your Vue.js App'"
+        },
+        "mount": {
+          "name": "mount",
+          "defaultValue": ""
+        },
+        "el": {
+          "name": "el",
+          "defaultValue": ""
+        },
+        "componentName": {
+          "name": "componentName",
+          "defaultValue": "HelloWorld"
+        }
+      },
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3useinoptions": {
+      "description": "Use Composition API within Options API",
+      "variables": {
+        "component": {
+          "name": "component",
+          "defaultValue": "component"
+        },
+        "name": {
+          "name": "name",
+          "defaultValue": "name"
+        }
+      },
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vcommit": {
+      "description": "Commit to mpx store in methods for mutation",
+      "variables": {
+        "store": {
+          "name": "store",
+          "defaultValue": ""
+        },
+        "mutationName": {
+          "name": "mutationName",
+          "defaultValue": "mutationName"
+        },
+        "payload": {
+          "name": "payload",
+          "defaultValue": "payload"
+        }
+      },
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "v3computed": {
+      "description": "Mpx Composition api - computed",
+      "variables": {
+        "return": {
+          "name": "return",
+          "defaultValue": ""
+        },
+        "name": {
+          "name": "name",
+          "defaultValue": "name"
+        }
+      },
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3reactive": {
+      "description": "Mpx Composition api - reactive",
+      "variables": {
+        "name": {
+          "name": "name",
+          "defaultValue": "name"
+        },
+        "count": {
+          "name": "count",
+          "defaultValue": "count"
+        }
+      },
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3ref": {
+      "description": "Mpx Ref",
+      "variables": {
+        "name": {
+          "name": "name",
+          "defaultValue": "name"
+        },
+        "initialValue": {
+          "name": "initialValue",
+          "defaultValue": "initialValue"
+        }
+      },
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3watch-array": {
+      "description": "Mpx Composition api - watch as array",
+      "variables": {
+        "1": {
+          "name": "1",
+          "defaultValue": ""
+        },
+        "2": {
+          "name": "2",
+          "defaultValue": ""
+        },
+        "3": {
+          "name": "3",
+          "defaultValue": ""
+        },
+        "foo": {
+          "name": "foo",
+          "defaultValue": "foo"
+        },
+        "bar": {
+          "name": "bar",
+          "defaultValue": "bar"
+        }
+      },
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3watch": {
+      "description": "Mpx Composition api - watcher single source",
+      "variables": {
+        "body": {
+          "name": "body",
+          "defaultValue": ""
+        },
+        "foo": {
+          "name": "foo",
+          "defaultValue": "foo"
+        }
+      },
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3watcheffect": {
+      "description": "Mpx Composition api - watchEffect",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3reactive-setup": {
+      "description": "Mpx Composition API Script with Reactive",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vdispatch": {
+      "description": "Dispatch to mpx store in methods for action",
+      "variables": {
+        "store": {
+          "name": "store",
+          "defaultValue": ""
+        },
+        "actionName": {
+          "name": "actionName",
+          "defaultValue": "actionName"
+        },
+        "payload": {
+          "name": "payload",
+          "defaultValue": "payload"
+        }
+      },
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vimport-dynamic": {
+      "description": "Import component that should be lazy loaded",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vimport-export": {
+      "description": "Import a component and include it in export default",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vimport": {
+      "description": "Import one component into another",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vimport-lib": {
+      "description": "Import a library",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3onbeforemount": {
+      "description": "Mpx onBeforeMount Lifecycle hook",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3onbeforeunmount": {
+      "description": "(beforeDestroy) Vue onBeforeUnmount Lifecycle hook",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3onbeforeupdate": {
+      "description": "Mpx onBeforeUpdate Lifecycle hook",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3onerrorcaptured": {
+      "description": "Mpx onErrorCaptured Lifecycle hook",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3onmounted": {
+      "description": "Mpx Mounted Lifecycle hook",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3onunmounted": {
+      "description": "(destroyed) Vue onUnmounted Lifecycle hook",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "v3onupdated": {
+      "description": "Mpx onUpdated Lifecycle hook",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vbeforecreate": {
+      "description": "BeforeCreate lifecycle method",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vbeforedestroy": {
+      "description": "BeforeDestroy lifecycle method",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vbeforemount": {
+      "description": "BeforeMount lifecycle method",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vbeforeupdate": {
+      "description": "BeforeUpdate lifecycle method",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vcreated": {
+      "description": "Created lifecycle method",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vdestroyed": {
+      "description": "Destroyed lifecycle method",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vmounted": {
+      "description": "Mounted lifecycle method",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vupdated": {
+      "description": "Updated lifecycle method",
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vmapactions": {
+      "description": "Mapactions inside a vue component",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vmapgetters": {
+      "description": "Mapgetters inside a vue component",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vmapmutations": {
+      "description": "Mapmutations inside a vue component",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vmapstate": {
+      "description": "Map getters inside a vue component",
+      "variables": {},
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vwatcher-options": {
+      "description": "Mpx watcher with options",
+      "variables": {
+        "data": {
+          "name": "data",
+          "defaultValue": "data"
+        },
+        "true": {
+          "name": "true",
+          "defaultValue": "true"
+        },
+        "newValue": {
+          "name": "newValue",
+          "defaultValue": "newValue"
+        },
+        "oldValue": {
+          "name": "oldValue",
+          "defaultValue": "oldValue"
+        }
+      },
+      "context": [
+        "MPX_COMPONENT_DESCRIPTOR"
+      ]
+    },
+    "vconfig": {
+      "description": "Vue.config.js",
+      "variables": {
+        "data": {
+          "name": "data",
+          "defaultValue": "@import '@/styles/_variables.scss';"
+        },
+        "sass": {
+          "name": "sass",
+          "defaultValue": "sass"
+        }
+      },
+      "context": [
+        "MPX_SCRIPT"
+      ]
+    },
+    "vclass": {
+      "description": "Mpx class binding",
+      "variables": {
+        "div": {
+          "name": "div",
+          "defaultValue": "div"
+        },
+        "className": {
+          "name": "className",
+          "defaultValue": "className"
+        },
+        "data": {
+          "name": "data",
+          "defaultValue": "data"
+        }
+      },
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vclass-obj": {
+      "description": "Mpx class binding",
+      "variables": {
+        "div": {
+          "name": "div",
+          "defaultValue": "div"
+        },
+        "classNameA": {
+          "name": "classNameA",
+          "defaultValue": "classNameA"
+        },
+        "classNameB": {
+          "name": "classNameB",
+          "defaultValue": "classNameB"
+        }
+      },
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vemit-child": {
+      "description": "Mpx Emit from Child Component",
+      "variables": {
+        "emit": {
+          "name": "emit",
+          "defaultValue": ""
+        },
+        "event": {
+          "name": "event",
+          "defaultValue": ""
+        }
+      },
+      "context": [
+        "MPX_INSIDE_TAG"
+      ]
+    },
+    "vemit-parent": {
+      "description": "Mpx Emit to Parent Component",
+      "variables": {
+        "event": {
+          "name": "event",
+          "defaultValue": ""
+        },
+        "foo": {
+          "name": "foo",
+          "defaultValue": "foo"
+        }
+      },
+      "context": [
+        "MPX_INSIDE_TAG"
+      ]
+    },
+    "vclass-obj-mult": {
+      "description": "Mpx multiple conditional class bindings",
+      "variables": {
+        "div": {
+          "name": "div",
+          "defaultValue": "div"
+        },
+        "classNameA": {
+          "name": "classNameA",
+          "defaultValue": "classNameA"
+        },
+        "classNameB": {
+          "name": "classNameB",
+          "defaultValue": "classNameB"
+        },
+        "condition": {
+          "name": "condition",
+          "defaultValue": "condition"
+        }
+      },
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vroutename": {
+      "description": "Named routing link",
+      "variables": {
+        "name": {
+          "name": "name",
+          "defaultValue": "name"
+        },
+        "LinkTitle": {
+          "name": "LinkTitle",
+          "defaultValue": "LinkTitle"
+        }
+      },
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vroutenameparam": {
+      "description": "Named routing link w/ params",
+      "variables": {
+        "name": {
+          "name": "name",
+          "defaultValue": "name"
+        },
+        "id": {
+          "name": "id",
+          "defaultValue": "id"
+        },
+        "value": {
+          "name": "value",
+          "defaultValue": "value"
+        },
+        "LinkTitle": {
+          "name": "LinkTitle",
+          "defaultValue": "LinkTitle"
+        }
+      },
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vslot-named": {
+      "description": "Named slot",
+      "variables": {
+        "name": {
+          "name": "name",
+          "defaultValue": "name"
+        },
+        "defaultcontent": {
+          "name": "defaultcontent",
+          "defaultValue": "defaultcontent"
+        }
+      },
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vnuxtl": {
+      "description": "Nuxt routing link",
+      "variables": {},
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vroutepath": {
+      "description": "Path routing link",
+      "variables": {
+        "path": {
+          "name": "path",
+          "defaultValue": "path"
+        },
+        "LinkTitle": {
+          "name": "LinkTitle",
+          "defaultValue": "LinkTitle"
+        }
+      },
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vstyle": {
+      "description": "Mpx inline style binding",
+      "variables": {
+        "div": {
+          "name": "div",
+          "defaultValue": "div"
+        },
+        "data": {
+          "name": "data",
+          "defaultValue": "data"
+        }
+      },
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vstyle-obj": {
+      "description": "Vue inline style binding, objects",
+      "variables": {
+        "div": {
+          "name": "div",
+          "defaultValue": "div"
+        },
+        "styleObjectA": {
+          "name": "styleObjectA",
+          "defaultValue": "styleObjectA"
+        },
+        "styleObjectB": {
+          "name": "styleObjectB",
+          "defaultValue": "styleObjectB"
+        }
+      },
+      "context": [
+        "MPX_TEMPLATE"
+      ]
+    },
+    "vbase": {
+      "description": "Base for Mpx File with SCSS",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-3": {
+      "description": "Base for Mpx File Composition API with SCSS",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-3-reactive": {
+      "description": "Base for Mpx File Composition API with SCSS",
+      "variables": {},
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-3-ts": {
+      "description": "Base for Mpx File Composition API - Typescript",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-3-setup": {
+      "description": "Base for Mpx File Setup Composition API with SCSS",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-3-ts-setup": {
+      "description": "Base for Mpx File Setup Composition API - Typescript",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-ts-class": {
+      "description": "Base for Mpx File with Class based Typescript format",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-css": {
+      "description": "Base for Mpx File with CSS",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-less": {
+      "description": "Base for Mpx File with PostCSS",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-ns": {
+      "description": "Base for Mpx File with no styles",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-sass": {
+      "description": "Base for Mpx File with PostCSS",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-styl": {
+      "description": "Base for Mpx File with Stylus",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-ts": {
+      "description": "Base for Mpx File with Typescript",
+      "context": [
+        "MPX_TOP_LEVEL"
+      ]
+    },
+    "vbase-pcss": {
+      "description": "Base for Mpx File with PostCSS",
+      "context": [
+        "MPX_TOP_LEVEL"
       ]
     }
   }

@@ -1,8 +1,9 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.libraries.webpack
+package org.jetbrains.vuejs.libraries.webpack
 
-import com.intellij.lang.javascript.buildTools.webpack.WebpackIntegrationTestBase
-import com.hxz.mpxjs.lang.vueRelativeTestDataPath
+import com.intellij.javascript.debugger.NodeJsAppRule
+import com.intellij.webpack.WebpackIntegrationTestBase
+import org.jetbrains.vuejs.lang.vueRelativeTestDataPath
 
 class VueWebpackTest : WebpackIntegrationTestBase() {
   override fun getBasePath(): String = vueRelativeTestDataPath() + "/libraries/webpack"
@@ -13,5 +14,13 @@ class VueWebpackTest : WebpackIntegrationTestBase() {
 
   fun testVueCli() {
     doWebpackTest("module/src", "js")
+  }
+
+  fun testVueCliWorkspace() {
+    doWebpackTest("module", "js")
+  }
+
+  override fun configureInterpreterVersion(): NodeJsAppRule {
+    return NodeJsAppRule.LATEST_16
   }
 }

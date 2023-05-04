@@ -1,5 +1,5 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang.expr
+package org.jetbrains.vuejs.lang.expr
 
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.util.text.StringUtil
@@ -8,7 +8,7 @@ import com.intellij.psi.impl.DebugUtil
 import com.intellij.testFramework.FileBasedTestCaseHelperEx
 import com.intellij.testFramework.LightPlatformCodeInsightTestCase
 import com.intellij.testFramework.UsefulTestCase
-import com.hxz.mpxjs.lang.getVueTestDataPath
+import org.jetbrains.vuejs.lang.getVueTestDataPath
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.File

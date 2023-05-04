@@ -1,5 +1,5 @@
-// Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+// Copyright 2000-2022 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license.
+package org.jetbrains.vuejs.lang
 
 import com.intellij.codeInsight.CodeInsightSettings
 import com.intellij.lang.html.HTMLLanguage
@@ -7,21 +7,21 @@ import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.lang.javascript.JSTestUtils
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Disposer
-import com.intellij.openapi.util.ModificationTracker
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.psi.PsiDirectory
 import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.DebugUtil
-import com.intellij.psi.util.CachedValueProvider
 import com.intellij.testFramework.ParsingTestCase
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.util.ui.UIUtil
+import com.intellij.webSymbols.context.WebSymbolsContext
+import com.intellij.webSymbols.context.WebSymbolsContext.Companion.KIND_FRAMEWORK
+import com.intellij.webSymbols.context.WebSymbolsContextProvider
+import com.intellij.webSymbols.context.impl.WebSymbolsContextProviderExtensionPoint
 import com.intellij.webcore.libraries.ScriptingLibraryModel
 import junit.framework.TestCase
-import com.hxz.mpxjs.context.VueContextProvider
-import com.hxz.mpxjs.context.isVueContext
-import com.hxz.mpxjs.lang.expr.VueJSLanguage
-import com.hxz.mpxjs.lang.html.VueLanguage
+import org.jetbrains.vuejs.context.isVueContext
+import org.jetbrains.vuejs.lang.expr.VueJSLanguage
+import org.jetbrains.vuejs.lang.html.VueLanguage
 
 class VueInjectionTest : BasePlatformTestCase() {
   private var oldAutoComplete = false
@@ -35,8 +35,15 @@ class VueInjectionTest : BasePlatformTestCase() {
   }
 
   override fun tearDown() {
-    CodeInsightSettings.getInstance().AUTOCOMPLETE_ON_CODE_COMPLETION = oldAutoComplete
-    super.tearDown()
+    try {
+      CodeInsightSettings.getInstance().AUTOCOMPLETE_ON_CODE_COMPLETION = oldAutoComplete
+    }
+    catch (e: Throwable) {
+      addSuppressedException(e)
+    }
+    finally {
+      super.tearDown()
+    }
   }
 
   override fun getTestDataPath(): String = getVueTestDataPath() + "/injection/"
@@ -281,17 +288,16 @@ Vue.options.delimiters = ['<%', '%>']
 
     val disposable = Disposer.newDisposable()
     var forbid = true
-    VueContextProvider.VUE_CONTEXT_PROVIDER_EP
+    WebSymbolsContext.WEB_SYMBOLS_CONTEXT_EP
       .point
-      .registerExtension(object : VueContextProvider {
-        override fun isVueContext(directory: PsiDirectory): CachedValueProvider.Result<Boolean> {
-          return CachedValueProvider.Result.create(false, ModificationTracker.NEVER_CHANGED)
-        }
-
-        override fun isVueContextForbidden(contextFile: VirtualFile, project: Project): Boolean {
-          return forbid
-        }
-      }, disposable)
+      ?.registerExtension(
+        WebSymbolsContextProviderExtensionPoint(
+          KIND_FRAMEWORK,
+          "vue",
+          object : WebSymbolsContextProvider {
+            override fun isForbidden(contextFile: VirtualFile,
+                                     project: Project): Boolean = forbid
+          }), disposable)
     try {
       // Force reload of roots
       isVueContext(myFixture.file)
@@ -309,6 +315,13 @@ Vue.options.delimiters = ['<%', '%>']
     finally {
       Disposer.dispose(disposable)
     }
+  }
+
+  fun testTypingInI18NTag() {
+    myFixture.configureByFile(getTestName(false) + ".vue")
+    myFixture.type(':')
+    myFixture.type('"')
+    checkParseTree()
   }
 
   private fun checkParseTree(suffix: String = "") {

@@ -1,15 +1,18 @@
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.codeInsight.documentation.DocumentationManager
+import com.intellij.webSymbols.checkDocumentationAtCaret
+import com.intellij.webSymbols.checkLookupElementDocumentationAtCaret
+import com.intellij.webSymbols.checkNoDocumentationAtCaret
+import com.intellij.webSymbols.moveToOffsetBySignature
 import com.intellij.lang.documentation.ExternalDocumentationProvider
-import com.intellij.lang.javascript.JSAbstractDocumentationTest
+import com.intellij.lang.javascript.TypeScriptTestUtil
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
 
-class VueDocumentationTest : JSAbstractDocumentationTest() {
+class VueDocumentationTest : BasePlatformTestCase() {
 
   override fun getBasePath(): String = "/"
-  override fun getExtension(): String = "vue"
 
   override fun getTestDataPath(): String = getVueTestDataPath() + "/documentation"
 
@@ -43,16 +46,111 @@ class VueDocumentationTest : JSAbstractDocumentationTest() {
   }
 
   fun testInnerLevelTemplateStdAttrNoDoc() {
-    val testName = getTestName(false)
-    doTest(testName, extension, testName, false, Check.Null)
+    myFixture.configureByFile("${getTestName(false)}.vue")
+    myFixture.checkNoDocumentationAtCaret()
   }
 
   fun testInnerLevelTemplateCustomAttr() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
+    defaultTest()
+  }
+
+  fun testDynamicAttributes() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
+    defaultTest()
+  }
+
+  fun testScriptSetupDestructing() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
     defaultTest()
   }
 
   fun testCustomComponentProperty() {
     defaultTest()
+  }
+
+  fun testUnknownParentTag() {
+    defaultTest()
+  }
+
+  fun testRequiredPropertyTS() {
+    TypeScriptTestUtil.setStrictNullChecks(project, testRootDisposable)
+    defaultTest()
+  }
+
+  fun testNotRequiredPropertyTS() {
+    TypeScriptTestUtil.setStrictNullChecks(project, testRootDisposable)
+    defaultTest()
+  }
+
+  fun testNotRequiredPropertyJS() {
+    defaultTest()
+  }
+
+  fun testMergedWebTypesComponents() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2, VueTestModule.NAIVE_UI_2_33_2_PATCHED)
+    myFixture.configureByFile("${getTestName(false)}.vue")
+    myFixture.checkLookupElementDocumentationAtCaret(renderPriority = true) {
+      it.lookupString in setOf("n-affix", "n-bar", "n-a", "n-button", "n-alert")
+    }
+  }
+
+  fun testMergedWebTypesPropsGlobal() {
+    TypeScriptTestUtil.setStrictNullChecks(project, testRootDisposable)
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2, VueTestModule.NAIVE_UI_2_33_2_PATCHED)
+    myFixture.configureByFile("${getTestName(false)}.vue")
+    myFixture.checkLookupElementDocumentationAtCaret(renderPriority = true, renderTypeText = true) {
+      it.lookupString in setOf("bottom", "offset-top", "position", "trigger-bottom")
+    }
+  }
+
+  fun testMergedWebTypesPropsLocal() {
+    TypeScriptTestUtil.setStrictNullChecks(project, testRootDisposable)
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2, VueTestModule.NAIVE_UI_2_33_2_PATCHED)
+    myFixture.configureByFile("${getTestName(false)}.vue")
+    myFixture.checkLookupElementDocumentationAtCaret(renderPriority = true, renderTypeText = true) {
+      it.lookupString in setOf("bottom", "offset-top", "position", "trigger-bottom")
+    }
+  }
+
+  fun testMergedWebTypesSlots() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2, VueTestModule.NAIVE_UI_2_33_2_PATCHED)
+    myFixture.configureByFile("${getTestName(false)}.vue")
+    myFixture.checkLookupElementDocumentationAtCaret(renderPriority = true)
+  }
+
+  fun testMergedWebTypesPropsSource() {
+    myFixture.copyDirectoryToProject(getTestName(true), ".")
+    myFixture.configureFromTempProjectFile("src/MergedWebTypesPropsSource.vue")
+    myFixture.checkLookupElementDocumentationAtCaret(renderPriority = true, renderTypeText = true) {
+      it.lookupString in setOf("test-prop-two", "test-prop")
+    }
+    myFixture.configureFromTempProjectFile("src/MergedWebTypesPropsScriptSource.vue")
+    myFixture.checkLookupElementDocumentationAtCaret(renderPriority = true, renderTypeText = true) {
+      it.lookupString in setOf("test-prop-two", "test-prop")
+    }
+  }
+
+  fun testPrimeVueMergedProps() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2, VueTestModule.PRIMEVUE_3_8_2)
+    myFixture.configureByFile("${getTestName(false)}.vue")
+    myFixture.checkLookupElementDocumentationAtCaret(renderPriority = true, renderTypeText = true,
+                                                     fileName = "PrimeVueMergedPropsElement") {
+      it.lookupString in setOf("Avatar", "BlockUI")
+    }
+    myFixture.moveToOffsetBySignature("Avatar <caret>>")
+    myFixture.checkLookupElementDocumentationAtCaret(renderPriority = true, renderTypeText = true) {
+      it.lookupString in setOf("icon", "size")
+    }
+  }
+
+  fun testPropertyTypeDoc() {
+    defaultTest()
+  }
+
+  private fun defaultTest() {
+    myFixture.configureByFile("${getTestName(false)}.vue")
+    myFixture.checkDocumentationAtCaret()
   }
 
 }

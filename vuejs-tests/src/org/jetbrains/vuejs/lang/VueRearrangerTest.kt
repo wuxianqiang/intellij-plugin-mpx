@@ -1,13 +1,13 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.application.options.CodeStyle
 import com.intellij.lang.css.CSSLanguage
 import com.intellij.lang.css.rearranger.CssRearranger
 import com.intellij.psi.codeStyle.arrangement.AbstractRearrangerTest
 import com.intellij.psi.codeStyle.arrangement.std.StdArrangementSettings
-import com.hxz.mpxjs.lang.html.VueFileType
-import com.hxz.mpxjs.lang.html.VueLanguage
+import org.jetbrains.vuejs.lang.html.VueFileType
+import org.jetbrains.vuejs.lang.html.VueLanguage
 
 class VueRearrangerTest : AbstractRearrangerTest() {
   override fun setUp() {
@@ -160,6 +160,10 @@ class VueRearrangerTest : AbstractRearrangerTest() {
           <div
             v-text=""
             v-html=""
+            v-bindi=""
+            v-bind=""
+            v-on=""
+            v-oni=""
             v-on:click=""
             @dblclick=""
             foo=""
@@ -226,13 +230,17 @@ class VueRearrangerTest : AbstractRearrangerTest() {
             v-bind:ref=""
             v-slot=""
             v-model=""
+            v-bindi=""
             v-foo=""
             v-htmli=""
+            v-oni=""
             :foo=""
             foo=""
+            v-bind=""
             v-bind:foo=""
             vbar=""
             @dblclick=""
+            v-on=""
             v-on:click=""
             v-html=""
             v-text=""

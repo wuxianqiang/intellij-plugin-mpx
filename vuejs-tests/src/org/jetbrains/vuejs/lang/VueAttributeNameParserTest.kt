@@ -1,12 +1,12 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.testFramework.UsefulTestCase
-import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser
-import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser.*
-import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser.VueAttributeKind.*
-import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser.VueAttributeKind.SLOT
-import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser.VueDirectiveKind.*
+import org.jetbrains.vuejs.codeInsight.attributes.VueAttributeNameParser
+import org.jetbrains.vuejs.codeInsight.attributes.VueAttributeNameParser.*
+import org.jetbrains.vuejs.codeInsight.attributes.VueAttributeNameParser.VueAttributeKind.*
+import org.jetbrains.vuejs.codeInsight.attributes.VueAttributeNameParser.VueAttributeKind.SLOT
+import org.jetbrains.vuejs.codeInsight.attributes.VueAttributeNameParser.VueDirectiveKind.*
 
 class VueAttributeNameParserTest : UsefulTestCase() {
 

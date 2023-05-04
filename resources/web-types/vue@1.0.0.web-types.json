@@ -1,22 +1,22 @@
 {
-  "$schema": "../../../../plugins/JavaScriptLanguage/web-platform/web-types-gen/resources/web-types.json",
-  "framework": "vue",
-  "name": "vue",
+  "$schema": "../../../../community/platform/webSymbols/web-types-gen/resources/web-types.json",
+  "framework": "mpx",
+  "name": "mpx",
   "version": "1.0.0",
   "js-types-syntax": "typescript",
   "description-markup": "markdown",
-  "default-icon": "icons/vue.svg",
+  "default-icon": "icons/mpx.svg",
   "framework-config": {
     "enable-when": {
       "node-packages": [
-        "vue",
-        "@vue/cli"
+        "mpx",
+        "@mpx/cli"
       ],
       "file-extensions": [
-        "vue"
+        "mpx"
       ],
       "ide-libraries": [
-        "vue"
+        "mpx"
       ]
     }
   },
@@ -44,8 +44,7 @@
                 ]
               },
               "value": {
-                "type": "of-match",
-                "kind": "plain"
+                "type": "of-match"
               },
               "vue-custom-prop": {
                 "name": "Custom Vue component property",
@@ -53,7 +52,8 @@
                 "doc-hide-pattern": true,
                 "attribute-value": {
                   "required": false
-                }
+                },
+                "hide-from-completion": true
               }
             }
           ]
@@ -66,8 +66,7 @@
               "name": "scope",
               "deprecated": true,
               "value": {
-                "kind": "expression",
-                "parser": "vue:slot-scope"
+                "kind": "expression"
               }
             }
           ]
@@ -84,6 +83,17 @@
                 "type": "string"
               }
             }
+          ],
+          "vue-special-properties": [
+            {
+              "name": "Scoped slot binding",
+              "pattern": "(?!v-).*",
+              "doc-hide-pattern": true,
+              "priority": "low",
+              "attribute-value": {
+                "required": true
+              }
+            }
           ]
         },
         {
@@ -96,9 +106,41 @@
               "required": true
             }
           ]
+        },
+        {
+          "name": "textarea",
+          "extension": true,
+          "vue-special-properties": [
+            {
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "name": "select",
+          "extension": true,
+          "vue-special-properties": [
+            {
+              "name": "value"
+            }
+          ]
         }
       ],
       "attributes": [
+        {
+          "name": "data-*",
+          "description": "The `data-*` global attributes form a class of attributes called custom data attributes, that allow proprietary information to be exchanged between the HTML and its DOM representation by scripts.",
+          "doc-url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*",
+          "pattern": {
+            "template": [
+              "data-",
+              {
+                "regex": ".*"
+              }
+            ]
+          },
+          "hide-from-completion": true
+        },
         {
           "name": "Vue directive",
           "description": "Directives are special attributes with the `v-` prefix. Directive attribute values are expected to be a single JavaScript expression (with the exception of `v-for` and `v-on`). A directive's job is to reactively apply side effects to the DOM when the value of its expression changes.",
@@ -106,10 +148,12 @@
           "virtual": true,
           "value": {
             "kind": "expression",
-            "parser": "vue:expression",
             "type": "any",
             "required": false
           },
+          "exclusive-contributions": [
+            "/html/modifiers"
+          ],
           "pattern": {
             "items": "/html/vue-directives",
             "template": [
@@ -126,7 +170,7 @@
                 "proximity": 5
               },
               {
-                "items": "modifiers",
+                "items": "/html/modifiers",
                 "template": [
                   ".",
                   "#item:modifier"
@@ -144,10 +188,12 @@
           "virtual": true,
           "value": {
             "kind": "expression",
-            "parser": "vue:expression",
             "type": "any",
             "required": false
           },
+          "exclusive-contributions": [
+            "/html/modifiers"
+          ],
           "pattern": {
             "proximity": 10,
             "delegate": "/html/vue-directives/on",
@@ -162,7 +208,7 @@
                 "required": true
               },
               {
-                "items": "modifiers",
+                "items": "/html/modifiers",
                 "template": [
                   ".",
                   "#item:modifier"
@@ -180,10 +226,12 @@
           "virtual": true,
           "value": {
             "kind": "expression",
-            "parser": "vue:expression",
             "type": "any",
             "required": false
           },
+          "exclusive-contributions": [
+            "/html/modifiers"
+          ],
           "pattern": {
             "proximity": 10,
             "delegate": "/html/vue-directives/bind",
@@ -198,43 +246,7 @@
                 ]
               },
               {
-                "items": "modifiers",
-                "template": [
-                  ".",
-                  "#item:modifier"
-                ],
-                "required": false,
-                "repeat": true
-              }
-            ]
-          }
-        },
-        {
-          "name": "v-slot alias",
-          "description": "Denote named slots or slots that expect to receive props.",
-          "doc-url": "https://v3.vuejs.org/api/directives.html#v-slot",
-          "virtual": true,
-          "value": {
-            "kind": "expression",
-            "parser": "vue:expression",
-            "type": "any",
-            "required": false
-          },
-          "pattern": {
-            "proximity": 10,
-            "delegate": "/html/vue-directives/slot",
-            "template": [
-              "#",
-              "$...",
-              {
-                "delegate": "argument",
-                "required": true,
-                "template": [
-                  "#item:slot name"
-                ]
-              },
-              {
-                "items": "modifiers",
+                "items": "/html/modifiers",
                 "template": [
                   ".",
                   "#item:modifier"
@@ -250,8 +262,7 @@
           "deprecated": true,
           "virtual": true,
           "value": {
-            "kind": "expression",
-            "parser": "vue:slot-scope"
+            "kind": "expression"
           }
         },
         {
@@ -310,12 +321,6 @@
             },
             {
               "name": "src"
-            },
-            {
-              "name": "setup",
-              "value": {
-                "kind": "no-value"
-              }
             }
           ]
         },
@@ -404,7 +409,6 @@
           "description": "Render the element or template block multiple times based on the source data. The directive’s value must use the special syntax `alias (in|of)` expression to provide an alias for the current element being iterated on.",
           "doc-url": "https://v1.vuejs.org/api/#v-for",
           "attribute-value": {
-            "parser": "vue:for",
             "type": "void",
             "required": true
           }
@@ -414,7 +418,6 @@
           "description": "Attaches an event listener to the element. The event type is denoted by the argument. The expression can either be a method name or an inline statement, or simply omitted when there are modifiers present.\n\nWhen used on a normal element, it listens to **native DOM events** only. When used on a custom element component, it also listens to **custom events** emitted on that child component.\n\nWhen listening to native DOM events, the method receives the native event as the only argument. If using inline statement, the statement has access to the special `$event` property: `v-on:click=\"handle('ok', $event)\"`.\n\n**1.0.11+** When listening the custom events, inline statements have access to the special `$arguments` property, which is an array of the additional arguments passed to the child components’ `$emit` call.",
           "doc-url": "https://v1.vuejs.org/api/#v-on",
           "attribute-value": {
-            "parser": "vue:on",
             "type": "void",
             "required": true
           },
@@ -423,18 +426,16 @@
             "description": "Event name",
             "required": true,
             "pattern": {
-              "or": [
+              "items": "/js/events"
+            },
+            "js": {
+              "events": [
                 {
-                  "items": "/html/events",
-                  "priority": "normal"
-                },
-                {
-                  "template": [
-                    {
-                      "regex": "(?!\\.).*"
-                    }
-                  ],
-                  "priority": "lowest"
+                  "name": "Custom event",
+                  "pattern": "(?!\\.).*",
+                  "priority": "lowest",
+                  "doc-hide-pattern": true,
+                  "hide-from-completion": true
                 }
               ]
             }
@@ -478,110 +479,118 @@
               "description": "Trigger handler at most once."
             }
           ],
-          "events": [
-            {
-              "name": "Mouse button event modifiers",
-              "extension": true,
-              "pattern": {
-                "or": [
-                  "click",
-                  "dblclick",
-                  "mousedown",
-                  "mouseup"
-                ]
-              },
-              "modifiers": [
-                {
-                  "name": "left",
-                  "description": "Only trigger handler for left button mouse events."
+          "js": {
+            "events": [
+              {
+                "name": "Mouse button event modifiers",
+                "extension": true,
+                "pattern": {
+                  "or": [
+                    "click",
+                    "dblclick",
+                    "mousedown",
+                    "mouseup"
+                  ]
                 },
-                {
-                  "name": "right",
-                  "description": "Only trigger handler for right button mouse events."
-                },
-                {
-                  "name": "middle",
-                  "description": "Only trigger handler for middle button mouse events."
+                "html": {
+                  "modifiers": [
+                    {
+                      "name": "left",
+                      "description": "Only trigger handler for left button mouse events."
+                    },
+                    {
+                      "name": "right",
+                      "description": "Only trigger handler for right button mouse events."
+                    },
+                    {
+                      "name": "middle",
+                      "description": "Only trigger handler for middle button mouse events."
+                    }
+                  ]
                 }
-              ]
-            },
-            {
-              "name": "Key event modifiers",
-              "extension": true,
-              "pattern": {
-                "or": [
-                  "keydown",
-                  "keypress",
-                  "keyup"
-                ]
               },
-              "modifiers": [
-                {
-                  "name": "Key alias",
-                  "pattern": {
-                    "or": [
-                      "enter",
-                      "tab",
-                      "delete",
-                      "esc",
-                      "space",
-                      "up",
-                      "down",
-                      "left",
-                      "right"
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "name": "System event modifiers",
-              "extension": true,
-              "pattern": {
-                "or": [
-                  "keydown",
-                  "keypress",
-                  "keyup",
-                  "click",
-                  "contextmenu",
-                  "dblclick",
-                  "mousedown",
-                  "mouseenter",
-                  "mouseleave",
-                  "mousemove",
-                  "mouseout",
-                  "mouseover",
-                  "mouseup",
-                  "show",
-                  "drag",
-                  "dragend",
-                  "dragenter",
-                  "dragleave",
-                  "dragover",
-                  "dragstart",
-                  "drop"
-                ]
-              },
-              "modifiers": [
-                {
-                  "name": "System modifier key",
-                  "description": "Triggers mouse or keyboard event listeners only when the modifier key is pressed.",
-                  "pattern": {
-                    "or": [
-                      "ctrl",
-                      "alt",
-                      "shift",
-                      "meta"
-                    ]
-                  }
+              {
+                "name": "Key event modifiers",
+                "extension": true,
+                "pattern": {
+                  "or": [
+                    "keydown",
+                    "keypress",
+                    "keyup"
+                  ]
                 },
-                {
-                  "name": "exact",
-                  "description": "Allows control of the exact combination of system modifiers needed to trigger an event."
+                "html": {
+                  "modifiers": [
+                    {
+                      "name": "Key alias",
+                      "pattern": {
+                        "or": [
+                          "enter",
+                          "tab",
+                          "delete",
+                          "esc",
+                          "space",
+                          "up",
+                          "down",
+                          "left",
+                          "right"
+                        ]
+                      }
+                    }
+                  ]
                 }
-              ]
-            }
-          ]
+              },
+              {
+                "name": "System event modifiers",
+                "extension": true,
+                "pattern": {
+                  "or": [
+                    "keydown",
+                    "keypress",
+                    "keyup",
+                    "click",
+                    "contextmenu",
+                    "dblclick",
+                    "mousedown",
+                    "mouseenter",
+                    "mouseleave",
+                    "mousemove",
+                    "mouseout",
+                    "mouseover",
+                    "mouseup",
+                    "show",
+                    "drag",
+                    "dragend",
+                    "dragenter",
+                    "dragleave",
+                    "dragover",
+                    "dragstart",
+                    "drop"
+                  ]
+                },
+                "html": {
+                  "modifiers": [
+                    {
+                      "name": "System modifier key",
+                      "description": "Triggers mouse or keyboard event listeners only when the modifier key is pressed.",
+                      "pattern": {
+                        "or": [
+                          "ctrl",
+                          "alt",
+                          "shift",
+                          "meta"
+                        ]
+                      }
+                    },
+                    {
+                      "name": "exact",
+                      "description": "Allows control of the exact combination of system modifiers needed to trigger an event."
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         },
         {
           "name": "bind",
@@ -599,7 +608,8 @@
                   "path": "/html/attributes",
                   "includeVirtual": false,
                   "filter": "vue-bind"
-                }
+                },
+                "/html/vue-special-properties"
               ]
             }
           },
@@ -632,7 +642,7 @@
               "items": {
                 "path": "attributes",
                 "filter": "match-with-target-list",
-                "target-list": "/html/events",
+                "target-list": "/js/events",
                 "prefix": "update:"
               }
             }
@@ -693,6 +703,16 @@
           "attribute-value": {
             "kind": "no-value"
           }
+        }
+      ]
+    },
+    "css": {
+      "pseudo-elements": [
+        {
+          "name": "v-deep",
+          "doc-url": "https://vue-loader.vuejs.org/guide/scoped-css.html",
+          "arguments": false,
+          "description": "Make a rule that targets child components."
         }
       ]
     }

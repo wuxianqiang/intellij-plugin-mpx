@@ -1,7 +1,7 @@
 {
-  "$schema": "../../../../plugins/JavaScriptLanguage/web-platform/web-types-gen/resources/web-types.json",
-  "framework": "vue",
-  "name": "vue-i18n",
+  "$schema": "../../../../community/platform/webSymbols/web-types-gen/resources/web-types.json",
+  "framework": "mpx",
+  "name": "mpx-i18n",
   "version": "0.0.0",
   "js-types-syntax": "typescript",
   "description-markup": "markdown",
@@ -14,7 +14,26 @@
           "doc-url": "https://kazupon.github.io/vue-i18n/guide/sfc.html#basic-usage",
           "attributes": [
             {
-              "name": "lang"
+              "name": "lang",
+              "doc-url": "https://kazupon.github.io/vue-i18n/guide/sfc.html#basic-usage",
+              "description": "Allows to specify explicit name of language used with the block.",
+              "value": {
+                "type": "enum"
+              },
+              "values": [
+                {
+                  "name": "json"
+                },
+                {
+                  "name": "yaml"
+                }
+              ]
+            },
+            {
+              "name": "locale"
+            },
+            {
+              "name": "src"
             }
           ]
         }

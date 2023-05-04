@@ -1,17 +1,17 @@
-<idea-plugin url="https://github.com/JetBrains/intellij-plugins/tree/master/vuejs" package="org.jetbrains.vuejs">
-  <version>1.0-SNAPSHOT</version>
-  <idea-version since-build="212" until-build="222.*" />
+<idea-plugin url="https://github.com/wuxianqiang/intellij-plugin-mpx" package="com.hxz.mpxjs">
+  <version>2.1</version>
+  <idea-version since-build="231.8109.197" until-build="231.*" />
   <!--suppress PluginXmlCapitalization -->
-  <name>Vue.js</name>
-  <id>org.jetbrains.plugins.vue</id>
-  <description><![CDATA[Support for <a href="https://vuejs.org">Vue.js</a> projects.
+  <name>Mpx</name>
+  <id>com.hxz.mpxjs</id>
+  <description><![CDATA[Support for <a href="https://mpxjs.cn">Mpx</a> projects.
 
     <h3>Getting started</h3>
 
     <ul>
-      <li>Open your Vue.js project.</li>
-      <li>Make sure you have Vue.js listed in your project dependencies in package.json and it is installed.</li>
-      <li>Now, you will get Vue-specific code completion, navigation, and many other features in .vue files.</li>
+      <li>Open your Mpx project.</li>
+      <li>Make sure you have <code>@mpxjs/core</code> listed in your project dependencies in package.json and it is installed.</li>
+      <li>Now, you will get Mpx-specific code completion, navigation, and many other features in .mpx files.</li>
     </ul>
 
     <h3>Features</h3>
@@ -19,179 +19,253 @@
     <ul>
       <li>Completion for components, directives, props and methods in templates</li>
       <li>Navigation from the component, directives and event handlers to their definition</li>
-      <li>Coding assistance for different languages inside template, script and style tags in .vue files</li>
+      <li>Coding assistance for different languages inside template, script and style tags in .mpx files</li>
       <li>Extract component and rename component refactorings</li>
-      <li>Collection of code snippets for Vue.js</li>
-      <li>Create new projects from the IDE Welcome screen using Vue CLI</li>
+      <li>Collection of code snippets for Mpx</li>
+      <li>Create new projects from the IDE Welcome screen using Mpx CLI</li>
     </ul>
 
 
-    Learn more about Vue.js support in the <a href="https://www.jetbrains.com/help/webstorm/vue-js.html">IDE
-      documentation</a>.]]></description>
-  <vendor>JetBrains</vendor>
+    Learn more about Mpx support in the <a href="https://mpxjs.cn">IDE documentation</a>.]]></description>
+  <vendor>wuxianqiang</vendor>
   <category>JavaScript Frameworks and Tools</category>
-  <!--  <content>-->
-  <!--    <module name="intellij.vuejs/prettier"/>-->
-  <!--    <module name="intellij.vuejs/copyright"/>-->
-  <!--  </content>-->
   <dependencies>
+    <plugin id="com.intellij.modules.xml" />
     <plugin id="JavaScript" />
     <plugin id="com.intellij.css" />
+    <plugin id="intellij.webpack" />
+    <plugin id="intellij.prettierJS" />
   </dependencies>
   <!--  <depends optional="true" config-file="js-debugger.xml">JavaScriptDebugger</depends>-->
   <extensionPoints>
     <!--suppress PluginXmlValidity -->
-    <extensionPoint qualifiedName="com.intellij.vuejs.templateScopesProvider" interface="org.jetbrains.vuejs.codeInsight.template.VueTemplateScopesProvider" dynamic="true" />
-    <!--suppress DeprecatedClassUsageInspection -->
-    <extensionPoint qualifiedName="com.intellij.vuejs.contextProvider" interface="org.jetbrains.vuejs.context.VueContextProvider" dynamic="true" />
-    <extensionPoint qualifiedName="com.intellij.vuejs.containerInfoProvider" interface="org.jetbrains.vuejs.model.source.VueContainerInfoProvider" dynamic="true" />
+    <extensionPoint qualifiedName="com.intellij.mpxjs.templateScopesProvider" interface="com.hxz.mpxjs.codeInsight.template.VueTemplateScopesProvider" dynamic="true" />
+    <extensionPoint qualifiedName="com.intellij.mpxjs.containerInfoProvider" interface="com.hxz.mpxjs.model.source.VueContainerInfoProvider" dynamic="true" />
   </extensionPoints>
   <extensions defaultExtensionNs="com.intellij">
-    <css.embeddedCssProvider implementation="org.jetbrains.vuejs.css.VueEmbeddedCssProvider" />
-    <css.inclusionContext implementation="org.jetbrains.vuejs.css.VueCssInclusionContext" />
-    <css.elementDescriptorProvider implementation="org.jetbrains.vuejs.css.VueCssElementDescriptorProvider" />
-    <psi.referenceContributor implementation="org.jetbrains.vuejs.css.refs.VueCssReferencesContributor" />
-    <html.attributeValueProvider implementation="org.jetbrains.vuejs.codeInsight.attributes.VueCustomAttributeValueProvider" />
-    <fileType name="Vue.js" extensions="vue" language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.VueFileType" fieldName="INSTANCE" />
-    <lang.parserDefinition language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.parser.VueParserDefinition" />
-    <lang.parserDefinition language="VueJS" implementationClass="org.jetbrains.vuejs.lang.expr.parser.VueJSParserDefinition" />
-    <typedHandler implementation="org.jetbrains.vuejs.editor.VueJSBracesInterpolationTypedHandler" />
-    <lang.braceMatcher language="VueJS" implementationClass="com.intellij.lang.javascript.highlighting.JSBraceMatcher" />
-    <annotator language="VueJS" implementationClass="com.intellij.lang.javascript.validation.JSAnnotator" />
-    <psi.referenceContributor language="JavaScript" implementation="org.jetbrains.vuejs.codeInsight.refs.VueJSReferenceContributor" />
-    <psi.referenceContributor language="Vue" implementation="org.jetbrains.vuejs.codeInsight.refs.VueReferenceContributor" />
-    <psi.referenceContributor language="JavaScript" implementation="org.jetbrains.vuejs.libraries.vuex.codeInsight.refs.VuexReferenceContributor" />
-    <pom.declarationSearcher implementation="org.jetbrains.vuejs.codeInsight.refs.VuePomDeclarationSearcher" />
-    <psi.fileReferenceHelper implementation="org.jetbrains.vuejs.libraries.nuxt.codeInsight.NuxtFileReferenceHelper" />
-    <pathReferenceProvider implementation="org.jetbrains.vuejs.libraries.vueLoader.VueLoaderPathReferenceProvider" />
-    <useScopeEnlarger implementation="org.jetbrains.vuejs.findUsages.VueUseScopeEnlarger" />
+    <lang.findUsagesProvider language="JSON" implementationClass="com.hxz.mpxjs.pinkfloyded.ComponentRegistrationFindUsageProvider" order="first" />
+    <xml.elementDescriptorProvider implementation="com.hxz.mpxjs.pinkfloyded.WXMLElementDescriptorProvider" />
+    <lang.inspectionSuppressor language="CSS" implementationClass="com.hxz.mpxjs.pinkfloyded.WxssCssInspectionFilter" />
+    <psi.referenceContributor implementation="com.hxz.mpxjs.pinkfloyded.JsonReferenceContributor" />
+    <prettierjs.codeStyleInstaller implementation="com.hxz.mpxjs.libraries.prettier.VuePrettierCodeStyleInstaller" />
+    <!--    <dependencySupport kind="javascript" coordinate="npm:mpx" displayName="Mpx.js"/>-->
+    <!--    <dependencySupport kind="javascript" coordinate="npm:nuxt" displayName="Nuxt"/>-->
+    <css.embeddedCssProvider implementation="com.hxz.mpxjs.css.VueEmbeddedCssProvider" />
+    <css.inclusionContext implementation="com.hxz.mpxjs.css.VueCssInclusionContext" />
+    <html.attributeValueProvider implementation="com.hxz.mpxjs.codeInsight.attributes.VueCustomAttributeValueProvider" />
+    <fileType name="Mpx.js" extensions="mpx" language="Mpx" implementationClass="com.hxz.mpxjs.lang.html.VueFileType" fieldName="INSTANCE" />
+    <fileType name="MPXWXS" fieldName="INSTANCE" extensions="wxs" language="JavaScript 1.8" implementationClass="com.hxz.mpxjs.pinkfloyded.WXSFileType" />
+    <lang.parserDefinition language="Mpx" implementationClass="com.hxz.mpxjs.lang.html.parser.VueParserDefinition" />
+    <lang.parserDefinition language="MpxJS" implementationClass="com.hxz.mpxjs.lang.expr.parser.VueJSParserDefinition" />
+    <typedHandler implementation="com.hxz.mpxjs.editor.VueJSBracesInterpolationTypedHandler" />
+    <lang.braceMatcher language="MpxJS" implementationClass="com.intellij.lang.javascript.highlighting.JSBraceMatcher" />
+    <annotator language="MpxJS" implementationClass="com.intellij.lang.javascript.validation.JSAnnotator" />
+    <psi.referenceContributor language="JavaScript" implementation="com.hxz.mpxjs.codeInsight.refs.VueJSReferenceContributor" />
+    <psi.referenceContributor language="Mpx" implementation="com.hxz.mpxjs.codeInsight.refs.VueReferenceContributor" />
+    <psi.referenceContributor language="JavaScript" implementation="com.hxz.mpxjs.libraries.vuex.codeInsight.refs.VuexReferenceContributor" />
+    <psi.referenceContributor language="MpxJS" implementation="com.hxz.mpxjs.css.refs.VueCssReferencesContributor" />
+    <psi.referenceContributor language="CSS" implementation="com.hxz.mpxjs.css.refs.VueCssReferencesContributor" />
+    <pom.declarationSearcher implementation="com.hxz.mpxjs.codeInsight.refs.VuePomDeclarationSearcher" />
+    <psi.fileReferenceHelper implementation="com.hxz.mpxjs.libraries.nuxt.codeInsight.NuxtFileReferenceHelper" />
+    <pathReferenceProvider implementation="com.hxz.mpxjs.libraries.vueLoader.VueLoaderPathReferenceProvider" />
+    <useScopeEnlarger implementation="com.hxz.mpxjs.findUsages.VueUseScopeEnlarger" />
     <!--suppress PluginXmlValidity -->
-    <quoteHandler className="com.intellij.codeInsight.editorActions.HtmlQuoteHandler" fileType="Vue.js" />
-    <lang.syntaxHighlighterFactory language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.highlighting.VueSyntaxHighlighterFactory" />
-    <xml.xmlExtension implementation="org.jetbrains.vuejs.codeInsight.VueXmlExtension" order="before web-symbols-react" />
-    <html.embeddedContentSupport implementation="org.jetbrains.vuejs.lang.html.lexer.VueEmbeddedContentSupport" />
-    <html.embeddedContentSupport implementation="org.jetbrains.vuejs.libraries.i18n.VueI18nEmbeddedContentSupport" />
-    <gotoDeclarationHandler implementation="org.jetbrains.vuejs.editor.VueGotoDeclarationHandler" />
-    <notificationGroup displayType="BALLOON" id="Vue" icon="org.jetbrains.vuejs.VuejsIcons.Vue" isLogByDefault="true" bundle="messages.VueBundle" key="vue.documentation.vue" />
-    <stubIndex implementation="org.jetbrains.vuejs.index.VueComponentsIndex" />
-    <stubIndex implementation="org.jetbrains.vuejs.index.VueOptionsIndex" />
-    <stubIndex implementation="org.jetbrains.vuejs.index.VueMixinBindingIndex" />
-    <stubIndex implementation="org.jetbrains.vuejs.index.VueExtendsBindingIndex" />
-    <stubIndex implementation="org.jetbrains.vuejs.index.VueGlobalDirectivesIndex" />
-    <stubIndex implementation="org.jetbrains.vuejs.index.VueUrlIndex" />
-    <stubIndex implementation="org.jetbrains.vuejs.index.VueIdIndex" />
-    <stubIndex implementation="org.jetbrains.vuejs.index.VueGlobalFiltersIndex" />
-    <stubIndex implementation="org.jetbrains.vuejs.libraries.vuex.index.VuexStoreIndex" />
-    <fileBasedIndex implementation="org.jetbrains.vuejs.index.VueEmptyComponentInitializersIndex" />
-    <stubElementTypeHolder class="org.jetbrains.vuejs.lang.expr.parser.VueJSStubElementTypes" />
-    <stubElementTypeHolder class="org.jetbrains.vuejs.lang.html.parser.VueStubElementTypes" />
-    <langCodeStyleSettingsProvider implementation="org.jetbrains.vuejs.options.VueCodeStyleSettingsProvider" />
-    <fileIndentOptionsProvider implementation="org.jetbrains.vuejs.lang.html.psi.formatter.VueFileIndentOptionsProvider" id="vue" order="before html" />
-    <postStartupActivity implementation="org.jetbrains.vuejs.lang.html.psi.arrangement.VueArrangementSettingsMigration" />
-    <directoryIndexExcludePolicy implementation="org.jetbrains.vuejs.libraries.nuxt.index.NuxtIndexExcludePolicy" />
-    <directoryProjectGenerator implementation="org.jetbrains.vuejs.cli.VueCliProjectGenerator" />
+    <quoteHandler className="com.intellij.codeInsight.editorActions.HtmlQuoteHandler" fileType="Mpx.js" />
+    <lang.syntaxHighlighterFactory language="Mpx" implementationClass="com.hxz.mpxjs.lang.html.highlighting.VueSyntaxHighlighterFactory" />
+    <highlightErrorFilter implementation="com.hxz.mpxjs.lang.expr.highlighting.MpxJSErrorFilter" />
+    <xml.xmlExtension implementation="com.hxz.mpxjs.codeInsight.VueXmlExtension" order="before web-symbols-react" />
+    <xml.xmlSuppressionProvider implementation="com.hxz.mpxjs.inspections.VueXmlSuppressionProvider" order="first" />
+    <html.embeddedContentSupport implementation="com.hxz.mpxjs.lang.html.lexer.VueEmbeddedContentSupport" />
+    <!--    <html.embeddedContentSupport implementation="com.hxz.mpxjs.libraries.i18n.VueI18nEmbeddedContentSupport"/>-->
+    <notificationGroup displayType="BALLOON" id="Mpx" isLogByDefault="true" bundle="messages.VueBundle" key="vue.documentation.vue" />
+    <stubIndex implementation="com.hxz.mpxjs.index.VueComponentsIndex" />
+    <stubIndex implementation="com.hxz.mpxjs.index.VueCompositionAppIndex" />
+    <stubIndex implementation="com.hxz.mpxjs.index.VueOptionsIndex" />
+    <stubIndex implementation="com.hxz.mpxjs.index.VueMixinBindingIndex" />
+    <stubIndex implementation="com.hxz.mpxjs.index.VueExtendsBindingIndex" />
+    <stubIndex implementation="com.hxz.mpxjs.index.VueGlobalDirectivesIndex" />
+    <stubIndex implementation="com.hxz.mpxjs.index.VueUrlIndex" />
+    <stubIndex implementation="com.hxz.mpxjs.index.VueIdIndex" />
+    <stubIndex implementation="com.hxz.mpxjs.index.VueGlobalFiltersIndex" />
+    <stubIndex implementation="com.hxz.mpxjs.libraries.vuex.index.VuexStoreIndex" />
+    <fileBasedIndex implementation="com.hxz.mpxjs.index.VueEmptyComponentInitializersIndex" />
+    <stubElementTypeHolder class="com.hxz.mpxjs.lang.expr.parser.VueJSStubElementTypes" externalIdPrefix="MPX-JS:" />
+    <stubElementTypeHolder class="com.hxz.mpxjs.lang.html.parser.VueStubElementTypes" externalIdPrefix="MPX:" />
+    <langCodeStyleSettingsProvider implementation="com.hxz.mpxjs.options.VueCodeStyleSettingsProvider" />
+    <fileIndentOptionsProvider implementation="com.hxz.mpxjs.lang.html.psi.formatter.VueFileIndentOptionsProvider" id="mpx" order="before html" />
+    <postStartupActivity implementation="com.hxz.mpxjs.lang.html.psi.arrangement.VueArrangementSettingsMigration" />
+    <directoryIndexExcludePolicy implementation="com.hxz.mpxjs.libraries.nuxt.index.NuxtIndexExcludePolicy" />
+    <additionalLibraryRootsProvider implementation="com.hxz.mpxjs.libraries.nuxt.library.NuxtDotFolderSyntheticLibraryProvider" />
     <!-- works in WebStorm and other SmallIDEs -->
-    <projectTemplatesFactory implementation="org.jetbrains.vuejs.cli.VueProjectTemplateFactory" />
-    <!-- works in IntelliJ IDEA -->
-    <localInspection language="Vue" groupKey="vue.inspection.group.name" shortName="VueDataFunction" enabledByDefault="true" level="WARNING" implementationClass="org.jetbrains.vuejs.inspections.DataFunctionInspection" key="vue.inspection.display.name.data.function" bundle="messages.VueBundle" />
-    <localInspection language="Vue" groupKey="vue.inspection.group.name" shortName="VueDuplicateTag" enabledByDefault="true" level="WARNING" implementationClass="org.jetbrains.vuejs.inspections.DuplicateTagInspection" key="vue.inspection.display.name.duplicate.tag" bundle="messages.VueBundle" />
+    <directoryProjectGenerator implementation="com.hxz.mpxjs.cli.VueCliProjectGenerator" />
+    <!-- works in IDEA -->
+    <projectTemplatesFactory implementation="com.hxz.mpxjs.cli.VueProjectTemplateFactory" />
+    <!-- works in new IDEA wizard -->
+    <moduleBuilder builderClass="com.hxz.mpxjs.cli.VueCLIProjectModuleBuilder" />
+    <!--    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="MpxDataFunction"-->
+    <!--                     enabledByDefault="true" level="WARNING"-->
+    <!--                     implementationClass="com.hxz.mpxjs.inspections.DataFunctionInspection"-->
+    <!--                     key="vue.inspection.display.name.data.function"-->
+    <!--                     bundle="messages.VueBundle"/>-->
+    <!--    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="MpxDuplicateTag"-->
+    <!--                     enabledByDefault="true" level="WARNING"-->
+    <!--                     implementationClass="com.hxz.mpxjs.inspections.DuplicateTagInspection"-->
+    <!--                     key="vue.inspection.display.name.duplicate.tag" bundle="messages.VueBundle"/>-->
+    <!--    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="MpxMissingComponentImportInspection"-->
+    <!--                     enabledByDefault="true" level="WARNING"-->
+    <!--                     implementationClass="com.hxz.mpxjs.inspections.VueMissingComponentImportInspection"-->
+    <!--                     key="vue.inspection.display.name.missing.component.import" bundle="messages.VueBundle"/>-->
+    <!--    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="MpxUnrecognizedSlot"-->
+    <!--                     enabledByDefault="true" level="WEAK WARNING"-->
+    <!--                     implementationClass="com.hxz.mpxjs.inspections.VueUnrecognizedSlotInspection"-->
+    <!--                     key="vue.inspection.display.name.unrecognized.slot" bundle="messages.VueBundle"/>-->
+    <!--    <webSymbols.inspectionToolMapping symbolNamespace="html" symbolKind="vue-available-slots"-->
+    <!--                                      toolShortName="VueUnrecognizedSlot"/>-->
+    <!--    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="MpxUnrecognizedDirective"-->
+    <!--                     enabledByDefault="true" level="WARNING"-->
+    <!--                     implementationClass="com.hxz.mpxjs.inspections.VueUnrecognizedDirectiveInspection"-->
+    <!--                     key="vue.inspection.display.name.unrecognized.directive" bundle="messages.VueBundle"/>-->
+    <!--    <webSymbols.inspectionToolMapping symbolNamespace="html" symbolKind="vue-directives"-->
+    <!--                                      toolShortName="VueUnrecognizedDirective"/>-->
+    <!--    <localInspection language="Mpx" groupKey="vue.inspection.group.name" shortName="MpxDeprecatedSymbol"-->
+    <!--                     enabledByDefault="true" level="WARNING"-->
+    <!--                     implementationClass="com.hxz.mpxjs.inspections.VueDeprecatedSymbolInspection"-->
+    <!--                     key="vue.inspection.display.name.deprecated.symbol" bundle="messages.VueBundle"/>-->
+    <!--    <webSymbols.inspectionToolMapping symbolNamespace="html" symbolKind="mpx-available-slots"-->
+    <!--                                      toolShortName="MpxDeprecatedSymbol"/>-->
+    <!--    <webSymbols.inspectionToolMapping symbolNamespace="html" symbolKind="vue-components"-->
+    <!--                                      toolShortName="VueDeprecatedSymbol"/>-->
+    <!--    <webSymbols.inspectionToolMapping symbolNamespace="html" symbolKind="vue-directives"-->
+    <!--                                      toolShortName="VueDeprecatedSymbol"/>-->
+    <!--    <webSymbols.inspectionToolMapping symbolNamespace="html" symbolKind="vue-special-properties"-->
+    <!--                                      toolShortName="VueDeprecatedSymbol"/>-->
+    <!--    <webSymbols.inspectionToolMapping symbolNamespace="html" symbolKind="vue-file-top-elements"-->
+    <!--                                      toolShortName="VueDeprecatedSymbol"/>-->
+    <!--    <webSymbols.inspectionToolMapping symbolNamespace="html" symbolKind="vue-model-modifiers"-->
+    <!--                                      toolShortName="VueDeprecatedSymbol"/>-->
+    <!--    <webSymbols.documentationCustomizer implementation="com.hxz.mpxjs.web.VueDocumentationCustomizer"/>-->
     <intentionAction>
-      <className>org.jetbrains.vuejs.intentions.extractComponent.VueExtractComponentIntention</className>
-      <category>VueJS</category>
+      <language>Mpx</language>
+      <className>com.hxz.mpxjs.intentions.extractComponent.VueExtractComponentIntention</className>
+      <!--suppress PluginXmlI18n -->
+      <category>MpxJS</category>
     </intentionAction>
     <intentionAction>
-      <className>org.jetbrains.vuejs.intentions.expandVModel.VueExpandVModelIntention</className>
-      <category>VueJS</category>
+      <language>Mpx</language>
+      <className>com.hxz.mpxjs.intentions.VueExpandVModelIntention</className>
+      <!--suppress PluginXmlI18n -->
+      <category>MpxJS</category>
+    </intentionAction>
+    <intentionAction>
+      <language>Mpx</language>
+      <className>com.hxz.mpxjs.intentions.VueImportComponentIntention</className>
+      <!--suppress PluginXmlI18n -->
+      <category>MpxJS</category>
     </intentionAction>
     <!--suppress PluginXmlValidity -->
-    <multiHostInjector implementation="org.jetbrains.vuejs.editor.VueInjector" order="before JSConfigurationInjector, before WebSymbolsHtmlText, after TemporaryPlacesInjector" id="VueInjector" />
-    <internalFileTemplate name="Vue Single File Component" />
-    <createFromTemplateHandler implementation="org.jetbrains.vuejs.VueCreateFromTemplateHandler" />
-    <spellchecker.bundledDictionaryProvider implementation="org.jetbrains.vuejs.spellchecker.VueSpellcheckingDictionaryProvider" />
-    <spellchecker.support language="Vue" implementationClass="org.jetbrains.vuejs.spellchecker.VueSpellcheckingStrategy" />
-    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueBaseLiveTemplateContextType"/>-->
-    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueScriptLiveTemplateContextType"/>-->
-    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueComponentDescriptorLiveTemplateContextType"/>-->
-    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTemplateLiveTemplateContextType"/>-->
-    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueInsideTagLiveTemplateContextType"/>-->
-    <!--    <liveTemplateContext implementation="org.jetbrains.vuejs.liveTemplate.VueTopLevelLiveTemplateContextType"/>-->
-    <!--    <defaultLiveTemplates file="liveTemplates/Vue"/>-->
-    <renamePsiElementProcessor implementation="org.jetbrains.vuejs.refactoring.VueJSComponentRenameProcessor" />
-    <referencesSearch implementation="org.jetbrains.vuejs.findUsages.VueJSReferenceSearcher" />
-    <completion.contributor language="any" implementationClass="org.jetbrains.vuejs.codeInsight.VueCompletionContributor" id="VueCompletionContributor" order="before JSPatternBasedCompletionContributor, before JSCompletionContributor, before xmlNonFirst, before cssClassOrIdReferenceCompletionContributor" />
-    <completion.contributor language="JavaScript" implementationClass="org.jetbrains.vuejs.libraries.vuex.codeInsight.VuexCompletionContributor" id="VuexCompletionContributor" />
-    <typedHandler implementation="org.jetbrains.vuejs.codeInsight.completion.VueAutoPopupHandler" />
-    <include.provider implementation="org.jetbrains.vuejs.index.VueES6ModuleFileIncludeProvider" />
-    <highlightingPassFactory implementation="org.jetbrains.vuejs.lang.typescript.service.VueTypeScriptServiceHighlightingPassFactoryRegistrar" />
-    <lang.formatter language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.psi.formatter.VueFormattingModelBuilder" />
-    <lang.formatter language="VueJS" implementationClass="org.jetbrains.vuejs.lang.expr.psi.formatter.VueJSFormattingModelBuilder" />
-    <lang.rearranger language="Vue" implementationClass="org.jetbrains.vuejs.lang.html.psi.arrangement.VueRearranger" />
-    <multiLangCommenter implementation="org.jetbrains.vuejs.editor.VueCommenterProvider" />
-    <lang.syntaxHighlighterFactory language="VueJS" implementationClass="org.jetbrains.vuejs.lang.expr.highlighting.VueJSHighlighterFactory" />
-    <idIndexer filetype="Vue" implementationClass="org.jetbrains.vuejs.lang.html.index.VueIdIndexer" />
-    <todoIndexer filetype="Vue" implementationClass="org.jetbrains.vuejs.lang.html.index.VueTodoIndexer" />
-    <codeInsight.parameterInfo language="VueJS" implementationClass="com.intellij.javascript.JSParameterInfoHandler" />
-    <codeInsight.parameterNameHints language="Vue" implementationClass="org.jetbrains.vuejs.editor.VueJSInlayParameterHintsProvider" />
-    <eslint.ruleMappersFactory implementation="org.jetbrains.vuejs.libraries.eslint.VueEslintRuleMappersFactory" />
-    <javascript.web.framework id="vue" implementation="org.jetbrains.vuejs.web.VueFramework" />
-    <javascript.web.context framework="vue" implementation="org.jetbrains.vuejs.context.VueFileContext" id="vue.file" />
-    <javascript.web.context framework="vue" implementation="org.jetbrains.vuejs.context.VueLegacyContext" id="vue.legacy" order="last" />
-    <javascript.webTypes source="web-types/vue@1.0.0.web-types.json" />
-    <javascript.webTypes source="web-types/vue@2.0.0.web-types.json" />
-    <javascript.webTypes source="web-types/vue@2.1.0.web-types.json" />
-    <javascript.webTypes source="web-types/vue@2.1.8.web-types.json" />
-    <javascript.webTypes source="web-types/vue@2.2.0.web-types.json" />
-    <javascript.webTypes source="web-types/vue@2.3.0.web-types.json" />
-    <javascript.webTypes source="web-types/vue@2.4.0.web-types.json" />
-    <javascript.webTypes source="web-types/vue@2.5.0.web-types.json" />
-    <javascript.webTypes source="web-types/vue@3.0.0.web-types.json" enableByDefault="true" />
-    <javascript.webTypes source="web-types/vue-i18n@0.0.0.web-types.json" />
-    <javascript.web.additionalContextProvider implementation="org.jetbrains.vuejs.web.VueWebSymbolsAdditionalContextProvider" id="vue" />
-    <javascript.web.additionalContextProvider implementation="org.jetbrains.vuejs.libraries.i18n.VueI18nAdditionalContextProvider" id="vue-i18n" />
-    <javascript.web.symbolsFilter name="vue-bind" implementation="org.jetbrains.vuejs.web.VueBindFilter" />
-    <javascript.web.symbolCodeCompletionItemCustomizer implementation="org.jetbrains.vuejs.web.VueWebSymbolsAdditionalContextProvider$VueSymbolsCodeCompletionItemCustomizer" />
-    <vuejs.templateScopesProvider implementation="org.jetbrains.vuejs.codeInsight.template.VueStandardSymbolsScopesProvider" id="standardSymbols" order="before templateElements" />
-    <vuejs.templateScopesProvider implementation="org.jetbrains.vuejs.codeInsight.template.VueTemplateElementsScopeProvider" id="templateElements" />
-    <vuejs.templateScopesProvider implementation="org.jetbrains.vuejs.codeInsight.template.VueContainerScopeProvider" id="containerScope" order="after templateElements" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.model.source.VueDefaultContainerInfoProvider" id="default" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.model.source.VueComponentTemplateInfoProvider" id="defaultTemplate" order="after default, before decoratedComponent" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.model.source.VueCompositionInfoProvider" id="composition" order="after default, before decoratedComponent" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.libraries.componentDecorator.VueDecoratedComponentInfoProvider" id="decoratedComponent" order="after default" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.libraries.vuex.model.component.VuexBasicComponentInfoProvider" id="vuexBasic" order="after decoratedComponent" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.libraries.vuex.model.component.VuexDecoratedComponentInfoProvider" id="vuexDecoratedComponent" order="after decoratedComponent" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.libraries.templateLoader.TemplateLoaderComponentInfoProvider" id="templateLoader" order="after defaultTemplate" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.libraries.vuelidate.VuelidateContainerInfoProvider" id="vuelidate" order="after decoratedComponent" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.libraries.nuxt.model.NuxtComponentProvider" id="nuxt" />
-    <vuejs.containerInfoProvider implementation="org.jetbrains.vuejs.libraries.cssModules.VueCssModulesInfoProvider" id="css-modules" />
-    <lang.documentationProvider implementationClass="org.jetbrains.vuejs.codeInsight.documentation.VueDocumentationProvider" language="VueJS" />
+    <multiHostInjector implementation="com.hxz.mpxjs.editor.VueInjector" order="before JSConfigurationInjector, before WebSymbolsHtmlText, after TemporaryPlacesInjector" id="MpxInjector" />
+    <internalFileTemplate name="Mpx Single File Component" />
+    <createFromTemplateHandler implementation="com.hxz.mpxjs.VueCreateFromTemplateHandler" />
+    <spellchecker.bundledDictionaryProvider implementation="com.hxz.mpxjs.spellchecker.VueSpellcheckingDictionaryProvider" />
+    <spellchecker.support language="Mpx" implementationClass="com.hxz.mpxjs.spellchecker.VueSpellcheckingStrategy" />
+    <liveTemplateContext contextId="Mpx" implementation="com.hxz.mpxjs.liveTemplate.VueBaseLiveTemplateContextType" />
+    <liveTemplateContext contextId="MPX_SCRIPT" baseContextId="Mpx" implementation="com.hxz.mpxjs.liveTemplate.VueScriptLiveTemplateContextType" />
+    <liveTemplateContext contextId="MPX_COMPONENT_DESCRIPTOR" baseContextId="Mpx" implementation="com.hxz.mpxjs.liveTemplate.VueComponentDescriptorLiveTemplateContextType" />
+    <liveTemplateContext contextId="MPX_TEMPLATE" baseContextId="Mpx" implementation="com.hxz.mpxjs.liveTemplate.VueTemplateLiveTemplateContextType" />
+    <liveTemplateContext contextId="MPX_INSIDE_TAG" baseContextId="Mpx" implementation="com.hxz.mpxjs.liveTemplate.VueInsideTagLiveTemplateContextType" />
+    <liveTemplateContext contextId="MPX_TOP_LEVEL" baseContextId="Mpx" implementation="com.hxz.mpxjs.liveTemplate.VueTopLevelLiveTemplateContextType" />
+    <!--    <defaultLiveTemplates file="liveTemplates/Mpx"/>-->
+    <referencesSearch implementation="com.hxz.mpxjs.findUsages.VueJSReferenceSearcher" />
+    <completion.contributor language="any" implementationClass="com.hxz.mpxjs.codeInsight.VueCompletionContributor" id="MpxCompletionContributor" order="before JSPatternBasedCompletionContributor, before JSCompletionContributor, before xmlNonFirst, before cssClassOrIdReferenceCompletionContributor" />
+    <completion.contributor language="JavaScript" implementationClass="com.hxz.mpxjs.libraries.vuex.codeInsight.VuexCompletionContributor" id="MpxStoreCompletionContributor" />
+    <typedHandler implementation="com.hxz.mpxjs.codeInsight.completion.VueAutoPopupHandler" />
+    <include.provider implementation="com.hxz.mpxjs.index.VueES6ModuleFileIncludeProvider" />
+    <highlightingPassFactory implementation="com.hxz.mpxjs.lang.typescript.service.VueTypeScriptServiceHighlightingPassFactoryRegistrar" />
+    <lang.formatter language="Mpx" implementationClass="com.hxz.mpxjs.lang.html.psi.formatter.VueFormattingModelBuilder" />
+    <lang.formatter language="MpxJS" implementationClass="com.hxz.mpxjs.lang.expr.psi.formatter.VueJSFormattingModelBuilder" />
+    <lang.rearranger language="Mpx" implementationClass="com.hxz.mpxjs.lang.html.psi.arrangement.VueRearranger" />
+    <multiLangCommenter implementation="com.hxz.mpxjs.editor.VueCommenterProvider" />
+    <lang.syntaxHighlighterFactory language="MpxJS" implementationClass="com.hxz.mpxjs.lang.expr.highlighting.VueJSHighlighterFactory" />
+    <idIndexer filetype="Mpx" implementationClass="com.hxz.mpxjs.lang.html.index.VueIdIndexer" />
+    <todoIndexer filetype="Mpx" implementationClass="com.hxz.mpxjs.lang.html.index.VueTodoIndexer" />
+    <codeInsight.parameterInfo language="MpxJS" implementationClass="com.intellij.javascript.JSParameterInfoHandler" />
+    <codeInsight.parameterNameHints language="Mpx" implementationClass="com.hxz.mpxjs.editor.VueJSInlayParameterHintsProvider" />
+    <eslint.ruleMappersFactory implementation="com.hxz.mpxjs.libraries.eslint.VueEslintRuleMappersFactory" />
+    <!--    <psi.symbolReferenceProvider hostElementClass="com.intellij.psi.xml.XmlAttributeValue"-->
+    <!--                                 hostLanguage="HtmlCompatible"-->
+    <!--                                 implementationClass="com.hxz.mpxjs.web.VueDeprecatedSlotAttributeReferenceProvider"-->
+    <!--                                 anyReferenceClass="true"-->
+    <!--                                 targetClass="com.intellij.webSymbols.WebSymbol"/>-->
+    <rename.symbolRenameTargetFactory implementation="com.hxz.mpxjs.web.VueSymbolRenameTargetFactory" />
+    <webSymbols.declarationProvider implementation="com.hxz.mpxjs.web.VueSymbolDeclarationProvider" />
+    <vetoRenameCondition implementation="com.hxz.mpxjs.web.VueRenameHandlerVeto" />
+    <webSymbols.framework id="mpx" implementation="com.hxz.mpxjs.web.VueFramework" />
+    <webSymbols.context kind="framework" name="mpx" implementation="com.hxz.mpxjs.context.VueFileContext" id="mpx.file" />
+    <webSymbols.webTypes source="web-types/vue@3.2.0.web-types.json" enableByDefault="true" />
+    <!--    <webSymbols.webTypes source="web-types/vue-i18n@0.0.0.web-types.json"/>-->
+    <webSymbols.webTypes source="web-types/vue-contexts@0.0.0.web-types.json" enableByDefault="true" />
+    <webSymbols.queryConfigurator implementation="com.hxz.mpxjs.web.VueWebSymbolsQueryConfigurator" id="mpx" />
+    <!--    <webSymbols.queryConfigurator implementation="com.hxz.mpxjs.libraries.i18n.VueI18NQueryConfigurator"-->
+    <!--                                          id="mpx-i18n"/>-->
+    <!--    <webSymbols.queryResultsCustomizerFactory implementation="com.hxz.mpxjs.web.VueWebSymbolsQueryResultsCustomizer$Provider"/>-->
+    <webSymbols.webTypes.filter name="mpx-bind" implementation="com.hxz.mpxjs.web.VueBindFilter" />
+    <webSymbols.codeCompletionItemCustomizer implementation="com.hxz.mpxjs.web.VueSymbolsCodeCompletionItemCustomizer" />
+    <mpxjs.templateScopesProvider implementation="com.hxz.mpxjs.codeInsight.template.VueStandardSymbolsScopesProvider" id="standardSymbols" order="before templateElements" />
+    <mpxjs.templateScopesProvider implementation="com.hxz.mpxjs.codeInsight.template.VueTemplateElementsScopeProvider" id="templateElements" />
+    <mpxjs.templateScopesProvider implementation="com.hxz.mpxjs.codeInsight.template.VueScriptSetupScopeProvider" id="scriptSetupScope" order="after templateElements" />
+    <mpxjs.templateScopesProvider implementation="com.hxz.mpxjs.codeInsight.template.VueContainerScopeProvider" id="containerScope" order="after scriptSetupScope" />
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueDefaultContainerInfoProvider" id="default" />
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueComponentTemplateInfoProvider" id="defaultTemplate" order="after default, before decoratedComponent" />
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueCompositionInfoProvider" id="composition" order="after default, before decoratedComponent" />
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.model.source.VueScriptSetupInfoProvider" id="scriptSetup" order="after default, before decoratedComponent" />
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.componentDecorator.VueDecoratedComponentInfoProvider" id="decoratedComponent" order="after default" />
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.vuex.model.component.VuexBasicComponentInfoProvider" id="vuexBasic" order="after decoratedComponent" />
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.vuex.model.component.VuexDecoratedComponentInfoProvider" id="vuexDecoratedComponent" order="after decoratedComponent" />
+    <!--    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.templateLoader.TemplateLoaderComponentInfoProvider"-->
+    <!--                                 id="templateLoader"-->
+    <!--                                 order="after defaultTemplate"/>-->
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.vuelidate.VuelidateContainerInfoProvider" id="vuelidate" order="after decoratedComponent" />
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.nuxt.model.NuxtComponentProvider" id="nuxt" />
+    <mpxjs.containerInfoProvider implementation="com.hxz.mpxjs.libraries.cssModules.VueCssModulesInfoProvider" id="css-modules" />
+    <lang.documentationProvider implementationClass="com.hxz.mpxjs.codeInsight.documentation.VueDocumentationProvider" language="MpxJS" />
   </extensions>
   <actions>
-    <action class="org.jetbrains.vuejs.CreateVueSingleFileComponentAction" id="CreateVueSingleFileComp">
+    <action class="com.hxz.mpxjs.CreateVueSingleFileComponentAction" id="CreateMpxSingleFileComp">
       <add-to-group group-id="NewGroup" anchor="before" relative-to-action="NewFromTemplate" />
     </action>
-    <action class="org.jetbrains.vuejs.intentions.extractComponent.VueExtractComponentAction" id="VueExtractComponentAction">
+    <action class="com.hxz.mpxjs.intentions.extractComponent.VueExtractComponentAction" id="MpxExtractComponentAction">
       <add-to-group group-id="IntroduceActionsGroup" anchor="last" />
     </action>
   </actions>
   <extensions defaultExtensionNs="JavaScript">
-    <elementScopeProvider implementation="org.jetbrains.vuejs.VueElementResolveScopeProvider" />
-    <indexedFileTypeProvider implementation="org.jetbrains.vuejs.lang.html.VueIndexedFileTypeProvider" />
-    <frameworkIndexingHandler implementation="org.jetbrains.vuejs.index.VueFrameworkHandler" version="13" />
-    <frameworkIndexingHandler implementation="org.jetbrains.vuejs.libraries.vuex.index.VuexFrameworkHandler" version="7" />
-    <frameworkIndexingHandler implementation="org.jetbrains.vuejs.libraries.templateLoader.TemplateLoaderFrameworkHandler" version="1" />
-    <intentionAndInspectionFilter language="VueJS" implementationClass="org.jetbrains.vuejs.inspections.VueInspectionFilter" />
-    <inheritedLanguagesConfigurableProvider language="VueJS" implementationClass="org.jetbrains.vuejs.codeInsight.VueJSLanguageConfigurableProvider" />
-    <dialectSpecificHandlersFactory language="VueJS" implementationClass="org.jetbrains.vuejs.codeInsight.VueJSSpecificHandlersFactory" />
-    <frameworkSpecificHandler language="JavaScript" implementationClass="org.jetbrains.vuejs.libraries.nuxt.codeInsight.NuxtFrameworkSpecificHandler" />
-    <frameworkSpecificHandler language="JavaScript" implementationClass="org.jetbrains.vuejs.codeInsight.VueFrameworkInsideScriptSpecificHandler" />
-    <frameworkSpecificHandler language="JavaScript" implementationClass="org.jetbrains.vuejs.libraries.vuex.codeInsight.VuexFrameworkSpecificHandler" />
-    <analysisHandlersFactory implementationClass="org.jetbrains.vuejs.inspections.VueAnalysisHandlersFactory" language="VueJS" />
-    <tsImportResolver implementation="org.jetbrains.vuejs.lang.typescript.VueTypeScriptImportsResolverProvider" order="first" />
+    <JsonSchema.ProviderFactory implementation="com.hxz.mpxjs.pinkfloyded.WechatMiniProgramJsonSchemaProviderFactory" />
+    <elementScopeProvider implementation="com.hxz.mpxjs.VueElementResolveScopeProvider" />
+    <indexedFileTypeProvider implementation="com.hxz.mpxjs.lang.html.VueIndexedFileTypeProvider" />
+    r
+    <frameworkIndexingHandler implementation="com.hxz.mpxjs.index.VueFrameworkHandler" version="23" />
+    <frameworkIndexingHandler implementation="com.hxz.mpxjs.libraries.vuex.index.VuexFrameworkHandler" version="7" />
+    <!--    <frameworkIndexingHandler implementation="com.hxz.mpxjs.libraries.templateLoader.TemplateLoaderFrameworkHandler" version="1"/>-->
+    <intentionAndInspectionFilter language="MpxJS" implementationClass="com.hxz.mpxjs.inspections.VueInspectionFilter" />
+    <inheritedLanguagesConfigurableProvider language="MpxJS" implementationClass="com.hxz.mpxjs.codeInsight.VueJSLanguageConfigurableProvider" />
+    <dialectSpecificHandlersFactory language="MpxJS" implementationClass="com.hxz.mpxjs.codeInsight.VueJSSpecificHandlersFactory" />
+    <dialectSpecificHandlersFactory language="Mpx" implementationClass="com.hxz.mpxjs.codeInsight.VueJSSpecificHandlersFactory" />
+    <handlersFactory language="MpxJS" implementationClass="com.hxz.mpxjs.codeInsight.VueJSHandlersFactory" />
+    <frameworkSpecificHandler language="JavaScript" implementationClass="com.hxz.mpxjs.libraries.nuxt.codeInsight.NuxtFrameworkSpecificHandler" />
+    <frameworkSpecificHandler language="JavaScript" implementationClass="com.hxz.mpxjs.codeInsight.VueFrameworkSpecificHandler" />
+    <frameworkSpecificHandler language="JavaScript" implementationClass="com.hxz.mpxjs.codeInsight.VueFrameworkInsideScriptSpecificHandler" />
+    <frameworkSpecificHandler language="JavaScript" implementationClass="com.hxz.mpxjs.libraries.vuex.codeInsight.VuexFrameworkSpecificHandler" />
+    <!--    <analysisHandlersFactory implementationClass="com.hxz.mpxjs.inspections.VueAnalysisHandlersFactory" language="MpxJS"/>-->
+    <tsImportResolver implementation="com.hxz.mpxjs.lang.typescript.VueTypeScriptImportsResolverProvider" order="first" />
+    <importModulePathStrategy implementation="com.hxz.mpxjs.lang.VueImportModulePathStrategy" />
     <!--suppress PluginXmlValidity -->
-    <languageServiceProvider order="first" implementation="org.jetbrains.vuejs.lang.typescript.service.VueLanguageServiceProvider" />
+    <languageServiceProvider order="first" implementation="com.hxz.mpxjs.lang.typescript.service.VueLanguageServiceProvider" />
+    <!--    <importCandidatesFactory implementation="com.hxz.mpxjs.codeInsight.VueScriptCandidatesProvider"/>-->
+    <!--    <importCandidatesFactory implementation="com.hxz.mpxjs.codeInsight.VueComponentImportCandidatesProvider"/>-->
+  </extensions>
+  <extensions defaultExtensionNs="intellij.webpack">
     <!--suppress PluginXmlValidity -->
-    <webpackLocator implementation="org.jetbrains.vuejs.cli.VueCliWebpackConfigLocator" />
+    <webpackLocator implementation="com.hxz.mpxjs.cli.VueCliWebpackConfigLocator" />
     <!--suppress PluginXmlValidity -->
-    <webpackLocator implementation="org.jetbrains.vuejs.libraries.nuxt.codeInsight.NuxtWebpackConfigLocator" />
+    <webpackLocator implementation="com.hxz.mpxjs.libraries.nuxt.codeInsight.NuxtWebpackConfigLocator" />
   </extensions>
 </idea-plugin>

@@ -1,9 +1,9 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.libraries.vuex
+package org.jetbrains.vuejs.libraries.vuex
 
 import com.intellij.javascript.web.checkUsages
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import com.hxz.mpxjs.lang.getVueTestDataPath
+import org.jetbrains.vuejs.lang.getVueTestDataPath
 
 class VuexFindUsagesTest : BasePlatformTestCase() {
 
@@ -100,8 +100,8 @@ class VuexFindUsagesTest : BasePlatformTestCase() {
 
   private fun checkUsages(filePath: String, goldFileSuffix: String, vararg signatures: String) {
     val testName = getTestName(true)
+    myFixture.configureFromTempProjectFile(filePath)
     for ((i, signature) in signatures.withIndex()) {
-      myFixture.configureFromTempProjectFile(filePath)
       myFixture.checkUsages(signature, "$testName.$goldFileSuffix${if (signatures.size > 1) ".$i" else ""}")
     }
   }

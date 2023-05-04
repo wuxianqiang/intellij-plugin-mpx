@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.lang.html.HTMLLanguage
 import com.intellij.lang.javascript.JSTestUtils
@@ -37,6 +37,44 @@ class VueCommenterTest : BasePlatformTestCase() {
   }
 
   fun testCommentByBlockComment() = JSTestUtils.testWithTempCodeStyleSettings<Throwable>(project) {
+    val htmlSettings = it.getCommonSettings(HTMLLanguage.INSTANCE)
+    htmlSettings.BLOCK_COMMENT_AT_FIRST_COLUMN = false
+    htmlSettings.LINE_COMMENT_AT_FIRST_COLUMN = false
+    doTest(0, "CommentByBlockComment")
+
+    htmlSettings.BLOCK_COMMENT_AT_FIRST_COLUMN = true
+    htmlSettings.LINE_COMMENT_AT_FIRST_COLUMN = false
+    doTest(0, "CommentByBlockComment")
+
+    htmlSettings.BLOCK_COMMENT_AT_FIRST_COLUMN = false
+    htmlSettings.LINE_COMMENT_AT_FIRST_COLUMN = true
+    doTest(0, "CommentByBlockComment")
+
+    htmlSettings.BLOCK_COMMENT_AT_FIRST_COLUMN = true
+    htmlSettings.LINE_COMMENT_AT_FIRST_COLUMN = true
+    doTest(0, "CommentByBlockComment")
+  }
+
+  fun testCommentByBlockComment2() = JSTestUtils.testWithTempCodeStyleSettings<Throwable>(project) {
+    val htmlSettings = it.getCommonSettings(HTMLLanguage.INSTANCE)
+    htmlSettings.BLOCK_COMMENT_AT_FIRST_COLUMN = false
+    htmlSettings.LINE_COMMENT_AT_FIRST_COLUMN = false
+    doTest(0, "CommentByBlockComment")
+
+    htmlSettings.BLOCK_COMMENT_AT_FIRST_COLUMN = true
+    htmlSettings.LINE_COMMENT_AT_FIRST_COLUMN = false
+    doTest(1, "CommentByBlockComment")
+
+    htmlSettings.BLOCK_COMMENT_AT_FIRST_COLUMN = false
+    htmlSettings.LINE_COMMENT_AT_FIRST_COLUMN = true
+    doTest(0, "CommentByBlockComment")
+
+    htmlSettings.BLOCK_COMMENT_AT_FIRST_COLUMN = true
+    htmlSettings.LINE_COMMENT_AT_FIRST_COLUMN = true
+    doTest(1, "CommentByBlockComment")
+  }
+
+  fun testCommentByBlockComment3() = JSTestUtils.testWithTempCodeStyleSettings<Throwable>(project) {
     val htmlSettings = it.getCommonSettings(HTMLLanguage.INSTANCE)
     htmlSettings.BLOCK_COMMENT_AT_FIRST_COLUMN = false
     htmlSettings.LINE_COMMENT_AT_FIRST_COLUMN = false

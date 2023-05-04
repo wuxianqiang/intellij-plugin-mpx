@@ -1,7 +1,7 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
-import com.intellij.javascript.web.findOffsetBySignature
+import com.intellij.webSymbols.findOffsetBySignature
 import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.lang.javascript.psi.JSReferenceExpression
 import com.intellij.lang.javascript.psi.resolve.JSResolveUtil
@@ -27,7 +27,7 @@ class VueTypeResolveTest : BasePlatformTestCase() {
              Triple("str", "string", "number"),
              Triple("obj", "boolean", "string"),
              Triple("objNum", "string,string", "number"),
-             Triple("objMix", "Foo2,string|boolean", "string|number"),
+             Triple("objMix", "Foo2,string|boolean", "number|string"),
              Triple("objIter", "boolean", "number"),
              Triple("objInit", "number", "\"a\"|\"b\"|\"c\"|\"d\""),
              Triple("state", "ShopState,Foo2", "number"))

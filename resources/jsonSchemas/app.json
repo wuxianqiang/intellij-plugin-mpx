@@ -1,0 +1,440 @@
+{
+  "title": "JSON schema for the Wechat mini program app configuration file",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "pagesDefinition": {
+      "properties": {
+        "pages": {
+          "description": "Specifies a list of Wechat mini program page",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "windowDefinition": {
+      "properties": {
+        "window": {
+          "type": "object",
+          "description": "Global window setting",
+          "properties": {
+            "backgroundTextStyle": {
+              "description": "Specify style for window background text",
+              "type": "string",
+              "default": "dark",
+              "enum": [
+                "dark",
+                "light"
+              ]
+            },
+            "navigationBarBackgroundColor": {
+              "description": "Specify color for navigation bar background",
+              "type": "string",
+              "default": "#000000"
+            },
+            "navigationBarTitleText": {
+              "description": "Specify text for navigation bar title",
+              "type": "string"
+            },
+            "navigationBarTextStyle": {
+              "type": "string",
+              "description": "Specify color for navigation bar text",
+              "default": "white",
+              "enum": [
+                "white",
+                "black"
+              ]
+            },
+            "backgroundColor": {
+              "description": "Specify color for window background",
+              "type": "string",
+              "default": "#ffffff"
+            },
+            "navigationStyle": {
+              "description": "Specify style for navigation bar",
+              "type": "string",
+              "default": "default",
+              "enum": [
+                "custom",
+                "default"
+              ]
+            },
+            "backgroundColorTop": {
+              "description": "Background color of the top window, only iOS support",
+              "type": "string"
+            },
+            "backgroundColorBottom": {
+              "description": "Background color of the bottom window, only iOS support",
+              "type": "string",
+              "default": "#ffffff"
+            },
+            "enablePullDownRefresh": {
+              "description": "Whether to enable global pull-down refresh",
+              "type": "boolean",
+              "default": "false"
+            },
+            "onReachBottomDistance": {
+              "description": "The distance from the bottom of the page when the page pull-up event is triggered, in px.",
+              "type": "boolean",
+              "default": 50
+            },
+            "pageOrientation": {
+              "description": "Specify file to store incremental compilation information.",
+              "type": "number",
+              "default": "portrait",
+              "enum": [
+                "portrait",
+                "auto",
+                "landscape"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "tabBarDefinition": {
+      "properties": {
+        "tabBar": {
+          "type": "object",
+          "description": "Configuration of the bottom tab bar",
+          "properties": {
+            "color": {
+              "description": "The default color of the text on the tab, only supports hexadecimal color",
+              "type": "string"
+            },
+            "selectedColor": {
+              "description": "The color of the text on the tab is selected, only supports hexadecimal color",
+              "type": "string"
+            },
+            "backgroundColor": {
+              "description": "The background color of the tab, only supports hexadecimal color",
+              "type": "string"
+            },
+            "borderStyle": {
+              "description": "The color of the top border of the tabbar, only supports black / white",
+              "type": "string",
+              "default": "black",
+              "enum": [
+                "black",
+                "white"
+              ]
+            },
+            "list": {
+              "description": "A list of tab configuration",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pagePath": {
+                    "description": "Specify page path for tab",
+                    "type": "string"
+                  },
+                  "text": {
+                    "description": "Specify text for tab",
+                    "type": "string"
+                  },
+                  "iconPath": {
+                    "description": "Specify text for tab",
+                    "type": "string"
+                  },
+                  "selectedIconPath": {
+                    "description": "Specify text for tab",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text",
+                  "pagePath"
+                ]
+              }
+            },
+            "position": {
+              "description": "The position for the tab",
+              "type": "string",
+              "default": "bottom",
+              "enum": [
+                "bottom",
+                "top"
+              ]
+            },
+            "custom": {
+              "description": "whether to use a custom tab bar",
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "required": [
+            "color",
+            "selectedColor",
+            "backgroundColor",
+            "list"
+          ]
+        }
+      }
+    },
+    "networkTimeoutDefinition": {
+      "properties": {
+        "networkTimeout": {
+          "type": "object",
+          "description": "Timeout time for various network requests, in milliseconds",
+          "properties": {
+            "request": {
+              "type": "number",
+              "description": "wx.request timeout in milliseconds",
+              "default": 60000
+            },
+            "connectSocket": {
+              "type": "number",
+              "description": "wx.connectSocket timeout in milliseconds",
+              "default": 60000
+            },
+            "uploadFile": {
+              "type": "number",
+              "description": "wx.uploadFile timeout in milliseconds",
+              "default": 60000
+            },
+            "downloadFile": {
+              "description": "wx.downloadFile timeout in milliseconds",
+              "type": "number",
+              "default": 60000
+            }
+          }
+        }
+      }
+    },
+    "debugDefinition": {
+      "properties": {
+        "debug": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "subpackagesDefinition": {
+      "properties": {
+        "subpackages": {
+          "type": "array",
+          "description": "Configuration for sub packages",
+          "items": {
+            "type": "object",
+            "properties": {
+              "root": {
+                "type": "string",
+                "description": "Root dir for sub package"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name for sub package"
+              },
+              "pages": {
+                "type": "array",
+                "description": "Subcontract page path, relative to subcontracting root directory",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "independent": {
+                "type": "boolean",
+                "description": "whether it is independent subcontracting"
+              },
+              "pluginsDefinition": {
+                "type": "object",
+                "items": {
+                  "type": "object",
+                  "items": {
+                    "properties": {
+                      "version": {
+                        "type": "string",
+                        "description": "specify the version of the plugin"
+                      },
+                      "provider": {
+                        "type": "string",
+                        "description": "plugin provider"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "functionalPagesDefinition": {
+      "properties": {
+        "functionalPages": {
+          "type": "boolean",
+          "description": "Whether to enable the plugin function page, it is off by default.",
+          "default": false
+        }
+      }
+    },
+    "workersDefinition": {
+      "properties": {
+        "workers": {
+          "type": "string",
+          "description": "the directory where the worker code is placed"
+        }
+      }
+    },
+    "requiredBackgroundModesDefinition": {
+      "properties": {
+        "requiredBackgroundModes": {
+          "type": "array",
+          "items": {
+            "type": "array"
+          },
+          "description": "Ability to use in the background, such as \"music playback\""
+        }
+      }
+    },
+    "pluginsDefinition": {
+      "properties": {
+        "plugins": {
+          "type": "object",
+          "patternProperties": {
+            ".+": {
+              "type": "object",
+              "items": {
+                "properties": {
+                  "version": {
+                    "type": "string",
+                    "description": "specify the version of the plugin"
+                  },
+                  "provider": {
+                    "type": "string",
+                    "description": "plugin provider"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "allOf": [
+    {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/pagesDefinition"
+        },
+        {
+          "$ref": "#/definitions/windowDefinition"
+        },
+        {
+          "$ref": "#/definitions/tabBarDefinition"
+        },
+        {
+          "$ref": "#/definitions/networkTimeoutDefinition"
+        },
+        {
+          "$ref": "#/definitions/subpackagesDefinition"
+        },
+        {
+          "$ref": "#/definitions/functionalPagesDefinition"
+        },
+        {
+          "$ref": "#/definitions/workersDefinition"
+        },
+        {
+          "$ref": "#/definitions/requiredBackgroundModesDefinition"
+        },
+        {
+          "$ref": "#/definitions/pluginsDefinition"
+        }
+      ]
+    }
+  ],
+  "properties": {
+    "preloadRule": {
+      "type": "object",
+      "patternProperties": {
+        ".+": {
+          "type": "object",
+          "properties": {
+            "network": {
+              "type": "string",
+              "description": "Pre download under specified network",
+              "default": "wifi"
+            },
+            "packages": {
+              "type": "array",
+              "description": "After entering the page, pre-download the root or name of the sub-package. \"__APP__\" indicates the main package.",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "packages"
+          ]
+        }
+      }
+    },
+    "resizable": {
+      "description": "Enable screen rotation support on your ipad",
+      "type": "boolean",
+      "default": false
+    },
+    "navigateToMiniProgramAppIdList": {
+      "type": "array",
+      "description": "When the applet needs to use the wx.navigateToMiniProgram interface to jump to other applets, you need to declare the list of applets appId to be jumped in the configuration file, and allow up to 10",
+      "items": {
+        "type": "string"
+      }
+    },
+    "usingComponents": {
+      "type": "object",
+      "description": "Global custom component",
+      "patternProperties": {
+        ".+": {
+          "type": "string",
+          "description": "The path of component"
+        }
+      }
+    },
+    "permission": {
+      "type": "object",
+      "description": "Applet interface permission related settings",
+      "patternProperties": {
+        "^scope\\\\.[A-Za-z0-9\\\\.-]+": {
+          "type": "object",
+          "properties": {
+            "desc": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "sitemapLocation": {
+      "type": "string",
+      "description": "indicate the location of sitemap json"
+    },
+    "style": {
+      "type": "string",
+      "enum": [
+        "v2"
+      ],
+      "description": "Style version for \"button icon radio checkbox switch slider\""
+    },
+    "useExtendedLib": {
+      "type": "object",
+      "description": "Specify the extension library to reference",
+      "properties": {
+        "kbone": {
+          "type": "boolean",
+          "default": false
+        },
+        "weui": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  }
+}

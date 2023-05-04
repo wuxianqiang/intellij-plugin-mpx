@@ -1,14 +1,17 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.libraries.vuex
+package org.jetbrains.vuejs.libraries.vuex
 
-import com.intellij.javascript.web.assertUnresolvedReference
-import com.intellij.javascript.web.resolveReference
+import com.intellij.webSymbols.assertUnresolvedReference
+import com.intellij.webSymbols.resolveReference
 import com.intellij.lang.javascript.psi.stubs.JSImplicitElement
+import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.psi.PsiDocumentManager
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.ComparisonFailure
 import junit.framework.TestCase
-import com.hxz.mpxjs.lang.createPackageJsonWithVueDependency
-import com.hxz.mpxjs.lang.getVueTestDataPath
+import org.jetbrains.vuejs.lang.configureVueDependencies
+import org.jetbrains.vuejs.lang.createPackageJsonWithVueDependency
+import org.jetbrains.vuejs.lang.getVueTestDataPath
 
 class VuexResolveTest : BasePlatformTestCase() {
 
@@ -430,6 +433,35 @@ class VuexResolveTest : BasePlatformTestCase() {
       "store.dispatch('inc<caret>rement')" to "store/store.js:635:JSProperty",
       "@click=\"inc<caret>rement\"" to "src/composition-counter.vue:572:JSProperty",
     )
+  }
+
+  fun testStoreModuleCaching() {
+    val constFragment = "const counterModule"
+
+    createPackageJsonWithVueDependency(myFixture, """ "vuex":"*" """)
+    val storeModuleFile = myFixture.configureByFile("storeModuleCaching/store/counter/index.js")
+    myFixture.configureByFile("storeModuleCaching/store/index.js")
+    val appFile = myFixture.configureByFile("storeModuleCaching/App.vue")
+
+    TestCase.assertNotNull(appFile.findReferenceAt(myFixture.caretOffset)?.resolve()?.parent)
+
+    WriteCommandAction.runWriteCommandAction(project) {
+      PsiDocumentManager.getInstance(project).getDocument(storeModuleFile)?.let { document ->
+        document.replaceString(0, constFragment.length, "") // remove const
+        PsiDocumentManager.getInstance(project).commitDocument(document)
+      }
+    }
+
+    TestCase.assertNull(appFile.findReferenceAt(myFixture.caretOffset)?.resolve()?.parent)
+
+    WriteCommandAction.runWriteCommandAction(project) {
+      PsiDocumentManager.getInstance(project).getDocument(storeModuleFile)?.let { document ->
+        document.replaceString(0, 0, constFragment) // restore const
+        PsiDocumentManager.getInstance(project).commitDocument(document)
+      }
+    }
+
+    TestCase.assertNotNull(appFile.findReferenceAt(myFixture.caretOffset)?.resolve()?.parent)
   }
 
   private fun doStorefrontTest(vararg args: Pair<String, String?>) {

@@ -5,7 +5,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
 import kotlin.Pair;
 import org.jetbrains.annotations.Nullable;
-import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes;
+import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes;
 %%
 
 %unicode
@@ -227,7 +227,7 @@ CONDITIONAL_COMMENT_CONDITION=({ALPHA})({ALPHA}|{WHITE_SPACE_CHARS}|{DIGIT}|"."|
     } else {
       yybegin(INTERPOLATION_DQ);
     }
-    return MpxTokenTypes.INTERPOLATION_START;
+    return VueTokenTypes.INTERPOLATION_START;
   }
   return XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN;}
 }
@@ -242,7 +242,7 @@ CONDITIONAL_COMMENT_CONDITION=({ALPHA})({ALPHA}|{WHITE_SPACE_CHARS}|{DIGIT}|"."|
     } else {
       yybegin(INTERPOLATION_SQ);
     }
-    return MpxTokenTypes.INTERPOLATION_START;
+    return VueTokenTypes.INTERPOLATION_START;
   }
   return XmlTokenType.XML_ATTRIBUTE_VALUE_TOKEN;}
 }
@@ -261,7 +261,7 @@ CONDITIONAL_COMMENT_CONDITION=({ALPHA})({ALPHA}|{WHITE_SPACE_CHARS}|{DIGIT}|"."|
   if (inBuffer(interpolationEnd, 0)) {
     yybegin(yystate() == INTERPOLATION_DQ ? INTERPOLATION_END_DQ : INTERPOLATION_END_SQ);
     yypushback(1);
-    return MpxTokenTypesMpxTokenTypes.INTERPOLATION_EXPR;
+    return VueTokenTypes.INTERPOLATION_EXPR;
   }
   if (interpolationStartPos <= 0) {
     interpolationStartPos = zzStartRead;
@@ -271,7 +271,7 @@ CONDITIONAL_COMMENT_CONDITION=({ALPHA})({ALPHA}|{WHITE_SPACE_CHARS}|{DIGIT}|"."|
 <INTERPOLATION_END_DQ, INTERPOLATION_END_SQ> [^] {
   yybegin(yystate() == INTERPOLATION_END_DQ ? ATTRIBUTE_VALUE_DQ : ATTRIBUTE_VALUE_SQ);
   if (tryConsumeInterpolationBoundary(interpolationEnd)) {
-    return MpxTokenTypes.INTERPOLATION_END;
+    return VueTokenTypes.INTERPOLATION_END;
   }
   return XmlTokenType.XML_BAD_CHARACTER;
 }
@@ -290,7 +290,7 @@ CONDITIONAL_COMMENT_CONDITION=({ALPHA})({ALPHA}|{WHITE_SPACE_CHARS}|{DIGIT}|"."|
   if (inBuffer(interpolationEnd, 0)) {
     yybegin(INTERPOLATION_END);
     yypushback(1);
-    return MpxTokenTypes.INTERPOLATION_EXPR;
+    return VueTokenTypes.INTERPOLATION_EXPR;
   }
   if (interpolationStartPos <= 0) {
     interpolationStartPos = zzStartRead;
@@ -299,7 +299,7 @@ CONDITIONAL_COMMENT_CONDITION=({ALPHA})({ALPHA}|{WHITE_SPACE_CHARS}|{DIGIT}|"."|
 <INTERPOLATION_END> [^] {
   yybegin(YYINITIAL);
   if (tryConsumeInterpolationBoundary(interpolationEnd)) {
-    return MpxTokenTypes.INTERPOLATION_END;
+    return VueTokenTypes.INTERPOLATION_END;
   }
   return XmlTokenType.XML_BAD_CHARACTER;
 }
@@ -311,7 +311,7 @@ CONDITIONAL_COMMENT_CONDITION=({ALPHA})({ALPHA}|{WHITE_SPACE_CHARS}|{DIGIT}|"."|
     } else {
       yybegin(INTERPOLATION);
     }
-    return MpxTokenTypes.INTERPOLATION_START;
+    return VueTokenTypes.INTERPOLATION_START;
   }
   return XmlTokenType.XML_DATA_CHARACTERS;
 }

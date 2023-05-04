@@ -1,19 +1,22 @@
 {
-  "$schema": "../../../../plugins/JavaScriptLanguage/web-platform/web-types-gen/resources/web-types.json",
+  "$schema": "../../../../community/platform/webSymbols/web-types-gen/resources/web-types.json",
   "framework": "mpx",
   "name": "mpx",
   "version": "3.0.0",
   "js-types-syntax": "typescript",
   "description-markup": "markdown",
-  "default-icon": "icons/vue.svg",
+  "default-icon": "icons/mpx.svg",
   "framework-config": {
     "enable-when": {
       "node-packages": [
+        "mpx",
+        "@mpx/cli"
       ],
       "file-extensions": [
         "mpx"
       ],
       "ide-libraries": [
+        "mpx"
       ]
     }
   },
@@ -41,16 +44,16 @@
                 ]
               },
               "value": {
-                "type": "of-match",
-                "kind": "plain"
+                "type": "of-match"
               },
               "vue-custom-prop": {
                 "name": "Custom Vue component property",
-                "pattern": "(?!wx:).*",
+                "pattern": "(?!v-).*",
                 "doc-hide-pattern": true,
                 "attribute-value": {
                   "required": false
-                }
+                },
+                "hide-from-completion": true
               }
             }
           ]
@@ -63,8 +66,7 @@
               "name": "scope",
               "deprecated": true,
               "value": {
-                "kind": "expression",
-                "parser": "vue:slot-scope"
+                "kind": "expression"
               }
             }
           ]
@@ -81,143 +83,253 @@
                 "type": "string"
               }
             }
+          ],
+          "vue-special-properties": [
+            {
+              "name": "Scoped slot binding",
+              "pattern": "(?!v-).*",
+              "doc-hide-pattern": true,
+              "priority": "low",
+              "attribute-value": {
+                "required": true
+              }
+            }
+          ]
+        },
+        {
+          "name": "textarea",
+          "extension": true,
+          "vue-special-properties": [
+            {
+              "name": "value"
+            }
+          ]
+        },
+        {
+          "name": "select",
+          "extension": true,
+          "vue-special-properties": [
+            {
+              "name": "value"
+            }
           ]
         }
       ],
       "attributes": [
         {
-          "name": "Mpx directive",
-          "description": "Directives are special attributes with the `wx:` prefix. Directive attribute values are expected to be a single JavaScript expression (with the exception of `wx:for` and `wx:if`). A directive's job is to reactively apply side effects to the DOM when the value of its expression changes.",
-          "doc-url": "https://mpxjs.cn/api/directives.html",
+          "name": "data-*",
+          "description": "The `data-*` global attributes form a class of attributes called custom data attributes, that allow proprietary information to be exchanged between the HTML and its DOM representation by scripts.",
+          "doc-url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*",
+          "pattern": {
+            "template": [
+              "data-",
+              {
+                "regex": ".*"
+              }
+            ]
+          },
+          "hide-from-completion": true
+        },
+        {
+          "name": "Vue directive",
+          "description": "Directives are special attributes with the `v-` prefix. Directive attribute values are expected to be a single JavaScript expression (with the exception of `v-for` and `v-on`). A directive's job is to reactively apply side effects to the DOM when the value of its expression changes.",
+          "doc-url": "https://v3.vuejs.org/guide/template-syntax.html#directives",
           "virtual": true,
           "value": {
             "kind": "expression",
-            "parser": "vue:expression",
+            "type": "any",
+            "required": false
+          },
+          "exclusive-contributions": [
+            "/html/modifiers"
+          ],
+          "pattern": {
+            "items": "/html/vue-directives",
+            "template": [
+              "v-",
+              "#item:Vue directive",
+              {
+                "delegate": "argument",
+                "template": [
+                  ":",
+                  "#...",
+                  "#item:argument"
+                ],
+                "required": false,
+                "proximity": 5
+              },
+              {
+                "items": "/html/modifiers",
+                "template": [
+                  ".",
+                  "#item:modifier"
+                ],
+                "required": false,
+                "repeat": true
+              }
+            ]
+          }
+        },
+        {
+          "name": "v-on alias",
+          "description": "Attaches an event listener to the element. The event type is denoted by the argument. The expression can be a method name, an inline statement, or omitted if there are modifiers present.\n\nWhen used on a normal element, it listens to *native DOM events* only. When used on a custom element component, it listens to *custom events* emitted on that child component.\n\nWhen listening to native DOM events, the method receives the native event as the only argument. If using inline statement, the statement has access to the special `$event` property: `v-on:click=\"handle('ok', $event)\"`.\n\n`v-on` also supports binding to an object of event/listener pairs without an argument. Note when using the object syntax, it does not support any modifiers.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-on",
+          "virtual": true,
+          "value": {
+            "kind": "expression",
+            "type": "any",
+            "required": false
+          },
+          "exclusive-contributions": [
+            "/html/modifiers"
+          ],
+          "pattern": {
+            "proximity": 10,
+            "delegate": "/html/vue-directives/on",
+            "template": [
+              "@",
+              "$...",
+              {
+                "delegate": "argument",
+                "template": [
+                  "#item:attribute or property name"
+                ],
+                "required": true
+              },
+              {
+                "items": "/html/modifiers",
+                "template": [
+                  ".",
+                  "#item:modifier"
+                ],
+                "required": false,
+                "repeat": true
+              }
+            ]
+          }
+        },
+        {
+          "name": "v-bind alias",
+          "description": "Dynamically bind one or more attributes, or a component prop to an expression.\n\nWhen used to bind the `class` or `style` attribute, it supports additional value types such as Array or Objects. See linked guide section below for more details.\n\nWhen used for prop binding, the prop must be properly declared in the child component.\n\nWhen used without an argument, can be used to bind an object containing attribute name-value pairs. Note in this mode `class` and `style` does not support Array or Objects.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-bind",
+          "virtual": true,
+          "value": {
+            "kind": "expression",
+            "type": "any",
+            "required": false
+          },
+          "exclusive-contributions": [
+            "/html/modifiers"
+          ],
+          "pattern": {
+            "proximity": 10,
+            "delegate": "/html/vue-directives/bind",
+            "template": [
+              ":",
+              "$...",
+              {
+                "delegate": "argument",
+                "required": true,
+                "template": [
+                  "#item:event name"
+                ]
+              },
+              {
+                "items": "/html/modifiers",
+                "template": [
+                  ".",
+                  "#item:modifier"
+                ],
+                "required": false,
+                "repeat": true
+              }
+            ]
+          }
+        },
+        {
+          "name": "v-slot alias",
+          "description": "Denote named slots or slots that expect to receive props.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-slot",
+          "virtual": true,
+          "value": {
+            "kind": "expression",
             "type": "any",
             "required": false
           },
           "pattern": {
-            "items": "/html/vue-directives",
+            "proximity": 10,
+            "items": [
+              "vue-available-slots",
+              "/html/vue-dynamic-argument"
+            ],
             "template": [
-              "wx:",
-              "#item:Vue directive"
+              "#",
+              "$...",
+              "#item:slot name"
             ]
           }
         },
         {
           "name": "slot",
-          "deprecated": true
+          "description": "Denote named slots or slots that expect to receive props.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-slot",
+          "virtual": true,
+          "value": {
+            "kind": "expression",
+            "type": "any",
+            "required": false
+          },
+          "pattern": {
+            "template": [
+              "v-slot",
+              {
+                "items": [
+                  "vue-available-slots",
+                  "/html/vue-dynamic-argument"
+                ],
+                "required": false,
+                "proximity": 5,
+                "template": [
+                  ":",
+                  "#...",
+                  "#item:slot name"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "ref",
+          "priority": "low",
+          "proximity": 10,
+          "description": "`ref` is used to register a reference to an element or a child component. The reference will be registered under the parent component's `$refs` object. If used on a plain DOM element, the reference will be that element; if used on a child component, the reference will be component instance.",
+          "doc-url": "https://v3.vuejs.org/api/special-attributes.html#ref"
         },
         {
           "name": "is",
-          "priority": "low"
+          "priority": "low",
+          "proximity": 10,
+          "doc-url": "https://v3.vuejs.org/api/special-attributes.html#is",
+          "description": "Used for [dynamic components](https://v3.vuejs.org/guide/component-dynamic-async.html).",
+          "value": {
+            "type": [
+              "string",
+              "object"
+            ]
+          }
         },
         {
           "name": "key",
-          "priority": "low"
-        },
-        {
-          "name": "style",
-          "priority": "low"
-        },
-        {
-          "name": "class",
-          "priority": "low"
-        },
-        {
-          "name": "bindtap",
-          "priority": "low"
-        },
-        {
-          "name": "bindtouchstart",
-          "priority": "low"
-        },
-        {
-          "name": "bindtouchmove",
-          "priority": "low"
-        },
-        {
-          "name": "bindtouchcancel",
-          "priority": "low"
-        },
-        {
-          "name": "bindtouchend",
-          "priority": "low"
-        },
-        {
-          "name": "bindlongpress",
-          "priority": "low"
-        },
-        {
-          "name": "bindlongtap",
-          "priority": "low"
-        },
-        {
-          "name": "bindtransitionend",
-          "priority": "low"
-        },{
-          "name": "bindanimationstart",
-          "priority": "low"
-        },
-        {
-          "name": "bindanimationiteration",
-          "priority": "low"
-        },
-        {
-          "name": "bindanimationend",
-          "priority": "low"
-        },
-        {
-          "name": "bindtouchforcechange",
-          "priority": "low"
-        },
-        {
-          "name": "catchtap",
-          "priority": "low"
-        },
-        {
-          "name": "catchtouchstart",
-          "priority": "low"
-        },
-        {
-          "name": "catchtouchmove",
-          "priority": "low"
-        },
-        {
-          "name": "catchtouchcancel",
-          "priority": "low"
-        },
-        {
-          "name": "catchtouchend",
-          "priority": "low"
-        },
-        {
-          "name": "catchlongpress",
-          "priority": "low"
-        },
-        {
-          "name": "catchlongtap",
-          "priority": "low"
-        },
-        {
-          "name": "catchtransitionend",
-          "priority": "low"
-        },
-        {
-          "name": "catchanimationstart",
-          "priority": "low"
-        },
-        {
-          "name": "catchanimationiteration",
-          "priority": "low"
-        },
-        {
-          "name": "catchanimationend",
-          "priority": "low"
-        },
-        {
-          "name": "catchtouchforcechange",
-          "priority": "low"
+          "priority": "low",
+          "proximity": 10,
+          "description": "The `key` special attribute is primarily used as a hint for Vue's virtual DOM algorithm to identify VNodes when diffing the new list of nodes against the old list. Without keys, Vue uses an algorithm that minimizes element movement and tries to patch/reuse elements of the same type in-place as much as possible. With keys, it will reorder elements based on the order change of keys, and elements with keys that are no longer present will always be removed/destroyed.\n\nChildren of the same common parent must have **unique keys**. Duplicate keys will cause render errors.\n\nThe most common use case is combined with `v-for`.",
+          "doc-url": "https://v3.vuejs.org/api/special-attributes.html#key",
+          "value": {
+            "type": [
+              "number",
+              "string"
+            ]
+          }
         }
       ],
       "vue-file-top-elements": [
@@ -263,7 +375,8 @@
             {
               "name": "setup",
               "value": {
-                "kind": "no-value"
+                "kind": "expression",
+                "required": false
               }
             }
           ]
@@ -306,93 +419,240 @@
           ]
         },
         {
-          "name": "image",
-          "description": "媒体组件",
-          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/component/image.html",
+          "name": "Transition components base",
+          "abstract": true,
+          "props": [
+            {
+              "name": "name",
+              "description": "Used to automatically generate transition CSS class names. e.g. `name: 'fade'` will auto expand to `.fade-enter`, `.fade-enter-active`, etc.",
+              "type": "string"
+            },
+            {
+              "name": "appear",
+              "description": "Whether to apply transition on initial render.",
+              "type": "boolean",
+              "default": "false"
+            },
+            {
+              "name": "css",
+              "description": "Whether to apply CSS transition classes. Defaults to `true`. If set to `false`, will only trigger JavaScript hooks registered via component events.",
+              "default": "true",
+              "type": "boolean"
+            },
+            {
+              "name": "type",
+              "description": "Specifies the type of transition events to wait for to determine transition end timing. Available values are `\"transition\"` and `\"animation\"`. By default, it will automatically detect the type that has a longer duration.",
+              "type": [
+                "\"transition\"",
+                "\"animation\""
+              ]
+            },
+            {
+              "name": "duration",
+              "description": "Specifies the duration of transition. By default, Vue waits for the first `transitionend` or `animationend` event on the root transition element.",
+              "type": [
+                "number",
+                "{ enter: number, leave: number }"
+              ]
+            },
+            {
+              "name": "enterFromClass",
+              "type": "string"
+            },
+            {
+              "name": "leaveFromClass",
+              "type": "string"
+            },
+            {
+              "name": "appearClass",
+              "type": "string"
+            },
+            {
+              "name": "enterToClass",
+              "type": "string"
+            },
+            {
+              "name": "leaveToClass",
+              "type": "string"
+            },
+            {
+              "name": "appearToClass",
+              "type": "string"
+            },
+            {
+              "name": "enterActiveClass",
+              "type": "string"
+            },
+            {
+              "name": "leaveActiveClass",
+              "type": "string"
+            },
+            {
+              "name": "appearActiveClass",
+              "type": "string"
+            }
+          ],
+          "events": [
+            {
+              "name": "before-enter"
+            },
+            {
+              "name": "before-leave"
+            },
+            {
+              "name": "enter"
+            },
+            {
+              "name": "leave"
+            },
+            {
+              "name": "appear"
+            },
+            {
+              "name": "after-enter"
+            },
+            {
+              "name": "after-leave"
+            },
+            {
+              "name": "after-appear"
+            },
+            {
+              "name": "enter-cancelled"
+            },
+            {
+              "name": "leave-cancelled"
+            },
+            {
+              "name": "appear-cancelled"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default"
+            }
+          ]
+        },
+        {
+          "name": "Transition",
+          "extends": "/html/vue-components/Transition components base",
+          "description": "`<transition>` serve as transition effects for *single* element/component. The `<transition>` only applies the transition behavior to the wrapped content inside; it doesn't render an extra DOM element, or show up in the inspected component hierarchy.",
+          "doc-url": "https://v3.vuejs.org/api/built-in-components.html#transition",
           "props": [
             {
               "name": "mode",
-              "description": "图片裁剪、缩放的模式",
+              "description": "Controls the timing sequence of leaving/entering transitions. Available modes are `\"out-in\"` and `\"in-out\"`; defaults to simultaneous.",
               "attribute-value": {
-                "type": "enum",
-                "default": "scaleToFill"
+                "type": "enum"
               },
               "values": [
                 {
-                  "name": "scaleToFill",
-                  "description": "缩放模式，不保持纵横比缩放图片，使图片的宽高完全拉伸至填满 image 元素"
+                  "name": "out-in",
+                  "description": "Current element transitions out first, then when complete, the new element transitions in."
                 },
                 {
-                  "name": "aspectFit",
-                  "description": "缩放模式，保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来"
-                },
-                {
-                  "name": "aspectFill",
-                  "description": "缩放模式，保持纵横比缩放图片，只保证图片的短边能完全显示出来。也就是说，图片通常只在水平或垂直方向是完整的，另一个方向将会发生截取"
-                },
-                {
-                  "name": "widthFix",
-                  "description": "缩放模式，宽度不变，高度自动变化，保持原图宽高比不变"
-                },
-                {
-                  "name": "heightFix",
-                  "description": "缩放模式，高度不变，宽度自动变化，保持原图宽高比不变，2。10。3"
-                },
-                {
-                  "name": "top",
-                  "description": "裁剪模式，不缩放图片，只显示图片的顶部区域"
-                },
-                {
-                  "name": "bottom",
-                  "description": "裁剪模式，不缩放图片，只显示图片的底部区域"
-                },
-                {
-                  "name": "center",
-                  "description": "裁剪模式，不缩放图片，只显示图片的中间区域"
-                },
-                {
-                  "name": "right",
-                  "description": "裁剪模式，不缩放图片，只显示图片的左边区域"
-                },
-                {
-                  "name": "left",
-                  "description": "裁剪模式，不缩放图片，只显示图片的右边区域"
-                },
-                {
-                  "name": "top left",
-                  "description": "裁剪模式，不缩放图片，只显示图片的左上边区域"
-                },
-                {
-                  "name": "top right",
-                  "description": "裁剪模式，不缩放图片，只显示图片的右上边区域"
-                },
-                {
-                  "name": "bottom left",
-                  "description": "裁剪模式，不缩放图片，只显示图片的左下边区域"
-                },
-                {
-                  "name": "bottom right",
-                  "description": "裁剪模式，不缩放图片，只显示图片的右下边区域"
+                  "name": "in-out",
+                  "description": "New element transitions in first, then when complete, the current element transitions out."
                 }
               ]
+            }
+          ]
+        },
+        {
+          "name": "TransitionGroup",
+          "extends": "/html/vue-components/Transition components base",
+          "description": "`<transition-group>` serve as transition effects for *multiple* elements/components. The `<transition-group>` renders a real DOM element. By default it renders a `<span>`, and you can configure what element it should render via the `tag` attribute.\n\nNote that every child in a `<transition-group>` must be *uniquely keyed* for the animations to work properly.",
+          "doc-url": "https://v3.vuejs.org/api/built-in-components.html#transition-group",
+          "props": [
+            {
+              "name": "tag",
+              "default": "\"span\"",
+              "type": "string"
+            },
+            {
+              "name": "moveClass",
+              "description": "Overwrite CSS class applied during moving transition"
+            }
+          ]
+        },
+        {
+          "name": "KeepAlive",
+          "doc-url": "https://v3.vuejs.org/api/built-in-components.html#keep-alive",
+          "description": "When wrapped around a dynamic component, `<keep-alive>` caches the inactive component instances without destroying them. Similar to `<transition>`, `<keep-alive>` is an abstract component: it doesn’t render a DOM element itself, and doesn’t show up in the component parent chain.\n\nWhen a component is toggled inside `<keep-alive>`, its `activated` and `deactivated` lifecycle hooks will be invoked accordingly.\n\nPrimarily used to preserve component state or avoid re-rendering.",
+          "props": [
+            {
+              "name": "include",
+              "description": "Only components with matching names will be cached.",
+              "type": [
+                "string",
+                "RegExp",
+                "(string|RegExp)[]"
+              ]
+            },
+            {
+              "name": "exclude",
+              "description": "Any component with a matching name will not be cached.",
+              "type": [
+                "string",
+                "RegExp",
+                "(string|RegExp)[]"
+              ]
+            },
+            {
+              "name": "max",
+              "description": "The maximum number of component instances to cache.",
+              "type": "number"
+            }
+          ]
+        },
+        {
+          "name": "Suspense",
+          "description": "Suspense is a special component that renders a fallback content instead of child components until a condition is met. This condition is usually async operation happening in the components setup function.",
+          "slots": [
+            {
+              "name": "default",
+              "description": "Content to render once async operation is finished"
+            },
+            {
+              "name": "fallback",
+              "description": "Content to render during async operation"
+            }
+          ]
+        },
+        {
+          "name": "Teleport",
+          "description": "Teleport provides a clean way to control under which parent in our DOM a piece of HTML will be rendered, without having to resort to global state or splitting elements into two components.",
+          "doc-url": "https://v3.vuejs.org/api/built-in-components.html#slot",
+          "props": [
+            {
+              "name": "to",
+              "description": "A valid query selector, or an HTMLElement (if used in a browser environment). Specifies a target element where `<teleport>` content will be moved",
+              "type": [
+                "string",
+                "HTMLElement"
+              ]
+            },
+            {
+              "name": "disabled",
+              "description": "Used to disable the `<teleport>`'s functionality, which means that its slot content will not be moved anywhere and instead be rendered where you specified the `<teleport>` in the surrounding parent component."
             }
           ]
         }
       ],
       "vue-directives": [
         {
-          "name": "style",
-          "description": "直接绑定到一个样式对象通常更好，这会让模板更清晰",
-          "doc-url": "https://mpxjs.cn/api/directives.html#wx-style",
+          "name": "text",
+          "description": "Updates the element’s `textContent`. If you need to update the part of `textContent`, you should use `{{ Mustache }}` interpolations.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-text",
           "attribute-value": {
             "type": "string",
             "required": true
           }
         },
         {
-          "name": "ref",
-          "description": "获取 WXML 节点信息的对象",
-          "doc-url": "https://mpxjs.cn/api/directives.html#wx-ref",
+          "name": "html",
+          "description": "Updates the element’s `innerHTML`. *Note that the contents are inserted as plain HTML - they will not be compiled as Vue templates*. If you find yourself trying to compose templates using `v-html`, try to rethink the solution by using components instead.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-html",
           "attribute-value": {
             "type": "string",
             "required": true
@@ -401,7 +661,7 @@
         {
           "name": "show",
           "description": "Toggles the element’s `display` CSS property based on the truthy-ness of the expression value.\n\nThis directive triggers transitions when its condition changes.",
-          "doc-url": "https://mpxjs.cn/api/directives.html#wx-show",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-show",
           "attribute-value": {
             "required": true
           }
@@ -409,23 +669,23 @@
         {
           "name": "if",
           "description": "Conditionally render the element based on the truthy-ness of the expression value. The element and its contained directives / components are destroyed and re-constructed during toggles. If the element is a `<template>` element, its content will be extracted as the conditional block.\n\nThis directive triggers transitions when its condition changes.",
-          "doc-url": "https://mpxjs.cn/api/directives.html#wx-if",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-if",
           "attribute-value": {
             "required": true
           }
         },
         {
           "name": "else",
-          "description": "Denote the “else block” for `wx:if` or a `wx:if/wx:elif` chain.",
-          "doc-url": "https://mpxjs.cn/api/directives.html#wx-else",
+          "description": "Denote the “else block” for `v-if` or a `v-if/v-else-if` chain.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-else",
           "attribute-value": {
             "kind": "no-value"
           }
         },
         {
-          "name": "elif",
-          "description": "Denote the “else if block” for `wx:if`. Can be chained.",
-          "doc-url": "https://mpxjs.cn/api/directives.html#wx-elif",
+          "name": "else-if",
+          "description": "Denote the “else if block” for `v-if`. Can be chained.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-else-if",
           "attribute-value": {
             "required": true
           }
@@ -433,9 +693,8 @@
         {
           "name": "for",
           "description": "Render the element or template block multiple times based on the source data. The directive’s value must use the special syntax `alias in expression` to provide an alias for the current element being iterated on. Alternatively, you can also specify an alias for the index (or the key if used on an Object). The default behavior of `v-for` will try to patch the elements in-place without moving them. To force it to reorder elements, you need to provide an ordering hint with the `key` special attribute.",
-          "doc-url": "https://mpxjs.cn/api/directives.html#wx-for",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-for",
           "attribute-value": {
-            "parser": "vue:for",
             "type": "void",
             "required": true
           }
@@ -445,7 +704,6 @@
           "description": "Attaches an event listener to the element. The event type is denoted by the argument. The expression can be a method name, an inline statement, or omitted if there are modifiers present.\n\nWhen used on a normal element, it listens to *native DOM events* only. When used on a custom element component, it listens to *custom events* emitted on that child component.\n\nWhen listening to native DOM events, the method receives the native event as the only argument. If using inline statement, the statement has access to the special `$event` property: `v-on:click=\"handle('ok', $event)\"`.\n\n`v-on` also supports binding to an object of event/listener pairs without an argument. Note when using the object syntax, it does not support any modifiers.",
           "doc-url": "https://v3.vuejs.org/api/directives.html#v-on",
           "attribute-value": {
-            "parser": "vue:on",
             "type": "void",
             "required": true
           },
@@ -453,18 +711,19 @@
             "name": "event name",
             "description": "Optional event name",
             "pattern": {
-              "or": [
+              "items": [
+                "/js/events",
+                "/html/vue-dynamic-argument"
+              ]
+            },
+            "js": {
+              "events": [
                 {
-                  "items": "/html/events",
-                  "priority": "normal"
-                },
-                {
-                  "template": [
-                    {
-                      "regex": "(?!\\.).*"
-                    }
-                  ],
-                  "priority": "lowest"
+                  "name": "Custom event",
+                  "pattern": "(?!\\.).*",
+                  "priority": "lowest",
+                  "doc-hide-pattern": true,
+                  "hide-from-completion": true
                 }
               ]
             }
@@ -501,108 +760,142 @@
               "description": "attaches a DOM event with `{ passive: true }`."
             }
           ],
-          "events": [
-            {
-              "name": "Mouse button event modifiers",
-              "extension": true,
-              "pattern": {
-                "or": [
-                  "click",
-                  "dblclick",
-                  "mousedown",
-                  "mouseup"
-                ]
-              },
-              "modifiers": [
-                {
-                  "name": "left",
-                  "description": "Only trigger handler for left button mouse events."
+          "js": {
+            "events": [
+              {
+                "name": "Mouse button event modifiers",
+                "extension": true,
+                "pattern": {
+                  "or": [
+                    "click",
+                    "dblclick",
+                    "mousedown",
+                    "mouseup"
+                  ]
                 },
-                {
-                  "name": "right",
-                  "description": "Only trigger handler for right button mouse events."
-                },
-                {
-                  "name": "middle",
-                  "description": "Only trigger handler for middle button mouse events."
+                "html": {
+                  "modifiers": [
+                    {
+                      "name": "left",
+                      "description": "Only trigger handler for left button mouse events."
+                    },
+                    {
+                      "name": "right",
+                      "description": "Only trigger handler for right button mouse events."
+                    },
+                    {
+                      "name": "middle",
+                      "description": "Only trigger handler for middle button mouse events."
+                    }
+                  ]
                 }
-              ]
-            },
-            {
-              "name": "Key event modifiers",
-              "extension": true,
-              "pattern": {
-                "or": [
-                  "keydown",
-                  "keypress",
-                  "keyup"
-                ]
               },
-              "modifiers": [
-                {
-                  "name": "Key alias",
-                  "pattern": {
-                    "or": [
-                      "enter",
-                      "tab",
-                      "delete",
-                      "esc",
-                      "space",
-                      "up",
-                      "down",
-                      "left",
-                      "right"
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "name": "System event modifiers",
-              "extension": true,
-              "pattern": {
-                "or": [
-                  "keydown",
-                  "keypress",
-                  "keyup",
-                  "click",
-                  "contextmenu",
-                  "dblclick",
-                  "mousedown",
-                  "mouseenter",
-                  "mouseleave",
-                  "mousemove",
-                  "mouseout",
-                  "mouseover",
-                  "mouseup",
-                  "show",
-                  "drag",
-                  "dragend",
-                  "dragenter",
-                  "dragleave",
-                  "dragover",
-                  "dragstart",
-                  "drop"
-                ]
-              },
-              "modifiers": [
-                {
-                  "name": "System modifier key",
-                  "description": "Triggers mouse or keyboard event listeners only when the modifier key is pressed.",
-                  "pattern": {
-                    "or": [
-                      "ctrl",
-                      "alt",
-                      "shift",
-                      "meta"
-                    ]
-                  }
+              {
+                "name": "Key event modifiers",
+                "extension": true,
+                "pattern": {
+                  "or": [
+                    "keydown",
+                    "keypress",
+                    "keyup"
+                  ]
                 },
-                {
-                  "name": "exact",
-                  "description": "Allows control of the exact combination of system modifiers needed to trigger an event."
+                "html": {
+                  "modifiers": [
+                    {
+                      "name": "Key alias",
+                      "pattern": {
+                        "or": [
+                          "enter",
+                          "tab",
+                          "delete",
+                          "esc",
+                          "space",
+                          "up",
+                          "down",
+                          "left",
+                          "right"
+                        ]
+                      }
+                    }
+                  ]
                 }
+              },
+              {
+                "name": "System event modifiers",
+                "extension": true,
+                "pattern": {
+                  "or": [
+                    "keydown",
+                    "keypress",
+                    "keyup",
+                    "click",
+                    "contextmenu",
+                    "dblclick",
+                    "mousedown",
+                    "mouseenter",
+                    "mouseleave",
+                    "mousemove",
+                    "mouseout",
+                    "mouseover",
+                    "mouseup",
+                    "show",
+                    "drag",
+                    "dragend",
+                    "dragenter",
+                    "dragleave",
+                    "dragover",
+                    "dragstart",
+                    "drop"
+                  ]
+                },
+                "html": {
+                  "modifiers": [
+                    {
+                      "name": "System modifier key",
+                      "description": "Triggers mouse or keyboard event listeners only when the modifier key is pressed.",
+                      "pattern": {
+                        "or": [
+                          "ctrl",
+                          "alt",
+                          "shift",
+                          "meta"
+                        ]
+                      }
+                    },
+                    {
+                      "name": "exact",
+                      "description": "Allows control of the exact combination of system modifiers needed to trigger an event."
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "bind",
+          "description": "Dynamically bind one or more attributes, or a component prop to an expression.\n\nWhen used to bind the `class` or `style` attribute, it supports additional value types such as Array or Objects. See linked guide section below for more details.\n\nWhen used for prop binding, the prop must be properly declared in the child component.\n\nWhen used without an argument, can be used to bind an object containing attribute name-value pairs. Note in this mode `class` and `style` does not support Array or Objects.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-bind",
+          "argument": {
+            "name": "attribute or property name",
+            "description": "Optional attribute or property name",
+            "pattern": {
+              "items": [
+                {
+                  "path": "/html/attributes",
+                  "includeVirtual": false,
+                  "filter": "vue-bind"
+                },
+                "/html/vue-special-properties",
+                "/html/vue-dynamic-argument"
               ]
+            }
+          },
+          "modifiers": [
+            {
+              "name": "camel",
+              "description": "Transform the kebab-case attribute name into camelCase."
             }
           ]
         },
@@ -617,12 +910,15 @@
           "argument": {
             "name": "v-model prop/event pair to bind",
             "pattern": {
-              "items": {
-                "path": "attributes",
-                "filter": "match-with-target-list",
-                "target-list": "/html/events",
-                "prefix": "update:"
-              }
+              "items": [
+                {
+                  "path": "/html/attributes",
+                  "filter": "match-with-target-list",
+                  "target-list": "/js/events",
+                  "prefix": "update:"
+                },
+                "/html/vue-dynamic-argument"
+              ]
             }
           },
           "modifiers": [
@@ -649,20 +945,104 @@
           ]
         },
         {
-          "name": "slot",
-          "description": "Denote named slots or slots that expect to receive props.",
-          "doc-url": "https://v3.vuejs.org/api/directives.html#v-slot",
+          "name": "pre",
+          "description": "Skip compilation for this element and all its children. You can use this for displaying raw mustache tags. Skipping large numbers of nodes with no directives on them can also speed up compilation.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-pre",
           "attribute-value": {
-            "parser": "vue:slot",
-            "type": "void"
-          },
-          "argument": {
-            "name": "Slot name",
-            "description": "Slot name (optional, defaults to `default`)",
-            "pattern": {
-              "items": "vue-available-slots"
-            }
+            "kind": "no-value"
           }
+        },
+        {
+          "name": "cloak",
+          "description": "This directive will remain on the element until the associated Vue instance finishes compilation. Combined with CSS rules such as `[v-cloak] { display: none }`, this directive can be used to hide un-compiled mustache bindings until the Vue instance is ready.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-cloak",
+          "attribute-value": {
+            "kind": "no-value"
+          }
+        },
+        {
+          "name": "once",
+          "description": "Render the element and component *once* only. On subsequent re-renders, the element/component and all its children will be treated as static content and skipped. This can be used to optimize update performance.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-once",
+          "attribute-value": {
+            "kind": "no-value"
+          }
+        },
+        {
+          "name": "is",
+          "description": "When using in-DOM templates, the template is subject to native HTML parsing rules. Some HTML elements, such as `<ul>`, `<ol>`, `<table>` and `<select>` have restrictions on what elements can appear inside them, and some elements such as `<li>`, `<tr>`, and `<option>` can only appear inside certain other elements. As a workaround, we can use `v-is` directive on these elements.",
+          "doc-url": "https://v3.vuejs.org/api/directives.html#v-is",
+          "attribute-value": {
+            "type": "string",
+            "required": true
+          }
+        }
+      ],
+      "vue-model-modifiers": [
+        {
+          "name": "Unknown",
+          "description": "An unknown Vue model modifier.",
+          "pattern": ".*",
+          "doc-hide-pattern": true,
+          "hide-from-completion": true
+        }
+      ],
+      "vue-dynamic-argument": {
+        "name": "Dynamic directive argument",
+        "description": "It is possible to use a JavaScript expression in a directive argument by wrapping it with square brackets. The expression's evaluated value will be used as the final value for the argument.\n\nDynamic arguments are expected to evaluate to a string, with the exception of `null`. The special value `null` can be used to explicitly remove the binding. Any other non-string value will trigger a warning.",
+        "doc-url": "https://vuejs.org/guide/essentials/template-syntax.html#dynamic-arguments",
+        "hide-from-completion": true,
+        "doc-hide-pattern": true,
+        "pattern": "\\[[^\\]]+\\]",
+        "priority": "high"
+      }
+    },
+    "css": {
+      "pseudo-classes": [
+        {
+          "name": "deep",
+          "doc-url": "https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md#deep-selectors",
+          "arguments": true,
+          "description": "Make a rule that targets child components."
+        },
+        {
+          "name": "slotted",
+          "doc-url": "https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md#targeting--avoiding-slot-content",
+          "arguments": true,
+          "description": "In v3 child scoped styles are **not** affecting slot content by default. To explicitly target slot content, the `::v-slotted()` (shorthand: `:slotted()`) pseudo element can be used."
+        },
+        {
+          "name": "global",
+          "doc-url": "https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md#one-off-global-rules",
+          "arguments": true,
+          "description": "Use `::v-global()` (shorthand: `:global()`) pseudo element to make a one-off global rule within scoped `<style>` block."
+        }
+      ],
+      "pseudo-elements": [
+        {
+          "name": "v-deep",
+          "doc-url": "https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md#deep-selectors",
+          "arguments": false,
+          "deprecated": true,
+          "description": "Make a rule that targets child components.\n\n**Note: usage without arguments is deprecated since Vue 3.0.**"
+        },
+        {
+          "name": "v-deep",
+          "doc-url": "https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md#deep-selectors",
+          "arguments": true,
+          "description": "Make a rule that targets child components."
+        },
+        {
+          "name": "v-slotted",
+          "doc-url": "https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md#targeting--avoiding-slot-content",
+          "arguments": true,
+          "description": "In v3 child scoped styles are **not** affecting slot content by default. To explicitly target slot content, the `::v-slotted()` (shorthand: `:slotted()`) pseudo element can be used."
+        },
+        {
+          "name": "v-global",
+          "doc-url": "https://github.com/vuejs/rfcs/blob/master/active-rfcs/0023-scoped-styles-changes.md#one-off-global-rules",
+          "arguments": true,
+          "description": "Use `::v-global()` (shorthand: `:global()`) pseudo element to make a one-off global rule within scoped `<style>` block."
         }
       ]
     }

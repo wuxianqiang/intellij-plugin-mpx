@@ -1,0 +1,8 @@
+<idea-plugin package="com.hxz.mpxjs.libraries.prettier">
+  <dependencies>
+    <plugin id="intellij.prettierJS"/>
+  </dependencies>
+  <extensions defaultExtensionNs="com.intellij">
+    <prettierjs.codeStyleInstaller implementation="com.hxz.mpxjs.libraries.prettier.VuePrettierCodeStyleInstaller"/>
+  </extensions>
+</idea-plugin>

@@ -14,6 +14,7 @@ import com.hxz.mpxjs.model.VueInstanceOwner
 import com.hxz.mpxjs.model.createImplicitPropertySignature
 import com.hxz.mpxjs.model.source.VueContainerInfoProvider
 import com.hxz.mpxjs.types.VueComponentInstanceType
+import com.hxz.mpxjs.types.asCompleteType
 
 class VuelidateContainerInfoProvider : VueContainerInfoProvider {
 
@@ -37,10 +38,11 @@ class VuelidateContainerInfoProvider : VueContainerInfoProvider {
                                       ?: return emptyList()
 
     val compositeVuelidateType = JSCompositeTypeFactory.createIntersectionType(
-      listOf(parametrizedValidationProps.copyWithStrict(false),
-             validationGroups.jsType.copyWithStrict(false),
-             validation.jsType.copyWithStrict(false)),
-      validationPropsType.source.copyWithStrict(false))
+      listOf(parametrizedValidationProps.copyWithStrict(true),
+             validationGroups.jsType.copyWithStrict(true),
+             validation.jsType.copyWithStrict(true)),
+      validationPropsType.source.copyWithStrict(true))
+      .asCompleteType()
 
     return listOf(createImplicitPropertySignature("\$v", compositeVuelidateType,
                                                   standardProperties["\$v"]?.memberSource?.singleElement ?: source,

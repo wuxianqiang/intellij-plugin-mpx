@@ -1,0 +1,65 @@
+// Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+package com.hxz.mpxjs.web
+
+import com.intellij.html.webSymbols.attributes.WebSymbolAttributeDescriptor
+import com.intellij.psi.xml.XmlAttribute
+import com.intellij.psi.xml.XmlTag
+import com.intellij.webSymbols.WebSymbol.Companion.NAMESPACE_HTML
+import com.intellij.webSymbols.query.WebSymbolsQueryExecutorFactory
+import com.intellij.webSymbols.utils.hideFromCompletion
+import com.hxz.mpxjs.codeInsight.ATTR_ARGUMENT_PREFIX
+import com.hxz.mpxjs.codeInsight.ATTR_DIRECTIVE_PREFIX
+import com.hxz.mpxjs.codeInsight.ATTR_SLOT_SHORTHAND
+import com.hxz.mpxjs.codeInsight.attributes.VueAttributeNameParser
+import com.hxz.mpxjs.web.VueWebSymbolsQueryConfigurator.Companion.KIND_VUE_DIRECTIVE_ARGUMENT
+import java.util.function.Predicate
+
+class VueAttributeNameCodeCompletionFilter(tag: XmlTag) : Predicate<String> {
+
+  private val names = mutableSetOf<String>()
+
+  init {
+    tag.attributes.forEach { addAliases(it) }
+  }
+
+  override fun test(name: String): Boolean =
+    !names.contains(name)
+
+  private fun addAliases(attr: XmlAttribute) {
+    val info = VueAttributeNameParser.parse(attr.name, attr.parent)
+    names.add(attr.name)
+    if (info is VueAttributeNameParser.VueDirectiveInfo) {
+      val descriptor = attr.descriptor as? WebSymbolAttributeDescriptor
+      when (info.directiveKind) {
+        VueAttributeNameParser.VueDirectiveKind.ON -> return
+        VueAttributeNameParser.VueDirectiveKind.BIND -> {
+          if (info.arguments != null) {
+            names.add(ATTR_ARGUMENT_PREFIX + info.arguments)
+            names.add(ATTR_DIRECTIVE_PREFIX + info.name + ATTR_ARGUMENT_PREFIX + info.arguments)
+          }
+          else {
+            return
+          }
+        }
+        VueAttributeNameParser.VueDirectiveKind.SLOT -> {
+          names.add(ATTR_SLOT_SHORTHAND.toString())
+          names.add(ATTR_DIRECTIVE_PREFIX + info.name)
+          names.add(ATTR_DIRECTIVE_PREFIX + info.name + ATTR_ARGUMENT_PREFIX)
+        }
+        else -> {
+          val symbol = descriptor?.symbol
+          if (symbol != null
+              && WebSymbolsQueryExecutorFactory.create(attr)
+                .runNameMatchQuery(NAMESPACE_HTML, KIND_VUE_DIRECTIVE_ARGUMENT, "", scope = listOf(symbol))
+                .count { !it.hideFromCompletion } == 0
+          ) {
+            names.add(ATTR_DIRECTIVE_PREFIX + info.name)
+          }
+        }
+      }
+    }
+    else {
+      names.add(info.name)
+    }
+  }
+}

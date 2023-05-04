@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang.html
+package org.jetbrains.vuejs.lang.html
 
 import com.intellij.html.HtmlParsingTest
 import com.intellij.html.embedding.HtmlEmbeddedContentSupport
@@ -39,10 +39,10 @@ import org.intellij.plugins.postcss.PostCssLanguage
 import org.intellij.plugins.postcss.descriptors.PostCssElementDescriptorProvider
 import org.intellij.plugins.postcss.parser.PostCssParserDefinition
 import org.intellij.plugins.postcss.psi.impl.PostCssTreeElementFactory
-import com.hxz.mpxjs.lang.expr.parser.VueJSParserDefinition
-import com.hxz.mpxjs.lang.html.lexer.VueEmbeddedContentSupport
-import com.hxz.mpxjs.lang.html.parser.VueFileElementType
-import com.hxz.mpxjs.lang.html.parser.VueParserDefinition
+import org.jetbrains.vuejs.lang.expr.parser.VueJSParserDefinition
+import org.jetbrains.vuejs.lang.html.lexer.VueEmbeddedContentSupport
+import org.jetbrains.vuejs.lang.html.parser.VueFileElementType
+import org.jetbrains.vuejs.lang.html.parser.VueParserDefinition
 
 class VueParserTest : HtmlParsingTest("", "vue",
                                       VueParserDefinition(),

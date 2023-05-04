@@ -1,30 +1,41 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
-import com.intellij.codeInsight.CodeInsightSettings
 import com.intellij.codeInsight.lookup.Lookup
 import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.codeInsight.lookup.impl.LookupImpl
-import com.intellij.javascript.web.moveToOffsetBySignature
-import com.intellij.javascript.web.renderLookupItems
+import com.intellij.javascript.web.nonHtmlLookupFilter
 import com.intellij.lang.javascript.BaseJSCompletionTestCase.*
 import com.intellij.lang.javascript.JSTestUtils
-import com.intellij.lang.javascript.buildTools.npm.PackageJsonUtil
+import com.intellij.lang.javascript.JavaScriptFormatterTestBase
+import com.intellij.lang.javascript.JavascriptLanguage
+import com.intellij.lang.javascript.TypeScriptTestUtil
+import com.intellij.lang.javascript.formatter.JSCodeStyleSettings
 import com.intellij.lang.javascript.settings.JSApplicationSettings
+import com.intellij.openapi.application.WriteAction
+import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.util.RecursionManager
+import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.xml.XmlAttribute
 import com.intellij.testFramework.PlatformTestUtil
 import com.intellij.testFramework.UsefulTestCase
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
-import com.intellij.testFramework.fixtures.CodeInsightTestFixture
 import com.intellij.testFramework.fixtures.TestLookupElementPresentation
 import com.intellij.util.containers.ContainerUtil
+import com.intellij.webSymbols.*
 import junit.framework.ComparisonFailure
 import junit.framework.TestCase
-import com.hxz.mpxjs.codeInsight.toAsset
+import org.jetbrains.vuejs.codeInsight.toAsset
+import org.jetbrains.vuejs.index.VUE_CLASS_COMPONENT_MODULE
 
 class VueCompletionTest : BasePlatformTestCase() {
   override fun getTestDataPath(): String = getVueTestDataPath() + "/completion/"
+
+  override fun setUp() {
+    super.setUp()
+    // Let's ensure we don't get WebSymbols registry stack overflows randomly
+    this.enableIdempotenceChecksOnEveryCache();
+  }
 
   fun testCompleteCssClasses() {
     myFixture.configureByText("a.css", ".externalClass {}")
@@ -80,7 +91,33 @@ import compUI from 'compUI.vue'
   fun testCompleteWithImport() {
     configureTextsForCompleteLocalComponent()
 
-    noAutoComplete(Runnable {
+    noAutoComplete {
+      myFixture.completeBasic()
+      UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "to-import")
+      myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
+      myFixture.checkResult("""
+<template>
+<to-import<caret>
+</template>
+<script>
+import ToImport from "./toImport.vue";
+
+export default {
+  components: {ToImport}
+}
+</script>
+""")
+    }
+  }
+
+
+  fun testCompleteWithImportNoExtension() {
+    JavaScriptFormatterTestBase.setTempSettings<JSCodeStyleSettings>(project, JavascriptLanguage.INSTANCE) {
+      it.USE_EXPLICIT_JS_EXTENSION = JSCodeStyleSettings.UseExplicitExtension.FALSE
+    }
+    configureTextsForCompleteLocalComponent()
+
+    noAutoComplete {
       myFixture.completeBasic()
       UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "to-import")
       myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
@@ -90,12 +127,13 @@ import compUI from 'compUI.vue'
 </template>
 <script>
 import ToImport from "./toImport";
+
 export default {
   components: {ToImport}
 }
 </script>
 """)
-    })
+    }
   }
 
   private fun configureTextsForCompleteLocalComponent(tsLang: Boolean = false) {
@@ -125,7 +163,7 @@ export default {
     val before = jsApplicationSettings.isUseJavaScriptAutoImport
     jsApplicationSettings.isUseJavaScriptAutoImport = false
     try {
-      noAutoComplete(Runnable {
+      noAutoComplete {
         myFixture.completeBasic()
         UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "to-import")
         myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
@@ -138,7 +176,7 @@ export default {
 }
 </script>
 """)
-      })
+      }
     }
     finally {
       jsApplicationSettings.isUseJavaScriptAutoImport = before
@@ -151,7 +189,7 @@ export default {
     val before = jsApplicationSettings.isUseTypeScriptAutoImport
     jsApplicationSettings.isUseTypeScriptAutoImport = false
     try {
-      noAutoComplete(Runnable {
+      noAutoComplete {
         myFixture.completeBasic()
         UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "to-import")
         myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
@@ -164,7 +202,7 @@ export default {
 }
 </script>
 """)
-      })
+      }
     }
     finally {
       jsApplicationSettings.isUseTypeScriptAutoImport = before
@@ -187,7 +225,7 @@ export default {
 </script>
 """)
 
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.completeBasic()
       UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "ToImport")
       myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
@@ -196,20 +234,23 @@ export default {
 <ToImport<caret>></ToImport>
 </template>
 <script>
-import ToImport from "./toImport";
-export default {
+import {defineComponent} from "vue";
+import ToImport from "./toImport.vue";
+
+export default defineComponent({
   components: {ToImport}
-}
+})
 </script>
 """)
-    })
+    }
   }
 
   fun testCompleteWithImportCreateScript() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
     myFixture.configureByText("toImport.vue", """
 <script>
 export default {
-  name: 'toImport'
+  name: 'toBeImported'
 }
 </script>
 """)
@@ -219,24 +260,26 @@ export default {
 </template>
 """)
 
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.completeBasic()
-      UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "to-import")
+      UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "to-be-imported")
       myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
       myFixture.checkResult("""
 <template>
-<to-import
+<to-be-imported
 </template>
 <script>
-import ToImport from "./toImport";
+import ToBeImported from "./toImport.vue";
+
 export default {
-  components: {ToImport}
+  components: {ToBeImported}
 }
 </script>""")
-    })
+    }
   }
 
   fun testCompleteWithImportCreateScriptNoExport() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
     myFixture.configureByText("toImport.vue", """
 """)
     myFixture.configureByText("CompleteWithImportCreateScript.vue", """
@@ -245,7 +288,7 @@ export default {
 </template>
 """)
 
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.completeBasic()
       UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "to-import")
       myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
@@ -254,12 +297,13 @@ export default {
 <to-import
 </template>
 <script>
-import ToImport from "./toImport";
+import ToImport from "./toImport.vue";
+
 export default {
   components: {ToImport}
 }
 </script>""")
-    })
+    }
   }
 
   fun testCompleteWithoutImportForRenamedGlobalComponent() {
@@ -286,7 +330,7 @@ export default {
 </script>
 """)
 
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.completeBasic()
       UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "renamed-component")
       myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
@@ -299,7 +343,7 @@ export default {
 }
 </script>
 """)
-    })
+    }
   }
 
   fun testCompleteWithoutImportForGlobalComponent() {
@@ -326,7 +370,7 @@ export default {
 </script>
 """)
 
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.completeBasic()
       UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "lib2-component")
       myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
@@ -339,7 +383,7 @@ export default {
 }
 </script>
 """)
-    })
+    }
   }
 
   fun testCompleteAttributesFromProps() {
@@ -503,33 +547,22 @@ export default {
   }
 
   fun testInsertAttributeWithoutValue() {
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.configureByText("InsertAttributeWithoutValue.vue", "<template v-onc<caret>></template>")
       myFixture.completeBasic()
       UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "v-once")
       myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
       myFixture.checkResult("<template v-once<caret>></template>")
-    })
+    }
   }
 
   fun testInsertAttributeWithValue() {
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.configureByText("InsertAttributeWithValue.vue", "<template v-tex<caret>></template>")
       myFixture.completeBasic()
       UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "v-text")
       myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
       myFixture.checkResult("<template v-text=\"<caret>\"></template>")
-    })
-  }
-
-  private fun noAutoComplete(callback: Runnable) {
-    val old = CodeInsightSettings.getInstance().AUTOCOMPLETE_ON_CODE_COMPLETION
-    CodeInsightSettings.getInstance().AUTOCOMPLETE_ON_CODE_COMPLETION = false
-    try {
-      callback.run()
-    }
-    finally {
-      CodeInsightSettings.getInstance().AUTOCOMPLETE_ON_CODE_COMPLETION = old
     }
   }
 
@@ -563,7 +596,7 @@ export default {
   }
 </script>
 """)
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.completeBasic()
       UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!,
                                             "first-mixin-prop", "second-mixin-prop", "hi2dden",
@@ -572,7 +605,7 @@ export default {
                                          "FirstMixinProp", "firstMixinProp",
                                          "SecondMixinProp", "secondMixinProp", "Hi2dden",
                                          "InterestingProp", "interestingProp")
-    })
+    }
   }
 
   fun testNoNotImportedMixinsInCompletion() {
@@ -601,14 +634,14 @@ export default {
   }
 </script>
 """)
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.completeBasic()
       UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "hi2dden", "interesting-prop")
       UsefulTestCase.assertDoesntContain(myFixture.lookupElementStrings!!,
                                          "Hi2dden", "interestingProp", "InterestingProp",
                                          "FirstMixinProp", "firstMixinProp", "first-mixin-prop",
                                          "SecondMixinProp", "secondMixinProp", "second-mixin-prop")
-    })
+    }
   }
 
   fun testNoCompletionInVueAttributes() {
@@ -674,15 +707,15 @@ export default {
   }
 </script>
 """)
-    noAutoComplete(Runnable {
+    noAutoComplete {
       myFixture.completeBasic()
-      TestCase.assertNotNull(myFixture.lookupElements)
+      assertNotNull(myFixture.lookupElements)
       val item: LookupElement? = myFixture.lookupElements?.firstOrNull { "callMe" == it.lookupString }
-      TestCase.assertNotNull(item)
+      assertNotNull(item)
       val presentation = TestLookupElementPresentation.renderReal(item!!)
-      TestCase.assertEquals("number", presentation.typeText)
-      TestCase.assertEquals("(aaa, bbb)" + getLocationPresentation("default.methods", "PrettyLookup.vue"), presentation.tailText)
-    })
+      assertEquals("number", presentation.typeText)
+      assertEquals("(aaa, bbb)" + getLocationPresentation("default.methods", "PrettyLookup.vue"), presentation.tailText)
+    }
   }
 
   fun testCompleteVBind() {
@@ -736,43 +769,12 @@ $script""")
     UsefulTestCase.assertDoesntContain(myFixture.lookupElementStrings!!, ":use-me", ":v-for", ":v-bind", ":onclick", ":onchange")
   }
 
-  fun testVueOutObjectLiteralCompletion() {
-    myFixture.configureVueDependencies(VueTestModule.VUE_2_5_3)
-    myFixture.configureByText("VueOutObjectLiteralCompletion.vue", """
-    <script>
-      export default {
-        <caret>
-      }
-    </script>
-""")
-    myFixture.completeBasic()
-    assertVueExportedObjectCompletionVariants()
+  fun testVueOutObjectLiteral() {
+    doLookupTest(VueTestModule.VUE_2_5_3, renderPriority = false, renderTypeText = false)
   }
 
-  private fun assertVueExportedObjectCompletionVariants() {
-    assertSameElements(myFixture.lookupElementStrings!!, listOf("activated", "beforeCreate", "beforeDestroy", "beforeMount",
-                                                                "beforeUpdate", "comments", "compile", "component", "components",
-                                                                "computed", "config", "created", "data", "deactivated", "delete",
-                                                                "delimiters", "destroyed", "directive", "directives", "el",
-                                                                "errorCaptured", "extend", "extends", "filter", "filters",
-                                                                "functional", "inheritAttrs", "inject", "methods", "mixin",
-                                                                "mixins", "model", "mounted", "name", "nextTick", "parent",
-                                                                "props", "propsData", "provide", "render", "renderError",
-                                                                "set", "staticRenderFns", "template", "transitions", "updated",
-                                                                "use", "watch"))
-  }
-
-  fun testVueOutObjectLiteralCompletionTs() {
-    myFixture.configureVueDependencies(VueTestModule.VUE_2_5_3)
-    myFixture.configureByText("VueOutObjectLiteralCompletionTs.vue", """
-    <script lang="ts">
-      export default {
-        <caret>
-      }
-    </script>
-""")
-    myFixture.completeBasic()
-    assertVueExportedObjectCompletionVariants()
+  fun testVueOutObjectLiteralTs() {
+    doLookupTest(VueTestModule.VUE_2_5_3, renderPriority = false, renderTypeText = false)
   }
 
   fun testVueOutObjectLiteralCompletionJsx() {
@@ -895,6 +897,12 @@ $script""")
     UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, listOf("affix", "alert", "auto-complete", "avatar"))
   }
 
+  fun testIview3Completion() {
+    doLookupTest(VueTestModule.IVIEW_3_5_4, locations = listOf("v-bind:<caret>", "v-on:<caret>")) {
+      !it.startsWith("aria-")
+    }
+  }
+
   fun testBootstrapVueCompletion() {
     myFixture.configureVueDependencies(VueTestModule.BOOTSTRAP_VUE_2_0_0_RC_11)
     myFixture.configureByText("BoostrapVue.vue",
@@ -985,6 +993,8 @@ $script""")
   }
 
   fun testComponentInsertion() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
+    createPackageJsonWithVueDependency(myFixture, """"$VUE_CLASS_COMPONENT_MODULE": "*"""")
     val data = listOf(
       Pair("""<template>
   <Sho<caret>
@@ -995,7 +1005,8 @@ $script""")
 <script>
 import Vue from "vue";
 import {Component} from "vue-class-component";
-import ShortComponent from "./ShortComponent";
+import ShortComponent from "./ShortComponent.vue";
+
 @Component({
   components: {ShortComponent}
 })
@@ -1012,7 +1023,8 @@ export default class ComponentInsertion extends Vue {
 <script>
 import Vue from "vue";
 import {Component} from "vue-class-component";
-import ShortComponent from "./ShortComponent";
+import ShortComponent from "./ShortComponent.vue";
+
 @Component({
   components: {ShortComponent}
 })
@@ -1032,7 +1044,8 @@ import Vue from "vue";
 <script>
 import Vue from "vue";
 import {Component} from "vue-class-component";
-import ShortComponent from "./ShortComponent";
+import ShortComponent from "./ShortComponent.vue";
+
 @Component({
   components: {ShortComponent}
 })
@@ -1053,7 +1066,8 @@ import {Component} from "vue-class-component";
 <script>
 import {Component} from "vue-class-component";
 import Vue from "vue";
-import ShortComponent from "./ShortComponent";
+import ShortComponent from "./ShortComponent.vue";
+
 @Component({
   components: {ShortComponent}
 })
@@ -1080,7 +1094,7 @@ export default class ComponentInsertion extends Vue {
 <script>
 import Vue from "vue";
 import {Component} from "vue-class-component";
-import ShortComponent from "./ShortComponent";
+import ShortComponent from "./ShortComponent.vue";
 @Component({
   name: "a123",
   components: {ShortComponent}
@@ -1169,7 +1183,7 @@ export default class ComponentInsertion extends Vue {
   }
 
   fun testNoImportInsertedForRecursivelyLocalComponent() {
-    noAutoComplete(Runnable {
+    noAutoComplete {
       defineRecursiveMixedMixins(myFixture)
       myFixture.configureByText("CompletionWithRecursiveMixins.vue", """
         <template>
@@ -1184,7 +1198,7 @@ export default class ComponentInsertion extends Vue {
           <HiddenComponent from-hidden="" from-d=""<caret>
         </template>
       """)
-    })
+    }
 
   }
 
@@ -1204,10 +1218,10 @@ export default class ComponentInsertion extends Vue {
     myFixture.configureByText("foo.vue", "<template> <BAlert @<caret> </template>")
     myFixture.completeBasic()
     myFixture.assertPreferredCompletionItems(0, // first 3 items come from the BAlert component
-                                             "@dismiss-count-down", "@dismissed", "@input",
-                                             "@abort", "@auxclick", "@blur", "@cancel", "@canplay",
-                                             "@canplaythrough", "@change", "@click", "@close", "@contextmenu",
-                                             "@copy", "@cuechange", "@cut", "@dblclick")
+                                             "@dismiss-count-down", "@dismissCountDown", "@dismissed", "@input",
+                                             "@abort", "@auxclick", "@beforeinput", "@beforematch", "@blur", "@cancel", "@canplay",
+                                             "@canplaythrough", "@change", "@click", "@close", "@contextlost", "@contextmenu",
+                                             "@contextrestored", "@copy", "@cuechange", "@cut", "@dblclick")
 
     myFixture.configureByText("foo.vue", "<template> <BAlert @inp<caret> </template>")
     myFixture.completeBasic()
@@ -1216,7 +1230,8 @@ export default class ComponentInsertion extends Vue {
     myFixture.configureByText("foo.vue", "<template> <div @c<caret> </template>")
     myFixture.completeBasic()
     assertSameElements(myFixture.lookupElementStrings!!, "@copy", "@cancel", "@click", "@canplaythrough", "@close",
-                       "@change", "@canplay", "@cut", "@cuechange", "@contextmenu")
+                       "@change", "@canplay", "@cut", "@cuechange", "@contextlost", "@contextmenu", "@contextrestored", ".capture",
+                       ".once", ".passive", ".prevent", ".self", ".stop")
   }
 
   fun testEventsAfterVOn() {
@@ -1227,7 +1242,7 @@ export default class ComponentInsertion extends Vue {
 
     myFixture.configureByText("foo.vue", "<template> <div v-on:<caret> </template>")
     myFixture.completeBasic()
-    myFixture.assertPreferredCompletionItems(0, "abort", "auxclick", "blur",
+    myFixture.assertPreferredCompletionItems(0, "abort", "auxclick", "beforeinput", "beforematch", "blur",
                                              "cancel", "canplay", "canplaythrough", "change", "click")
   }
 
@@ -1265,7 +1280,7 @@ export default class ComponentInsertion extends Vue {
     myFixture.assertPreferredCompletionItems(0, "v-on:", "v-on")
     (myFixture.lookup as LookupImpl).finishLookup(Lookup.NORMAL_SELECT_CHAR)
     // new completion must start
-    myFixture.assertPreferredCompletionItems(0, "abort", "auxclick", "blur", "cancel", "canplay")
+    myFixture.assertPreferredCompletionItems(0, "abort", "auxclick", "beforeinput", "beforematch", "blur", "cancel", "canplay")
     (myFixture.lookup as LookupImpl).finishLookup(Lookup.NORMAL_SELECT_CHAR)
     myFixture.checkResult("<div v-on:abort=\"<caret>\">")
   }
@@ -1373,49 +1388,15 @@ export default class ComponentInsertion extends Vue {
   }
 
   fun testCompletionPriorityAndHints() {
-    myFixture.copyDirectoryToProject("hierarchy", ".")
-    myFixture.configureVueDependencies(VueTestModule.VUETIFY_1_2_10, VueTestModule.SHARDS_VUE_1_0_5)
-    myFixture.configureFromTempProjectFile("App.vue")
-    myFixture.completeBasic()
-    assertEquals(listOf("!HW#null#100", "HelloApp#null#50", "DCardHeader#@shards/vue#10", "HeyWorld#null#10",
-                        "VBottomSheet#vuetify#10", "VBottomSheetTransition#vuetify#10", "VCheckbox#vuetify#10", "VChip#vuetify#10",
-                        "VDatePickerHeader#vuetify#10", "VDatePickerMonthTable#vuetify#10", "VHover#vuetify#10",
-                        "VStepperHeader#vuetify#10", "VSubheader#vuetify#10", "VSwitch#vuetify#10", "HelloWorld#null#1"),
-                 myFixture.renderLookupItems(renderPriority = true, renderTypeText = true)
-                   .filter { !it.contains("html") })
+    doLookupTest(VueTestModule.VUETIFY_1_2_10, VueTestModule.SHARDS_VUE_1_0_5, dir = true, lookupFilter = nonHtmlLookupFilter)
   }
 
   fun testCompletionPriorityAndHintsBuiltInTags() {
-    myFixture.configureVueDependencies(VueTestModule.VUE_2_5_3)
-    myFixture.configureByText("b-component.vue", """
-      <template>
-        <<caret>
-      <template>
-    """)
-    myFixture.completeBasic()
-    assertEquals(listOf("Component#vue#10", "KeepAlive#vue#10", "Slot#vue#10", "Transition#vue#10", "TransitionGroup#vue#10",
-                        "component#vue#10", "keep-alive#vue#10", "slot#vue#10", "transition#vue#10", "transition-group#vue#10"),
-                 myFixture.renderLookupItems(renderPriority = true, renderTypeText = true)
-                   .filter { !it.contains("http://www.w3.org") })
+    doLookupTest(VueTestModule.VUE_2_5_3, lookupFilter = nonHtmlLookupFilter)
   }
 
   fun testDirectiveCompletionOnComponent() {
-    myFixture.configureVueDependencies(VueTestModule.VUETIFY_1_3_7)
-    myFixture.configureByText("a-component.vue", """
-      <template>
-        <v-list>
-            <v-list-tile
-                    v-for="color in ['primary', 'secondary', 'info', 'success', 'warning', 'error']"
-                    :key="color"
-                    v<caret>
-            >
-                <v-list-tile-title>Item with "{{ color }}" class</v-list-tile-title>
-            </v-list-tile>
-        </v-list>
-      </template>
-    """)
-    myFixture.completeBasic()
-    assertContainsElements(myFixture.lookupElementStrings!!, "v-ripple", "v-resize", "v-scroll")
+    doLookupTest(VueTestModule.VUETIFY_1_3_7, renderPriority = false, renderTypeText = false, containsCheck = true)
   }
 
   fun testBuiltInTagsAttributeCompletion() {
@@ -1430,65 +1411,44 @@ export default class ComponentInsertion extends Vue {
   }
 
   fun testBindProposalsPriority() {
-    myFixture.configureVueDependencies(VueTestModule.VUETIFY_1_2_10)
-    myFixture.configureByText("b-component.vue", """
-      <template>
-        <v-alert v-bind:<caret>
-      <template>
-    """)
-    myFixture.completeBasic()
-    assertEquals(
-      listOf("!color#100+7", "!dismissible#100+7", "!icon#100+7", "!mode#100+7", "!origin#100+7", "!outline#100+7", "!transition#100+7",
-             "!type#100+7", "!value#100+7", "about#1+6", "accesskey#1+6", "align#1+6", "autocapitalize#1+6", "autofocus#1+6", "class#1+6",
-             "content#1+6", "contenteditable#1+6", "datafld#1+6", "dataformatas#1+6", "datasrc#1+6", "datatype#1+6", "dir#1+6",
-             "draggable#1+6", "hidden#1+6", "id#1+6", "inlist#1+6", "inputmode#1+6", "is#1+6", "itemid#1+6", "itemprop#1+6", "itemref#1+6",
-             "itemscope#1+6", "itemtype#1+6", "lang#1+6", "nonce#1+6", "prefix#1+6", "property#1+6", "rel#1+6", "resource#1+6", "rev#1+6",
-             "role#1+6", "spellcheck#1+6", "style#1+6", "tabindex#1+6", "title#1+6", "translate#1+6", "typeof#1+6", "vocab#1+6",
-             "key#1+5", "ref#1+5", "~slot#0+5"),
-      myFixture.renderLookupItems(renderPriority = true, renderTypeText = false, renderProximity = true)
-        .filter { !it.contains("aria-") })
+    doLookupTest(VueTestModule.VUETIFY_1_2_10, VueTestModule.VUE_2_6_10, renderTypeText = false, renderProximity = true) {
+      !it.contains("aria-") && !it.startsWith("on")
+    }
   }
 
   fun testBindProposalsStdTag() {
-    createPackageJsonWithVueDependency(myFixture)
-    myFixture.configureByText("b-component.vue", """
-      <template>
-        <a v-bind:<caret>
-      <template>
-    """)
-    myFixture.completeBasic()
-    assertEquals(
-      listOf("about", "accesskey", "autocapitalize", "autofocus", "charset", "class", "content", "contenteditable", "coords",
-             "datatype", "dir", "download", "draggable", "hidden", "href", "hreflang", "id", "inlist", "inputmode", "is", "itemid",
-             "itemprop", "itemref", "itemscope", "itemtype", "key", "lang", "methods", "name", "nonce", "prefix", "property", "ref",
-             "referrerpolicy", "rel", "resource", "rev", "role", "shape", "slot", "spellcheck", "style", "tabindex", "target",
-             "title", "translate", "type", "typeof", "urn", "vocab"),
-      myFixture.lookupElementStrings!!
-        .filter { !it.contains("aria-") }
-        .sorted())
+    doLookupTest(VueTestModule.VUE_2_6_10, renderPriority = false, renderTypeText = false) {
+      !it.contains("aria-")
+    }
   }
 
-  fun testAttributeNamePriority() {
-    myFixture.configureVueDependencies(VueTestModule.VUETIFY_1_2_10)
-    myFixture.configureByText("b-component.vue", """
-      <template>
-        <v-alert <caret>
-      <template>
-    """)
-    myFixture.completeBasic()
-    assertEquals(
-      listOf("!color#100+12", "!dismissible#100+12", "!icon#100+12", "!mode#100+12", "!origin#100+12", "!outline#100+12",
-             "!transition#100+12", "!type#100+12", "!value#100+12", "##10+10", ":#10+10", "@#10+10", "v-bind:#10+5", "v-model:#10+5",
-             "v-on:#10+5", "v-slot:#10+5", "v-bind#10+0", "v-cloak#10+0", "v-else#10+0", "v-else-if#10+0", "v-for#10+0", "v-html#10+0",
-             "v-if#10+0", "v-is#10+0", "v-model#10+0", "v-on#10+0", "v-once#10+0", "v-pre#10+0", "v-show#10+0", "v-slot#10+0",
-             "v-text#10+0", "is#1+0", "key#1+0", "ref#1+0", "about#0+0", "accesskey#0+0", "align#0+0", "autocapitalize#0+0",
-             "autofocus#0+0", "class#0+0", "content#0+0", "contenteditable#0+0", "datafld#0+0", "dataformatas#0+0", "datasrc#0+0",
-             "datatype#0+0", "dir#0+0", "draggable#0+0", "hidden#0+0", "id#0+0", "inlist#0+0", "inputmode#0+0", "itemid#0+0",
-             "itemprop#0+0", "itemref#0+0", "itemscope#0+0", "itemtype#0+0", "lang#0+0", "nonce#0+0", "prefix#0+0", "property#0+0",
-             "rel#0+0", "resource#0+0", "rev#0+0", "role#0+0", "~slot#0+0", "~slot-scope#0+0", "spellcheck#0+0", "style#0+0",
-             "tabindex#0+0", "title#0+0", "translate#0+0", "typeof#0+0", "vocab#0+0", "xml:base#0+0", "xml:lang#0+0", "xml:space#0+0"),
-      myFixture.renderLookupItems(renderPriority = true, renderTypeText = false, renderProximity = true)
-        .filter { !it.contains("aria-") && !it.startsWith("on") })
+  private fun doAttributeNamePriorityTest(vueVersion: VueTestModule) {
+    doLookupTest(VueTestModule.VUETIFY_1_2_10, vueVersion,
+                 fileContents = """
+         <template>
+          <v-alert <caret>
+        <template>
+      """.trimIndent(),
+                 renderTypeText = false,
+                 renderProximity = true) {
+      !it.contains("aria-") && !it.startsWith("on")
+    }
+  }
+
+  fun testAttributeNamePriorityVue26() {
+    doAttributeNamePriorityTest(VueTestModule.VUE_2_6_10)
+  }
+
+  fun testAttributeNamePriorityVue30() {
+    doAttributeNamePriorityTest(VueTestModule.VUE_3_0_0)
+  }
+
+  fun testAttributeNamePriorityVue31() {
+    doAttributeNamePriorityTest(VueTestModule.VUE_3_1_0)
+  }
+
+  fun testAttributeNamePriorityVue32() {
+    doAttributeNamePriorityTest(VueTestModule.VUE_3_2_2)
   }
 
   fun testComplexComponentDecoratorCompletion() {
@@ -1556,38 +1516,34 @@ export default class ComponentInsertion extends Vue {
       }
   }
 
-  fun testSlotPropsCompletion() {
-    myFixture.configureByFile("slotProps.vue")
-    myFixture.completeBasic()
-    assertContainsElements(myFixture.lookupElementStrings!!, "foo", "bar", "headerProps", "vFor")
-    assertDoesntContain(myFixture.lookupElementStrings!!, "header1Props", "vFor2")
+  fun testSlotProps() {
+    doLookupTest(renderPriority = true, renderTypeText = false) {
+      // Ignore global objects
+      item ->
+      !item.endsWith("#1")
+    }
   }
 
   fun testVueDefaultSymbolsWithDefinitions() {
-    myFixture.configureVueDependencies(VueTestModule.VUE_2_5_3)
-    testVueDefaultSymbols()
+    doLookupTest(VueTestModule.VUE_2_5_3, locations = listOf(
+      "v-on:click=\"<caret>\"",
+      "v-bind:about=\"<caret>\""
+    )) {
+      // Ignore global objects
+      item ->
+      !item.endsWith("#1")
+    }
   }
 
-  @Suppress("MemberVisibilityCanBePrivate")
   fun testVueDefaultSymbols() {
-    myFixture.configureByFile("vueDefaultSymbols.vue")
-
-    myFixture.moveToOffsetBySignature("v-on:click=\"<caret>\"")
-    myFixture.completeBasic()
-    assertContainsElements(myFixture.lookupElementStrings!!, "\$event", "\$emit", "\$root", "\$props", "\$refs")
-
-    myFixture.moveToOffsetBySignature("v-bind:about=\"<caret>\"")
-    myFixture.completeBasic()
-    assertContainsElements(myFixture.lookupElementStrings!!, "\$emit", "\$root", "\$props", "\$refs")
-    assertDoesntContain(myFixture.lookupElementStrings!!, "\$event")
+    doLookupTest(locations = listOf(
+      "v-on:click=\"<caret>\"",
+      "v-bind:about=\"<caret>\""
+    ))
   }
 
   fun testSlotTag() {
-    myFixture.configureVueDependencies(VueTestModule.VUE_2_5_3)
-    myFixture.configureByFile("slotTag.vue")
-
-    myFixture.completeBasic()
-    assertContainsElements(myFixture.lookupElementStrings!!, "name")
+    doLookupTest(VueTestModule.VUE_2_5_3, containsCheck = true, renderPriority = true, renderTypeText = false)
   }
 
   fun testSlotNameCompletion() {
@@ -1611,22 +1567,14 @@ export default class ComponentInsertion extends Vue {
     }
   }
 
-  fun testFiltersCompletion() {
+  fun testFilters() {
     createPackageJsonWithVueDependency(myFixture, "\"some_lib\": \"0.0.0\"")
-    myFixture.copyDirectoryToProject("filters", ".")
-    myFixture.configureFromTempProjectFile("App.vue")
-    myFixture.completeBasic()
-    TestCase.assertEquals(listOf("localFilter", "globalFilter", "appFilter"/*, "webTypesFilter"*/).sorted(),
-                          myFixture.lookupElementStrings!!.sorted())
+    doLookupTest(dir = true, renderTypeText = false, renderPriority = false)
   }
 
   fun testComplexThisContext() {
-    myFixture.configureVueDependencies(VueTestModule.VUEX_3_1_0, VueTestModule.VUE_2_5_3)
-    myFixture.configureByFile("complexThisContext.vue")
-    myFixture.completeBasic()
-    assertContainsElements(myFixture.lookupElementStrings!!,
-                           "\$store", "exampleComputed", "anotherComputed",
-                           "exampleMethod", "anotherMethod")
+    doLookupTest(VueTestModule.VUEX_3_1_0, VueTestModule.VUE_2_5_3,
+                 renderTypeText = false, renderPriority = false)
   }
 
   fun testTopLevelTagsNoI18n() {
@@ -1656,86 +1604,84 @@ export default class ComponentInsertion extends Vue {
     }
   }
 
+  fun testScriptLangAttributeWithAlreadyPresentCode() {
+    myFixture.configureByText("Test.vue", """
+      <script la<caret>>
+      export default {
+        name: "Test"
+      };
+      </script>
+    """.trimIndent())
+    myFixture.completeBasic()
+    myFixture.finishLookup('\t')
+    myFixture.checkResult("""
+      <script lang="<caret>">
+      export default {
+        name: "Test"
+      };
+      </script>
+    """.trimIndent())
+  }
+
   fun testComputedTypeTS() {
-    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
-    myFixture.configureByFile("computedTypeTS.vue")
-    for (test in listOf("{{ a<caret>", "this.<caret>")) {
-      myFixture.moveToOffsetBySignature("{{ a<caret>")
-      myFixture.completeBasic()
-      assertContainsElements(myFixture.renderLookupItems(false, true), "annualReportPeriodId#12")
-    }
+    doLookupTest(VueTestModule.VUE_2_6_10, renderPriority = false, locations = listOf(
+      "{{ a<caret>",
+      "this.<caret>"
+    ))
   }
 
   fun testComputedTypeJS() {
-    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
-    myFixture.configureByFile("computedTypeJS.vue")
-    for (test in listOf("{{ a<caret>", "this.<caret>")) {
-      myFixture.moveToOffsetBySignature("{{ a<caret>")
-      myFixture.completeBasic()
-      assertContainsElements(myFixture.renderLookupItems(false, true), "annualReportPeriodId#number")
-    }
+    doLookupTest(VueTestModule.VUE_2_6_10, renderPriority = false, locations = listOf(
+      "{{ a<caret>",
+      "this.<caret>"
+    ))
   }
 
   fun testDataTypeTS() {
-    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
-    myFixture.configureByFile("dataTypeTS.vue")
-    for (test in listOf("this.<caret>msg\"", "= this.<caret>userInput")) {
-      myFixture.moveToOffsetBySignature(test)
-      myFixture.completeBasic()
-      assertContainsElements(myFixture.renderLookupItems(false, true),
-                             "msg#Number", "userInput#string", "tasks#string[]")
+    doLookupTest(VueTestModule.VUE_2_6_10, renderPriority = false, locations = listOf(
+      "this.<caret>msg\"",
+      "= this.<caret>userInput"
+    )) {
+      !it.startsWith("\$")
     }
   }
 
   fun testCustomModifiers() {
     createPackageJsonWithVueDependency(myFixture, """"test-lib":"0.0.0"""")
-    myFixture.copyDirectoryToProject("modifiers", ".")
-    myFixture.configureFromTempProjectFile("App.vue")
-    myFixture.completeBasic()
-    assertEquals(listOf(".ba", ".foo"), myFixture.lookupElementStrings!!)
+    doLookupTest(dir = true, renderPriority = false, renderTypeText = false)
   }
 
-  fun testVue2CompositionApiCompletion() {
-    myFixture.configureVueDependencies(VueTestModule.COMPOSITION_API_0_4_0)
-    myFixture.configureByFile("compositionAPI/count-vue2.vue")
-    myFixture.completeBasic()
-    UsefulTestCase.assertContainsElements(myFixture.renderLookupItems(true, false), "!foo#101", "!state#101")
-    // myFixture.type("foo.") <== makes test stuck
-    myFixture.moveToOffsetBySignature("{{foo.<caret>}}")
-    myFixture.completeBasic()
-    UsefulTestCase.assertDoesntContain(myFixture.renderLookupItems(false, true), "value#T")
-    UsefulTestCase.assertContainsElements(myFixture.renderLookupItems(true, true), "!substr#string#101")
-    myFixture.moveToOffsetBySignature("{{state.<caret>count}}")
-    myFixture.completeBasic()
-    UsefulTestCase.assertContainsElements(myFixture.renderLookupItems(true, false), "!count#101", "!double#101")
+  fun testVue2CompositionApi() {
+    doLookupTest(VueTestModule.VUE_2_6_10, VueTestModule.COMPOSITION_API_0_4_0, locations = listOf(
+      "{{<caret>}}",
+      "{{foo.<caret>}}",
+      "{{state.<caret>count}}"
+    )) {
+      // Ignore global objects
+      item ->
+      !item.endsWith("#1")
+    }
   }
 
-  fun testVue3CompositionApiCompletion() {
+  fun testVue3CompositionApi() {
     // Used TS type is recursive in itself and recursion prevention is expected
     RecursionManager.disableAssertOnRecursionPrevention(myFixture.testRootDisposable)
     RecursionManager.disableMissedCacheAssertions(myFixture.testRootDisposable)
-    myFixture.configureVueDependencies(VueTestModule.VUE_3_0_0)
-    myFixture.configureByFile("compositionAPI/count-vue3.vue")
-    myFixture.completeBasic()
-    UsefulTestCase.assertContainsElements(myFixture.renderLookupItems(true, false), "!foo#101", "!state#101")
-    // myFixture.type("foo.") <== makes test stuck
-    myFixture.moveToOffsetBySignature("{{foo.<caret>}}")
-    myFixture.completeBasic()
-    UsefulTestCase.assertDoesntContain(myFixture.renderLookupItems(false, true), "value#T")
-    UsefulTestCase.assertContainsElements(myFixture.renderLookupItems(true, true), "!substr#string#101")
-    myFixture.moveToOffsetBySignature("{{state.<caret>count}}")
-    myFixture.completeBasic()
-    UsefulTestCase.assertContainsElements(myFixture.renderLookupItems(true, false), "!count#101", "!double#101")
+
+    doLookupTest(VueTestModule.VUE_3_0_0, locations = listOf(
+      "{{<caret>}}",
+      "{{foo.<caret>}}",
+      "{{state.<caret>count}}"
+    )) {
+      // Ignore global objects
+      item ->
+      !item.endsWith("#1")
+    }
   }
 
   fun testDefineComponent() {
-    myFixture.configureVueDependencies(VueTestModule.VUE_2_5_3, VueTestModule.COMPOSITION_API_0_4_0)
-    myFixture.copyDirectoryToProject("defineComponent", "")
-    myFixture.configureByText("test.vue", "<template><<caret></template>")
-    myFixture.completeBasic()
-    assertContainsElements(myFixture.lookupElementStrings!!, "Component1", "component1",
-                           "Component2", "component2", "ComponentThree", "component-three", "Component4", "component4")
-    assertDoesntContain(myFixture.lookupElementStrings!!, "component-four", "ComponentFour")
+    doLookupTest(VueTestModule.VUE_2_5_3, VueTestModule.COMPOSITION_API_0_4_0,
+                 dir = true, fileContents = """<template><<caret></template>""", lookupFilter = nonHtmlLookupFilter)
   }
 
   fun testNoDuplicateCompletionProposals() {
@@ -1743,7 +1689,7 @@ export default class ComponentInsertion extends Vue {
     myFixture.completeBasic()
     UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "v-dir2", "v-on:", "v-bind:")
     UsefulTestCase.assertDoesntContain(myFixture.lookupElementStrings!!, "v-dir1", "v-slot", "v-slot:")
-    myFixture.type("v-on:\n")
+    myFixture.type("v-on:")
     UsefulTestCase.assertContainsElements(myFixture.lookupElementStrings!!, "click", "dblclick")
     myFixture.type("\n\" :")
     myFixture.completeBasic()
@@ -1785,19 +1731,19 @@ export default class ComponentInsertion extends Vue {
   }
 
   fun testSassGlobalFunctions() {
-    myFixture.configureByText("foo.vue", "<style lang='scss'>*{color: tra<caret> }</style>")
-    myFixture.completeBasic()
-    assertOrderedEquals(myFixture.lookupElementStrings!!, "transparent", "transparentize")
+    doLookupTest(renderTypeText = false)
   }
 
   fun testImportEmptyObjectInitializerComponent() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
     myFixture.configureByText("FooBar.vue", "<script>export default {}</script>")
     myFixture.configureByText("check.vue", "<template><<caret></template>")
     myFixture.completeBasic()
     myFixture.type("foo-\n")
     myFixture.checkResult("""<template><foo-bar</template>
 <script>
-import FooBar from "./FooBar";
+import FooBar from "./FooBar.vue";
+
 export default {
   components: {FooBar}
 }
@@ -1805,13 +1751,15 @@ export default {
   }
 
   fun testImportFunctionPropertyObjectInitializerComponent() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
     myFixture.configureByText("FooBar.vue", "<script>export default {data(){}}</script>")
     myFixture.configureByText("check.vue", "<template><<caret></template>")
     myFixture.completeBasic()
     myFixture.type("foo-\n")
     myFixture.checkResult("""<template><foo-bar</template>
 <script>
-import FooBar from "./FooBar";
+import FooBar from "./FooBar.vue";
+
 export default {
   components: {FooBar}
 }
@@ -1819,55 +1767,396 @@ export default {
   }
 
   fun testCastedObjectProps() {
-    myFixture.configureByFile("castedObjectProps.vue")
-    myFixture.moveToOffsetBySignature("post.<caret>")
-    myFixture.completeBasic()
-    assertSameElements(myFixture.renderLookupItems(true, true, false),
-                       listOf("!slug#string#101", "propertyIsEnumerable#boolean#98", "isPrototypeOf#boolean#98",
-                              "toLocaleString#string#98", "!id#number#101", "constructor#Function#98", "valueOf#Object#98",
-                              "!subtitle#string#101", "toString#string#98", "!title#string#101", "hasOwnProperty#boolean#98"))
-    myFixture.moveToOffsetBySignature("callback.<caret>")
-    myFixture.completeBasic()
-    assertSameElements(myFixture.renderLookupItems(true, true, false),
-                       listOf("!okMessage#string#101", "!cancelMessage#string#101", "propertyIsEnumerable#boolean#98",
-                              "isPrototypeOf#boolean#98",
-                              "toLocaleString#string#98", "constructor#Function#98", "valueOf#Object#98",
-                              "toString#string#98", "!title#string#101", "hasOwnProperty#boolean#98"))
-    myFixture.moveToOffsetBySignature("message.<caret>")
-    myFixture.completeBasic()
-    assertSameElements(myFixture.renderLookupItems(true, true, false),
-                       listOf("propertyIsEnumerable#boolean#98", "isPrototypeOf#boolean#98",
-                              "toLocaleString#string#98", "constructor#Function#98", "valueOf#Object#98",
-                              "toString#string#98", "!title#string#101", "hasOwnProperty#boolean#98"))
+    doLookupTest(VueTestModule.VUE_3_2_2, locations = listOf(
+      "post.<caret>",
+      "callback.<caret>",
+      "message.<caret>"
+    ))
   }
 
   fun testImportVueExtend() {
-    myFixture.configureByText("FooBar.vue", "<script>export default Vue.extend({props: {}});</script>")
-    myFixture.configureByText("Test.vue", "<script>export default Vue.extend({name: 'FooBar2'});</script>")
-    myFixture.configureByText("FooBar3.vue", "<script>export default Vue.extend({data: function(){}});</script>")
-    myFixture.configureByText("FooBar4.vue", "<script>export default Vue.extend({});</script>")
-    myFixture.configureByText("check.vue", "<template><foo-<caret></template>")
+    doLookupTest(dir = true)
+  }
+
+  fun testScriptSetup() {
+    doLookupTest(VueTestModule.VUE_3_2_2,
+                 renderPriority = false,
+                 locations = listOf(
+                   ":count=\"<caret>count\"",
+                   " v<caret>/>",
+                   ":<caret>foo=",
+                   "<<caret>Foo",
+                 ),
+                 lookupFilter = nonHtmlLookupFilter) {
+      !it.startsWith("aria-") && !it.startsWith("on") && !it.startsWith(":aria-")
+    }
+
+    myFixture.moveToOffsetBySignature("<caret>\n// write")
+    myFixture.type("fo")
     myFixture.completeBasic()
-    assertEquals("foo-bar, foo-bar2, foo-bar3, foo-bar4", (myFixture.lookupElementStrings ?: emptyList()).joinToString())
+    assertContainsElements(myFixture.lookupElementStrings!!, "foos")
+    myFixture.type("os.")
+    myFixture.completeBasic()
+    assertContainsElements(myFixture.lookupElementStrings!!, "foo")
+  }
+
+  fun testScriptSetupTs() {
+    TypeScriptTestUtil.setStrictNullChecks(project, testRootDisposable)
+    doLookupTest(VueTestModule.VUE_3_2_2,
+                 renderPriority = false,
+                 locations = listOf(
+                   ":count=\"<caret>count\"",
+                   " v<caret>/>",
+                   ":<caret>foo=",
+                   "<<caret>Foo",
+                 ),
+                 lookupFilter = nonHtmlLookupFilter) {
+      !it.startsWith("aria-") && !it.startsWith("on") && !it.startsWith(":aria-")
+    }
+
+    myFixture.moveToOffsetBySignature("<caret>\n// write")
+    myFixture.type("fo")
+    myFixture.completeBasic()
+    assertContainsElements(myFixture.lookupElementStrings!!, "foos")
+    myFixture.type("os.")
+    myFixture.completeBasic()
+    assertContainsElements(myFixture.lookupElementStrings!!, "foo")
+  }
+
+  fun testExpression() {
+    doLookupTest(VueTestModule.VUE_2_6_10) {
+      // Ignore global objects
+      item ->
+      !item.endsWith("#1")
+    }
+  }
+
+  fun testObjectLiteralProperty() {
+    doLookupTest(VueTestModule.VUE_3_2_2)
+  }
+
+  fun testEnum() {
+    doLookupTest(VueTestModule.VUE_3_2_2) {
+      // Ignore global objects
+      item ->
+      !item.endsWith("#1")
+    }
+  }
+
+  fun testScriptSetupRef() {
+    doLookupTest(VueTestModule.VUE_3_2_2)
+  }
+
+  fun testScriptSetupGlobals() {
+    doLookupTest(VueTestModule.VUE_3_2_2)
+    myFixture.type("Pro")
+    myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
+    myFixture.checkResult("""
+      <script setup>
+      defineProps()
+      </script>
+    """.trimIndent())
+  }
+
+  fun testScriptSetupGlobalsTs() {
+    doLookupTest(VueTestModule.VUE_3_2_2, dir = true)
+    myFixture.type("Pro")
+    myFixture.finishLookup(Lookup.NORMAL_SELECT_CHAR)
+    myFixture.checkResult("""
+      <script setup lang="ts">
+      defineProps()
+      </script>
+    """.trimIndent())
+  }
+
+  fun testTypedComponentsImportClassic() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_0_0, VueTestModule.HEADLESS_UI_1_4_1)
+    myFixture.configureByText("text.vue", "<template><Dial<caret></template>\n<script></script>")
+    myFixture.completeBasic()
+    myFixture.type('\n')
+    myFixture.checkResultByFile("typedComponentsImportClassic.vue")
+  }
+
+  fun testTypedComponentsImportScriptSetup() {
+    myFixture.configureVueDependencies(VueTestModule.HEADLESS_UI_1_4_1)
+    myFixture.configureByText("text.vue", "<template><Dial<caret></template>")
+    myFixture.completeBasic()
+    myFixture.type('\n')
+    myFixture.checkResultByFile("typedComponentsImportScriptSetup.vue")
+  }
+
+  fun testTypedComponentsImportScriptSetup2() {
+    myFixture.configureVueDependencies(VueTestModule.NAIVE_UI_2_19_11_NO_WEB_TYPES)
+    myFixture.configureByText("text.vue", "<template><n-a<caret></template>\n<script setup>\n</script>")
+    myFixture.completeBasic()
+    myFixture.type('\n')
+    myFixture.checkResultByFile("typedComponentsImportScriptSetup2.vue")
+  }
+
+  fun testTypedComponentsPropsAndEvents() {
+    TypeScriptTestUtil.setStrictNullChecks(project, testRootDisposable)
+    doLookupTest(VueTestModule.VUE_3_2_2,
+                 VueTestModule.HEADLESS_UI_1_4_1,
+                 VueTestModule.ELEMENT_PLUS_2_1_11_NO_WEB_TYPES,
+                 locations = listOf("Dialog v-bind:<caret>", "Dialog v-on:<caret>",
+                                    "el-affix v-bind:<caret>", "el-affix v-on:<caret>")) {
+      !it.startsWith("aria-")
+    }
+  }
+
+  fun testTypedComponentsList() {
+    doLookupTest(VueTestModule.VUE_3_2_2,
+                 VueTestModule.HEADLESS_UI_1_4_1,
+                 VueTestModule.NAIVE_UI_2_19_11_NO_WEB_TYPES,
+                 VueTestModule.ELEMENT_PLUS_2_1_11_NO_WEB_TYPES,
+                 fileContents = """<template><<caret></template>""", lookupFilter = nonHtmlLookupFilter)
+  }
+
+  fun testStyleVBind() {
+    doLookupTest(VueTestModule.VUE_3_2_2, renderPriority = false, renderTypeText = false)
+  }
+
+  fun testStyleVBindScriptSetupCss() {
+    doLookupTest(VueTestModule.VUE_3_2_2, renderPriority = false, renderTypeText = true)
+  }
+
+  fun testStyleVBindScriptSetupScss() {
+    doLookupTest(VueTestModule.VUE_3_2_2, renderPriority = false, renderTypeText = true)
+  }
+
+  fun testStyleVBindScriptSetupSass() {
+    doLookupTest(VueTestModule.VUE_3_2_2, renderPriority = false, renderTypeText = true)
+  }
+
+  fun testStyleVBindScriptSetupLess() {
+    doLookupTest(VueTestModule.VUE_3_2_2, renderPriority = false, renderTypeText = true)
+  }
+
+  fun testCreateAppIndex() {
+    myFixture.copyDirectoryToProject("../common/createApp", ".")
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.configureFromTempProjectFile("index.html")
+    doLookupTest(renderPriority = true, noConfigure = true, locations = listOf("<<caret>Boo", "<div v-<caret>"),
+                 lookupFilter = nonHtmlLookupFilter)
+    myFixture.moveToOffsetBySignature("w<<caret>")
+    myFixture.completeBasic()
+    assertDoesntContain(myFixture.lookupElementStrings!!, "Car", "Bar", "foo-bar")
+  }
+
+  fun testCreateAppIncludedComponent() {
+    myFixture.copyDirectoryToProject("../common/createApp", ".")
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.configureFromTempProjectFile("foo.vue")
+    doLookupTest(renderPriority = true, noConfigure = true, locations = listOf("<<caret>Boo", "<div v-<caret>"),
+                 lookupFilter = nonHtmlLookupFilter)
+  }
+
+  fun testCreateAppRootComponent() {
+    myFixture.copyDirectoryToProject("../common/createApp", ".")
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.configureFromTempProjectFile("App.vue")
+    doLookupTest(renderPriority = true, noConfigure = true, locations = listOf("<<caret>Boo", "<div v-<caret>"),
+                 lookupFilter = nonHtmlLookupFilter)
+  }
+
+  fun testCreateAppImportedByRootComponent() {
+    myFixture.copyDirectoryToProject("../common/createApp", ".")
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.configureFromTempProjectFile("ImportedByRoot.vue")
+    myFixture.moveToOffsetBySignature("<<caret>div")
+    doLookupTest(renderPriority = true, noConfigure = true, lookupFilter = nonHtmlLookupFilter)
+  }
+
+  fun testCreateAppNotImported() {
+    myFixture.copyDirectoryToProject("../common/createApp", ".")
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.configureFromTempProjectFile("NotImported.vue")
+    myFixture.moveToOffsetBySignature("<<caret>div")
+    doLookupTest(renderPriority = true, noConfigure = true, lookupFilter = nonHtmlLookupFilter)
+  }
+
+  fun testSlotsWithPatterns() {
+    doLookupTest(dir = true, renderPriority = false, renderPresentedText = true, locations = listOf("<template #<caret>"))
+  }
+
+  fun testSlotTypes() {
+    doLookupTest(VueTestModule.VUE_3_2_2, VueTestModule.QUASAR_2_6_5,
+                 dir = true, renderPriority = false,
+                 locations = listOf("props.<caret>key", "{<caret>selected,"))
+  }
+
+  fun testAutoImportInsertion() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2, VueTestModule.HEADLESS_UI_1_4_1)
+    myFixture.configureByFile(getTestName(true) + ".vue")
+    myFixture.completeBasic()
+    myFixture.type("al\n")
+    myFixture.checkResultByFile(getTestName(true) + ".after.vue")
+  }
+
+  fun testComponentEmitsDefinitions() {
+    doLookupTest(VueTestModule.VUE_3_2_2, dir = true, renderPriority = true, renderTypeText = false,
+                 locations = listOf("define-emits @<caret>", "define-component @<caret>", "export-component @<caret>",
+                                    "define-emits-with-type @<caret>"),
+                 filter = { it.startsWith("!") })
+  }
+
+  fun testExternalSymbolsImport() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.copyDirectoryToProject(getTestName(true), ".")
+
+    fun doTest() {
+      myFixture.moveToOffsetBySignature(":style=\"<caret>\"")
+      myFixture.completeBasic()
+      myFixture.type("Col\n.r")
+      myFixture.completeBasic()
+      myFixture.type("\n")
+
+      myFixture.moveToOffsetBySignature("key) in i<caret>")
+      myFixture.completeBasic()
+      myFixture.type("tems\n")
+
+      myFixture.moveToOffsetBySignature(" {{ <caret> }}")
+      myFixture.completeBasic()
+      myFixture.type("getTe\n")
+    }
+
+    myFixture.configureFromTempProjectFile("HelloWorld.vue")
+    doTest()
+    myFixture.checkResultByFile(getTestName(true) + "/HelloWorld.after.vue")
+
+    myFixture.configureFromTempProjectFile("HelloWorldClassic.vue")
+    doTest()
+    myFixture.checkResultByFile(getTestName(true) + "/HelloWorldClassic.after.vue")
+  }
+
+  fun testImportComponentFromTextContext() {
+    myFixture.copyDirectoryToProject(getTestName(true), ".")
+    myFixture.configureFromTempProjectFile("Check.vue")
+    myFixture.completeBasic()
+    myFixture.checkResultByFile("${getTestName(true)}/Check.after.vue")
+  }
+
+  fun testImportNoScriptOrScriptSetupComponentInCode() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.copyDirectoryToProject(getTestName(true), ".")
+    myFixture.configureByFile("test.ts")
+
+    myFixture.moveToOffsetBySignature("foo: No<caret>")
+    myFixture.completeBasic()
+    myFixture.type("ScriptC\n")
+
+    myFixture.moveToOffsetBySignature("bar: Sc<caret>")
+    myFixture.completeBasic()
+    myFixture.type("riptSet\n")
+
+    myFixture.checkResultByFile("${getTestName(true)}/test.after.ts")
+
+    myFixture.configureByFile("imports.ts")
+
+    myFixture.moveToOffsetBySignature("import No<caret>")
+    myFixture.completeBasic()
+    myFixture.type("ScriptC\n")
+
+    myFixture.moveToOffsetBySignature("import Sc<caret>")
+    myFixture.completeBasic()
+    myFixture.type("riptSet\n")
+
+    myFixture.checkResultByFile("${getTestName(true)}/imports.after.ts")
+
+  }
+
+  fun testExternalScriptComponentEdit() {
+    myFixture.copyDirectoryToProject(getTestName(true), ".")
+
+    myFixture.configureFromTempProjectFile("foo.vue")
+
+    myFixture.completeBasic()
+    myFixture.type("Col\n.r")
+    myFixture.completeBasic()
+    myFixture.type("\n")
+
+    WriteAction.run<Throwable> {
+      PsiDocumentManager.getInstance(project).commitAllDocuments()
+      FileDocumentManager.getInstance().saveAllDocuments()
+    }
+
+    myFixture.checkResultByFile("${getTestName(true)}/foo.after.vue")
+
+    myFixture.configureFromTempProjectFile("foo.js")
+    myFixture.checkResultByFile("${getTestName(true)}/foo.after.js")
+  }
+
+  fun testExternalScriptComponentImport() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.copyDirectoryToProject(getTestName(true), ".")
+    myFixture.configureFromTempProjectFile("test.vue")
+
+    myFixture.type("<")
+    myFixture.completeBasic()
+    myFixture.type("fo\n :")
+    myFixture.completeBasic()
+    myFixture.type("ms\n")
+
+    myFixture.checkResultByFile("${getTestName(true)}/test.after.vue")
   }
 
   private fun assertDoesntContainVueLifecycleHooks() {
     myFixture.completeBasic()
     assertDoesntContain(myFixture.lookupElementStrings!!, "\$el", "\$options", "\$parent")
   }
-}
 
-fun createPackageJsonWithVueDependency(fixture: CodeInsightTestFixture,
-                                       additionalDependencies: String = "") {
-  fixture.configureByText(PackageJsonUtil.FILE_NAME, """
-  {
-    "name": "test",
-    "version": "0.0.1",
-    "dependencies": {
-      "vue": "2.5.3" ${if (additionalDependencies.isBlank()) "" else ", $additionalDependencies"}
+  private fun doLookupTest(vararg modules: VueTestModule,
+                           fileContents: String? = null,
+                           dir: Boolean = false,
+                           noConfigure: Boolean = false,
+                           locations: List<String> = emptyList(),
+                           renderPriority: Boolean = true,
+                           renderTypeText: Boolean = true,
+                           renderTailText: Boolean = false,
+                           containsCheck: Boolean = false,
+                           renderProximity: Boolean = false,
+                           renderPresentedText: Boolean = false,
+                           lookupFilter: (item: LookupElement) -> Boolean = { true },
+                           filter: (item: String) -> Boolean = { true }) {
+    if (!noConfigure) {
+      if (dir) {
+        myFixture.copyDirectoryToProject(getTestName(true), ".")
+      }
+      if (modules.isNotEmpty()) {
+        myFixture.configureVueDependencies(*modules)
+      }
+      if (fileContents != null) {
+        myFixture.configureByText(getTestName(true) + ".vue", fileContents)
+      }
+      else if (dir) {
+        myFixture.configureFromTempProjectFile(getTestName(true) + ".vue")
+      }
+      else {
+        myFixture.configureByFile(getTestName(true) + ".vue")
+      }
+    }
+    if (locations.isEmpty()) {
+      myFixture.completeBasic()
+      myFixture.checkListByFile(
+        myFixture.renderLookupItems(renderPriority, renderTypeText, renderTailText, renderProximity, renderPresentedText, lookupFilter)
+          .filter(filter),
+        getTestName(true) + ".txt",
+        containsCheck
+      )
+    }
+    else {
+      locations.forEachIndexed { index, location ->
+        myFixture.moveToOffsetBySignature(location)
+        myFixture.completeBasic()
+        myFixture.checkListByFile(
+          myFixture.renderLookupItems(renderPriority, renderTypeText, renderTailText, renderProximity, renderPresentedText, lookupFilter)
+            .filter(filter),
+          getTestName(true) + ".${index + 1}.txt",
+          containsCheck
+        )
+      }
     }
   }
-  """)
 }
 
 private val VUETIFY_UNRESOLVED_COMPONENTS = setOf(
@@ -1919,7 +2208,8 @@ private val VUETIFY_UNRESOLVED_COMPONENTS = setOf(
   "v-toolbar-items",
   "v-toolbar-title"
 )
-private val VUETIFY_UNRESOLVED_COMPONENTS_WITH_PASCAL_CASE: MutableIterable<String> = ContainerUtil.concat(VUETIFY_UNRESOLVED_COMPONENTS,
-                                                                                                           VUETIFY_UNRESOLVED_COMPONENTS.map {
-                                                                                                             toAsset(it).capitalize()
-                                                                                                           })
+private val VUETIFY_UNRESOLVED_COMPONENTS_WITH_PASCAL_CASE: MutableIterable<String> = ContainerUtil.concat(
+  VUETIFY_UNRESOLVED_COMPONENTS,
+  VUETIFY_UNRESOLVED_COMPONENTS.map {
+    toAsset(it, true)
+  })

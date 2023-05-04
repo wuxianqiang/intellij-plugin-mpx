@@ -11,8 +11,8 @@ import com.intellij.psi.formatter.xml.AnotherLanguageBlockWrapper
 import com.intellij.psi.formatter.xml.SyntheticBlock
 import com.intellij.psi.formatter.xml.XmlFormattingPolicy
 import com.hxz.mpxjs.lang.expr.VueJSLanguage
-import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_END
-import com.hxz.mpxjs.lang.html.lexer.MpxTokenTypes.Companion.INTERPOLATION_START
+import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_END
+import com.hxz.mpxjs.lang.html.lexer.VueTokenTypes.Companion.INTERPOLATION_START
 
 class VueSyntheticBlock(subBlocks: List<Block>,
                         parent: Block,

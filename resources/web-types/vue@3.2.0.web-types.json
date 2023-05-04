@@ -1,0 +1,1639 @@
+{
+  "$schema": "../../../../community/platform/webSymbols/web-types-gen/resources/web-types.json",
+  "framework": "mpx",
+  "name": "mpx",
+  "version": "3.2.0",
+  "js-types-syntax": "typescript",
+  "description-markup": "markdown",
+  "default-icon": "icons/mpx.svg",
+  "framework-config": {
+    "enable-when": {
+      "node-packages": [
+        "@mpxjs/core",
+        "@mpx/cli"
+      ],
+      "file-extensions": [
+        "mpx"
+      ],
+      "ide-libraries": [
+        "@mpxjs/core"
+      ]
+    }
+  },
+  "contributions": {
+    "html": {
+      "elements": [
+        {
+          "name": "Mpx component",
+          "pattern": {
+            "items": "/html/vue-components"
+          },
+          "attributes": [
+            {
+              "name": "Component property",
+              "pattern": {
+                "or": [
+                  {
+                    "items": "props",
+                    "priority": "highest"
+                  },
+                  {
+                    "delegate": "vue-custom-prop",
+                    "priority": "lowest"
+                  }
+                ]
+              },
+              "value": {
+                "type": "of-match"
+              },
+              "vue-custom-prop": {
+                "name": "Custom event component property",
+                "pattern": "(bind|catch|bind:|catch:)(touchstart|touchmove|touchcancel|touchend|tap|longpress|longtap|transitionend|animationstart|animationiteration|animationend|touchforcechange)",
+                "doc-hide-pattern": true,
+                "attribute-value": {
+                  "required": true
+                },
+                "hide-from-completion": true
+              }
+            }
+          ]
+        },
+        {
+          "name": "template",
+          "extension": true,
+          "attributes": [
+            {
+              "name": "scope",
+              "deprecated": true,
+              "value": {
+                "kind": "expression"
+              }
+            }
+          ]
+        },
+        {
+          "name": "slot",
+          "description": "`<slot>` serve as content distribution outlets in component templates. `<slot>` itself will be replaced.",
+          "doc-url": "https://mpxjs.cn/api/builtIn.html",
+          "attributes": [
+            {
+              "name": "name",
+              "description": "Used for named slot.",
+              "value": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "attributes": [
+        {
+          "name": "data-*",
+          "description": "The `data-*` global attributes form a class of attributes called custom data attributes, that allow proprietary information to be exchanged between the HTML and its DOM representation by scripts.",
+          "doc-url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*",
+          "pattern": {
+            "template": [
+              "data-",
+              {
+                "regex": ".*"
+              }
+            ]
+          },
+          "hide-from-completion": true
+        },
+        {
+          "name": "Mpx directive",
+          "description": "Directives are special attributes with the `wx:` prefix. Directive attribute values are expected to be a single JavaScript expression (with the exception of `v-for` and `v-on`). A directive's job is to reactively apply side effects to the DOM when the value of its expression changes.",
+          "doc-url": "https://mpxjs.cn/api/directives.html",
+          "virtual": true,
+          "value": {
+            "kind": "expression",
+            "type": "any",
+            "required": false
+          },
+          "exclusive-contributions": [
+            "/html/modifiers"
+          ],
+          "pattern": {
+            "items": "/html/vue-directives",
+            "template": [
+              "wx:",
+              "#item:Vue directive",
+              {
+                "delegate": "argument",
+                "template": [
+                  ":",
+                  "#...",
+                  "#item:argument"
+                ],
+                "required": false,
+                "proximity": 5
+              },
+              {
+                "items": "/html/modifiers",
+                "template": [
+                  ".",
+                  "#item:modifier"
+                ],
+                "required": false,
+                "repeat": true
+              }
+            ]
+          }
+        },
+        {
+          "name": "event alias",
+          "description": "Attaches an event listener to the element. The event type is denoted by the argument. The expression can be a method name, an inline statement, or omitted if there are modifiers present.\n\nWhen used on a normal element, it listens to *native DOM events* only. When used on a custom element component, it listens to *custom events* emitted on that child component.\n\nWhen listening to native DOM events, the method receives the native event as the only argument. If using inline statement, the statement has access to the special `$event` property: `bind:tap=\"handle('ok', $event)\"`.\n\n`bind` also supports binding to an object of event/listener pairs without an argument. Note when using the object syntax, it does not support any modifiers.",
+          "doc-url": "https://mpxjs.cn/guide/basic/event.html",
+          "virtual": true,
+          "value": {
+            "kind": "expression",
+            "type": "any",
+            "required": false
+          },
+          "exclusive-contributions": [
+            "/html/modifiers"
+          ],
+          "pattern": {
+            "proximity": 10,
+            "delegate": "/html/vue-directives/on",
+            "template": [
+              "bind",
+              "$...",
+              {
+                "delegate": "argument",
+                "template": [
+                  "#item:bind or property name"
+                ],
+                "required": true
+              },
+              {
+                "items": "/html/modifiers",
+                "template": [
+                  ".",
+                  "#item:modifier"
+                ],
+                "required": false,
+                "repeat": true
+              }
+            ]
+          }
+        },
+        {
+          "name": "bindtouchstart",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸动作开始",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "catchtouchstart",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸动作开始",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindtouchmove",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸后移动",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "catchtouchmove",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸后移动",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindtouchcancel",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸动作被打断，如来电提醒，弹窗",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindtouchend",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸动作结束",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "catchtouchend",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸动作结束",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindtap",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸后马上离开",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "catchtap",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸后马上离开",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindlongpress",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸后，超过350ms再离开，如果指定了事件回调函数并触发了这个事件，tap事件将不被触发",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindlongtap",
+          "priority": "low",
+          "proximity": 10,
+          "description": "手指触摸后，超过350ms再离开（推荐使用 longpress 事件代替）",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindtransitionend",
+          "priority": "low",
+          "proximity": 10,
+          "description": "会在 WXSS transition 或 wx.createAnimation 动画结束后触发",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindanimationstart",
+          "priority": "low",
+          "proximity": 10,
+          "description": "会在一个 WXSS animation 动画开始时触发",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindanimationiteration",
+          "priority": "low",
+          "proximity": 10,
+          "description": "会在一个 WXSS animation 一次迭代结束时触发",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindanimationend",
+          "priority": "low",
+          "proximity": 10,
+          "description": "会在一个 WXSS animation 动画完成时触发",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        },
+        {
+          "name": "bindtouchforcechange",
+          "priority": "low",
+          "proximity": 10,
+          "description": "在支持 3D Touch 的 iPhone 设备，重按时会触发",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html",
+          "value": {
+            "type": [
+              "string"
+            ]
+          }
+        }
+      ],
+      "mpx-file-top-elements": [
+        {
+          "name": "style",
+          "priority": "high",
+          "description": "The top-level `<style>` element serves as a container for the component styles.",
+          "attributes": [
+            {
+              "name": "lang"
+            },
+            {
+              "name": "src"
+            },
+            {
+              "name": "module",
+              "value": {
+                "required": false
+              }
+            },
+            {
+              "name": "scoped",
+              "value": {
+                "kind": "no-value"
+              }
+            }
+          ]
+        },
+        {
+          "name": "script",
+          "priority": "high",
+          "description": "The top-level `<script>` element serves as a container for the component code.",
+          "attributes": [
+            {
+              "name": "lang"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "src"
+            },
+            {
+              "name": "type"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "setup",
+              "value": {
+                "kind": "expression",
+                "required": false
+              }
+            }
+          ]
+        },
+        {
+          "name": "template",
+          "priority": "high",
+          "description": "The top-level `<template>` element serves as a container for the component template contents.",
+          "attributes": [
+            {
+              "name": "lang"
+            },
+            {
+              "name": "src"
+            },
+            {
+              "name": "functional",
+              "value": {
+                "kind": "no-value"
+              }
+            }
+          ]
+        }
+      ],
+      "vue-components": [
+        {
+          "name": "script",
+          "props": [
+            {
+              "name": "setup",
+              "type": [
+                "boolean"
+              ]
+            },
+            {
+              "name": "name",
+              "attribute-value": {
+                "type": "enum",
+                "default": "json"
+              },
+              "values": [
+                {
+                  "name": "json"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "style",
+          "props": [
+            {
+              "name": "scoped",
+              "type": [
+                "boolean"
+              ]
+            },
+            {
+              "name": "src",
+              "type": [
+                "string"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Component",
+          "doc-url": "https://mpxjs.cn/api/builtIn.html",
+          "description": "A “meta component” for rendering dynamic components. The actual component to render is determined by the `is` prop.",
+          "props": [
+            {
+              "name": "is",
+              "description": "An HTML tag name, a Component name or Component class reference.",
+              "type": [
+                "string",
+                "ComponentDefinition",
+                "ComponentConstructor"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "image",
+          "description": "媒体组件",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/component/image.html",
+          "props": [
+            {
+              "name": "mode",
+              "description": "图片裁剪、缩放的模式",
+              "attribute-value": {
+                "type": "enum",
+                "default": "scaleToFill"
+              },
+              "values": [
+                {
+                  "name": "scaleToFill",
+                  "description": "缩放模式，不保持纵横比缩放图片，使图片的宽高完全拉伸至填满 image 元素"
+                },
+                {
+                  "name": "aspectFit",
+                  "description": "缩放模式，保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来"
+                },
+                {
+                  "name": "aspectFill",
+                  "description": "缩放模式，保持纵横比缩放图片，只保证图片的短边能完全显示出来。也就是说，图片通常只在水平或垂直方向是完整的，另一个方向将会发生截取"
+                },
+                {
+                  "name": "widthFix",
+                  "description": "缩放模式，宽度不变，高度自动变化，保持原图宽高比不变"
+                },
+                {
+                  "name": "heightFix",
+                  "description": "缩放模式，高度不变，宽度自动变化，保持原图宽高比不变，2。10。3"
+                },
+                {
+                  "name": "top",
+                  "description": "裁剪模式，不缩放图片，只显示图片的顶部区域"
+                },
+                {
+                  "name": "bottom",
+                  "description": "裁剪模式，不缩放图片，只显示图片的底部区域"
+                },
+                {
+                  "name": "center",
+                  "description": "裁剪模式，不缩放图片，只显示图片的中间区域"
+                },
+                {
+                  "name": "right",
+                  "description": "裁剪模式，不缩放图片，只显示图片的左边区域"
+                },
+                {
+                  "name": "left",
+                  "description": "裁剪模式，不缩放图片，只显示图片的右边区域"
+                },
+                {
+                  "name": "top left",
+                  "description": "裁剪模式，不缩放图片，只显示图片的左上边区域"
+                },
+                {
+                  "name": "top right",
+                  "description": "裁剪模式，不缩放图片，只显示图片的右上边区域"
+                },
+                {
+                  "name": "bottom left",
+                  "description": "裁剪模式，不缩放图片，只显示图片的左下边区域"
+                },
+                {
+                  "name": "bottom right",
+                  "description": "裁剪模式，不缩放图片，只显示图片的右下边区域"
+                }
+              ]
+            },
+            {
+              "name": "src",
+              "type": [
+                "string"
+              ],
+              "description": "图片资源地址"
+            },
+            {
+              "name": "webp",
+              "type": [
+                "boolean"
+              ],
+              "description": "默认不解析 webP 格式，只支持网络资源"
+            },
+            {
+              "name": "lazy-load",
+              "type": [
+                "boolean"
+              ],
+              "description": "图片懒加载，在即将进入一定范围（上下三屏）时才开始加载"
+            },
+            {
+              "name": "show-menu-by-longpress",
+              "type": [
+                "boolean"
+              ],
+              "description": "长按图片显示发送给朋友、收藏、保存图片、搜一搜、打开名片/前往群聊/打开小程序（若图片中包含对应二维码或小程序码）的菜单"
+            },
+            {
+              "name": "binderror",
+              "description": "当错误发生时触发，event.detail = {errMsg}"
+            },
+            {
+              "name": "bindload",
+              "description": "当图片载入完毕时触发，event.detail = {height, width}"
+            }
+          ]
+        },
+        {
+          "name": "view",
+          "description": "视图容器",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/component/view.html",
+          "props": [
+            {
+              "name": "hover-class",
+              "type": [
+                "string"
+              ],
+              "description": "指定按下去的样式类。当 hover-class=\"none\" 时，没有点击态效果"
+            },
+            {
+              "name": "hover-stop-propagation",
+              "type": [
+                "boolean"
+              ],
+              "description": "指定是否阻止本节点的祖先节点出现点击态"
+            },
+            {
+              "name": "hover-start-time",
+              "description": "按住后多久出现点击态，单位毫秒",
+              "attribute-value": {
+                "type": "number",
+                "default": "50"
+              }
+            },
+            {
+              "name": "hover-stay-time",
+              "attribute-value": {
+                "type": "number",
+                "default": "400"
+              },
+              "description": "手指松开后点击态保留时间，单位毫秒"
+            }
+          ]
+        },
+        {
+          "name": "swiper",
+          "description": "滑块视图容器。其中只可放置swiper-item组件，否则会导致未定义的行为",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html",
+          "props": [
+            {
+              "name": "indicator-dots",
+              "type": [
+                "boolean"
+              ],
+              "description": "是否显示面板指示点"
+            },
+            {
+              "name": "indicator-color",
+              "attribute-value": {
+                "type": "string",
+                "default": "rgba(0, 0, 0, .3)"
+              },
+              "description": "指示点颜色"
+            },
+            {
+              "name": "indicator-active-color",
+              "description": "当前选中的指示点颜色",
+              "attribute-value": {
+                "type": "string",
+                "default": "#000000"
+              }
+            },
+            {
+              "name": "autoplay",
+              "type": [
+                "boolean"
+              ],
+              "description": "是否自动切换"
+            },
+            {
+              "name": "current",
+              "description": "当前所在滑块的 index",
+              "attribute-value": {
+                "type": "number",
+                "default": "0"
+              }
+            },
+            {
+              "name": "number",
+              "description": "自动切换时间间隔",
+              "attribute-value": {
+                "type": "number",
+                "default": "5000"
+              }
+            },
+            {
+              "name": "duration",
+              "description": "滑动动画时长",
+              "attribute-value": {
+                "type": "number",
+                "default": "500"
+              }
+            },
+            {
+              "name": "circular",
+              "type": [
+                "boolean"
+              ],
+              "description": "是否采用衔接滑动"
+            },
+            {
+              "name": "vertical",
+              "type": [
+                "boolean"
+              ],
+              "description": "滑动方向是否为纵向"
+            },
+            {
+              "name": "previous-margin",
+              "description": "前边距，可用于露出前一项的一小部分，接受 px 和 rpx 值",
+              "attribute-value": {
+                "type": "string",
+                "default": "0px"
+              }
+            },
+            {
+              "name": "next-margin",
+              "description": "后边距，可用于露出后一项的一小部分，接受 px 和 rpx 值",
+              "attribute-value": {
+                "type": "string",
+                "default": "0px"
+              }
+            },
+            {
+              "name": "snap-to-edge",
+              "type": [
+                "boolean"
+              ],
+              "description": "当 swiper-item 的个数大于等于 2，关闭 circular 并且开启 previous-margin 或 next-margin 的时候，可以指定这个边距是否应用到第一个、最后一个元素"
+            },
+            {
+              "name": "display-multiple-items",
+              "description": "同时显示的滑块数量",
+              "attribute-value": {
+                "type": "number",
+                "default": "1"
+              }
+            },
+            {
+              "name": "easing-function",
+              "description": "指定 swiper 切换缓动动画类型",
+              "attribute-value": {
+                "type": "enum",
+                "default": "default"
+              },
+              "values": [
+                {
+                  "name": "default",
+                  "description": "默认缓动函数"
+                },
+                {
+                  "name": "linear",
+                  "description": "线性动画"
+                },
+                {
+                  "name": "easeInCubic",
+                  "description": "缓入动画"
+                },
+                {
+                  "name": "easeOutCubic",
+                  "description": "缓出动画"
+                },
+                {
+                  "name": "easeInOutCubic",
+                  "description": "缓入缓出动画"
+                }
+              ]
+            },
+            {
+              "name": "bindchange",
+              "type": [
+                "string"
+              ],
+              "description": "current 改变时会触发 change 事件，event.detail = {current, source}"
+            },
+            {
+              "name": "bindtransition",
+              "type": [
+                "string"
+              ],
+              "description": "swiper-item 的位置发生改变时会触发 transition 事件，event.detail = {dx: dx, dy: dy}"
+            },
+            {
+              "name": "bindanimationfinish",
+              "type": [
+                "string"
+              ],
+              "description": "动画结束时会触发 animationfinish 事件，event.detail 同上"
+            }
+          ]
+        },
+        {
+          "name": "swiper-item",
+          "description": "仅可放置在swiper组件中，宽高自动设置为100%",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/component/swiper-item.html",
+          "props": [
+            {
+              "name": "item-id",
+              "type": [
+                "string"
+              ],
+              "description": "该 swiper-item 的标识符"
+            },
+            {
+              "name": "skip-hidden-item-layout",
+              "type": [
+                "boolean"
+              ],
+              "description": "是否跳过未显示的滑块布局，设为 true 可优化复杂情况下的滑动性能，但会丢失隐藏状态滑块的布局信息"
+            }
+          ]
+        },
+        {
+          "name": "movable-area",
+          "description": "movable-view的可移动区域",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/component/movable-area.html",
+          "props": [
+            {
+              "name": "scale-area",
+              "type": [
+                "boolean"
+              ],
+              "description": "当里面的 movable-view 设置为支持双指缩放时，设置此值可将缩放手势生效区域修改为整个movable-area"
+            }
+          ]
+        },
+        {
+          "name": "movable-view",
+          "description": "可移动的视图容器，在页面中可以拖拽滑动。movable-view必须在 movable-area 组件中，并且必须是直接子节点，否则不能移动",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/component/movable-view.html",
+          "props": [
+            {
+              "name": "direction",
+              "description": "movable-view的移动方向，属性值有all、vertical、horizontal、none",
+              "attribute-value": {
+                "type": "enum",
+                "default": "none"
+              },
+              "values": [
+                {
+                  "name": "all",
+                  "description": "滑动方向是否为任意方向"
+                },
+                {
+                  "name": "vertical",
+                  "description": "滑动方向是否为纵向"
+                },
+                {
+                  "name": "horizontal",
+                  "description": "滑动方向是否为横向"
+                },
+                {
+                  "name": "none",
+                  "description": "滑动方向是否开启"
+                }
+              ]
+            },
+            {
+              "name": "inertia",
+              "type": [
+                "boolean"
+              ],
+              "description": "movable-view是否带有惯性"
+            },
+            {
+              "name": "out-of-bounds",
+              "type": [
+                "boolean"
+              ],
+              "description": "超过可移动区域后，movable-view是否还可以移动"
+            },
+            {
+              "name": "x",
+              "type": [
+                "number"
+              ],
+              "description": "定义 x 轴方向的偏移，如果 x 的值不在可移动范围内，会自动移动到可移动范围；改变 x 的值会触发动画；单位支持px（默认）、rpx"
+            },
+            {
+              "name": "y",
+              "type": [
+                "number"
+              ],
+              "description": "定义 y 轴方向的偏移，如果 y 的值不在可移动范围内，会自动移动到可移动范围；改变 y 的值会触发动画；单位支持px（默认）、rpx"
+            },
+            {
+              "name": "damping",
+              "description": "阻尼系数，用于控制 x 或y改变时的动画和过界回弹的动画，值越大移动越快",
+              "attribute-value": {
+                "type": "number",
+                "default": "20"
+              }
+            },
+            {
+              "name": "friction",
+              "description": "摩擦系数，用于控制惯性滑动的动画，值越大摩擦力越大，滑动越快停止；必须大于0，否则会被设置成默认值",
+              "attribute-value": {
+                "type": "number",
+                "default": "2"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": [
+                "boolean"
+              ],
+              "description": "是否禁用"
+            },
+            {
+              "name": "scale",
+              "type": [
+                "boolean"
+              ],
+              "description": "是否支持双指缩放，默认缩放手势生效区域是在 movable-view 内"
+            },
+            {
+              "name": "scale-min",
+              "description": "定义缩放倍数最小值",
+              "attribute-value": {
+                "type": "number",
+                "default": "0.5"
+              }
+            },
+            {
+              "name": "scale-max",
+              "description": "定义缩放倍数最大值",
+              "attribute-value": {
+                "type": "number",
+                "default": "10"
+              }
+            },
+            {
+              "name": "scale-value",
+              "description": "定义缩放倍数，取值范围为 0.5 - 10",
+              "attribute-value": {
+                "type": "number",
+                "default": "1"
+              }
+            },
+            {
+              "name": "animation",
+              "type": [
+                "boolean"
+              ],
+              "description": "是否使用动画"
+            },
+            {
+              "name": "bindchange",
+              "type": [
+                "string"
+              ],
+              "description": "拖动过程中触发的事件，event.detail = {x, y, source}"
+            },
+            {
+              "name": "bindscale",
+              "type": [
+                "string"
+              ],
+              "description": "缩放过程中触发的事件，event.detail = {x, y, scale}，x和 y 字段在2.1.0之后支持"
+            },
+            {
+              "name": "htouchmove",
+              "type": [
+                "string"
+              ],
+              "description": "初次手指触摸后移动为横向的移动时触发，如果 catch 此事件，则意味着 touchmove 事件也被catch"
+            },
+            {
+              "name": "vtouchmove",
+              "type": [
+                "string"
+              ],
+              "description": "初次手指触摸后移动为纵向的移动时触发，如果 catch 此事件，则意味着 touchmove 事件也被catch"
+            }
+          ]
+        },
+        {
+          "name": "scroll-view",
+          "description": "可滚动视图区域。使用竖向滚动时，需要给scroll-view一个固定高度，通过 WXSS 设置 height。组件属性的长度单位默认为px，2.4.0起支持传入单位(rpx/px)",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html",
+          "props": [
+            {
+              "name": "scroll-x",
+              "type": [
+                "boolean"
+              ],
+              "description": "允许横向滚动"
+            },
+            {
+              "name": "scroll-y",
+              "type": [
+                "boolean"
+              ],
+              "description": "允许纵向滚动"
+            },
+            {
+              "name": "upper-threshold",
+              "attribute-value": {
+                "type": "number",
+                "default": "50"
+              },
+              "description": "距顶部/左边多远时，触发 scrolltoupper 事件"
+            },
+            {
+              "name": "lower-threshold",
+              "attribute-value": {
+                "type": "number",
+                "default": "50"
+              },
+              "description": "距底部/右边多远时，触发 scrolltolower 事件"
+            },
+            {
+              "name": "scroll-top",
+              "type": [
+                "number"
+              ],
+              "description": "设置竖向滚动条位置"
+            },
+            {
+              "name": "scroll-left",
+              "type": [
+                "number"
+              ],
+              "description": "设置横向滚动条位置"
+            },
+            {
+              "name": "scroll-into-view",
+              "type": [
+                "string"
+              ],
+              "description": "值应为某子元素id（id不能以数字开头）。设置哪个方向可滚动，则在哪个方向滚动到该元素"
+            },
+            {
+              "name": "scroll-with-animation",
+              "type": [
+                "boolean"
+              ],
+              "description": "在设置滚动条位置时使用动画过渡"
+            },
+            {
+              "name": "enable-back-to-top",
+              "type": [
+                "boolean"
+              ],
+              "description": "iOS点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只支持竖向。自 2.27.3 版本开始，若非显式设置为 false，则在显示尺寸大于屏幕 90% 时自动开启"
+            },
+            {
+              "name": "enable-flex",
+              "type": [
+                "boolean"
+              ],
+              "description": "启用 flexbox 布局。开启后，当前节点声明了 `display: flex` 就会成为 flex container，并作用于其孩子节点"
+            },
+            {
+              "name": "scroll-anchoring",
+              "type": [
+                "boolean"
+              ],
+              "description": "开启 scroll anchoring 特性，即控制滚动位置不随内容变化而抖动，仅在 iOS 下生效，安卓下可参考 CSS `overflow-anchor` 属性"
+            },
+            {
+              "name": "enable-passive",
+              "type": [
+                "boolean"
+              ],
+              "description": "开启 passive 特性，能优化一定的滚动性能"
+            },
+            {
+              "name": "refresher-enabled",
+              "type": [
+                "boolean"
+              ],
+              "description": "开启自定义下拉刷新"
+            },
+            {
+              "name": "refresher-threshold",
+              "attribute-value": {
+                "type": "number",
+                "default": "50"
+              },
+              "description": "设置自定义下拉刷新阈值"
+            },
+            {
+              "name": "refresher-default-style",
+              "attribute-value": {
+                "type": "string",
+                "default": "black"
+              },
+              "description": "设置自定义下拉刷新默认样式，支持设置 `black | white | none`， none 表示不使用默认样式"
+            },
+            {
+              "name": "refresher-background",
+              "attribute-value": {
+                "type": "string",
+                "default": "#FFF"
+              },
+              "description": "设置自定义下拉刷新区域背景颜色"
+            },
+            {
+              "name": "refresher-triggered",
+              "type": [
+                "boolean"
+              ],
+              "description": "设置当前下拉刷新状态，true 表示下拉刷新已经被触发，false 表示下拉刷新未被触发"
+            },
+            {
+              "name": "enhanced",
+              "type": [
+                "boolean"
+              ],
+              "description": "启用 scroll-view 增强特性，启用后可通过 ScrollViewContext 操作 scroll-view"
+            },
+            {
+              "name": "bounces",
+              "type": [
+                "boolean"
+              ],
+              "description": "iOS 下 scroll-view 边界弹性控制 (同时开启 enhanced 属性后生效)"
+            },
+            {
+              "name": "show-scrollbar",
+              "type": [
+                "boolean"
+              ],
+              "description": "滚动条显隐控制 (同时开启 enhanced 属性后生效)"
+            },
+            {
+              "name": "paging-enabled",
+              "type": [
+                "boolean"
+              ],
+              "description": "分页滑动效果 (同时开启 enhanced 属性后生效)"
+            },
+            {
+              "name": "fast-deceleration",
+              "type": [
+                "boolean"
+              ],
+              "description": "滑动减速速率控制, 仅在 iOS 下生效 (同时开启 enhanced 属性后生效)"
+            },
+            {
+              "name": "binddragstart",
+              "type": [
+                "string"
+              ],
+              "description": "滑动开始事件 (同时开启 enhanced 属性后生效) detail { scrollTop, scrollLeft }"
+            },
+            {
+              "name": "binddragging",
+              "type": [
+                "string"
+              ],
+              "description": "滑动事件 (同时开启 enhanced 属性后生效) detail { scrollTop, scrollLeft }"
+            },
+            {
+              "name": "binddragend",
+              "type": [
+                "string"
+              ],
+              "description": "滑动结束事件 (同时开启 enhanced 属性后生效) detail { scrollTop, scrollLeft, velocity }"
+            },
+            {
+              "name": "bindscrolltoupper",
+              "type": [
+                "string"
+              ],
+              "description": "滚动到顶部/左边时触发"
+            },
+            {
+              "name": "bindscrolltolower",
+              "type": [
+                "string"
+              ],
+              "description": "滚动到底部/右边时触发"
+            },
+            {
+              "name": "bindscroll",
+              "type": [
+                "string"
+              ],
+              "description": "滚动时触发，event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}"
+            },
+            {
+              "name": "bindrefresherpulling",
+              "type": [
+                "string"
+              ],
+              "description": "自定义下拉刷新控件被下拉"
+            },
+            {
+              "name": "bindrefresherrefresh",
+              "type": [
+                "string"
+              ],
+              "description": "自定义下拉刷新被触发"
+            },
+            {
+              "name": "bindrefresherrestore",
+              "type": [
+                "string"
+              ],
+              "description": "自定义下拉刷新被复位"
+            },
+            {
+              "name": "bindrefresherabort",
+              "type": [
+                "string"
+              ],
+              "description": "自定义下拉刷新被中止"
+            }
+          ]
+        },
+        {
+          "name": "button",
+          "description": "按钮",
+          "doc-url": "https://developers.weixin.qq.com/miniprogram/dev/component/button.html",
+          "props": [
+            {
+              "name": "size",
+              "description": "按钮的大小",
+              "attribute-value": {
+                "type": "enum",
+                "default": "default"
+              },
+              "values": [
+                {
+                  "name": "default",
+                  "description": "默认大小"
+                },
+                {
+                  "name": "mini",
+                  "description": "小尺寸"
+                }
+              ]
+            },
+            {
+              "name": "type",
+              "description": "按钮的样式类型",
+              "attribute-value": {
+                "type": "enum",
+                "default": "default"
+              },
+              "values": [
+                {
+                  "name": "primary",
+                  "description": "绿色"
+                },
+                {
+                  "name": "default",
+                  "description": "白色"
+                },
+                {
+                  "name": "warn",
+                  "description": "红色"
+                }
+              ]
+            },
+            {
+              "name": "form-type",
+              "description": "用于 form 组件，点击分别会触发 form 组件的 submit/reset 事件",
+              "attribute-value": {
+                "type": "enum",
+                "default": ""
+              },
+              "values": [
+                {
+                  "name": "submit",
+                  "description": "提交表单"
+                },
+                {
+                  "name": "reset",
+                  "description": "重置表单"
+                }
+              ]
+            },
+            {
+              "name": "lang",
+              "description": "指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文",
+              "attribute-value": {
+                "type": "enum",
+                "default": "en"
+              },
+              "values": [
+                {
+                  "name": "en",
+                  "description": "英文"
+                },
+                {
+                  "name": "zh_CN",
+                  "description": "简体中文"
+                },
+                {
+                  "name": "zh_TW",
+                  "description": "繁体中文"
+                }
+              ]
+            },
+            {
+              "name": "open-type",
+              "description": "微信开放能力",
+              "attribute-value": {
+                "type": "enum",
+                "default": ""
+              },
+              "values": [
+                {
+                  "name": "contact",
+                  "description": "打开客服会话，如果用户在会话中点击消息卡片后返回小程序，可以从 bindcontact 回调中获得具体信息，具体说明 （*小程序插件中不能使用*）"
+                },
+                {
+                  "name": "share",
+                  "description": "触发用户转发，使用前建议先阅读使用指引"
+                },
+                {
+                  "name": "getPhoneNumber",
+                  "description": "获取用户手机号，可以从 bindgetphonenumber 回调中获取到用户信息，具体说明 （*小程序插件中不能使用*）"
+                },
+                {
+                  "name": "getUserInfo",
+                  "description": "获取用户信息，可以从 bindgetuserinfo 回调中获取到用户信息 （*小程序插件中不能使用*）"
+                },
+                {
+                  "name": "launchApp",
+                  "description": "打开APP，可以通过 app-parameter 属性设定向 APP 传的参数具体说明"
+                },
+                {
+                  "name": "openSetting",
+                  "description": "打开授权设置页"
+                },
+                {
+                  "name": "feedback",
+                  "description": "打开“意见反馈”页面，用户可提交反馈内容并上传日志，开发者可以登录小程序管理后台后进入左侧菜单“客服反馈”页面获取到反馈内容"
+                },
+                {
+                  "name": "chooseAvatar",
+                  "description": "获取用户头像，可以从 bindchooseavatar 回调中获取到头像信息"
+                }
+              ]
+            },
+            {
+              "name": "plain",
+              "type": [
+                "boolean"
+              ],
+              "description": "按钮是否镂空，背景色透明"
+            },
+            {
+              "name": "disabled",
+              "type": [
+                "boolean"
+              ],
+              "description": "是否禁用"
+            },
+            {
+              "name": "loading",
+              "type": [
+                "boolean"
+              ],
+              "description": "名称前是否带 loading 图标"
+            },
+            {
+              "name": "hover-class",
+              "type": [
+                "string"
+              ],
+              "description": "指定按钮按下去的样式类。当 `hover-class=\"none\"` 时，没有点击态效果"
+            },
+            {
+              "name": "hover-stop-propagation",
+              "type": [
+                "boolean"
+              ],
+              "description": "指定是否阻止本节点的祖先节点出现点击态"
+            },
+            {
+              "name": "hover-start-time",
+              "description": "按住后多久出现点击态，单位毫秒",
+              "attribute-value": {
+                "type": "number",
+                "default": "20"
+              }
+            },
+            {
+              "name": "hover-stay-time",
+              "description": "手指松开后点击态保留时间，单位毫秒",
+              "attribute-value": {
+                "type": "number",
+                "default": "70"
+              }
+            },
+            {
+              "name": "session-from",
+              "type": [
+                "string"
+              ],
+              "description": "会话来源，open-type=\"contact\"时有效"
+            },
+            {
+              "name": "send-message-title",
+              "type": [
+                "string"
+              ],
+              "description": "会话内消息卡片标题，open-type=\"contact\"时有效"
+            },
+            {
+              "name": "send-message-path",
+              "type": [
+                "string"
+              ],
+              "description": "会话内消息卡片点击跳转小程序路径，open-type=\"contact\"时有效"
+            },
+            {
+              "name": "send-message-img",
+              "type": [
+                "string"
+              ],
+              "description": "会话内消息卡片图片，open-type=\"contact\"时有效"
+            },
+            {
+              "name": "app-parameter",
+              "type": [
+                "string"
+              ],
+              "description": "打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效"
+            },
+            {
+              "name": "show-message-card",
+              "type": [
+                "boolean"
+              ],
+              "description": "是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示\"可能要发送的小程序\"提示，用户点击后可以快速发送小程序消息，open-type=\"contact\"时有效"
+            },
+            {
+              "name": "bindgetuserinfo",
+              "type": [
+                "string"
+              ],
+              "description": "用户点击该按钮时，会返回获取到的用户信息，回调的 detail 数据与wx.getUserInfo返回的一致，open-type=\"getUserInfo\"时有效"
+            },
+            {
+              "name": "bindcontact",
+              "type": [
+                "string"
+              ],
+              "description": "客服消息回调，open-type=\"contact\"时有效"
+            },
+            {
+              "name": "bindgetphonenumber",
+              "type": [
+                "string"
+              ],
+              "description": "获取用户手机号回调，open-type=getPhoneNumber时有效"
+            },
+            {
+              "name": "binderror",
+              "type": [
+                "string"
+              ],
+              "description": "当使用开放能力时，发生错误的回调，open-type=launchApp时有效"
+            },
+            {
+              "name": "bindopensetting",
+              "type": [
+                "string"
+              ],
+              "description": "在打开授权设置页后回调，open-type=openSetting时有效"
+            },
+            {
+              "name": "bindlaunchapp",
+              "type": [
+                "string"
+              ],
+              "description": "打开 APP 成功的回调，open-type=launchApp时有效"
+            },
+            {
+              "name": "bindchooseavatar",
+              "type": [
+                "string"
+              ],
+              "description": "获取用户头像回调，open-type=chooseAvatar时有效"
+            }
+          ]
+        }
+      ],
+      "vue-directives": [
+        {
+          "name": "style",
+          "description": "wx:style 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。CSS property 名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case) 来命名",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-style",
+          "attribute-value": {
+            "type": "string",
+            "required": true
+          }
+        },
+        {
+          "name": "ref",
+          "description": "获取 WXML 节点信息的对象",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-ref",
+          "attribute-value": {
+            "type": "string",
+            "required": true
+          }
+        },
+        {
+          "name": "show",
+          "description": "与 wx:if 所不同的是不会移除节点，而是设置节点的 style 为 display: none",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-show",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "if",
+          "description": "根据表达式的值的 truthiness 来有条件地渲染元素。在切换时元素及它的数据绑定/组件被销毁并重建",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-if",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "else",
+          "description": "前一兄弟元素必须有 wx:if 或 wx:elif",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-else",
+          "attribute-value": {
+            "kind": "no-value"
+          }
+        },
+        {
+          "name": "elif",
+          "description": "前一兄弟元素必须有 wx:if 或 wx:elif",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-elif",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "for",
+          "description": "在组件上使用 wx:for 控制属性绑定一个数组，即可使用数组中各项的数据重复渲染该组件。默认数组的当前项的下标变量名默认为 index，数组当前项的变量名默认为 item",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-for",
+          "attribute-value": {
+            "parser": "vue:for",
+            "type": "void",
+            "required": true
+          }
+        },
+        {
+          "name": "key",
+          "description": "如果列表中项目的位置会动态改变或者有新的项目添加到列表中，并且希望列表中的项目保持自己的特征和状态，需要使用 wx:key 来指定列表中项目的唯一的标识符。 注意：如不提供 wx:key，会报一个 warning， 如果明确知道该列表是静态，或者不必关注其顺序，可以选择忽略",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-for",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "for-index",
+          "description": "使用 wx:for-index 可以指定数组当前下标的变量名",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-for",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "for-item",
+          "description": "使用 wx:for-item 可以指定数组当前元素的变量名",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-for",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "class",
+          "description": "绑定HTML Class: 类似vue的class绑定",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-class",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "model",
+          "description": "除了小程序原生指令之外，mpx 基于input事件提供了一个指令 wx:model, 用于双向绑定",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-model",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "model-prop",
+          "description": "wx:model 默认使用 value 属性传值，使用 wx:model-prop 定义 wx:model 指令对应的属性",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-model",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "model-event",
+          "description": "wx:model 默认监听 input 事件，可以使用 wx:model-event 定义 wx:model 指令对应的事件",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-model",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "model-value-path",
+          "description": "指定 wx:model 双向绑定时的取值路径； 并非所有的组件都会按微信的标注格式 event.detail.value 来传值，例如 vant 的 input 组件，值是通过抛出 event.detail 本身传递的，这时我们可以使用 wx:model-value-path=\"[]\" 重新指定取值路径",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-model",
+          "attribute-value": {
+            "required": true
+          }
+        },
+        {
+          "name": "model-filter",
+          "description": "在使用 wx:model 时我们可能需要像 Vue 的 .trim 、.lazy 这样的修饰符来对双向数据绑定的数据进行过滤和修饰；Mpx 通过增强指令 wx:model-filter 可以实现这一功能； 该指令可以绑定内建的 filter 或者自定义的 filter 方法，该方法接收过滤前的值，返回过滤操作后的值",
+          "doc-url": "https://mpxjs.cn/api/directives.html#wx-model",
+          "attribute-value": {
+            "required": true
+          }
+        }
+      ]
+    }
+  }
+}

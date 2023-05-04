@@ -1,5 +1,5 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang.html
+package org.jetbrains.vuejs.lang.html
 
 import com.intellij.lang.javascript.dialects.JSLanguageLevel
 import com.intellij.lexer.Lexer
@@ -8,8 +8,8 @@ import com.intellij.testFramework.LightProjectDescriptor
 import com.intellij.testFramework.fixtures.IdeaProjectTestFixture
 import com.intellij.testFramework.fixtures.IdeaTestFixtureFactory
 import org.jetbrains.annotations.NonNls
-import com.hxz.mpxjs.lang.getVueTestDataPath
-import com.hxz.mpxjs.lang.html.lexer.VueLexerImpl
+import org.jetbrains.vuejs.lang.getVueTestDataPath
+import org.jetbrains.vuejs.lang.html.lexer.VueLexerImpl
 import kotlin.properties.Delegates.notNull
 
 open class VueLexerTest : LexerTestCase() {
@@ -22,7 +22,7 @@ open class VueLexerTest : LexerTestCase() {
 
     // needed for various XML extension points registration
     fixture = IdeaTestFixtureFactory.getFixtureFactory()
-      .createLightFixtureBuilder(LightProjectDescriptor.EMPTY_PROJECT_DESCRIPTOR).fixture
+      .createLightFixtureBuilder(LightProjectDescriptor.EMPTY_PROJECT_DESCRIPTOR, getTestName(false)).fixture
     fixture.setUp()
   }
 

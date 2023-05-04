@@ -2,19 +2,34 @@
   <component name="RecentProjectsManager">
     <option name="additionalInfo">
       <map>
-        <entry key="$USER_HOME$/workspace/2022/vue/vue-vite">
+        <entry key="$USER_HOME$/workspace/2023/mpx/mpxtemplatedeme2eo">
           <value>
-            <RecentProjectMetaInfo frameTitle="vue-vite – title.vue" projectWorkspaceId="28x5ExAR57vBxI6Zo8s60SuMoFG">
+            <RecentProjectMetaInfo frameTitle="mpxtemplatedeme2eo – list.mpx" projectWorkspaceId="2PJw8r7vmE3f9rPW2KDNDvazISh">
+              <option name="activationTimestamp" value="1683188335816" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="build" value="IU-212.4746.92" />
-              <option name="buildTimestamp" value="1627369797648" />
-              <frame x="136" y="25" width="1400" height="935" />
+              <option name="build" value="IU-231.8770.65" />
+              <option name="buildTimestamp" value="1682609129085" />
+              <frame x="-1484" y="32" width="1400" height="1000" />
               <option name="productionCode" value="IU" />
-              <option name="projectOpenTimestamp" value="1654436943617" />
+              <option name="projectOpenTimestamp" value="1683188336781" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/workspace/2020/kf-mp-apphome">
+          <value>
+            <RecentProjectMetaInfo frameTitle="kf-mp-apphome – base-map.mpx" projectWorkspaceId="2Ij1T8SGR8z1koBv6Z5yIZLI32b">
+              <option name="activationTimestamp" value="1683188568878" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="build" value="IU-231.8770.65" />
+              <option name="buildTimestamp" value="1682609129085" />
+              <frame x="-1455" y="66" width="1400" height="1000" />
+              <option name="productionCode" value="IU" />
+              <option name="projectOpenTimestamp" value="1683188471917" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
       </map>
     </option>
+    <option name="lastOpenedProject" value="$USER_HOME$/workspace/2020/kf-mp-apphome" />
   </component>
 </application>

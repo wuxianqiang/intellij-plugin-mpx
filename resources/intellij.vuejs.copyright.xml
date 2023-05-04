@@ -1,4 +1,4 @@
-<idea-plugin package="com.hxz.mpxjs.copyright">
+<idea-plugin package="org.jetbrains.vuejs.copyright">
   <dependencies>
     <plugin id="com.intellij.copyright"/>
   </dependencies>

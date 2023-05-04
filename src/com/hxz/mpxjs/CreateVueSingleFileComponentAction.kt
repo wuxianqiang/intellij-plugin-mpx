@@ -12,15 +12,15 @@ import org.jetbrains.annotations.Nls
 import com.hxz.mpxjs.context.hasVueFiles
 import com.hxz.mpxjs.context.isVueContext
 
-class CreateVueSingleFileComponentAction : CreateFileFromTemplateAction(VueBundle.message("vue.create.single.file.component.action.text"),
+class CreateVueSingleFileComponentAction : CreateFileFromTemplateAction(VueBundle.message("mpx.create.single.file.component.action.text"),
                                                                         VueBundle.message(
                                                                           "vue.create.single.file.component.action.description"),
                                                                         VuejsIcons.Vue), DumbAware {
   companion object {
-    const val VUE_TEMPLATE_NAME: String = "Vue Single File Component"
+    const val VUE_TEMPLATE_NAME: String = "Mpx Single File Component"
 
     @Nls
-    private val name = VueBundle.message("vue.create.single.file.component.action.text")
+    private val name = VueBundle.message("mpx.create.single.file.component.action.text")
   }
 
   override fun isAvailable(dataContext: DataContext): Boolean {
