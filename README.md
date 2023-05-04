@@ -4,8 +4,6 @@ This plugin provides support for [Mpx](https://mpxjs.cn/) in IntelliJ IDEA Ultim
 
 It provides intelligent Mpx-specific code completion, navigation, and refactoring.
 
-The plugin bundles a collection of [Mpx code templates](https://github.com/sdras/vue-vscode-snippets) .
-
 ## Getting started
 
 1. If you’re using IntelliJ IDEA Ultimate, PhpStorm, PyCharm, or RubyMine, install Mpx plugin in Preferences | Plugins - Install JetBrains plugins.
