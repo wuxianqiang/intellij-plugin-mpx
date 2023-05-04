@@ -1,38 +1,45 @@
 <application>
-  <component name="NodeJsLocalInterpreters">
-    <local-interpreter path="/usr/local/opt/node@14/bin/node" />
+  <component name="NotRoamableUiSettings">
+    <option name="presentationModeIdeScale" value="1.75" />
   </component>
-  <component name="ProjectPluginTrackerManager">
-    <trackers>
-      <map>
-        <entry key="28x5ExAR57vBxI6Zo8s60SuMoFG">
-          <value>
-            <ProjectPluginTracker />
-          </value>
-        </entry>
-      </map>
-    </trackers>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="NextRunPlatformUpdateBuild" value="IU-212.5712.43/2021.2.4" />
-    <property name="NextRunPlatformUpdateVersion" value="2021.2.4" />
-    <property name="eclipse.projects.detected" value="" />
-    <property name="fileTypeChangedCounter" value="4" />
-    <property name="fileTypeDetectors" value="com.android.tools.idea.fileTypes.profiler.MemoryCaptureFileType$Detector:com.android.tools.idea.sqlite.fileType.SqliteFileTypeDetector:com.intellij.database.vfs.DbStorageFileType$Detector:com.intellij.ide.scratch.ScratchFileServiceImpl$Detector:com.intellij.javascript.debugger.sourcemap.SourceMapFileType$MyFileTypeDetector:com.intellij.profiler.ultimate.hprof.impl.HprofFileTypeDetector:com.jetbrains.nodejs.util.NodeFileTypeDetector$JavaScriptFileTypeDetector:com.jetbrains.nodejs.util.NodeFileTypeDetector$TypeScriptFileTypeDetector:org.jetbrains.plugins.textmate.TextMateFileType$TextMateFileDetector" />
-    <property name="got.it.tooltip.cwm.invitation.notification" value="1" />
-    <property name="ide.memory.adjusted" value="true" />
-    <property name="ide.updates.previous.build.number" value="IU-212.4746.92" />
-    <property name="ide.updates.whats.new.shown.for" value="212" />
-    <property name="installed.kotlin.plugin.version" value="212-1.5.10-release-IJ4746.92" />
-    <property name="log.trace.categories" value="#com.jetbrains.rdserver.requests&#10;#com.jetbrains.rd.ide.document&#10;#com.jetbrains.rdserver.document&#10;#com.jetbrains.rdserver.editors&#10;#com.jetbrains.rdserver.actions&#10;#com.jetbrains.rdserver.permissions" />
-    <property name="packagesearch.endpoint.url.fulltext" value="https://package-search.services.jetbrains.com/api/search/idea/fulltext" />
-    <property name="packagesearch.endpoint.url.suggest" value="https://package-search.services.jetbrains.com/api/search/idea/suggest" />
-    <property name="packagesearch.status.updated.ts" value="1654436715440" />
-    <property name="registry.to.advanced.settings.migration.build" value="IU-212.4746.92" />
-    <property name="tasks.pass.word.conversion.enforced" value="true" />
-    <property name="ts.lib.d.ts.version" value="4.3.5" />
-  </component>
-  <component name="ToolbarSettingsService">
-    <option name="NEW_TOOLBAR_SETTINGS" value="OLD_NAVBAR" />
-  </component>
+  <component name="PropertyService"><![CDATA[{
+  "keyToString": {
+    "CWM_LOGGING_VERSION": "1",
+    "RunOnceActivity.se.text.search": "true",
+    "bundled.plugins.list.saved.version": "IU-231.8770.65",
+    "com.intellij.ide.projectWizard.generators.JavaNewProjectWizard$Step.selectedStep": "IntelliJ",
+    "com.intellij.ide.wizard.NewProjectWizardLanguageStep.selectedStep": "Java",
+    "defaultJdkConfigured": "true",
+    "evlsprt3.231": "22",
+    "experimental.ui.first.promotion.localdate": "2023-05-04",
+    "fileTypeChangedCounter": "1",
+    "fontSizeToResetConsole": "13.0",
+    "fontSizeToResetEditor": "13.0",
+    "gotit.previous.run": "IU-231.8770.65",
+    "ide.memory.adjusted": "true",
+    "installed.kotlin.plugin.version": "231-1.8.21-IJ8770.65",
+    "jdk.selected.JAVA_MODULE": "18",
+    "migrate.android.sdk.path.to.roamable.storage": "false",
+    "migrated.non.roamable.values.from.general.settings": "true",
+    "previousColorScheme": "_@user_Darcula",
+    "project.wizard.group": "NPW.simple-project",
+    "registry.to.advanced.settings.migration.build": "IU-231.8770.65",
+    "tasks.pass.word.conversion.enforced": "true",
+    "ts.lib.d.ts.version": "4.8.4"
+  },
+  "keyToStringList": {
+    "fileTypeDetectors": [
+      "com.intellij.ide.scratch.ScratchFileServiceImpl$Detector",
+      "com.intellij.docker.dockerFile.DockerFileTypeDetector",
+      "com.intellij.profiler.ultimate.hprof.impl.HprofFileTypeDetector",
+      "com.intellij.javascript.debugger.sourcemap.SourceMapFileType$MyFileTypeDetector",
+      "com.intellij.database.vfs.DbStorageFileType$Detector",
+      "com.jetbrains.nodejs.util.NodeFileTypeDetector$JavaScriptFileTypeDetector",
+      "com.jetbrains.nodejs.util.NodeFileTypeDetector$TypeScriptFileTypeDetector",
+      "com.android.tools.idea.sqlite.fileType.SqliteFileTypeDetector",
+      "com.android.tools.idea.profilers.capture.MemoryCaptureFileType$Detector",
+      "org.jetbrains.plugins.textmate.TextMateFileType$TextMateFileDetector"
+    ]
+  }
+}]]></component>
 </application>

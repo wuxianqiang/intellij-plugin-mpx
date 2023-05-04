@@ -1,4 +1,4 @@
-// Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+// Copyright 2000-2022 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license.
 package com.hxz.mpxjs.model.source
 
 import com.intellij.lang.ecmascript6.psi.ES6ImportExportDeclarationPart
@@ -16,18 +16,13 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.util.CachedValueProvider
 import com.intellij.psi.util.CachedValuesManager
 import com.intellij.psi.util.PsiModificationTracker
-import com.intellij.util.castSafelyTo
-import com.hxz.mpxjs.codeInsight.collectPropertiesRecursively
-import com.hxz.mpxjs.codeInsight.getStringLiteralsFromInitializerArray
-import com.hxz.mpxjs.codeInsight.getTextIfLiteral
-import com.hxz.mpxjs.codeInsight.objectLiteralFor
+import com.intellij.util.asSafely
+import com.hxz.mpxjs.codeInsight.*
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import java.util.function.Function
 
 interface EntityContainerInfoProvider<T> {
 
-  @JvmDefault
   fun getInfo(descriptor: VueSourceEntityDescriptor): T? = null
 
   abstract class DecoratedContainerInfoProvider<T>(val createInfo: (clazz: JSClass) -> T) : EntityContainerInfoProvider<T> {
@@ -58,11 +53,11 @@ interface EntityContainerInfoProvider<T> {
       }
 
     protected abstract class InitializedContainerInfo(val declaration: JSElement) {
-      private val values: MutableMap<MemberAccessor<*>, Any?> = ConcurrentHashMap()
+      private val values: ConcurrentHashMap<MemberAccessor<*>, Any?> = ConcurrentHashMap()
 
       protected fun <T> get(accessor: MemberAccessor<T>): T {
         @Suppress("UNCHECKED_CAST")
-        return values.computeIfAbsent(accessor, Function { it.build(declaration) }) as T
+        return values.getOrPut(accessor) { accessor.build(declaration) } as T
       }
     }
 
@@ -113,9 +108,9 @@ interface EntityContainerInfoProvider<T> {
         }
 
       private fun getBooleanValue(element: Any?): Boolean =
-        element?.castSafelyTo<JSTypeOwner>()
+        element?.asSafely<JSTypeOwner>()
           ?.jsType?.substitute()
-          ?.castSafelyTo<JSBooleanLiteralTypeImpl>()
+          ?.asSafely<JSBooleanLiteralTypeImpl>()
           ?.literal == true
     }
 
@@ -155,9 +150,16 @@ interface EntityContainerInfoProvider<T> {
           }
         }
         if (propsObject != null && canBeObject) {
-          return collectPropertiesRecursively(propsObject)
+          return collectMembers(propsObject)
         }
-        return if (canBeArray) readPropsFromArray(property) else return emptyList()
+        if (canBeArray)
+          readPropsFromArray(property).let {
+            if (it.isNotEmpty()) return it
+          }
+        return if (canBeObject)
+          processJSTypeMembers(property.jsType)
+        else
+          emptyList()
       }
 
       private fun readFileExports(file: JSFile): List<Pair<String, JSElement>> =
@@ -168,23 +170,11 @@ interface EntityContainerInfoProvider<T> {
           ?.let { exportedMember ->
             val objectLiteral = objectLiteralFor(exportedMember)
             if (canBeObject && objectLiteral != null)
-              collectPropertiesRecursively(objectLiteral)
+              collectMembers(objectLiteral)
             else if (canBeArray)
               readPropsFromArray(exportedMember)
             else null
           } ?: emptyList()
-
-      private fun processJSTypeMembers(type: JSType?): List<Pair<String, JSElement>> =
-        type?.asRecordType()
-          ?.properties
-          ?.mapNotNull { prop ->
-            prop.takeIf { it.hasValidName() }
-              ?.memberSource
-              ?.singleElement
-              ?.castSafelyTo<JSElement>()
-              ?.let { Pair(prop.memberName, it) }
-          }
-        ?: emptyList()
 
       protected open fun getObjectLiteral(element: PsiElement): JSObjectLiteralExpression? =
         if (canBeFunctionResult) objectLiteralFor(element) else null

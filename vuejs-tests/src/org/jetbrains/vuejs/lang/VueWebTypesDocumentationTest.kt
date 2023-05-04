@@ -1,6 +1,7 @@
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
-import com.intellij.lang.javascript.JSAbstractDocumentationTest
+import com.intellij.webSymbols.checkDocumentationAtCaret
+import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import one.util.streamex.StreamEx
 import org.junit.Before
 import org.junit.Test
@@ -10,13 +11,11 @@ import java.io.File
 import java.util.*
 
 @RunWith(com.intellij.testFramework.Parameterized::class)
-class VueWebTypesDocumentationTest : JSAbstractDocumentationTest() {
+class VueWebTypesDocumentationTest : BasePlatformTestCase() {
 
   override fun getTestDataPath(): String = TEST_DATA_PATH
 
   override fun getBasePath(): String = "/"
-
-  override fun getExtension(): String = "vue"
 
   @Before
   fun before() {
@@ -28,13 +27,14 @@ class VueWebTypesDocumentationTest : JSAbstractDocumentationTest() {
   @JvmField
   var myFileName: String? = null
 
-  override fun getTestName(lowercaseFirstLetter: Boolean): String {
-    return myFileName!!
-  }
-
   @Test
   fun testTypes() {
     defaultTest()
+  }
+
+  private fun defaultTest() {
+    myFixture.configureByFile("${myFileName!!}.vue")
+    myFixture.checkDocumentationAtCaret()
   }
 
   companion object {

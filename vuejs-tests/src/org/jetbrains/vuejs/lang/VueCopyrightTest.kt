@@ -1,4 +1,4 @@
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.maddyhome.idea.copyright.CopyrightProfile

@@ -1,5 +1,5 @@
 // Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.lang.javascript.JSTestUtils
 import com.intellij.lang.javascript.JavascriptLanguage
@@ -7,24 +7,28 @@ import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
-import com.hxz.mpxjs.intentions.extractComponent.VueExtractComponentIntention
-import com.hxz.mpxjs.intentions.extractComponent.VueExtractComponentRefactoring
-import com.hxz.mpxjs.lang.html.VueLanguage
+import org.jetbrains.vuejs.intentions.extractComponent.VueExtractComponentIntention
+import org.jetbrains.vuejs.intentions.extractComponent.VueExtractComponentRefactoring
+import org.jetbrains.vuejs.lang.html.VueLanguage
 
 class VueExtractComponentTest : BasePlatformTestCase() {
   fun testExtractSingleTag() = doExtractTest(
     """<template>
 <selection><p>Paragraph!</p></selection>
-</template>""",
+</template>
+<script>
+</script>""",
 
     """<template>
     <NewComponent/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
-export default {
+import {defineComponent} from "vue";
+import NewComponent from "./NewComponent.vue";
+
+export default defineComponent({
     components: {NewComponent}
-}
+})
 </script>""",
 
     """<template>
@@ -51,7 +55,7 @@ export default {
     <NewComponent/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     name: 'Hello',
     components: {NewComponent}
@@ -86,7 +90,7 @@ export default {
     <NewComponent :one="one"/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     name: 'existing',
     components: {NewComponent},
@@ -128,7 +132,7 @@ export default {
     <NewComponent :comp-method="compMethod()" :one="one"/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     components: {NewComponent},
     props: {
@@ -165,7 +169,7 @@ export default {
 import OtherComp from './OtherComp'
 export default {
     name: 'current-comp',
-    components: { OtherComp },
+    components: {OtherComp},
     props: ['prop']
 }
 </script>
@@ -175,7 +179,7 @@ export default {
     <NewComponent :prop="prop"/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     name: 'current-comp',
     components: {NewComponent},
@@ -213,7 +217,7 @@ export default {
 import OtherComp from './OtherComp'
 export default {
     name: 'current-comp',
-    components: { OtherComp },
+    components: {OtherComp},
     props: ['prop']
 }
 </script>
@@ -276,7 +280,7 @@ export default {
 </template>
 
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     name: "test-v-for",
     components: {NewComponent},
@@ -325,7 +329,7 @@ export default {
 </template>
 
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     name: "test-v-for",
     components: {NewComponent},
@@ -372,7 +376,7 @@ export default {
     <NewComponent :one-more="oneMore"/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     components: {NewComponent},
     methods: {
@@ -415,7 +419,7 @@ export default {
     <NewComponent :prop-with-camel="propWithCamel"/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     components: {NewComponent},
     props: {
@@ -513,7 +517,7 @@ export default {
 <script>
 import CoolStuck from './OtherName'
 export default {
-  components: { CoolStuck }
+  components: {CoolStuck}
 }
 </script>
 """,
@@ -522,7 +526,7 @@ export default {
     <NewComponent/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
   components: {NewComponent}
 }
@@ -557,7 +561,7 @@ export default {
 <script>
 import CoolStuck from './OtherName'
 export default {
-  components: { CoolStuck }
+  components: {CoolStuck}
 }
 </script>
 """,
@@ -566,7 +570,7 @@ export default {
     <NewComponent/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
   components: {NewComponent}
 }
@@ -609,7 +613,7 @@ export default {
     <NewComponent :item="item"/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     components: {NewComponent},
     props: { item: {} }
@@ -665,7 +669,7 @@ export default {
 </template>
 
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     name: "styled",
     components: {NewComponent}
@@ -758,7 +762,7 @@ ${'$'}duration = 1.4s
 </template>
 
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     name: 'spinner',
     components: {NewComponent},
@@ -916,7 +920,7 @@ export default {
     <NewComponent :show-tools="showTools"/>
 </template>
 <script>
-import NewComponent from "./NewComponent";
+import NewComponent from "./NewComponent.vue";
 export default {
     components: {NewComponent},
     methods: {
@@ -1042,11 +1046,8 @@ header {
 <style lang="stylus">
   @import './stylus/main'
 </style>
-<script>
-import NewComponent from "./NewComponent";
-export default {
-    components: {NewComponent}
-}
+<script setup>
+import NewComponent from "./NewComponent.vue";
 </script>""",
 
     """<template>

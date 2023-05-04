@@ -1,5 +1,5 @@
-<idea-plugin package="com.hxz.mpxjs.run">
+<idea-plugin package="org.jetbrains.vuejs.run">
   <extensions defaultExtensionNs="com.jetbrains">
-    <javaScriptDebugAware implementation="com.hxz.mpxjs.run.VueDebugAware"/>
+    <javaScriptDebugAware implementation="org.jetbrains.vuejs.run.VueDebugAware"/>
   </extensions>
 </idea-plugin>

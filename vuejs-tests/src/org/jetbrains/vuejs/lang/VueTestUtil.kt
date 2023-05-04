@@ -1,4 +1,4 @@
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.testFramework.fixtures.IdeaTestExecutionPolicy
 import java.io.File

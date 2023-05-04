@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.linters.tslint
+package org.jetbrains.vuejs.linters.tslint
 
 import com.intellij.lang.javascript.JSTestUtils
 import com.intellij.lang.javascript.linter.tslint.TypeScriptServiceWithTslintTestBase
@@ -8,7 +8,7 @@ import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.VfsUtilCore
 import com.intellij.util.LineSeparator
 import junit.framework.TestCase
-import com.hxz.mpxjs.lang.vueRelativeTestDataPath
+import org.jetbrains.vuejs.lang.vueRelativeTestDataPath
 
 class VueTypeScriptWithTslintTest : TypeScriptServiceWithTslintTestBase() {
 

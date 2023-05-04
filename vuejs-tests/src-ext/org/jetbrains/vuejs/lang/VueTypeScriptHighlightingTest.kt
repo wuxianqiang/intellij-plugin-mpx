@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.codeInsight.daemon.impl.HighlightInfo
 import com.intellij.lang.javascript.JSDaemonAnalyzerLightTestCase
@@ -9,8 +9,8 @@ import com.intellij.openapi.util.text.StringUtil
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.util.Function
-import com.hxz.mpxjs.lang.html.VueFileType
-import com.hxz.mpxjs.lang.html.VueLanguage
+import org.jetbrains.vuejs.lang.html.VueFileType
+import org.jetbrains.vuejs.lang.html.VueLanguage
 
 class VueTypeScriptHighlightingTest : TypeScriptHighlightingTest() {
   private val toFix = setOf(
@@ -57,7 +57,7 @@ class VueTypeScriptHighlightingTest : TypeScriptHighlightingTest() {
 
     super.doTestFor(checkWeakWarnings, function, *fileNames)
   }
-  
+
   private fun skipTest() = toFix.contains(getTestName(false))
 
   override fun configureEditorFile(name: String?) {
@@ -97,5 +97,9 @@ class VueTypeScriptHighlightingTest : TypeScriptHighlightingTest() {
       }
       super.doHighlightingWithInvokeFixAndCheckResult(fixName, ext, *files)
     }
+  }
+  override fun testPrivateBrandCheck_js() {
+    // skip
+    // See https://youtrack.jetbrains.com/issue/WEB-57683/
   }
 }

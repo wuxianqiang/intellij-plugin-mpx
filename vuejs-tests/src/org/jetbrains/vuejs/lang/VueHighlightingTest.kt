@@ -1,13 +1,16 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.htmltools.codeInspection.htmlInspections.HtmlFormInputWithoutLabelInspection
 import com.intellij.lang.javascript.JSTestUtils
 import com.intellij.lang.javascript.JSTestUtils.testWithinLanguageLevel
 import com.intellij.lang.javascript.JavaScriptBundle
 import com.intellij.lang.javascript.dialects.JSLanguageLevel
+import com.intellij.lang.javascript.inspections.ES6UnusedImportsInspection
 import com.intellij.lang.javascript.inspections.JSUnusedGlobalSymbolsInspection
+import com.intellij.lang.javascript.inspections.JSUnusedLocalSymbolsInspection
 import com.intellij.lang.javascript.library.JSCorePredefinedLibrariesProvider
+import com.intellij.psi.PsiFile
 import com.intellij.psi.css.inspections.invalid.CssInvalidFunctionInspection
 import com.intellij.psi.css.inspections.invalid.CssInvalidPseudoSelectorInspection
 import com.intellij.spellchecker.inspections.SpellCheckingInspection
@@ -19,8 +22,12 @@ import com.intellij.xml.util.CheckTagEmptyBodyInspection
 import junit.framework.TestCase
 import org.jetbrains.plugins.scss.inspections.SassScssResolvedByNameOnlyInspection
 import org.jetbrains.plugins.scss.inspections.SassScssUnresolvedVariableInspection
-import com.hxz.mpxjs.lang.html.VueFileType
+import org.jetbrains.vuejs.lang.html.VueFileType
 
+/**
+ * @see VueComponentTest
+ * @see VueControlFlowTest
+ */
 class VueHighlightingTest : BasePlatformTestCase() {
   override fun getTestDataPath(): String = getVueTestDataPath() + "/highlighting"
 
@@ -33,6 +40,14 @@ class VueHighlightingTest : BasePlatformTestCase() {
                      addNodeModules: List<VueTestModule> = emptyList(),
                      extension: String = "vue",
                      vararg files: String) {
+    configureTestProject(packageJsonDependencies, addNodeModules, extension, *files)
+    myFixture.checkHighlighting()
+  }
+
+  private fun configureTestProject(packageJsonDependencies: String? = null,
+                                   addNodeModules: List<VueTestModule> = emptyList(),
+                                   extension: String = "vue",
+                                   vararg files: String): PsiFile {
     if (packageJsonDependencies != null) {
       createPackageJsonWithVueDependency(myFixture, packageJsonDependencies)
     }
@@ -40,19 +55,21 @@ class VueHighlightingTest : BasePlatformTestCase() {
       myFixture.configureVueDependencies(*addNodeModules.toTypedArray())
     }
     myFixture.configureByFiles(*files)
-    myFixture.configureByFile(getTestName(true) + "." + extension)
-    myFixture.checkHighlighting()
+    return myFixture.configureByFile(getTestName(true) + "." + extension)
   }
 
-  private fun doDirTest(addNodeModules: List<VueTestModule> = emptyList()) {
+  private fun doDirTest(addNodeModules: List<VueTestModule> = emptyList(), fileName: String? = null, vararg additionalFilesToCheck: String) {
     val testName = getTestName(true)
     if (addNodeModules.isNotEmpty()) {
       myFixture.configureVueDependencies(*addNodeModules.toTypedArray())
     }
     myFixture.copyDirectoryToProject(testName, ".")
-    myFixture.configureFromTempProjectFile("$testName.vue")
-      .virtualFile.putUserData(VfsTestUtil.TEST_DATA_FILE_PATH, "$testDataPath/$testName/$testName.vue")
-    myFixture.checkHighlighting()
+
+    for (toCheck in sequenceOf(fileName ?: "$testName.vue").plus(additionalFilesToCheck)) {
+      myFixture.configureFromTempProjectFile(toCheck)
+        .virtualFile.putUserData(VfsTestUtil.TEST_DATA_FILE_PATH, "$testDataPath/$testName/$toCheck")
+      myFixture.checkHighlighting()
+    }
   }
 
   fun testDirectivesWithoutParameters() = doTest()
@@ -118,7 +135,9 @@ const props = {seeMe: {}}
 
   fun testRequiredAttributeWithModifierTest() = doDirTest()
 
-  fun testRequiredAttributeWithVModel() = doDirTest()
+  fun testRequiredAttributeWithVModel() = doDirTest(listOf(VueTestModule.VUE_2_6_10))
+
+  fun testRequiredAttributeWithVModel3() = doDirTest(listOf(VueTestModule.VUE_3_0_0))
 
   fun testVueAttributeInCustomTag() = doTest()
 
@@ -127,6 +146,8 @@ const props = {seeMe: {}}
   fun testVForInPug() = com.intellij.testFramework.runInInitMode { doTest() }
 
   fun testTopLevelThisInInjection() = doTest()
+
+  fun testTextarea() = doTest()
 
   fun testGlobalComponentLiteral() = doDirTest()
 
@@ -140,24 +161,12 @@ const props = {seeMe: {}}
 
   fun testNoDoubleSpellCheckingInAttributesWithEmbeddedContents() {
     myFixture.enableInspections(SpellCheckingInspection())
-    myFixture.configureByText(VueFileType.INSTANCE, """
-<template>
-    <div>
-        <ul>
-            <li v-for="somewordd in someObject">{{ somewordd }}
-        </ul>
-    </div>
-</template>
-<script>
-    var someObject = []
-</script>
-""")
-    val list = myFixture.doHighlighting().filter { it.severity.name == "TYPO" }
-    val typoRanges: MutableSet<Pair<Int, Int>> = mutableSetOf()
-    for (info in list) {
-      val pair = Pair(info.startOffset, info.endOffset)
-      if (!typoRanges.add(pair)) TestCase.assertTrue("Duplicate $pair", false)
-    }
+    doTest()
+  }
+
+  fun testNoSpellcheckInEnumeratedAttributes() {
+    myFixture.enableInspections(SpellCheckingInspection())
+    doTest()
   }
 
   fun testTypeScriptTypesAreResolved() = doTest()
@@ -318,27 +327,22 @@ const props = {seeMe: {}}
   }
 
   fun testSemanticHighlighting() {
-    myFixture.configureByText("c-component.vue", """
-<script lang="ts">
-namespace <info descr="moduleName">space</info> {
-    export class <info descr="exported class">SpaceInterface</info> {
-    }
-    var <info descr="static field">i</info>:<info descr="exported class">SpaceInterface</info>;
-}
-import <info descr="exported class">SpaceInterface</info> = <info descr="moduleName">space</info>.<info descr="exported class">SpaceInterface</info>;
-var <info descr="global variable">i</info>:<info descr="exported class">SpaceInterface</info>;
-</script>
-""")
-    myFixture.checkHighlighting(false, true, true)
+    configureTestProject()
+    myFixture.checkHighlighting( /* checkWarnings = */ false,   /* checkInfos = */ true,  /* checkWeakWarnings = */ false)
   }
 
   // TODO add special inspection for unused slot scope parameters - WEB-43893
   fun testVSlotSyntax() = doTest()
 
   // TODO add special inspection for unused slot scope parameters - WEB-43893
-  fun testSlotSyntax() = doTest()
+  fun testSlotSyntax() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10)
+    doTest()
+  }
 
   fun testSlotName() = doTest()
+
+  fun testSlotNameBinding() = doTest()
 
   fun testVueExtendSyntax() = doDirTest(addNodeModules = listOf(VueTestModule.VUE_2_5_3))
 
@@ -384,11 +388,19 @@ var <info descr="global variable">i</info>:<info descr="exported class">SpaceInt
 
   fun testMultipleScriptTagsInVue() = doTest("")
 
-  fun testCompositionApiBasic() {
-    myFixture.configureVueDependencies(VueTestModule.COMPOSITION_API_0_4_0)
-    myFixture.configureByFile("compositeComponent1.vue")
+  fun testCompositionApiBasic_0_4_0() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10, VueTestModule.COMPOSITION_API_0_4_0)
+    myFixture.configureByFile("compositionComponent1.vue")
     myFixture.checkHighlighting()
-    myFixture.configureByFile("compositeComponent2.vue")
+    myFixture.configureByFile("compositionComponent2.vue")
+    myFixture.checkHighlighting()
+  }
+
+  fun testCompositionApiBasic_1_0_0() {
+    myFixture.configureVueDependencies(VueTestModule.VUE_2_6_10, VueTestModule.COMPOSITION_API_1_0_0)
+    myFixture.configureByFile("compositionComponent1.vue")
+    myFixture.checkHighlighting()
+    myFixture.configureByFile("compositionComponent2.vue")
     myFixture.checkHighlighting()
   }
 
@@ -399,7 +411,7 @@ var <info descr="global variable">i</info>:<info descr="exported class">SpaceInt
     }
   }
 
-  fun testCommonJSSupport() = doTest("")
+  fun testCommonJSSupport() = doTest(""" "vuex":"*" """)
 
   fun testComputedTypeTS() = doTest(addNodeModules = listOf(VueTestModule.VUE_2_6_10))
 
@@ -425,7 +437,15 @@ var <info descr="global variable">i</info>:<info descr="exported class">SpaceInt
 
   fun testAsyncSetup() = doTest(addNodeModules = listOf(VueTestModule.VUE_3_0_0))
 
-  fun testScriptSetup() = doTest(addNodeModules = listOf(VueTestModule.VUE_3_0_0))
+  fun testScriptSetup() {
+    myFixture.enableInspections(ES6UnusedImportsInspection())
+    doTest(addNodeModules = listOf(VueTestModule.VUE_3_0_0))
+  }
+
+  fun testScriptSetupComplexImports() {
+    myFixture.enableInspections(ES6UnusedImportsInspection())
+    doDirTest(addNodeModules = listOf(VueTestModule.VUE_3_2_2))
+  }
 
   fun testMissingLabelSuppressed() {
     myFixture.configureVueDependencies(VueTestModule.VUE_3_0_0)
@@ -437,6 +457,114 @@ var <info descr="global variable">i</info>:<info descr="exported class">SpaceInt
   fun testSuperComponentMixin() = doDirTest()
 
   fun testCompositionPropsJS() = doTest()
+
+  fun testCssSelectors() {
+    myFixture.enableInspections(CssInvalidPseudoSelectorInspection())
+    doTest()
+  }
+
+  fun testScriptSetupScopePriority() = doDirTest(addNodeModules = listOf(VueTestModule.VUE_3_2_2))
+
+  fun testBindingToDataAttributes() = doTest()
+
+  fun testPropsValidation() = doDirTest()
+
+  fun testScriptSetupRef() {
+    myFixture.enableInspections(
+      JSUnusedLocalSymbolsInspection(),
+      JSUnusedGlobalSymbolsInspection()
+    )
+    doTest()
+  }
+
+  fun testTypedComponentsScriptSetup() {
+    myFixture.enableInspections(ES6UnusedImportsInspection())
+    doTest(addNodeModules = listOf(VueTestModule.NAIVE_UI_2_19_11, VueTestModule.HEADLESS_UI_1_4_1, VueTestModule.VUE_3_2_2))
+  }
+
+  fun testTypedComponentsScriptSetup2() {
+    myFixture.enableInspections(ES6UnusedImportsInspection())
+    doTest(addNodeModules = listOf(VueTestModule.NAIVE_UI_2_19_11, VueTestModule.HEADLESS_UI_1_4_1, VueTestModule.VUE_3_2_2))
+  }
+
+  fun testCssVBind() {
+    myFixture.enableInspections(CssInvalidFunctionInspection::class.java)
+    doTest(addNodeModules = listOf(VueTestModule.VUE_3_2_2))
+  }
+
+  fun testCssVBindVue31() {
+    myFixture.enableInspections(CssInvalidFunctionInspection::class.java)
+    doTest(addNodeModules = listOf(VueTestModule.VUE_3_1_0))
+  }
+
+  fun testGlobalSymbols() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doTest(addNodeModules = listOf(VueTestModule.VUE_3_1_0))
+  }
+
+  fun testStandardBooleanAttributes() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doTest()
+  }
+
+  fun testRefUnwrap() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doTest(addNodeModules = listOf(VueTestModule.VUE_3_0_0))
+  }
+
+  fun testVModelWithMixin() {
+    doDirTest(fileName = "MyForm.vue")
+  }
+
+  fun testScriptSetupSymbolsHighlighting() {
+    configureTestProject()
+    myFixture.checkHighlighting(/* checkWarnings = */ true, /* checkInfos = */ true, /* checkWeakWarnings = */ true)
+  }
+
+  fun testSlotTypes() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doDirTest(addNodeModules = listOf(VueTestModule.VUE_3_2_2, VueTestModule.QUASAR_2_6_5), "MyTable.vue")
+  }
+
+  fun testGlobalScriptSetup() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doDirTest(addNodeModules = listOf(VueTestModule.VUE_3_2_2), "HelloWorld.vue")
+  }
+
+  fun testDynamicArguments() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doDirTest(addNodeModules = listOf(VueTestModule.VUE_3_2_2), "HelloWorld.vue")
+  }
+
+  fun testWithPropsFromFunctionCall() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doTest()
+  }
+
+  fun testWithPropsFromFunctionCall2() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doTest()
+  }
+
+  fun testInferPropType() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doTest(addNodeModules = listOf(VueTestModule.VUE_3_2_2, VueTestModule.NAIVE_UI_2_33_2_PATCHED))
+  }
+
+  fun testLocalWebTypes() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doDirTest(emptyList(), "main.vue", "main2.vue")
+  }
+
+  fun testPropertyReferenceInLambda() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doTest()
+  }
+
+  fun testSourceScopedSlots() {
+    myFixture.enableInspections(VueInspectionsProvider())
+    doDirTest(addNodeModules = listOf(VueTestModule.VUE_3_2_2), "Catalogue.vue")
+  }
 
 }
 

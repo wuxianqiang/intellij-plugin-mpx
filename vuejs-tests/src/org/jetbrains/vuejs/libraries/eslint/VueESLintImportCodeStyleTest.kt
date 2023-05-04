@@ -1,5 +1,5 @@
 // Copyright 2000-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.libraries.eslint
+package org.jetbrains.vuejs.libraries.eslint
 
 import com.intellij.lang.html.HTMLLanguage
 import com.intellij.lang.javascript.linter.ESLintImportCodeStyleTestBase
@@ -8,8 +8,8 @@ import com.intellij.psi.codeStyle.CodeStyleSettings.HtmlTagNewLineStyle.Never
 import com.intellij.psi.codeStyle.CodeStyleSettings.HtmlTagNewLineStyle.WhenMultiline
 import com.intellij.psi.formatter.xml.HtmlCodeStyleSettings
 import junit.framework.TestCase
-import com.hxz.mpxjs.lang.html.VueLanguage
-import com.hxz.mpxjs.lang.html.psi.formatter.VueCodeStyleSettings
+import org.jetbrains.vuejs.lang.html.VueLanguage
+import org.jetbrains.vuejs.lang.html.psi.formatter.VueCodeStyleSettings
 import org.junit.Assert
 
 class VueESLintImportCodeStyleTest : ESLintImportCodeStyleTestBase() {

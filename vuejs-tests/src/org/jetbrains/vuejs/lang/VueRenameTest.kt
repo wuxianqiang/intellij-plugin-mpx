@@ -24,8 +24,10 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
+import com.intellij.webSymbols.moveToOffsetBySignature
+import com.intellij.webSymbols.renameWebSymbol
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.testFramework.fixtures.CodeInsightTestUtil
@@ -75,10 +77,79 @@ class VueRenameTest : BasePlatformTestCase() {
     }
   }
 
-  private fun doTest(newName: String) {
+  fun testComponentNameFromPropertyName() {
+    myFixture.configureByFile("componentNameFromDeclaration1.vue")
+    doTest("AfterComponent")
+  }
+
+  fun testCssVBind() {
+    doTest("newColor")
+  }
+
+  fun testCssVBindScriptSetup() {
+    doTest("newColor", true)
+  }
+
+  fun testCreateAppComponent() {
+    myFixture.copyDirectoryToProject("../common/createApp", ".")
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.configureFromTempProjectFile("main.ts")
+    myFixture.moveToOffsetBySignature("\"C<caret>ar")
+    myFixture.renameWebSymbol("NewCar")
+    checkResultByDir()
+  }
+
+  fun testCreateAppComponentFromUsage() {
+    myFixture.copyDirectoryToProject("../common/createApp", ".")
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.configureFromTempProjectFile("App.vue")
+    myFixture.moveToOffsetBySignature("<C<caret>ar")
+    myFixture.renameWebSymbol("NewCar")
+    checkResultByDir("createAppComponent_after")
+  }
+
+  fun testCreateAppDirective() {
+    myFixture.copyDirectoryToProject("../common/createApp", ".")
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.configureFromTempProjectFile("main.ts")
+    myFixture.moveToOffsetBySignature("\"f<caret>oo")
+    myFixture.renameWebSymbol("bar")
+    checkResultByDir()
+  }
+
+  fun testCreateAppDirectiveFromUsage() {
+    myFixture.copyDirectoryToProject("../common/createApp", ".")
+    myFixture.configureVueDependencies(VueTestModule.VUE_3_2_2)
+    myFixture.configureFromTempProjectFile("TheComponent.vue")
+    myFixture.moveToOffsetBySignature("v-f<caret>oo")
+    myFixture.renameWebSymbol("bar")
+    checkResultByDir("createAppDirective_after")
+  }
+
+  private fun doTest(newName: String, usingHandler: Boolean = false) {
     myFixture.configureByFile(getTestName(true) + ".vue")
-    myFixture.renameElementAtCaret(newName)
+    if (usingHandler) {
+      val oldSetting = myFixture.editor.settings.isVariableInplaceRenameEnabled
+      myFixture.editor.settings.isVariableInplaceRenameEnabled = false
+      try {
+        myFixture.renameElementAtCaretUsingHandler(newName)
+      }
+      finally {
+        myFixture.editor.settings.isVariableInplaceRenameEnabled = oldSetting
+      }
+    } else {
+      myFixture.renameElementAtCaret(newName)
+    }
     myFixture.checkResultByFile(getTestName(true) + "_after.vue")
+  }
+
+  private fun checkResultByDir(resultsDir: String = getTestName(true) + "_after") {
+    val extensions = setOf("vue", "html", "ts")
+    myFixture.tempDirFixture.findOrCreateDir(".")
+      .children
+      .filter { !it.isDirectory && extensions.contains(it.extension) }.forEach {
+        myFixture.checkResultByFile(it.name, resultsDir + "/" + it.name, true)
+      }
   }
 
 }

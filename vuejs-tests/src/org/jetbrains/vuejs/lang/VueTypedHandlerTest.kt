@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate
 import com.intellij.ide.highlighter.HtmlFileType
@@ -21,8 +21,8 @@ import com.intellij.openapi.command.CommandProcessor
 import com.intellij.openapi.util.Pair
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.util.NullableFunction
-import com.hxz.mpxjs.editor.VueInterpolationBracesCompleter
-import com.hxz.mpxjs.lang.html.VueFileType
+import org.jetbrains.vuejs.editor.VueInterpolationBracesCompleter
+import org.jetbrains.vuejs.lang.html.VueFileType
 
 class VueTypedHandlerTest : BasePlatformTestCase() {
   fun testBracketsClosing() {

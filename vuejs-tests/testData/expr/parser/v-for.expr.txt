@@ -1,5 +1,5 @@
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')
@@ -22,7 +22,7 @@ JSFile:test.js.v-for.expr
         PsiElement(JS:IDENTIFIER)('foo')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSVarStatement
         VueJSVForVariable
@@ -34,7 +34,7 @@ JSFile:test.js.v-for.expr
         PsiElement(JS:IDENTIFIER)('foo')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSVarStatement
         VueJSVForVariable
@@ -46,7 +46,7 @@ JSFile:test.js.v-for.expr
         PsiElement(JS:IDENTIFIER)('foo')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       PsiErrorElement:Identifier expected
         <empty list>
@@ -54,7 +54,7 @@ JSFile:test.js.v-for.expr
         <empty list>
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSVarStatement
         VueJSVForVariable
@@ -63,7 +63,7 @@ JSFile:test.js.v-for.expr
         <empty list>
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSVarStatement
         VueJSVForVariable
@@ -74,7 +74,7 @@ JSFile:test.js.v-for.expr
         <empty list>
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSVarStatement
         VueJSVForVariable
@@ -95,7 +95,7 @@ JSFile:test.js.v-for.expr
       PsiElement(JS:SEMICOLON)(';')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')
@@ -106,7 +106,7 @@ JSFile:test.js.v-for.expr
             <empty list>
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')
@@ -121,7 +121,7 @@ JSFile:test.js.v-for.expr
             <empty list>
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')
@@ -145,7 +145,7 @@ JSFile:test.js.v-for.expr
         <empty list>
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')
@@ -163,7 +163,7 @@ JSFile:test.js.v-for.expr
         <empty list>
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')
@@ -185,7 +185,7 @@ JSFile:test.js.v-for.expr
       PsiElement(JS:SEMICOLON)(';')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')
@@ -215,7 +215,7 @@ JSFile:test.js.v-for.expr
       PsiElement(JS:NUMERIC_LITERAL)('12')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSVarStatement
         VueJSVForVariable
@@ -232,7 +232,7 @@ JSFile:test.js.v-for.expr
       PsiElement(JS:IDENTIFIER)('boo')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')
@@ -255,7 +255,7 @@ JSFile:test.js.v-for.expr
         PsiElement(JS:IDENTIFIER)('foo')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')
@@ -269,7 +269,33 @@ JSFile:test.js.v-for.expr
           PsiErrorElement:) expected
             <empty list>
           PsiWhiteSpace(' ')
-          PsiElement(JS:SHARP)('#')
+          PsiElement(JS:PRIVATE_IDENTIFIER)('#$')
+        PsiElement(JS:RPAR)(')')
+      PsiWhiteSpace(' ')
+      PsiElement(JS:OF_KEYWORD)('of')
+      PsiWhiteSpace(' ')
+      JSAttributeList
+        ES6Decorator
+          PsiElement(JS:AT)('@')
+      PsiErrorElement:'class' expected
+        <empty list>
+------
+JSFile:test.js.v-for.expr
+  VueJSEmbeddedExpressionContent
+    VueJSVForExpression
+      JSParenthesizedExpression
+        PsiElement(JS:LPAR)('(')
+        JSVarStatement
+          VueJSVForVariable
+            PsiElement(JS:IDENTIFIER)('a')
+          PsiElement(JS:COMMA)(',')
+          PsiWhiteSpace(' ')
+          VueJSVForVariable
+            PsiElement(JS:IDENTIFIER)('f')
+          PsiErrorElement:) expected
+            <empty list>
+          PsiWhiteSpace(' ')
+          PsiElement(JS:XOR)('^')
           PsiElement(JS:IDENTIFIER)('$')
         PsiElement(JS:RPAR)(')')
       PsiWhiteSpace(' ')
@@ -282,7 +308,7 @@ JSFile:test.js.v-for.expr
         <empty list>
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSVarStatement
         VueJSVForVariable
@@ -304,7 +330,7 @@ JSFile:test.js.v-for.expr
       PsiElement(JS:IDENTIFIER)('foo')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSVarStatement
         VueJSVForVariable
@@ -326,7 +352,7 @@ JSFile:test.js.v-for.expr
       PsiElement(JS:IDENTIFIER)('d')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSVarStatement
         JSDestructuringElement
@@ -347,7 +373,7 @@ JSFile:test.js.v-for.expr
         PsiElement(JS:IDENTIFIER)('foo')
 ------
 JSFile:test.js.v-for.expr
-  VueJSEmbeddedExpression
+  VueJSEmbeddedExpressionContent
     VueJSVForExpression
       JSParenthesizedExpression
         PsiElement(JS:LPAR)('(')

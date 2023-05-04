@@ -1,7 +1,7 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
-import com.intellij.javascript.web.findOffsetBySignature
+import com.intellij.webSymbols.findOffsetBySignature
 import com.intellij.lang.injection.InjectedLanguageManager
 import com.intellij.lang.javascript.psi.JSReferenceExpression
 import com.intellij.psi.PsiDocumentManager
@@ -9,8 +9,8 @@ import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
 import one.util.streamex.StreamEx
-import com.hxz.mpxjs.lang.expr.psi.VueJSEmbeddedExpression
-import com.hxz.mpxjs.lang.html.VueLanguage
+import org.jetbrains.vuejs.lang.expr.psi.VueJSEmbeddedExpressionContent
+import org.jetbrains.vuejs.lang.html.VueLanguage
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -39,7 +39,7 @@ class VueTemplateInjectionsTest : BasePlatformTestCase() {
     val injectedElement = injectedLanguageManager.findInjectedElementAt(
       myFixture.file, myFixture.file.findOffsetBySignature("<caret>title + foo"))
 
-    TestCase.assertNotNull(PsiTreeUtil.getParentOfType(injectedElement, VueJSEmbeddedExpression::class.java))
+    TestCase.assertNotNull(PsiTreeUtil.getParentOfType(injectedElement, VueJSEmbeddedExpressionContent::class.java))
 
     val resolved = (injectedElement!!.parent as JSReferenceExpression).resolve()
     TestCase.assertTrue(resolved!!.text, resolved.text.contains("Check me"))

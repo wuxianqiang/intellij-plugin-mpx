@@ -1,8 +1,8 @@
 // Copyright 2000-2019 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.libraries.vuex
+package org.jetbrains.vuejs.libraries.vuex
 
-import com.intellij.javascript.web.findOffsetBySignature
-import com.intellij.javascript.web.renderLookupItems
+import com.intellij.webSymbols.findOffsetBySignature
+import com.intellij.webSymbols.renderLookupItems
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.util.io.FileUtil
@@ -10,8 +10,8 @@ import com.intellij.psi.PsiDocumentManager
 import com.intellij.testFramework.PlatformTestUtil
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.TestCase
-import com.hxz.mpxjs.lang.createPackageJsonWithVueDependency
-import com.hxz.mpxjs.lang.getVueTestDataPath
+import org.jetbrains.vuejs.lang.createPackageJsonWithVueDependency
+import org.jetbrains.vuejs.lang.getVueTestDataPath
 import java.io.File
 
 class VuexCompletionTest : BasePlatformTestCase() {
@@ -544,9 +544,11 @@ class VuexCompletionTest : BasePlatformTestCase() {
   fun testStorefrontThisCompletion() {
     myFixture.configureStore(VuexTestStore.Storefront)
     myFixture.configureByFile("storefront-mappers-JS.vue")
+    prepareFiles(project)
     checkItems(0, false, true, true, true)
 
     myFixture.configureByFile("storefront-mappers-TS.ts")
+    prepareFiles(project)
     checkItems(1, false, true, true, true)
   }
 

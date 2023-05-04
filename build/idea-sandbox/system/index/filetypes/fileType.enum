@@ -1,28 +1,43 @@
-SCSS
+Kotlin
+script-definition-marker
 JSON
-HTTP Request
+SCSS
 TypeScript
 Flow
-Image
+Groovy
+JavaScript
+Mpx.js
+XML
 Vue.js
+DTD
+RNG Compact
+CSS
 PLAIN_TEXT
 textmate
-XML
-GitIgnore file
-IDEA_MODULE
-JavaScript
-DTD
-Markdown
-Kotlin/Native Def
-tsconfig
-RNG Compact
-XHTML
 PATCH
-Shell Script
-gdsl
-Kotlin
-protobuf
-script-definition-marker
+AUTO_DETECTED
+UNKNOWN
+XHTML
+Markdown
+GitIgnore file
+EditorConfig
+ECMAScript 6
+JSHint
 JAVA
 TypeScript JSX
-HTML
+protobuf
+Less
+PostCSS
+Stylus
+Sass
+IDEA_MODULE
+MPXWXS
+Image
+SourceMap
+ARCHIVE
+CSV/TSV
+Shell Script
+YAML
+JavaScript Testing Snapshot
+tsconfig
+JSX Harmony

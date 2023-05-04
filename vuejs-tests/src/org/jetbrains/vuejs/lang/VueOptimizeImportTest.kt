@@ -1,4 +1,4 @@
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
 import com.intellij.codeInsight.actions.OptimizeImportsAction
 import com.intellij.ide.DataManager

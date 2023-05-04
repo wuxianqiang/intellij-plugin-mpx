@@ -1,8 +1,8 @@
 // Copyright 2000-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.hxz.mpxjs.lang
+package org.jetbrains.vuejs.lang
 
-import com.intellij.javascript.web.moveToOffsetBySignature
-import com.intellij.javascript.web.resolveReference
+import com.intellij.webSymbols.moveToOffsetBySignature
+import com.intellij.webSymbols.resolveReference
 import com.intellij.lang.javascript.psi.stubs.JSImplicitElement
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import junit.framework.ComparisonFailure
@@ -64,10 +64,9 @@ class VueRefAttrsTest : BasePlatformTestCase() {
     for ((signature, result) in listOf(
       Pair("\$refs.input<caret>Ref", "ref='inputRef'"),
       Pair("\$refs.inputRef[0].validation<caret>Message",
-           "/**\n     * Returns the error message that would be displayed if the user submits the form, " +
-           "or an empty string if no error message. It also triggers the standard error message, " +
-           "such as \"this is a required field\". The result is that the user sees validation messages " +
-           "without actually submitting.\n     */\n" +
+           "/** Returns the error message that would be displayed if the user submits the form, or an empty string if no error message. " +
+           "It also triggers the standard error message, such as \"this is a required field\". " +
+           "The result is that the user sees validation messages without actually submitting. */\n" +
            "    readonly validationMessage: string"),
       Pair("this.\$refs.about.\$re<caret>fs", "\$refs: Data"),
       Pair("this.\$refs.div<caret>Ref3", "ref='divRef3'"),
